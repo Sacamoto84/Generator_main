@@ -1,0 +1,38 @@
+
+
+
+Breakpoint=D:/Dropbox/Actual/All F407/Generetor_V3/user/PAGE_Button.cpp:330, State=BP_STATE_DISABLED
+Breakpoint=D:/Dropbox/Actual/All F407/Generetor_V3/user/PAGE_generator.cpp:194:5, State=BP_STATE_DISABLED
+GraphedExpression="DMA_zagruzka", DisplayFormat=DISPLAY_FORMAT_DEC, Color=#a00909
+GraphedExpression="DMA_Run_us", Color=#09a01b
+GraphedExpression="Other_Run_us", DisplayFormat=DISPLAY_FORMAT_DEC, Color=#09a087
+GraphedExpression="DMA_Sum_us", Color=#0984a0
+OpenDocument="cmsis_gcc.h", FilePath="D:/Dropbox/Actual/All F407/Generetor_V3/Drivers/CMSIS/Include/cmsis_gcc.h", Line=133
+OpenDocument="generator.cpp", FilePath="D:/Dropbox/Actual/Drivers/Generator/generator.cpp", Line=137
+OpenDocument="sd_diskio.c", FilePath="D:/Dropbox/Actual/All F407/Generetor_V3/FATFS/Target/sd_diskio.c", Line=141
+OpenDocument="bsp_driver_sd.c", FilePath="D:/Dropbox/Actual/All F407/Generetor_V3/FATFS/Target/bsp_driver_sd.c", Line=102
+OpenDocument="stm32f4xx_hal_sd.c", FilePath="D:/Dropbox/Actual/All F407/Generetor_V3/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sd.c", Line=639
+OpenDocument="stm32f4xx_it.c", FilePath="D:/Dropbox/Actual/All F407/Generetor_V3/Core/Src/stm32f4xx_it.c", Line=90
+OpenDocument="PAGE_generator.cpp", FilePath="D:/Dropbox/Actual/All F407/Generetor_V3/user/PAGE_generator.cpp", Line=185
+OpenDocument="ST7789.cpp", FilePath="D:/Dropbox/Actual/Drivers/Display/uTFT2/Driver/ST7789.cpp", Line=184
+OpenDocument="loop.cpp", FilePath="D:/Dropbox/Actual/All F407/Generetor_V3/user/loop.cpp", Line=159
+OpenDocument="SEGGER_SYSVIEW.c", FilePath="D:/Dropbox/Actual/All F407/Generetor_V3/SW/SEGGER_SYSVIEW.c", Line=632
+OpenDocument="PAGE_Button.cpp", FilePath="D:/Dropbox/Actual/All F407/Generetor_V3/user/PAGE_Button.cpp", Line=302
+OpenDocument="startup_stm32f407vgtx.s", FilePath="D:/Dropbox/Actual/All F407/Generetor_V3/Core/Startup/startup_stm32f407vgtx.s", Line=48
+OpenDocument="TFT.cpp", FilePath="D:/Dropbox/Actual/Drivers/Display/uTFT2/TFT.cpp", Line=102
+OpenDocument="ff.c", FilePath="D:/Dropbox/Actual/All F407/Generetor_V3/Middlewares/Third_Party/FatFs/src/ff.c", Line=899
+OpenDocument="global_define.cpp", FilePath="D:/Dropbox/Actual/All F407/Generetor_V3/user/global_define.cpp", Line=27
+OpenDocument="Font_Smooth.cpp", FilePath="D:/Dropbox/Actual/Drivers/Display/uTFT2/Font/Font_Smooth.cpp", Line=373
+OpenDocument="SEGGER_RTT.c", FilePath="D:/Dropbox/Actual/All F407/Generetor_V3/SW/SEGGER_RTT.c", Line=1075
+OpenToolbar="Debug", Floating=0, x=0, y=0
+OpenWindow="Data Sampling", DockArea=BOTTOM, x=0, y=0, w=1920, h=194, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=0, VisibleTab=0, UniformSampleSpacing=0
+TableHeader="Data Sampling Table", SortCol="Index", SortOrder="ASCENDING", VisibleCols=["Index";"Time";" DMA_zagruzka";" DMA_Run_us";" Other_Run_us";" DMA_Sum_us"], ColWidths=[100;100;100;100;100;1420]
+TableHeader="Data Sampling Setup", SortCol="Expression", SortOrder="ASCENDING", VisibleCols=["Expression";"Type";"Value";"Min";"Max";"Average";"# Changes";"Min. Change";"Max. Change"], ColWidths=[117;118;100;100;100;100;100;118;1067]
+TableHeader="Power Sampling", SortCol="Index", SortOrder="ASCENDING", VisibleCols=["Index";"Time";"Ch 0"], ColWidths=[100;100;100]
+TableHeader="RegisterSelectionDialog", SortCol="None", SortOrder="ASCENDING", VisibleCols=[], ColWidths=[]
+TableHeader="TargetExceptionDialog", SortCol="Name", SortOrder="ASCENDING", VisibleCols=["Name";"Value";"Address";"Description"], ColWidths=[200;100;100;1095]
+WatchedExpression="DMA_zagruzka", Window=Watched Data 1
+WatchedExpression="DMA_Run_Tick", Window=Watched Data 1
+WatchedExpression="Other_Run_Tick", Window=Watched Data 1
+WatchedExpression="DMA_Sum_Tick", Window=Watched Data 1
+WatchedExpression="DMA_Run_us", Window=Watched Data 1
