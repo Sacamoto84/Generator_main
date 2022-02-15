@@ -194,6 +194,10 @@ void PAGE_init_struct_setting(void) {
 	page_item_setting[5].callBackFunc_isClick = &PAGE_Palitra;
 	page_item_setting[5].text_color = -1;
 
+	sprintf(page_item_setting[6].text, "BT Audio");
+	page_item_setting[6].callBackFunc_isClick = &PAGE_BT_Audio;
+	page_item_setting[6].text_color = -1;
+
 	//Описание как рендерить меню
 	page_setting.item_count   = 6;
 	page_setting.item_height  = 40;
@@ -205,7 +209,7 @@ void PAGE_init_struct_setting(void) {
 
 void PAGE_Setting(void)
 {
-  PAGE_Menu(&page_setting , &page_item_setting[0], 6);
+  PAGE_Menu(&page_setting , &page_item_setting[0], 7);
 }
 
 

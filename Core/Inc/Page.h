@@ -30,6 +30,8 @@ void PAGE_Menu(PAGE_Menu_config_typedef * menu , PAGE_Menu_item_typedef * item, 
 void PAGE_Palitra(void);
 void PAGE_Font(void);
 
+void PAGE_BT_Audio(void);
+
 //Wifi
 void PAGE_wifi(void);
 void PAGE_wifi_switch(void);

@@ -62,8 +62,8 @@ void Error_Handler(void);
 #define ENTER_GPIO_Port GPIOA
 #define BT_EN_Pin GPIO_PIN_15
 #define BT_EN_GPIO_Port GPIOD
-#define STATE_Pin GPIO_PIN_7
-#define STATE_GPIO_Port GPIOC
+#define BT_Audio_Pin GPIO_PIN_7
+#define BT_Audio_GPIO_Port GPIOC
 #define RESET_Pin GPIO_PIN_3
 #define RESET_GPIO_Port GPIOD
 #define A0_Pin GPIO_PIN_4
@@ -77,6 +77,8 @@ void Error_Handler(void);
 
 #define ESP_ON  HAL_GPIO_WritePin(ESP8266_EN_GPIO_Port, ESP8266_EN_Pin, GPIO_PIN_SET);
 #define ESP_OFF HAL_GPIO_WritePin(ESP8266_EN_GPIO_Port, ESP8266_EN_Pin, GPIO_PIN_RESET);
+
+
 
 /* USER CODE END Private defines */
 

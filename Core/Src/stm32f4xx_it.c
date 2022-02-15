@@ -239,10 +239,6 @@ void DMA1_Stream3_IRQHandler(void)
   /* USER CODE END DMA1_Stream3_IRQn 1 */
 }
 
-/**
-  * @brief This function handles DMA1 stream5 global interrupt.
-  */
-
 
 /**
   * @brief This function handles USART3 global interrupt.
