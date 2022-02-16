@@ -32,44 +32,49 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>BLE</name>
-			<type>2</type>
-			<location>D:/Dropbox/Actual/Drivers/BLE</location>
-		</link>
-		<link>
-			<name>BLE_CPP</name>
-			<type>2</type>
-			<location>D:/Dropbox/Actual/Drivers/BLE_CPP</location>
-		</link>
-		<link>
-			<name>CLI</name>
-			<type>2</type>
-			<location>D:/Dropbox/Actual/Drivers/SimpleCLI/src</location>
-		</link>
-		<link>
 			<name>Generator</name>
 			<type>2</type>
 			<location>D:/Dropbox/Actual/Drivers/Generator</location>
 		</link>
 		<link>
-			<name>GyverButton</name>
+			<name>Lib</name>
 			<type>2</type>
-			<location>D:/Dropbox/Actual/Drivers/Gyver/GyverButton V3.8</location>
-		</link>
-		<link>
-			<name>IniFile</name>
-			<type>2</type>
-			<location>D:/Dropbox/Actual/Drivers/IniFile</location>
-		</link>
-		<link>
-			<name>TimerDWT</name>
-			<type>2</type>
-			<location>D:/Dropbox/Actual/Drivers/Time/TimerTest</location>
+			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
 			<name>uTFT2</name>
 			<type>2</type>
 			<location>D:/Dropbox/Actual/Drivers/Display/uTFT2</location>
+		</link>
+		<link>
+			<name>Lib/BLE</name>
+			<type>2</type>
+			<location>D:/Dropbox/Actual/Drivers/BLE</location>
+		</link>
+		<link>
+			<name>Lib/BLE_CPP</name>
+			<type>2</type>
+			<location>D:/Dropbox/Actual/Drivers/BLE_CPP</location>
+		</link>
+		<link>
+			<name>Lib/CLI</name>
+			<type>2</type>
+			<location>D:/Dropbox/Actual/Drivers/SimpleCLI/src</location>
+		</link>
+		<link>
+			<name>Lib/GyverButton</name>
+			<type>2</type>
+			<location>D:/Dropbox/Actual/Drivers/Gyver/GyverButton V3.8</location>
+		</link>
+		<link>
+			<name>Lib/IniFile</name>
+			<type>2</type>
+			<location>D:/Dropbox/Actual/Drivers/IniFile</location>
+		</link>
+		<link>
+			<name>Lib/TimerDWT</name>
+			<type>2</type>
+			<location>D:/Dropbox/Actual/Drivers/Time/TimerTest</location>
 		</link>
 	</linkedResources>
 </projectDescription>
