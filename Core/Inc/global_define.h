@@ -46,7 +46,6 @@
 #include "spi.h"                //
 #include "tim.h"       	  	    //
 #include "gpio.h"               //
-#include "adc.h"                //
 #include "main.h"          		//
 #include "SEGGER.h"     	    //
 #include "SEGGER_RTT.h"     	//

@@ -56,9 +56,7 @@ volatile int U3_DMA_TX_Complete;
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
-extern DMA_HandleTypeDef hdma_dac1;
 extern DMA_HandleTypeDef hdma_usart3_tx;
-extern UART_HandleTypeDef huart3;
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
@@ -238,12 +236,6 @@ void DMA1_Stream3_IRQHandler(void)
   //SEGGER_SYSVIEW_RecordExitISR(); //SEGGER SW
   /* USER CODE END DMA1_Stream3_IRQn 1 */
 }
-
-
-/**
-  * @brief This function handles USART3 global interrupt.
-  */
-
 
 /* USER CODE BEGIN 1 */
 //void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
