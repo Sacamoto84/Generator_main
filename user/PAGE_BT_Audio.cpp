@@ -12,6 +12,13 @@
 
 void PAGE_BT_Audio(void) {
  HAL_GPIO_WritePin(BT_Audio_GPIO_Port, BT_Audio_Pin, GPIO_PIN_SET);
+
+ //sprintf(str, "%d", i);
+
+ tft.Fill(BLUE);
+
+ gfxfont.Puts(10, 22, "USB Audio");
+
  while (1) {
 	KEY.tick();
 	if (KEY.isClick()){
