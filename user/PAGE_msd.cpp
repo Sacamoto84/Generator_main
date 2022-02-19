@@ -35,7 +35,9 @@ void PAGE_MSD(void)
 
 	//tft.Bitmap_From_Flash_Background_16bit(&bmpBackground240240);
 
-    tft.BMP_From_File(0, 0, "b1.bmp");
+
+    tft.BMP_From_File(0, 0, "/Config/MSD.bmp");
+
 
 	//SEGGER_SYSVIEW_Warn("END tft.BMP_From_File(0, 0, /Config/MSD.bmp)");
 //	gfxfont.Puts(120, 30, (char *)"MSD");

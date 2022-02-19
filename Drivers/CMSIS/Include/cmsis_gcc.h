@@ -139,7 +139,7 @@ __STATIC_FORCEINLINE void __enable_irq(void)
  */
 __STATIC_FORCEINLINE void __disable_irq(void)
 {
-У  __ASM volatile ("cpsid i" : : : "memory");
+  __ASM volatile ("cpsid i" : : : "memory");
 }
 
 
