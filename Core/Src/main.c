@@ -115,7 +115,7 @@ int main(void)
   MX_TIM2_Init();
   MX_TIM6_Init();
   MX_USART3_UART_Init();
-  MX_DMA_Init();
+  //MX_DMA_Init();
   MX_TIM3_Init();
   MX_FATFS_Init();
   MX_TIM5_Init();
@@ -152,13 +152,13 @@ int main(void)
 
 	SEGGER_RTT_WriteString(0, "Start\n");
 
-	if (f_open(&SDFile, "/Config/MSD.bmp", FA_OPEN_EXISTING | FA_READ)
+	if (f_open(&SDFile, "b1.bmp", FA_OPEN_EXISTING | FA_READ)
 			== FR_OK) {
-		SEGGER_RTT_WriteString(0, "f_open == OK\n");
+		SEGGER_RTT_WriteString(0, " test f_open == OK\n");
 		f_close(&SDFile);
 
 	} else {
-		SEGGER_RTT_WriteString(0, "f_open == ERROR\n");
+		SEGGER_RTT_WriteString(0, "test f_open == ERROR\n");
 	}
 
 	//ESP_ON;

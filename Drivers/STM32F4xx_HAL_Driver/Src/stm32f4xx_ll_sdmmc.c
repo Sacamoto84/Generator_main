@@ -1181,7 +1181,7 @@ static uint32_t SDMMC_GetCmdResp1(SDIO_TypeDef *SDIOx, uint8_t SD_CMD, uint32_t 
       return SDMMC_ERROR_TIMEOUT;
     }
     sta_reg = SDIOx->STA;
-  }while(((sta_reg & (SDIO_FLAG_CCRCFAIL | SDIO_FLAG_CMDREND | SDIO_FLAG_CTIMEOUT)) == 0U) ||
+Б  }while(((sta_reg & (SDIO_FLAG_CCRCFAIL | SDIO_FLAG_CMDREND | SDIO_FLAG_CTIMEOUT)) == 0U) ||
          ((sta_reg & SDIO_FLAG_CMDACT) != 0U ));
     
   if(__SDIO_GET_FLAG(SDIOx, SDIO_FLAG_CTIMEOUT))

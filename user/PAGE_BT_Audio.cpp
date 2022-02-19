@@ -14,10 +14,11 @@ void PAGE_BT_Audio(void) {
  HAL_GPIO_WritePin(BT_Audio_GPIO_Port, BT_Audio_Pin, GPIO_PIN_SET);
 
  //sprintf(str, "%d", i);
-
  tft.Fill(BLUE);
+ tft.Font_Smooth_Load(&_acRoboto_Medium_en_ru_30[0]);
+ tft.Font_Smooth_drawStr(30, 100, "BT Audio");
 
- gfxfont.Puts(10, 22, "USB Audio");
+ //gfxfont.Puts(10, 22, "USB Audio");
 
  while (1) {
 	KEY.tick();
