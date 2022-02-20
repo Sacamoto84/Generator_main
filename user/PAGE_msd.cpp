@@ -2,10 +2,12 @@
 #include "global_define.h"
 #include "stdio.h"
 
-extern Bitmap bmpBackground240240;
 
-extern Bitmap bmp_on_3232;
-extern Bitmap bmp_off_3232;
+
+//extern Bitmap bmpBackground240240;
+
+//extern Bitmap bmp_on_3232;
+//extern Bitmap bmp_off_3232;
 
 #define APPLICATION_ADDRESS    0x08004000
 
@@ -27,7 +29,7 @@ void Go_To_User_App(void)
 
 void PAGE_MSD(void)
 {
-	Gen.pause(); //Останавливаем таймер6
+
 	tft.Fill(BLUE);
 	tft.Font_Smooth_Load(&_acRoboto_Medium_en_ru_30[0]);
 	tft.Font_Smooth_drawStr(30, 100, "MSD");
