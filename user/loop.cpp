@@ -40,17 +40,30 @@ void setup(void) {
 
 	tft.init(&LCD_0);
 
+
+
+
+
     __HAL_SPI_DISABLE(&hspi1);
     SPI1->CR1 &= ~(0x1UL << (5U));
     __HAL_SPI_ENABLE(&hspi1);
 
+
 	tft.ST77XX_Update_MADCTL();
+
+
+
+
 
 	Gen.Init();//Инициализация генератора
 
 	PAGE_init_palitra();
 
 	gfxfont.init(&tft);
+
+	tft.setResStartAdress(0x08020000); //Установим начало ресурсов
+
+
 
 	//gfxfont.setFont(&FreeMonoBold12pt7b);
 	//gfxfont.setFont(&FreeSansBold12pt7b);
@@ -88,7 +101,7 @@ void setup(void) {
 	//illegal_instruction_execution();
 
 	PAGE_Menu( &page_generator,  &page_item_generator[0], 23);
-
+    while(1);
 
 
 	//tft.Font_Smooth_Load(&_acJetBrainsMono_Medium_en_ru_30[0]);

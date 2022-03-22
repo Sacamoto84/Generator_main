@@ -17,7 +17,9 @@ static char * convert_item_modulation(char * s)
 	static char res_str[20];
 	memset(res_str, 0, 20);
 	int len = strlen(s);
-	memcpy(res_str, &s[0], len-4);
+	if (len > 0)
+	  memcpy(res_str, &s[0], len-4);
+
 	return &res_str[0];
 }
 
@@ -192,7 +194,7 @@ void PAGE_generator_select_modulation(void)
     menu.item_count   = 4;
     menu.item_height  = 30;
     menu.item_start_y = 120;
-    menu.font = &_acRoboto_Medium_en_ru_18[0];
+    menu.font = (uint8_t *)(tft.getResAdressFontID(1)); //&_acRoboto_Medium_en_ru_18[0];
     menu.encoder_block = 0;
     menu.postCallBackFunc = NULL;
     menu.preCallBackFunc  = NULL;

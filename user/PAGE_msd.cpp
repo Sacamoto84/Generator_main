@@ -31,7 +31,7 @@ void PAGE_MSD(void)
 {
 
 	tft.Fill(BLUE);
-	tft.Font_Smooth_Load(&_acRoboto_Medium_en_ru_30[0]);
+	tft.Font_Smooth_Load((uint8_t *)(tft.getResAdressFontID(0))); //(&_acRoboto_Medium_en_ru_30[0]);
 	tft.Font_Smooth_drawStr(30, 100, "MSD");
 	tft.Font_Smooth_drawStr(0, 130, "Press to Reset");
 

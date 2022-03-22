@@ -153,7 +153,9 @@ void PAGE_init_struct_generator(void)
 	page_generator.item_height  = 40;
 	page_generator.item_start_y = 0;
 	//page_generator.font =  &_acRoboto_Medium_en_ru_18[0];
-	page_generator.font =  &_acRoboto_Medium_en_ru_30[0];
+
+
+	page_generator.font = FontId0; //&_acRoboto_Medium_en_ru_30[0];
 	page_generator.preCallBackFunc = &prePageGenerator;
     page_generator.item_text_delta_y = -3;
     page_generator.verticalScroll = 1; //Включит скролл
@@ -203,7 +205,7 @@ void PAGE_init_struct_setting(void) {
 	page_setting.item_height  = 40;
 	page_setting.item_start_y = 0;
 
-	page_setting.font = &_acRoboto_Medium_en_ru_30[0];
+	page_setting.font = (uint8_t *)(tft.getResAdressFontID(0)); //&_acRoboto_Medium_en_ru_30[0];
 
 }
 

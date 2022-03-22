@@ -20,29 +20,29 @@ extern "C" void PAGE_HardFault (stack_ptr * SP)
 	tft.Fill(tft.RGB565(255,0,0));
 	gfxfont.Puts(20, 20, (char *)"HardFault", tft.RGB565(0,0,0));
 
-	sprintf(str,"R0:0x%08X",(unsigned int)SP->r0);
-	gfxfont.Puts(0, 40, str, WHITE);
+	//sprintf(str,"R0:0x%08X",(unsigned int)SP->r0);
+	//gfxfont.Puts(0, 40, str, WHITE);
 
-	sprintf(str,"R1:0x%08X",(unsigned int)SP->r1);
-	gfxfont.Puts(0, 60, str, WHITE);
+	//sprintf(str,"R1:0x%08X",(unsigned int)SP->r1);
+	//gfxfont.Puts(0, 60, str, WHITE);
 
-	sprintf(str,"R2:0x%08X",(unsigned int)SP->r2);
-	gfxfont.Puts(0, 80, str, WHITE);
+	//sprintf(str,"R2:0x%08X",(unsigned int)SP->r2);
+	//gfxfont.Puts(0, 80, str, WHITE);
 
-	sprintf(str,"R3:0x%08X",(unsigned int)SP->r3);
-	gfxfont.Puts(0, 100, str, WHITE);
+	//sprintf(str,"R3:0x%08X",(unsigned int)SP->r3);
+	//gfxfont.Puts(0, 100, str, WHITE);
 
-	sprintf(str,"R12:0x%08X",(unsigned int)SP->r12);
-	gfxfont.Puts(0, 120, str, WHITE);
+	//sprintf(str,"R12:0x%08X",(unsigned int)SP->r12);
+	//gfxfont.Puts(0, 120, str, WHITE);
 
-	sprintf(str,"lr:0x%08X",(unsigned int)SP->lr);
-	gfxfont.Puts(0, 140, str, WHITE);
+	//sprintf(str,"lr:0x%08X",(unsigned int)SP->lr);
+	//gfxfont.Puts(0, 140, str, WHITE);
 
-	sprintf(str,"pc:0x%08X",(unsigned int)SP->pc);
-	gfxfont.Puts(0, 160, str, WHITE);
+	//sprintf(str,"pc:0x%08X",(unsigned int)SP->pc);
+	//gfxfont.Puts(0, 160, str, WHITE);
 
-	sprintf(str,"psr:0x%08X",(unsigned int)SP->psr);
-	gfxfont.Puts(0, 180, str, WHITE);
+	//sprintf(str,"psr:0x%08X",(unsigned int)SP->psr);
+	//gfxfont.Puts(0, 180, str, WHITE);
 
 	tft.ST7789_Update();
 }

@@ -36,17 +36,11 @@ void PAGE_BT_Audio(void) {
  gif2.SetXY(120, 120);
  gif2.setOffset(4*21);
 
-
-
-
-
-
  Gen.pause(); //Останавливаем таймер6
-
 
  //sprintf(str, "%d", i);
  tft.Fill(BLUE);
- tft.Font_Smooth_Load(&_acRoboto_Medium_en_ru_30[0]);
+ tft.Font_Smooth_Load(((uint8_t *)(tft.getResAdressFontID(0)))); //(&_acRoboto_Medium_en_ru_30[0]);
  tft.Font_Smooth_drawStr(30, 100, "BT Audio");
 
  //gfxfont.Puts(10, 22, "USB Audio");
