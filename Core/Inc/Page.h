@@ -32,6 +32,7 @@ void PAGE_Font(void);
 
 void PAGE_BT_Audio(void);
 
+void PAGE_Volume(void);
 //Wifi
 void PAGE_wifi(void);
 void PAGE_wifi_switch(void);

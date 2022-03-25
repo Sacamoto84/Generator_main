@@ -15,7 +15,7 @@ extern void PAGE_Palitra0_15(void);
 
 char str[256] CCMRAM;
 
-int illegal_instruction_execution(void) {
+void illegal_instruction_execution(void) {
 	void (*func_name) (void);
 	func_name = (void (*)())0x77777777;
 	func_name();
@@ -27,6 +27,7 @@ void setup(void) {
 
 	TimerDWT.init();
 	TimerT5.init(&htim5);
+
 	taskCLI_setup();
 
 	USART3->CR1 |=  USART_CR1_RXNEIE; //Interupt RX
@@ -70,7 +71,7 @@ void setup(void) {
 
 	//gfxfont.setFont(&DejaVu_Sans_Mono_Bold_24);
 
-	gfxfont.setFont(&FreeMono14pt8b);
+	//////gfxfont.setFont(&FreeMono14pt8b);
 
 	//gfxfont.setFont(&CourierCyr16pt8b);
 
@@ -101,7 +102,7 @@ void setup(void) {
 	//illegal_instruction_execution();
 
 	PAGE_Menu( &page_generator,  &page_item_generator[0], 23);
-    while(1);
+
 
 
 	//tft.Font_Smooth_Load(&_acJetBrainsMono_Medium_en_ru_30[0]);
@@ -109,12 +110,12 @@ void setup(void) {
 
 	//PAGE_Menu( page_setting,  &page_menu[0], NUM_OF(page_menu));
 
-	tft.GotoXY(0, 20);
-	gfxfont.set_delta_x(0);
-	gfxfont.drawChar('T');
-	gfxfont.Puts((char*)"Hello12345");
+	//tft.GotoXY(0, 20);
+	//gfxfont.set_delta_x(0);
+	//gfxfont.drawChar('T');
+	//gfxfont.Puts((char*)"Hello12345");
 
-	tft.ST7789_Update();
+	//tft.ST7789_Update();
 
 
 
@@ -152,7 +153,7 @@ extern "C" void main_cpp(void) {
 extern "C" void DMA1_Stream5_IRQHandler(void)
 {
 	SEGGER_SYSVIEW_RecordEnterISR(); //SEGGER SW
-	Other_Run_Tick = TimerT5.End(); //Получаем время работы без тиков
+	//Other_Run_Tick = TimerT5.End(); //Получаем время работы без тиков
 	DMA_Sum_Tick   = Other_Run_Tick + DMA_Run_Tick;
 	DMA_zagruzka = (float)DMA_Run_Tick / (float)DMA_Sum_Tick * 100.0F;
 
@@ -160,7 +161,7 @@ extern "C" void DMA1_Stream5_IRQHandler(void)
 	//Other_Run_us = Other_Run_Tick / TimerT5.tickToUs;
 	//DMA_Sum_us   = DMA_Sum_Tick / TimerT5.tickToUs;
 
-	TimerT5.Start();
+	//TimerT5.Start();
 
 	if (DMA1_Stream5->CR & DMA_SxCR_CT)
 	{
@@ -174,8 +175,8 @@ extern "C" void DMA1_Stream5_IRQHandler(void)
 	}
 	HAL_DMA_IRQHandler(&hdma_dac1);
 
-	DMA_Run_Tick = TimerT5.End(); //Получили тики работы
-	TimerT5.Start();
+	//DMA_Run_Tick = TimerT5.End(); //Получили тики работы
+	//TimerT5.Start();
 	SEGGER_SYSVIEW_RecordExitISR(); //SEGGER SW
 }
 

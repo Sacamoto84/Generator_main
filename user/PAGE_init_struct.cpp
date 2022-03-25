@@ -178,11 +178,11 @@ void PAGE_init_struct_setting(void) {
 	page_item_setting[0].text_color = -1;
     //
 	sprintf(page_item_setting[1].text, "Сохранить");
-	page_item_setting[1].bmp = &bmpSave13232;
+	//page_item_setting[1].bmp = &bmpSave13232;
 	page_item_setting[1].text_color = -1;
     //
 	sprintf(page_item_setting[2].text, "Загрузить");
-	page_item_setting[2].bmp = &bmpProgram3232;
+	//page_item_setting[2].bmp = &bmpProgram3232;
 	page_item_setting[2].text_color = -1;
     //
 	sprintf(page_item_setting[3].text, "Яркость");
@@ -200,6 +200,10 @@ void PAGE_init_struct_setting(void) {
 	page_item_setting[6].callBackFunc_isClick = &PAGE_BT_Audio;
 	page_item_setting[6].text_color = -1;
 
+	sprintf(page_item_setting[7].text, "Wiget");
+	page_item_setting[7].callBackFunc_isClick = &PAGE_Volume;
+	page_item_setting[7].text_color = -1;
+
 	//Описание как рендерить меню
 	page_setting.item_count   = 6;
 	page_setting.item_height  = 40;
@@ -211,7 +215,7 @@ void PAGE_init_struct_setting(void) {
 
 void PAGE_Setting(void)
 {
-  PAGE_Menu(&page_setting , &page_item_setting[0], 7);
+  PAGE_Menu(&page_setting , &page_item_setting[0], 8);
 }
 
 

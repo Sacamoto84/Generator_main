@@ -20,7 +20,7 @@ void PAGE_BT_Audio(void) {
 
  TFT_gif gif;
  gif.init(&tft);
- gif.setName("BT");
+ gif.setName((char *)"BT");
  gif.setMaxIndex(44);
  gif.setDelay(0);
  gif.useAplpha(1);
@@ -28,7 +28,7 @@ void PAGE_BT_Audio(void) {
 
  TFT_gif gif2;
  gif2.init(&tft);
- gif2.setName("Q1");
+ gif2.setName((char *)"Q1");
  gif2.setMaxIndex(23);
  gif2.setDelay(0);
  gif2.useAplpha(1);
@@ -52,7 +52,11 @@ void PAGE_BT_Audio(void) {
 		return;
 	}
 
+
+
    tft.Fill(BLUE);
+
+   tft.Font_Smooth_drawStr(30, 100, "BT Audio");
 
    gif.run();
    gif2.run();
