@@ -28,7 +28,9 @@ void setup(void) {
 	TimerDWT.init();
 	TimerT5.init(&htim5);
 
-	taskCLI_setup();
+#ifdef USE_CLI
+	  taskCLI_setup();
+#endif
 
 	USART3->CR1 |=  USART_CR1_RXNEIE; //Interupt RX
     USART3->CR3 |=  USART_CR3_DMAT;

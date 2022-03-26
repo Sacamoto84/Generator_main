@@ -211,32 +211,63 @@ void PAGE_generator_select_modulation(void)
     PAGE_Menu( &menu,  &item[0], Dir_File_Info[0].maxFileCount+1);
     tft.Font_Smooth_Load(page_setting.font);
 
+#ifdef USE_CLI
     if (page_generator.index <12)
     	sendStructCHtoHost(0);
     else
     	sendStructCHtoHost(1);
+#endif
+
 
 }
 
 
 
 void PAGE_generator_CH1_CH_EN_switch(void)
-{ if (Gen.CH1.CH_EN) Gen.CH1.CH_EN = 0; else Gen.CH1.CH_EN = 1; sendStructCHtoHost(0); }
+{
+	if (Gen.CH1.CH_EN)
+	  Gen.CH1.CH_EN = 0;
+    else
+	  Gen.CH1.CH_EN = 1;
+#ifdef USE_CLI
+    sendStructCHtoHost(0);
+#endif
+}
 
 void PAGE_generator_CH1_AM_EN_switch(void)
-{ if (Gen.CH1.AM_EN) Gen.CH1.AM_EN = 0; else Gen.CH1.AM_EN = 1; sendStructCHtoHost(0);}
+{ if (Gen.CH1.AM_EN) Gen.CH1.AM_EN = 0; else Gen.CH1.AM_EN = 1;
+#ifdef USE_CLI
+    sendStructCHtoHost(0);
+#endif
+}
 
 void PAGE_generator_CH1_FM_EN_switch(void)
-{ if (Gen.CH1.FM_EN) Gen.CH1.FM_EN = 0; else Gen.CH1.FM_EN = 1; sendStructCHtoHost(0);}
+{ if (Gen.CH1.FM_EN) Gen.CH1.FM_EN = 0; else Gen.CH1.FM_EN = 1;
+#ifdef USE_CLI
+    sendStructCHtoHost(0);
+#endif
+}
 
 void PAGE_generator_CH2_CH_EN_switch(void)
-{ if (Gen.CH2.CH_EN) Gen.CH2.CH_EN = 0; else Gen.CH2.CH_EN = 1; sendStructCHtoHost(1);}
+{ if (Gen.CH2.CH_EN) Gen.CH2.CH_EN = 0; else Gen.CH2.CH_EN = 1;
+#ifdef USE_CLI
+    sendStructCHtoHost(1);
+#endif
+}
 
 void PAGE_generator_CH2_AM_EN_switch(void)
-{ if (Gen.CH2.AM_EN) Gen.CH2.AM_EN = 0; else Gen.CH2.AM_EN = 1; sendStructCHtoHost(1);}
+{ if (Gen.CH2.AM_EN) Gen.CH2.AM_EN = 0; else Gen.CH2.AM_EN = 1;
+#ifdef USE_CLI
+    sendStructCHtoHost(1);
+#endif
+}
 
 void PAGE_generator_CH2_FM_EN_switch(void)
-{ if (Gen.CH2.FM_EN) Gen.CH2.FM_EN = 0; else Gen.CH2.FM_EN = 1; sendStructCHtoHost(1);}
+{ if (Gen.CH2.FM_EN) Gen.CH2.FM_EN = 0; else Gen.CH2.FM_EN = 1;
+#ifdef USE_CLI
+	sendStructCHtoHost(1);
+#endif
+}
 
 //Включение отключение блокировки
 void PAGE_generator_encoder_block_switch(void)
@@ -260,7 +291,9 @@ void prePageGenerator(void)
 					temp -=100;
 					if (temp < 200) temp = 200;
 					Gen.CH1.Carrier_fr = temp;
+#ifdef USE_CLI
 					sendStructCHtoHost(0);
+#endif
 				}
 
 				if (Encoder.Right) {
@@ -268,7 +301,9 @@ void prePageGenerator(void)
 					temp +=100;
 					if (temp > 4000) temp = 4000;
 					Gen.CH1.Carrier_fr = temp;
+#ifdef USE_CLI
 					sendStructCHtoHost(0);
+#endif
 				}
 				sprintf(page_item_generator[INDEX_CH1_FR].text,"* %d *", Gen.CH1.Carrier_fr);
 
@@ -282,7 +317,9 @@ void prePageGenerator(void)
 				temp -=100;
 				if (temp < 200) temp = 200;
 				Gen.CH2.Carrier_fr = temp;
+#ifdef USE_CLI
 				sendStructCHtoHost(1);
+#endif
 			}
 
 			if (Encoder.Right) {
@@ -290,7 +327,9 @@ void prePageGenerator(void)
 				temp +=100;
 				if (temp > 4000) temp = 4000;
 				Gen.CH2.Carrier_fr = temp;
+#ifdef USE_CLI
 				sendStructCHtoHost(1);
+#endif
 			}
 			sprintf(page_item_generator[INDEX_CH2_FR].text,"* %d *", Gen.CH2.Carrier_fr);
 
@@ -311,7 +350,9 @@ void prePageGenerator(void)
 					if (tempf < 0.1F) tempf = 0.1F;
 
 					Gen.CH1.AM_fr = tempf;
+#ifdef USE_CLI
 					sendStructCHtoHost(0);
+#endif
 				}
 
 				if (Encoder.Right) {
@@ -325,7 +366,9 @@ void prePageGenerator(void)
 					if (tempf> 100.0F) tempf = 100.0F;
 
 					Gen.CH1.AM_fr = tempf;
+#ifdef USE_CLI
 					sendStructCHtoHost(0);
+#endif
 				}
 				sprintf(page_item_generator[INDEX_CH1_AM_FR].text,"> %.1f Hz <", Gen.CH1.AM_fr);
 		}
@@ -345,7 +388,9 @@ void prePageGenerator(void)
 					if (tempf < 0.1F) tempf = 0.1F;
 
 					Gen.CH2.AM_fr = tempf;
+#ifdef USE_CLI
 					sendStructCHtoHost(1);
+#endif
 				}
 
 				if (Encoder.Right) {
@@ -359,7 +404,9 @@ void prePageGenerator(void)
 					if (tempf> 100.0F) tempf = 100.0F;
 
 					Gen.CH2.AM_fr = tempf;
+#ifdef USE_CLI
 					sendStructCHtoHost(1);
+#endif
 				}
 				sprintf(page_item_generator[INDEX_CH2_AM_FR].text,"> %.1f Hz <", Gen.CH2.AM_fr);
 		}
@@ -372,7 +419,9 @@ void prePageGenerator(void)
 					temp -=100;
 					if (temp < 200) temp = 200;
 					Gen.CH1.FM_Base = temp;
+#ifdef USE_CLI
 					sendStructCHtoHost(0);
+#endif
 				}
 
 				if (Encoder.Right) {
@@ -381,7 +430,9 @@ void prePageGenerator(void)
 					temp +=100;
 					if (temp > 5000) temp = 5000;
 					Gen.CH1.FM_Base = temp;
+#ifdef USE_CLI
 					sendStructCHtoHost(0);
+#endif
 				}
 				sprintf(page_item_generator[INDEX_CH1_FM_BASE].text," Base * %d *", Gen.CH1.FM_Base);
 		}
@@ -394,7 +445,9 @@ void prePageGenerator(void)
 					temp -=100;
 					if (temp < 200) temp = 200;
 					Gen.CH2.FM_Base = temp;
+#ifdef USE_CLI
 					sendStructCHtoHost(1);
+#endif
 				}
 
 				if (Encoder.Right) {
@@ -403,7 +456,9 @@ void prePageGenerator(void)
 					temp +=100;
 					if (temp > 5000) temp = 5000;
 					Gen.CH2.FM_Base = temp;
+#ifdef USE_CLI
 					sendStructCHtoHost(1);
+#endif
 				}
 				sprintf(page_item_generator[INDEX_CH2_FM_BASE].text," Base * %d *", Gen.CH2.FM_Base);
 		}
@@ -417,7 +472,9 @@ void prePageGenerator(void)
 					temp -=100;
 					if (temp < 200) temp = 200;
 					Gen.CH1.FM_Dev = temp;
+#ifdef USE_CLI
 					sendStructCHtoHost(0);
+#endif
 				}
 
 				if (Encoder.Right) {
@@ -426,7 +483,9 @@ void prePageGenerator(void)
 					temp +=100;
 					if (temp > 5000) temp = 5000;
 					Gen.CH1.FM_Dev = temp;
+#ifdef USE_CLI
 					sendStructCHtoHost(0);
+#endif
 				}
 				sprintf(page_item_generator[INDEX_CH1_FM_DEV].text," Dev * %d *", Gen.CH1.FM_Dev);
 		}
@@ -439,7 +498,9 @@ void prePageGenerator(void)
 					temp -=100;
 					if (temp < 200) temp = 200;
 					Gen.CH2.FM_Dev = temp;
+#ifdef USE_CLI
 					sendStructCHtoHost(1);
+#endif
 				}
 
 				if (Encoder.Right) {
@@ -448,7 +509,9 @@ void prePageGenerator(void)
 					temp +=100;
 					if (temp > 5000) temp = 5000;
 					Gen.CH2.FM_Dev = temp;
+#ifdef USE_CLI
 					sendStructCHtoHost(1);
+#endif
 				}
 				sprintf(page_item_generator[INDEX_CH2_FM_DEV].text," Dev * %d *", Gen.CH2.FM_Dev);
 		}
@@ -467,7 +530,9 @@ void prePageGenerator(void)
 						tempf -=1.0F;
 					if (tempf < 0.1F) tempf = 0.1F;
 					Gen.CH1.FM_mod_fr = tempf;
+#ifdef USE_CLI
 					sendStructCHtoHost(0);
+#endif
 				}
 
 				if (Encoder.Right) {
@@ -478,7 +543,9 @@ void prePageGenerator(void)
 					  tempf +=1.0F;
 					if (tempf> 100.0F) tempf = 100.0F;
 					Gen.CH1.FM_mod_fr = tempf;
+#ifdef USE_CLI
 					sendStructCHtoHost(0);
+#endif
 				}
 				sprintf(page_item_generator[INDEX_CH1_FM_FR].text,"> %.1f Hz <", Gen.CH1.FM_mod_fr);
 		}
@@ -498,7 +565,9 @@ void prePageGenerator(void)
 					if (tempf < 0.1F) tempf = 0.1F;
 
 					Gen.CH2.FM_mod_fr = tempf;
+#ifdef USE_CLI
 					sendStructCHtoHost(1);
+#endif
 				}
 
 				if (Encoder.Right) {
@@ -510,7 +579,9 @@ void prePageGenerator(void)
 					  tempf +=1.0F;
 					if (tempf> 100.0F) tempf = 100.0F;
 					Gen.CH2.FM_mod_fr = tempf;
+#ifdef USE_CLI
 					sendStructCHtoHost(1);
+#endif
 				}
 				sprintf(page_item_generator[INDEX_CH2_FM_FR].text,"> %.1f Hz <", Gen.CH2.FM_mod_fr);
 		}

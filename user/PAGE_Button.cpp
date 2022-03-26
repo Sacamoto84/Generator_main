@@ -7,7 +7,7 @@
 
 #include "BLE_Commands.h"
 
-#include "TFTWiget.h"
+#include "TFT_Wiget_Animated_Rectagle.h"
 
 
 extern Bitmap bmpBackground240240;
@@ -187,7 +187,7 @@ void PAGE_Menu(PAGE_Menu_config_typedef * menu , PAGE_Menu_item_typedef * item, 
 	tft.needUpdate = 1;
 
 
-	TFT_Wiget_Animated_Button B[max_imem];
+	TFT_Wiget_Animated_Rectagle B[max_imem];
 
 	for(int i = 0; i< max_imem ; i++)
 	{
@@ -195,9 +195,13 @@ void PAGE_Menu(PAGE_Menu_config_typedef * menu , PAGE_Menu_item_typedef * item, 
 		B[i].setHW(H, 230);
 
 
+
+
+		B[i].typeAnimation = 2;
 	}
 
-
+	B[0].typeAnimation = 0;
+	B[1].typeAnimation = 1;
 
 	while (1) {
 
@@ -298,7 +302,7 @@ void PAGE_Menu(PAGE_Menu_config_typedef * menu , PAGE_Menu_item_typedef * item, 
 
 			*/
 
-			B[i].run();
+
 
 			if (i == index)
 				B[i].select(1);
@@ -308,6 +312,7 @@ void PAGE_Menu(PAGE_Menu_config_typedef * menu , PAGE_Menu_item_typedef * item, 
 
 			B[i].setY(StartY + H * (ii % menu->item_count));
 
+			B[i].run();
 
 
 			if (item[i].text_color != -1)
@@ -325,17 +330,26 @@ void PAGE_Menu(PAGE_Menu_config_typedef * menu , PAGE_Menu_item_typedef * item, 
 
 
 
-			if (B[i].needUpdate())
-			{
-				tft.ST7789_Update(B[i].info());
-				List_Update_Particle U;
-				U = B[i].info();
-				SEGGER_RTT_printf(0, "i:%d H:%d W:%d x0:%d y0:%d x1:%d y1:%d\n", i, U.H, U.W, U.x0, U.y0, U.x1, U.y1 );
 
-
-			}
 
 		}
+
+		for (i = window_start; i <= window_end; i++)
+		{
+
+			            if (B[i].needUpdate())
+						{
+
+							List_Update_Particle U;
+							U = B[i].info();
+							U.y1 += 1;
+							tft.ST7789_Update(U);
+							SEGGER_RTT_printf(0, "i:%d H:%d W:%d x0:%d y0:%d x1:%d y1:%d\n", i, U.H, U.W, U.x0, U.y0, U.x1, U.y1 );
+						}
+
+		}
+
+
 		//TimerT5.Loger("for (i = window_start; i <= window_end; i++)");
 
 		//menu->verticalScroll = 1;
@@ -402,7 +416,10 @@ void PAGE_Menu(PAGE_Menu_config_typedef * menu , PAGE_Menu_item_typedef * item, 
 				if (item[index].exit) return;
 		}
 
+#ifdef USE_CLI
 		BLE_Task();
+#endif
+
 		//sendStructCHtoHost(0);
 
 	}

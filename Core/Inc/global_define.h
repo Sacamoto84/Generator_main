@@ -1,6 +1,10 @@
 #ifndef __GLOBAL_DEFINE_H
 #define __GLOBAL_DEFINE_H
 
+//Если нужно использовать CLI
+//#define USE_CLI
+
+
  ///////////////
  //  define
  ///////////////

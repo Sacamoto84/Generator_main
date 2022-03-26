@@ -211,6 +211,7 @@ void PAGE_init_struct_setting(void) {
 
 	page_setting.font = (uint8_t *)(tft.getResAdressFontID(0)); //&_acRoboto_Medium_en_ru_30[0];
 
+	page_setting.verticalScroll = 1; //Включит скролл
 }
 
 void PAGE_Setting(void)

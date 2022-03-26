@@ -1,3 +1,5 @@
+#ifdef USE_CLI
+
 #include "taskCLI.h"
 
 Command comandCH1_EN;
@@ -130,3 +132,4 @@ void comandCH1_FM_MODCallback(cmd *c) {
 	SEGGER_RTT_printf(0, ">sCH1.FM_mod %s\n", Gen.CH1.FM_mod);
 }
 
+#endif

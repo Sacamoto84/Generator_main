@@ -1,3 +1,6 @@
+
+#ifdef USE_CLI
+
 #include "taskCLI.h"
 
 #include "HiSpeedDWT.h"
@@ -494,6 +497,6 @@ FRESULT scan_files (
     return res;
 }
 
-
+#endif
 
 

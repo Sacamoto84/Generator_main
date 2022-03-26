@@ -1,3 +1,5 @@
+#ifdef USE_CLI
+
 #include "taskCLI.h"
 
 extern TFT tft;
@@ -585,6 +587,7 @@ void LCD_Init_Callback(cmd *c) {
 	SEGGER_RTT_printf(0, ">LCD_Init\n");
 }
 
+#endif
 
 
 
