@@ -62,6 +62,7 @@
 #include "gfx_fonts_includes.h" //
 #include "HiSpeedDWT.h"         //
 #include "LOG.h"                //
+#include "TFT_gif.h"            //
 //////////////////////////////////
 
 ///////////////
@@ -95,7 +96,10 @@ typedef struct    //
    void (*callBackFunc_isHolded) (void);
    void (*callBackFunc_isDouble) (void);
 
-   Bitmap *bmp;  //Картинка 32x32
+   //Bitmap *bmp;  //Картинка 32x32
+
+   char *    nameGif; //Имя гифки
+   TFT_gif *    gif;  //Имя гифки
 
    int32_t text_color = -1; //Цвет текста -1 использовать значения по умолчанию
 

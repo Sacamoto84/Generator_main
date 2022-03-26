@@ -38,6 +38,7 @@ void PAGE_init_struct_generator(void)
 	page_item_generator[INDEX_CH1_FR].text_color = -1;
 	page_item_generator[INDEX_CH1_FR].callBackFunc_isHolded = &PAGE_Setting;
 	page_item_generator[INDEX_CH1_FR].callBackFunc_isClick = &PAGE_generator_encoder_block_switch;
+	page_item_generator[INDEX_CH1_FR].nameGif = (char*)"Q12";
 
 	//page_item_generator[2].text = (char*) "CH1 SINUS";
 	page_item_generator[INDEX_CH1_CR].text_color = -1;
@@ -53,6 +54,7 @@ void PAGE_init_struct_generator(void)
 	page_item_generator[INDEX_CH1_AM_MOD].text_color = -1;
 	page_item_generator[INDEX_CH1_AM_MOD].callBackFunc_isHolded = &PAGE_Setting;
 	page_item_generator[INDEX_CH1_AM_MOD].callBackFunc_isClick  = &PAGE_generator_select_modulation;
+	page_item_generator[INDEX_CH1_AM_MOD].nameGif = (char*)"Q12";
 
 	//page_item_generator[5].text = (char*) "AM-10.4 Hz";
 	page_item_generator[INDEX_CH1_AM_FR].text_color = -1;
@@ -180,6 +182,9 @@ void PAGE_init_struct_setting(void) {
 	sprintf(page_item_setting[1].text, "Сохранить");
 	//page_item_setting[1].bmp = &bmpSave13232;
 	page_item_setting[1].text_color = -1;
+	page_item_setting[1].nameGif = (char*)"Q1";
+
+
     //
 	sprintf(page_item_setting[2].text, "Загрузить");
 	//page_item_setting[2].bmp = &bmpProgram3232;

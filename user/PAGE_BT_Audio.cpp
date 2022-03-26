@@ -23,7 +23,7 @@ void PAGE_BT_Audio(void) {
  gif.setName((char *)"BT");
  gif.setMaxIndex(44);
  gif.setDelay(0);
- gif.useAplpha(1);
+
  gif.setSwap(0);
 
  TFT_gif gif2;
@@ -31,7 +31,7 @@ void PAGE_BT_Audio(void) {
  gif2.setName((char *)"Q1");
  gif2.setMaxIndex(23);
  gif2.setDelay(0);
- gif2.useAplpha(1);
+
  gif2.setSwap(0);
  gif2.SetXY(120, 120);
  gif2.setOffset(4*21);

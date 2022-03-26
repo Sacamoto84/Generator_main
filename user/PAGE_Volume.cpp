@@ -5,7 +5,7 @@
 #include "TFT_gif.h"
 
 
-TFT_gif gif;
+TFT_gif gifw;
 
 void PAGE_Volume(void)
 {
@@ -15,10 +15,10 @@ void PAGE_Volume(void)
 
     TFT_gif gif;
     gif.init(&tft);
-    gif.setName((char *)"Q1");
-    gif.setMaxIndex(23);
+    gif.setName((char *)"Q12");
+
     gif.setDelay(0);
-    gif.useAplpha(1);
+
     gif.setSwap(0);
     gif.SetXY(10, 10);
     gif.setOffset(4*21);
@@ -26,10 +26,10 @@ void PAGE_Volume(void)
 
     TFT_gif gif2;
     gif2.init(&tft);
-    gif2.setName((char *)"Q1");
-    gif2.setMaxIndex(23);
+    gif2.setName((char *)"Q12");
+
     gif2.setDelay(0);
-    gif2.useAplpha(1);
+
     gif2.setSwap(0);
     gif2.SetXY(100, 10);
     gif2.setOffset(4*21);
@@ -38,10 +38,10 @@ void PAGE_Volume(void)
 
     TFT_gif gif3;
     gif3.init(&tft);
-    gif3.setName((char *)"Q1");
-    gif3.setMaxIndex(23);
+    gif3.setName((char *)"Q12");
+
     gif3.setDelay(0);
-    gif3.useAplpha(1);
+
     gif3.setSwap(0);
     gif3.SetXY(10, 150);
     gif3.setOffset(4*21);
@@ -49,16 +49,19 @@ void PAGE_Volume(void)
 
     TFT_gif gif4;
     gif4.init(&tft);
-    gif4.setName((char *)"Q1");
+    gif4.setName((char *)"Q12");
     gif4.setMaxIndex(23);
     gif4.setDelay(0);
-    gif4.useAplpha(1);
+
     gif4.setSwap(0);
     gif4.SetXY(100, 150);
     gif4.setOffset(4*21);
     gif4.trigger = BOOMERANG;
 
 
+    tft.Fill(COLOR_DARKBLUE);
+
+    tft.ST7789_UpdateDMA16bitV3();
 
 	while (1) {
 		KEY.tick();
@@ -95,10 +98,13 @@ void PAGE_Volume(void)
 		gif3.run();
 		gif4.run();
 
-		//tft.ST7789_Update(gif.info());
-		//tft.ST7789_Update(gif2.info());
-		//tft.ST7789_Update(gif3.info());
-		//tft.ST7789_Update(gif4.info());
+		TimerT5.Start();
+		tft.ST7789_Update(gif.info());
+		TimerT5.Loger("tft.ST7789_Update");
+
+		tft.ST7789_Update(gif2.info());
+		tft.ST7789_Update(gif3.info());
+		tft.ST7789_Update(gif4.info());
 
 
 
@@ -107,7 +113,7 @@ void PAGE_Volume(void)
 
 
 
-		tft.ST7789_UpdateDMA16bitV3();
+		//tft.ST7789_UpdateDMA16bitV3();
 
 	    if (KEY.isClick())
 					return;	
