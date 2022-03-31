@@ -2,11 +2,6 @@
 #include "global_define.h"
 #include "stdio.h"
 
-extern Bitmap bmpBackground240240;
-
-extern Bitmap bmp_on_3232;
-extern Bitmap bmp_off_3232;
-
 static int temp;
 static PAGE_Menu_item_typedef   * temp_item;
 static PAGE_Menu_config_typedef * temp_menu;
@@ -30,7 +25,9 @@ void PageSelectModulation_onClick(void)
 	//char filename[32]={0};
 	//sprintf(filename,"%s", temp_item[index].text); //Получаем название несущей по индексу
 
-	if (temp == INDEX_CH1_CR) //Carrier
+	uint32_t i = page_generator.index;
+
+	if (i == INDEX_CH1_CR) //Carrier
 	{
 		sprintf(Gen.CH1.Carrier_mod,"%s", temp_item[index].text);
         Gen.Create_Carrier(&Gen.CH1);
@@ -38,7 +35,7 @@ void PageSelectModulation_onClick(void)
         tft.Font_Smooth_Load(page_generator.font);
 	}
 
-	if (temp == INDEX_CH1_AM_MOD) //AM mod
+	if (i == INDEX_CH1_AM_MOD) //AM mod
 	{
 		sprintf(Gen.CH1.AM_mod,"%s", temp_item[index].text);
         Gen.Create_AM_Modulation(&Gen.CH1);
@@ -46,7 +43,7 @@ void PageSelectModulation_onClick(void)
         tft.Font_Smooth_Load(page_generator.font);
 	}
 
-	if (temp == INDEX_CH1_FM_MOD) //AM mod
+	if (i == INDEX_CH1_FM_MOD) //AM mod
 	{
 		sprintf(Gen.CH1.FM_mod,"%s", temp_item[index].text);
         Gen.Create_FM_Modulation(&Gen.CH1);
@@ -54,7 +51,7 @@ void PageSelectModulation_onClick(void)
         tft.Font_Smooth_Load(page_generator.font);
 	}
 
-	if (temp == INDEX_CH2_CR) //Carrier
+	if (i == INDEX_CH2_CR) //Carrier
 	{
 		sprintf(Gen.CH2.Carrier_mod,"%s", temp_item[index].text);
         Gen.Create_Carrier(&Gen.CH2);
@@ -62,7 +59,7 @@ void PageSelectModulation_onClick(void)
         tft.Font_Smooth_Load(page_generator.font);
 	}
 
-	if (temp == INDEX_CH2_AM_MOD) //AM mod
+	if (i == INDEX_CH2_AM_MOD) //AM mod
 	{
 		sprintf(Gen.CH2.AM_mod,"%s", temp_item[index].text);
         Gen.Create_AM_Modulation(&Gen.CH2);
@@ -70,7 +67,7 @@ void PageSelectModulation_onClick(void)
         tft.Font_Smooth_Load(page_generator.font);
 	}
 
-	if (temp == INDEX_CH2_FM_MOD) //AM mod
+	if (i == INDEX_CH2_FM_MOD) //AM mod
 	{
 		sprintf(Gen.CH2.FM_mod,"%s", temp_item[index].text);
         Gen.Create_FM_Modulation(&Gen.CH2);
@@ -87,11 +84,13 @@ void postPageSelectModulation(void)
     char filename[32]={0};
     UINT testByte;
 
+    uint32_t i = page_generator.index;
+
    if (index)
    {
 
     //Получаем имя файла для отображения на экране
-	if ((temp==INDEX_CH1_CR)||(temp==INDEX_CH2_CR))
+	if ((i==INDEX_CH1_CR)||(i==INDEX_CH2_CR))
 		sprintf(filename,"/Carrier/%s", temp_item[index].text);
 	else
 		sprintf(filename,"/Mod/%s", temp_item[index].text);
@@ -113,7 +112,7 @@ void postPageSelectModulation(void)
 	    Gen.buffer_temp[1025] = Gen.buffer_temp[1023];
 
 	    //Carrier
-	   if ((temp == INDEX_CH1_CR)||(temp == INDEX_CH2_CR))
+	   if ((i == INDEX_CH1_CR)||(i == INDEX_CH2_CR))
 	   {
 	    tft.LineHW(0, 59, 239, BLUE);
 
@@ -132,7 +131,7 @@ void postPageSelectModulation(void)
 	   }
 
 	    //AM Mod
-	   if ((temp==INDEX_CH1_AM_MOD)||(temp==INDEX_CH1_FM_MOD)||(temp==INDEX_CH2_AM_MOD)||(temp==INDEX_CH2_FM_MOD))
+	   if ((i==INDEX_CH1_AM_MOD)||(i==INDEX_CH1_FM_MOD)||(i==INDEX_CH2_AM_MOD)||(i==INDEX_CH2_FM_MOD))
 	   {
 	    tft.LineHW(0, 59, 239, BLUE);
 	    tft.LineMoveXY(17, *p/40 + 8);
@@ -160,11 +159,11 @@ void PAGE_generator_select_modulation(void)
 	else
 	  path = (char*)"/Mod";
 
-	temp = i; //Определяет тип модуляции несущая или модуляция
+	//temp = i; //Определяет тип модуляции несущая или модуляция
 
     static FRESULT res;
     DIR dir;
-    static FILINFO fno;
+    FILINFO fno;
     Dir_File_Info[0].maxFileCount = 0;
 
     res = f_opendir(&dir, path);                       /* Open the directory */
@@ -194,8 +193,8 @@ void PAGE_generator_select_modulation(void)
     menu.item_count   = 4;
     menu.item_height  = 30;
     menu.item_start_y = 120;
-    menu.font = (uint8_t *)(tft.getResAdressFontID(1)); //&_acRoboto_Medium_en_ru_18[0];
-    menu.encoder_block = 0;
+    menu.font = Roboto_Medium_en_ru_18; //&_acRoboto_Medium_en_ru_18[0];
+    menu.field.encoder_block = 0;
     menu.postCallBackFunc = NULL;
     menu.preCallBackFunc  = NULL;
     menu.temp = 0;
@@ -270,8 +269,12 @@ void PAGE_generator_CH2_FM_EN_switch(void)
 }
 
 //Включение отключение блокировки
-void PAGE_generator_encoder_block_switch(void)
-{ if (page_generator.encoder_block) page_generator.encoder_block = 0; else page_generator.encoder_block = 1; }
+void PAGE_generator_encoder_block_switch(void){
+if (page_generator.field.encoder_block)
+	page_generator.field.encoder_block = 0;
+else
+	page_generator.field.encoder_block = 1;
+}
 
 //Пред функция для картинки генератор, обрабатывем крутилки
 void prePageGenerator(void)
@@ -280,7 +283,7 @@ void prePageGenerator(void)
 	uint32_t temp;
 	float    tempf;
 
-	if (page_generator.encoder_block){
+	if (page_generator.field.encoder_block){
 
         ///////////////////////////////////////
 		if (i == INDEX_CH1_FR) //CH1 Carrier Fr
@@ -299,7 +302,7 @@ void prePageGenerator(void)
 				if (Encoder.Right) {
 					Encoder.Right = 0;
 					temp +=100;
-					if (temp > 4000) temp = 4000;
+					if (temp > 10000) temp = 10000;
 					Gen.CH1.Carrier_fr = temp;
 #ifdef USE_CLI
 					sendStructCHtoHost(0);
@@ -586,10 +589,13 @@ void prePageGenerator(void)
 				sprintf(page_item_generator[INDEX_CH2_FM_FR].text,"> %.1f Hz <", Gen.CH2.FM_mod_fr);
 		}
 
-		tft.needUpdate = 1;
+		//tft.needUpdate = 1;
+		page_generator.field.needUpdate = 1;
 	}
 	else
 	{
+		//187 us
+
 		//Обновляем названия структуры по структуре CH1 и CH2
 		if (Gen.CH1.CH_EN)
 		  sprintf(page_item_generator[0].text,"CH1 [  Вкл  ]");
@@ -597,7 +603,6 @@ void prePageGenerator(void)
 		  sprintf(page_item_generator[0].text,"CH1 [ Откл ]");
 
 	    sprintf(page_item_generator[1].text," %d Hz", Gen.CH1.Carrier_fr);
-
 
 		sprintf(page_item_generator[2].text," %s", convert_item_modulation(Gen.CH1.Carrier_mod));
 
@@ -649,7 +654,6 @@ void prePageGenerator(void)
 		sprintf(page_item_generator[20].text," Dev   %d Hz", Gen.CH2.FM_Dev);
 		sprintf(page_item_generator[21].text," %s", convert_item_modulation(Gen.CH2.FM_mod));
 		sprintf(page_item_generator[22].text," %.1f Hz", Gen.CH2.FM_mod_fr);
-
 
 	}
 }

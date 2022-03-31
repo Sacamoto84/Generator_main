@@ -39,22 +39,29 @@ void PAGE_init_struct_generator(void)
 	page_item_generator[INDEX_CH1_FR].callBackFunc_isHolded = &PAGE_Setting;
 	page_item_generator[INDEX_CH1_FR].callBackFunc_isClick = &PAGE_generator_encoder_block_switch;
 	page_item_generator[INDEX_CH1_FR].nameGif = (char*)"Q12";
+	page_item_generator[INDEX_CH1_FR].resid   = 5;
 
 	//page_item_generator[2].text = (char*) "CH1 SINUS";
 	page_item_generator[INDEX_CH1_CR].text_color = -1;
 	page_item_generator[INDEX_CH1_CR].callBackFunc_isHolded = &PAGE_Setting;
 	page_item_generator[INDEX_CH1_CR].callBackFunc_isClick = &PAGE_generator_select_modulation;
+	page_item_generator[INDEX_CH1_CR].nameGif = (char*)"usb";
+	page_item_generator[INDEX_CH1_CR].resid   = 3;
 
 	//page_item_generator[3].text = (char*) "AM Enable";
 	page_item_generator[INDEX_CH1_AM_EN].text_color = -1;
 	page_item_generator[INDEX_CH1_AM_EN].callBackFunc_isHolded = &PAGE_Setting;
 	page_item_generator[INDEX_CH1_AM_EN].callBackFunc_isClick = &PAGE_generator_CH1_AM_EN_switch;
+	page_item_generator[INDEX_CH1_AM_EN].nameGif = (char*)"serv";
+	page_item_generator[INDEX_CH1_AM_EN].resid   = 4;
+
 
 	//page_item_generator[4].text = (char*) "AM-CHARP";
 	page_item_generator[INDEX_CH1_AM_MOD].text_color = -1;
 	page_item_generator[INDEX_CH1_AM_MOD].callBackFunc_isHolded = &PAGE_Setting;
 	page_item_generator[INDEX_CH1_AM_MOD].callBackFunc_isClick  = &PAGE_generator_select_modulation;
 	page_item_generator[INDEX_CH1_AM_MOD].nameGif = (char*)"Q12";
+	page_item_generator[INDEX_CH1_AM_MOD].resid   = 5;
 
 	//page_item_generator[5].text = (char*) "AM-10.4 Hz";
 	page_item_generator[INDEX_CH1_AM_FR].text_color = -1;
@@ -160,7 +167,7 @@ void PAGE_init_struct_generator(void)
 	page_generator.font = FontId0; //&_acRoboto_Medium_en_ru_30[0];
 	page_generator.preCallBackFunc = &prePageGenerator;
     page_generator.item_text_delta_y = -3;
-    page_generator.verticalScroll = 1; //Включит скролл
+    page_generator.field.verticalScroll = 1; //Включит скролл
 }
 
 void PAGE_init_struct_setting(void) {
@@ -182,7 +189,7 @@ void PAGE_init_struct_setting(void) {
 	sprintf(page_item_setting[1].text, "Сохранить");
 	//page_item_setting[1].bmp = &bmpSave13232;
 	page_item_setting[1].text_color = -1;
-	page_item_setting[1].nameGif = (char*)"Q1";
+	page_item_setting[1].nameGif = (char*)"Q12";
 
 
     //
@@ -214,9 +221,9 @@ void PAGE_init_struct_setting(void) {
 	page_setting.item_height  = 40;
 	page_setting.item_start_y = 0;
 
-	page_setting.font = (uint8_t *)(tft.getResAdressFontID(0)); //&_acRoboto_Medium_en_ru_30[0];
+	page_setting.font = Roboto_Medium_en_ru_30; //&_acRoboto_Medium_en_ru_30[0];
 
-	page_setting.verticalScroll = 1; //Включит скролл
+	page_setting.field.verticalScroll = 1; //Включит скролл
 }
 
 void PAGE_Setting(void)

@@ -13,34 +13,32 @@
 #include "TFT_gif.h"
 
 
-
-
 void PAGE_BT_Audio(void) {
  HAL_GPIO_WritePin(BT_Audio_GPIO_Port, BT_Audio_Pin, GPIO_PIN_SET);
 
  TFT_gif gif;
  gif.init(&tft);
  gif.setName((char *)"BT");
- gif.setMaxIndex(44);
+
  gif.setDelay(0);
 
- gif.setSwap(0);
+
 
  TFT_gif gif2;
  gif2.init(&tft);
  gif2.setName((char *)"Q1");
- gif2.setMaxIndex(23);
+
  gif2.setDelay(0);
 
- gif2.setSwap(0);
- gif2.SetXY(120, 120);
- gif2.setOffset(4*21);
+
+ gif2.setXY(120, 120);
+
 
  Gen.pause(); //Останавливаем таймер6
 
  //sprintf(str, "%d", i);
  tft.Fill(BLUE);
- tft.Font_Smooth_Load(((uint8_t *)(tft.getResAdressFontID(0)))); //(&_acRoboto_Medium_en_ru_30[0]);
+ tft.Font_Smooth_Load( Roboto_Medium_en_ru_30 ); //(&_acRoboto_Medium_en_ru_30[0]);
  tft.Font_Smooth_drawStr(30, 100, "BT Audio");
 
  //gfxfont.Puts(10, 22, "USB Audio");

@@ -195,15 +195,15 @@ void PAGE_Menu(PAGE_Menu_config_typedef *menu, PAGE_Menu_item_typedef *item,
 	B[0].typeAnimation = 0;
 	B[1].typeAnimation = 1;
 
-	int gif_count = 0;
+	int gif_count = 0;  //Количество гифок
 	for (int i = 0; i < max_imem; i++) {
 		if (item[i].nameGif)
 			gif_count++;
 	}
 
-
-
-		TFT_gif gif1[gif_count];
+	TFT_gif gif1[gif_count];
+	Bitmap  bmp [gif_count];
+	int8_t id;
 
 	if (gif_count) {
 		gif_count = 0;
@@ -214,23 +214,39 @@ void PAGE_Menu(PAGE_Menu_config_typedef *menu, PAGE_Menu_item_typedef *item,
 
 				item[i].gif = &gif1[gif_count];
 
+                id = item[i].resid;
+                bmp[gif_count] = tft.getResBitmapID(id);
+				item[i].gif->bmpStop = bmp[gif_count];
+
 				item[i].gif->init(&tft);
 				item[i].gif->setName(item[i].nameGif);
 				item[i].gif->setDelay(0);
-				item[i].gif->setSwap(0);
-				item[i].gif->SetXY(150, 10);
-				item[i].gif->setOffset(4 * 21);
+
+				item[i].gif->setXY(170, 10);
+
 				item[i].gif->trigger = HOVER;
-				item[i].gif->command(cPLAY);
+				item[i].gif->command(PLAY);
 				gif_count++;
 			}
 
 		}
 	}
 
+	item[1].gif->field.bit32 = 0;
+
+
+	char str[32];
+
+	menu->field.needUpdate = 1;
+
 	while (1) {
 
 		KEY.tick();
+
+		//tft.needUpdate = 0;
+
+
+
 
 		if (menu->preCallBackFunc) {
 			menu->index = index;
@@ -238,8 +254,10 @@ void PAGE_Menu(PAGE_Menu_config_typedef *menu, PAGE_Menu_item_typedef *item,
 			func_name();
 		}
 
+
+
 		//Блокировка энкодера, нужно чтобы обрабатывать в пре
-		if (menu->encoder_block == 0) {
+		if (menu->field.encoder_block == 0) {
 			if (Encoder.Left) {
 				Encoder.Left = 0;
 				index--;
@@ -270,19 +288,21 @@ void PAGE_Menu(PAGE_Menu_config_typedef *menu, PAGE_Menu_item_typedef *item,
 		menu->index = index;
 		menu->max_item = max_imem - 1;
 
+
+
 		//tft.needUpdate = 1;
 
-		//tft.Fill(BLUE);
+		tft.Fill(tft.RGB565(0, 7, 43)); //Фон
 
 		//Фон
 		//tft.Bitmap_From_Flash_Background_16bit(&bmpBackground240240); // 756us
 
-		if (index < 12)
-			tft.Gradient_Vertical(0, 0, 239, 239, 0x12, 0x0C, 0x6E, 0x0B, 0x07,
-					0x42); //670us
-		else
-			tft.Gradient_Vertical(0, 0, 239, 239, 0x4D, 0x44, 0x6f, 0x26, 0x4d,
-					0x59);
+		//if (index < 12)
+		//	tft.Gradient_Vertical(0, 0, 239, 239, 0x12, 0x0C, 0x6E, 0x0B, 0x07,
+		//			0x42); //670us
+		//else
+		//	tft.Gradient_Vertical(0, 0, 239, 239, 0x4D, 0x44, 0x6f, 0x26, 0x4d,
+		//			0x59);
 
 		//tft.Gradient_Vertical(0, 0, 239, 239, 0x26, 0x4d, 0x59, 0x43, 0x97, 0x8d);
 		//tft.Gradient_Vertical(0, 0, 239, 239, 0x68, 0x82, 0xa0, 0x2c, 0x69, 0x75);
@@ -299,72 +319,56 @@ void PAGE_Menu(PAGE_Menu_config_typedef *menu, PAGE_Menu_item_typedef *item,
 		ii = 0;
 		//TimerT5.Start();
 
+
+
+
+
 		//4.1ms
 		for (i = window_start; i <= window_end; i++) {
 
-			//if (item[i].value)
-			//{
-			//	tft.Font_Smooth_drawStr(180     + item[i].value_dx, 8 + H * (ii % menu.item_count) + StartY , item[i].value, (index == i) ? palitra[21] : palitra[21]);
-			//	tft.Font_Smooth_drawStr(180 - 1 + item[i].value_dx, 8 + H * (ii % menu.item_count) - 1 + StartY, item[i].value,	(index == i) ? palitra[20] : palitra[22]);
-			//}
 
-			////////tft.Font_Smooth_drawStr(9+menu->item_text_delta_x, 8 + H * (ii % menu->item_count) + StartY + menu->item_text_delta_y, item[i].text, (index == i) ? palitra[21] : palitra[21]);
-
-			/*
-			 if (item[i].text_color = -1)
-			 {
-			 tft.Font_Smooth_drawStr(9 - 1, 8 + H * (ii++ % menu.item_count) - 1 + StartY, item[i].text,	(index == i) ? palitra[20] : palitra[22]);
-			 }
-			 else
-			 {
-			 tft.Font_Smooth_drawStr(9 - 1, 8 + H * (ii++ % menu.item_count) - 1 + StartY, item[i].text,	(index == i) ? palitra[22] : (uint16_t)item[i].text_color);
-			 }
-
-			 */
 
 			if (i == index)
 				B[i].select(1);
 			else
 				B[i].select(0);
 
+
 			B[i].setY(StartY + H * (ii % menu->item_count));
+			//TimerT5.Start();
+			B[i].run();  //116 us -Of Gen on
+			//TimerT5.Loger("B[i].run()");
 
-			B[i].run();
 
+
+
+			//1500us
 			if (item[i].text_color != -1)
-				tft.Font_Smooth_drawStr(9 - 1 + menu->item_text_delta_x,
-						8 + H * (ii++ % menu->item_count) - 1 + StartY
-								+ menu->item_text_delta_y, item[i].text,
-						(uint16_t) item[i].text_color);
+				tft.Font_Smooth_drawStr(9 - 1 + menu->item_text_delta_x, 8 + H * (ii++ % menu->item_count) - 1 + StartY + menu->item_text_delta_y, item[i].text, (uint16_t) item[i].text_color);
 			else
-				tft.Font_Smooth_drawStr(9 - 1 + menu->item_text_delta_x,
-						8 + H * (ii++ % menu->item_count) - 1 + StartY
-								+ menu->item_text_delta_y, item[i].text,
-						(index == i) ? palitra[20] : palitra[22]);
+				tft.Font_Smooth_drawStr(9 - 1 + menu->item_text_delta_x, 8 + H * (ii++ % menu->item_count) - 1 + StartY + menu->item_text_delta_y, item[i].text, (index == i) ? palitra[20] : palitra[22]);
 
-			//if (item[i].gif)
-			//	item[i].gif->command(cPLAY);
 
-			if (item[i].gif)
-			{
+
+
+
+
+			if (item[i].gif) {
 
 				if (i == index)
-					item[i].gif->command(cPLAY);
+					item[i].gif->command(PLAY);
 				else
-					item[i].gif->command(cSTOP);
+					item[i].gif->command(STOP);
 
-				item[i].gif->SetY(StartY + H * (ii % menu->item_count));
-
-
-				TimerT5.Start();
-
-				item[i].gif->run(); //32x32x32 4800us(914285 Байт/Сек) -Of Gen Off    6500us Gen On 4096байт
-
-				TimerT5.Loger("item[i].gif->run();");
+				item[i].gif->setY(StartY + H * (ii % menu->item_count));
 
 				TimerT5.Start();
+				item[i].gif->run(); //32x32x32 4800us(914285 Байт/Сек) -Of Gen Off    5000us Gen On 4096байт
+
+				sprintf(str, "item[%d].gif->run();", i);
+				TimerT5.Loger(str);
+
 				tft.ST7789_Update(item[i].gif->info());
-				TimerT5.Loger("tft.ST7789_Update");
 			}
 			//if (item[index].bmp)
 			//  tft.Bitmap_From_Flash_Alpha(200, (index - window_start)*H+3 + StartY, item[index].bmp, 1);
@@ -377,7 +381,8 @@ void PAGE_Menu(PAGE_Menu_config_typedef *menu, PAGE_Menu_item_typedef *item,
 		for (i = window_start; i <= window_end; i++) {
 
 			if (B[i].needUpdate()) {
-
+				sprintf(str, "B[%d].needUpdate()", i);
+				LOG("MENU",'I',str);
 				List_Update_Particle U;
 				U = B[i].info();
 				U.y1 += 1;
@@ -394,7 +399,7 @@ void PAGE_Menu(PAGE_Menu_config_typedef *menu, PAGE_Menu_item_typedef *item,
 		//TimerT5.Start();
 
 		//Рисуем вертикальный скролл //87 us
-		if (menu->verticalScroll) {
+		if (menu->field.verticalScroll) {
 			tft.RectangleFilled(230, menu->item_start_y, 14,
 					menu->item_count * menu->item_height, tft.RGB565(0, 0, 0));
 			int H = (menu->item_count * menu->item_height) - 4; //Общая высота области в которой идет рисование
@@ -415,11 +420,10 @@ void PAGE_Menu(PAGE_Menu_config_typedef *menu, PAGE_Menu_item_typedef *item,
 			func_name();
 		}
 
-		tft.needUpdate = 1;
-		if (tft.needUpdate) {
-
+		if (menu->field.needUpdate) {
+			menu->field.needUpdate = 0;
+		    LOG("MENU",'I',"ST7789_UpdateDMA16bitV3");
 			tft.ST7789_UpdateDMA16bitV3(); //DMA8bitV2();
-
 		}
 
 		if (KEY.isHolded()) {

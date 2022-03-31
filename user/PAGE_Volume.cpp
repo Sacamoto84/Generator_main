@@ -19,9 +19,9 @@ void PAGE_Volume(void)
 
     gif.setDelay(0);
 
-    gif.setSwap(0);
-    gif.SetXY(10, 10);
-    gif.setOffset(4*21);
+
+    gif.setXY(10, 10);
+
     gif.trigger = HOVER;
 
     TFT_gif gif2;
@@ -30,9 +30,9 @@ void PAGE_Volume(void)
 
     gif2.setDelay(0);
 
-    gif2.setSwap(0);
-    gif2.SetXY(100, 10);
-    gif2.setOffset(4*21);
+
+    gif2.setXY(100, 10);
+
     gif2.trigger = LOOP;
 
 
@@ -42,20 +42,20 @@ void PAGE_Volume(void)
 
     gif3.setDelay(0);
 
-    gif3.setSwap(0);
-    gif3.SetXY(10, 150);
-    gif3.setOffset(4*21);
+
+    gif3.setXY(10, 150);
+
     gif3.trigger = MORPH;
 
     TFT_gif gif4;
     gif4.init(&tft);
     gif4.setName((char *)"Q12");
-    gif4.setMaxIndex(23);
+
     gif4.setDelay(0);
 
-    gif4.setSwap(0);
-    gif4.SetXY(100, 150);
-    gif4.setOffset(4*21);
+
+    gif4.setXY(100, 150);
+
     gif4.trigger = BOOMERANG;
 
 
@@ -71,10 +71,10 @@ void PAGE_Volume(void)
 			i+=1;
 			if (i>2) i=2;
 
-			gif .command(cSTOP);
-			gif2.command(cSTOP);
-			gif3.command(cSTOP);
-			gif4.command(cSTOP);
+			gif .command(STOP);
+			gif2.command(STOP);
+			gif3.command(STOP);
+			gif4.command(STOP);
 
 		}
 
@@ -83,10 +83,10 @@ void PAGE_Volume(void)
 			i-=1;
 			if(i<0) i=0;
 
-			gif .command(cPLAY);
-			gif2.command(cPLAY);
-			gif3.command(cPLAY);
-			gif4.command(cPLAY);
+			gif .command(PLAY);
+			gif2.command(PLAY);
+			gif3.command(PLAY);
+			gif4.command(PLAY);
 		}
 
 		tft.Fill(COLOR_DARKBLUE);

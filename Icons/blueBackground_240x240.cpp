@@ -1925,11 +1925,12 @@ const uint16_t  _acblueBackground[] = {
 		};
 
 //Картинка на секторе 7
+
 Bitmap bmpBackground240240 = {
 		240, // xSize
 		240, // ySize
 		NULL, // steam8
-		(const short unsigned int*)0x8040000,//&_acblueBackground[0],
+		(uint16_t *)0x8040000,//&_acblueBackground[0],
 		NULL,
 		16,
 		NULL

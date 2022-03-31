@@ -73,4 +73,4 @@ Bitmap bmp_on_3232 = { 32, // xSize
 		32, // ySize
 		NULL, // steam8
 		NULL,
-		NULL, 32, &_acon[0] };
+		NULL, 32, (uint32_t *)_acon[0] };

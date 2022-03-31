@@ -5,6 +5,20 @@
 //#define USE_CLI
 
 
+
+//ID Ресурсов
+
+#define Roboto_Medium_en_ru_30 (uint8_t *)(tft.getResAdressFontID(0))
+#define Roboto_Medium_en_ru_18 (uint8_t *)(tft.getResAdressFontID(1))
+
+
+
+
+
+
+
+
+
  ///////////////
  //  define
  ///////////////
@@ -98,8 +112,9 @@ typedef struct    //
 
    //Bitmap *bmp;  //Картинка 32x32
 
-   char *    nameGif; //Имя гифки
-   TFT_gif *    gif;  //Имя гифки
+   char *     nameGif; //Имя гифки
+   TFT_gif *      gif;  //Имя гифки
+   int8_t  resid = -1; //Номер картинки ресурса
 
    int32_t text_color = -1; //Цвет текста -1 использовать значения по умолчанию
 
@@ -113,6 +128,7 @@ typedef struct    //
    uint8_t item_count;    //Количество отображаемых строк
    uint8_t item_height;   //Высота одной строки
    uint8_t item_start_y;  //Координата Y начала списка
+   uint8_t count_item; //Максимальное количество элементов
 
    int8_t  item_text_delta_x;  //Смещение текста по X
    int8_t  item_text_delta_y;  //Смещение текста по Y
@@ -124,25 +140,32 @@ typedef struct    //
    void (*preCallBackFunc)  (void);
    void (*postCallBackFunc) (void);
 
-   //char * title;
-
-   //Enable
-   uint8_t verticalScroll; //1-использовать вертикальный скролл
-   uint8_t encoder_block;  //Блокировка энкодера
-
-
    uint32_t temp;
    uint32_t tempf;
 
-
-   uint32_t index;
-   int window_start;
-   int window_end;
-   int max_item;
-
-   int count_item; //Максимальное количество элементов
-
    PAGE_Menu_item_typedef * items;
+
+
+   struct fieldbite
+   {
+		unsigned verticalScroll :1; //1-использовать вертикальный скролл
+		unsigned encoder_block :1;  //Блокировка энкодера
+		unsigned needUpdate :1;     //Требование полной перерисовки кадра
+		unsigned needRender :1;
+   } field;
+
+
+
+
+
+   uint8_t index;
+   uint8_t window_start;
+   uint8_t window_end;
+   uint8_t max_item;
+
+
+
+
 
  } PAGE_Menu_config_typedef;
 

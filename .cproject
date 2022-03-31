@@ -1196,7 +1196,7 @@
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Drivers"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="FATFS"/>
 						<entry excluding="Generator_Render.c|mysignal.c|mysignal.h|signal.c|Generator_buffer.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Generator"/>
-						<entry excluding="save1_32x32.cpp|program32A_32x32.cpp|glass240x240.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Icons"/>
+						<entry excluding="blueBackground_240x240.cpp|bmp889727.cpp|off.cpp|on.cpp|save1_32x32.cpp|program32A_32x32.cpp|glass240x240.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Icons"/>
 						<entry excluding="CLI|Utils/SWO.c|BLE_CPP" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Lib"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Middlewares"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="SW"/>

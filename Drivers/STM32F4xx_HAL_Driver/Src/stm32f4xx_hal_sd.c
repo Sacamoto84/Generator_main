@@ -1165,7 +1165,6 @@ HAL_StatusTypeDef HAL_SD_ReadBlocks_DMA(SD_HandleTypeDef *hsd, uint8_t *pData, u
   SDIO_DataInitTypeDef config;
   uint32_t errorstate;
   uint32_t add = BlockAdd;
-
   if(NULL == pData)
   {
     hsd->ErrorCode |= HAL_SD_ERROR_PARAM;
