@@ -97,7 +97,7 @@ void PAGE_init_struct_generator(void)
 	//page_item_generator[11].text = (char*) "--------------";
 	page_item_generator[INDEX_SEPARATOR].text_color = tft.RGB565(0, 0, 255);
 	page_item_generator[INDEX_SEPARATOR].callBackFunc_isHolded = &PAGE_Setting;
-	page_item_generator[INDEX_SEPARATOR].text_color = -1;
+	//page_item_generator[INDEX_SEPARATOR].text_color = -1;
 
 
 	//page_item_generator[12].text = (char*) "CH2 EN";

@@ -2,7 +2,7 @@
 #include "global_define.h"
 #include "stdio.h"
 
-static int temp;
+//static int temp;
 static PAGE_Menu_item_typedef   * temp_item;
 static PAGE_Menu_config_typedef * temp_menu;
 
@@ -624,9 +624,7 @@ void prePageGenerator(void)
 		sprintf(page_item_generator[9].text," %s", convert_item_modulation(Gen.CH1.FM_mod));
 		sprintf(page_item_generator[10].text," %.1f Hz", Gen.CH1.FM_mod_fr);
 
-		char str[16];
-		sprintf(str, "---DMA{%.1f}---", DMA_zagruzka);
-		sprintf(page_item_generator[11].text, str);
+		sprintf(page_item_generator[11].text, "---DMA{%.1f}---", DMA_zagruzka);
 
 		if (Gen.CH2.CH_EN)
 		  sprintf(page_item_generator[12].text,"CH2 [  Вкл  ]");

@@ -18,7 +18,7 @@ extern "C" void PAGE_HardFault (stack_ptr * SP)
 {
 	//char str[32];
 	tft.Fill(tft.RGB565(255,0,0));
-	gfxfont.Puts(20, 20, (char *)"HardFault", tft.RGB565(0,0,0));
+	//gfxfont.Puts(20, 20, (char *)"HardFault", tft.RGB565(0,0,0));
 
 	//sprintf(str,"R0:0x%08X",(unsigned int)SP->r0);
 	//gfxfont.Puts(0, 40, str, WHITE);

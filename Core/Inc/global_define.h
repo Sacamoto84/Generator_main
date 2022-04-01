@@ -112,8 +112,8 @@ typedef struct    //
 
    //Bitmap *bmp;  //Картинка 32x32
 
-   char *     nameGif; //Имя гифки
-   TFT_gif *      gif;  //Имя гифки
+   char *     nameGif = 0; //Имя гифки
+   TFT_gif *      gif = 0;  //Имя гифки
    int8_t  resid = -1; //Номер картинки ресурса
 
    int32_t text_color = -1; //Цвет текста -1 использовать значения по умолчанию

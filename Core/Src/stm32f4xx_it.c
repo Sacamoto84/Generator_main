@@ -32,7 +32,20 @@ volatile int U3_DMA_TX_Complete;
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+ struct
+ {
+   uint32_t r0;
+   uint32_t r1;
+   uint32_t r2;
+   uint32_t r3;
+   uint32_t r12;
+   uint32_t lr;
+   uint32_t pc;
+   uint32_t psr;
+ }*stack_ptr; //Указатель на текущее значение стека(SP)
 
+extern void LOG(char * tag, char TYPE, char * text);
+extern void PAGE_HardFault ();
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -84,18 +97,6 @@ void NMI_Handler(void)
 void HardFault_Handler(void)
 {
   /* USER CODE BEGIN HardFault_IRQn 0 */
-	  struct
-	  {
-	    uint32_t r0;
-	    uint32_t r1;
-	    uint32_t r2;
-	    uint32_t r3;
-	    uint32_t r12;
-	    uint32_t lr;
-	    uint32_t pc;
-	    uint32_t psr;
-	  }*stack_ptr; //Указатель на текущее значение стека(SP)
-
 	  asm(
 	      "TST lr, #4 \n" //Тестируем 3ий бит указателя стека(побитовое �?)
 	      "ITE EQ \n"   //Значение указателя стека имеет бит 3?

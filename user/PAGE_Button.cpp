@@ -202,7 +202,7 @@ void PAGE_Menu(PAGE_Menu_config_typedef *menu, PAGE_Menu_item_typedef *item,
 	}
 
 	TFT_gif gif1[gif_count];
-	Bitmap  bmp [gif_count];
+	//Bitmap  bmp [gif_count];
 	int8_t id;
 
 	if (gif_count) {
@@ -215,8 +215,7 @@ void PAGE_Menu(PAGE_Menu_config_typedef *menu, PAGE_Menu_item_typedef *item,
 				item[i].gif = &gif1[gif_count];
 
                 id = item[i].resid;
-                bmp[gif_count] = tft.getResBitmapID(id);
-				item[i].gif->bmpStop = bmp[gif_count];
+				item[i].gif->bmpStop = tft.getResBitmapID(id);
 
 				item[i].gif->init(&tft);
 				item[i].gif->setName(item[i].nameGif);
@@ -382,7 +381,7 @@ void PAGE_Menu(PAGE_Menu_config_typedef *menu, PAGE_Menu_item_typedef *item,
 
 			if (B[i].needUpdate()) {
 				sprintf(str, "B[%d].needUpdate()", i);
-				LOG("MENU",'I',str);
+				LOG((char*)"MENU",'I',str);
 				List_Update_Particle U;
 				U = B[i].info();
 				U.y1 += 1;
@@ -420,9 +419,10 @@ void PAGE_Menu(PAGE_Menu_config_typedef *menu, PAGE_Menu_item_typedef *item,
 			func_name();
 		}
 
+
 		if (menu->field.needUpdate) {
 			menu->field.needUpdate = 0;
-		    LOG("MENU",'I',"ST7789_UpdateDMA16bitV3");
+		    LOG((char*)"MENU",'I',(char*)"ST7789_UpdateDMA16bitV3");
 			tft.ST7789_UpdateDMA16bitV3(); //DMA8bitV2();
 		}
 
@@ -443,7 +443,7 @@ void PAGE_Menu(PAGE_Menu_config_typedef *menu, PAGE_Menu_item_typedef *item,
 		}
 
 		if (KEY.isClick()) {
-			menu->index = index;
+			//menu->index = index;
 			KEY.isHolded();
 			KEY.isDouble();
 

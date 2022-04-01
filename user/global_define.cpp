@@ -3,8 +3,8 @@
 PAGE_Menu_config_typedef page_generator;
 PAGE_Menu_config_typedef page_setting;
 
-PAGE_Menu_item_typedef   page_item_setting[9];
-PAGE_Menu_item_typedef   page_item_generator[NUM_ITEM_GENERETOR];
+PAGE_Menu_item_typedef   page_item_setting[9] CCMRAM;
+PAGE_Menu_item_typedef   page_item_generator[NUM_ITEM_GENERETOR] CCMRAM;
 
 
 GButton KEY(ENTER_GPIO_Port, ENTER_Pin);

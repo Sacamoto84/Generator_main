@@ -80,7 +80,7 @@ int main(void)
 	SCB->VTOR = 0x8060000;
 
 	uint32_t *p;
-	p = (uint32_t *)0x10000000;
+	p = (uint32_t *)(0x10000000);
 	int count = 16384;
 	while(count--)
 		*p++ = 0;

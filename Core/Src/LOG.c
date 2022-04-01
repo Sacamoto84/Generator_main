@@ -5,6 +5,7 @@
  *      Author: Ivan
  */
 #include "LOG.h"
+#include "string.h"
 
 char log_str[256] __attribute__((aligned (4)));
 

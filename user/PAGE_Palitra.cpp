@@ -25,21 +25,21 @@ uint16_t palitra[256];
 
 void PAGE_init_palitra(void) {
 	palitra[0] = pColor_0;
-	palitra[0] = pColor_1;
-	palitra[1] = pColor_2;
-	palitra[2] = pColor_3;
-	palitra[3] = pColor_4;
-	palitra[4] = pColor_5;
-	palitra[5] = pColor_6;
-	palitra[6] = pColor_7;
-	palitra[7] = pColor_8;
-	palitra[8] = pColor_9;
-	palitra[9] = pColor_10;
-	palitra[10] = pColor_11;
-	palitra[11] = pColor_12;
-	palitra[12] = pColor_13;
-	palitra[13] = pColor14_WHITE;
-	palitra[14] = pColor15_BLACK;
+	palitra[1] = pColor_1;
+	palitra[2] = pColor_2;
+	palitra[3] = pColor_3;
+	palitra[4] = pColor_4;
+	palitra[5] = pColor_5;
+	palitra[6] = pColor_6;
+	palitra[7] = pColor_7;
+	palitra[8] = pColor_8;
+	palitra[9] = pColor_9;
+	palitra[10] = pColor_10;
+	palitra[11] = pColor_11;
+	palitra[12] = pColor_12;
+	palitra[13] = pColor_13;
+	palitra[14] = pColor14_WHITE;
+	palitra[15] = pColor15_BLACK;
 }
 
 void PAGE_Palitra(void) {

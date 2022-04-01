@@ -100,7 +100,7 @@ void PAGE_Volume(void)
 
 		TimerT5.Start();
 		tft.ST7789_Update(gif.info());
-		TimerT5.Loger("tft.ST7789_Update");
+		TimerT5.Loger((char*)"tft.ST7789_Update");
 
 		tft.ST7789_Update(gif2.info());
 		tft.ST7789_Update(gif3.info());
