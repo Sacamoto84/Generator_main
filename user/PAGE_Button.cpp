@@ -214,24 +214,26 @@ void PAGE_Menu(PAGE_Menu_config_typedef *menu, PAGE_Menu_item_typedef *item,
 
 				item[i].gif = &gif1[gif_count];
 
+				item[i].gif->init(&tft);
+				item[i].gif->setName(item[i].nameGif);
+
                 id = item[i].resid;
 				item[i].gif->bmpStop = tft.getResBitmapID(id);
 
-				item[i].gif->init(&tft);
-				item[i].gif->setName(item[i].nameGif);
 				item[i].gif->setDelay(0);
 
 				item[i].gif->setXY(170, 10);
 
 				item[i].gif->trigger = HOVER;
 				item[i].gif->command(PLAY);
+
 				gif_count++;
 			}
 
 		}
 	}
 
-	item[1].gif->field.bit32 = 0;
+	//item[1].gif->field.bit32 = 0;
 
 
 	char str[32];
@@ -335,7 +337,7 @@ void PAGE_Menu(PAGE_Menu_config_typedef *menu, PAGE_Menu_item_typedef *item,
 
 			B[i].setY(StartY + H * (ii % menu->item_count));
 			//TimerT5.Start();
-			B[i].run();  //116 us -Of Gen on
+		//	B[i].run();  //116 us -Of Gen on
 			//TimerT5.Loger("B[i].run()");
 
 
@@ -361,11 +363,11 @@ void PAGE_Menu(PAGE_Menu_config_typedef *menu, PAGE_Menu_item_typedef *item,
 
 				item[i].gif->setY(StartY + H * (ii % menu->item_count));
 
-				TimerT5.Start();
+				//TimerT5.Start();
 				item[i].gif->run(); //32x32x32 4800us(914285 Байт/Сек) -Of Gen Off    5000us Gen On 4096байт
 
 				sprintf(str, "item[%d].gif->run();", i);
-				TimerT5.Loger(str);
+				//TimerT5.Loger(str);
 
 				tft.ST7789_Update(item[i].gif->info());
 			}

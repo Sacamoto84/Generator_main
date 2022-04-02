@@ -33,27 +33,29 @@ void PAGE_init_struct_generator(void)
 	page_item_generator[INDEX_CH1_EN].text_color = -1;
 	page_item_generator[INDEX_CH1_EN].callBackFunc_isHolded = &PAGE_Setting;
 	page_item_generator[INDEX_CH1_EN].callBackFunc_isClick = &PAGE_generator_CH1_CH_EN_switch;
+	page_item_generator[INDEX_CH1_EN].nameGif = (char*)"serv24";
+	page_item_generator[INDEX_CH1_EN].resid = 6;
 
 	//page_item_generator[1].text = (char*) "CH1 1000Hz";
 	page_item_generator[INDEX_CH1_FR].text_color = -1;
 	page_item_generator[INDEX_CH1_FR].callBackFunc_isHolded = &PAGE_Setting;
 	page_item_generator[INDEX_CH1_FR].callBackFunc_isClick = &PAGE_generator_encoder_block_switch;
-	page_item_generator[INDEX_CH1_FR].nameGif = (char*)"Q12";
-	page_item_generator[INDEX_CH1_FR].resid   = 5;
+	page_item_generator[INDEX_CH1_FR].nameGif = (char*)"serv";
+
 
 	//page_item_generator[2].text = (char*) "CH1 SINUS";
 	page_item_generator[INDEX_CH1_CR].text_color = -1;
 	page_item_generator[INDEX_CH1_CR].callBackFunc_isHolded = &PAGE_Setting;
 	page_item_generator[INDEX_CH1_CR].callBackFunc_isClick = &PAGE_generator_select_modulation;
 	page_item_generator[INDEX_CH1_CR].nameGif = (char*)"usb";
-	page_item_generator[INDEX_CH1_CR].resid   = 3;
+	page_item_generator[INDEX_CH1_CR].resid   = 6;
 
 	//page_item_generator[3].text = (char*) "AM Enable";
 	page_item_generator[INDEX_CH1_AM_EN].text_color = -1;
 	page_item_generator[INDEX_CH1_AM_EN].callBackFunc_isHolded = &PAGE_Setting;
 	page_item_generator[INDEX_CH1_AM_EN].callBackFunc_isClick = &PAGE_generator_CH1_AM_EN_switch;
 	page_item_generator[INDEX_CH1_AM_EN].nameGif = (char*)"serv";
-	page_item_generator[INDEX_CH1_AM_EN].resid   = 4;
+	//page_item_generator[INDEX_CH1_AM_EN].resid   = 4;
 
 
 	//page_item_generator[4].text = (char*) "AM-CHARP";
@@ -61,7 +63,7 @@ void PAGE_init_struct_generator(void)
 	page_item_generator[INDEX_CH1_AM_MOD].callBackFunc_isHolded = &PAGE_Setting;
 	page_item_generator[INDEX_CH1_AM_MOD].callBackFunc_isClick  = &PAGE_generator_select_modulation;
 	page_item_generator[INDEX_CH1_AM_MOD].nameGif = (char*)"Q12";
-	page_item_generator[INDEX_CH1_AM_MOD].resid   = 5;
+	//page_item_generator[INDEX_CH1_AM_MOD].resid   = 5;
 
 	//page_item_generator[5].text = (char*) "AM-10.4 Hz";
 	page_item_generator[INDEX_CH1_AM_FR].text_color = -1;
@@ -189,9 +191,6 @@ void PAGE_init_struct_setting(void) {
 	sprintf(page_item_setting[1].text, "Сохранить");
 	//page_item_setting[1].bmp = &bmpSave13232;
 	page_item_setting[1].text_color = -1;
-	page_item_setting[1].nameGif = (char*)"Q12";
-
-
     //
 	sprintf(page_item_setting[2].text, "Загрузить");
 	//page_item_setting[2].bmp = &bmpProgram3232;

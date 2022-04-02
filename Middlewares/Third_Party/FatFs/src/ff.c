@@ -1793,8 +1793,8 @@ void gen_numname (
 	UINT seq			/* Sequence number */
 )
 {
-	BYTE ns[16], c;
-	INT i, j;
+	BYTE ns[8], c;
+	UINT i, j;
 	WCHAR wc;
 	DWORD sr;
 
@@ -1822,9 +1822,6 @@ void gen_numname (
 		ns[i--] = c;
 		seq /= 16;
 	} while (seq);
-
-	if (i<0) i = 0;
-
 	ns[i] = '~';
 
 	/* Append the number */
