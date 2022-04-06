@@ -26,7 +26,7 @@ extern uint16_t palitra_0[16];
 void PAGE_Button(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t select, char *str);
 void PAGE_Button_Pressed(uint16_t x, uint16_t y, uint16_t w, uint16_t h, char *str);
 void PAGE_Background_Board(void);
-void PAGE_Menu(PAGE_Menu_config_typedef * menu , PAGE_Menu_item_typedef * item, int NUM);
+void PAGE_Menu(menu_typedef * menu , item_typedef * item, int NUM);
 void PAGE_Palitra(void);
 void PAGE_Font(void);
 

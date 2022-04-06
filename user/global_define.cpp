@@ -1,10 +1,10 @@
 #include "global_define.h"
 
-PAGE_Menu_config_typedef page_generator;
-PAGE_Menu_config_typedef page_setting;
+menu_typedef menu_generator;
+menu_typedef menu_setting;
 
-PAGE_Menu_item_typedef   page_item_setting[9] CCMRAM;
-PAGE_Menu_item_typedef   page_item_generator[NUM_ITEM_GENERETOR] CCMRAM;
+item_typedef   item_setting[9] CCMRAM;
+item_typedef   item_generator[NUM_ITEM_GENERETOR] CCMRAM;
 
 
 GButton KEY(ENTER_GPIO_Port, ENTER_Pin);

@@ -103,7 +103,7 @@ void setup(void) {
 
 	//illegal_instruction_execution();
 
-	PAGE_Menu( &page_generator,  &page_item_generator[0], 23);
+	PAGE_Menu( &menu_generator,  &item_generator[0], 23);
 
 
 

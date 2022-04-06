@@ -3,8 +3,8 @@
 #include "stdio.h"
 
 //static int temp;
-static PAGE_Menu_item_typedef   * temp_item;
-static PAGE_Menu_config_typedef * temp_menu;
+static item_typedef   * temp_item;
+static menu_typedef * temp_menu;
 
 
 static char * convert_item_modulation(char * s)
@@ -25,54 +25,54 @@ void PageSelectModulation_onClick(void)
 	//char filename[32]={0};
 	//sprintf(filename,"%s", temp_item[index].text); //Получаем название несущей по индексу
 
-	uint32_t i = page_generator.index;
+	uint32_t i = menu_generator.index;
 
 	if (i == INDEX_CH1_CR) //Carrier
 	{
 		sprintf(Gen.CH1.Carrier_mod,"%s", temp_item[index].text);
         Gen.Create_Carrier(&Gen.CH1);
-        temp_item[index].exit = 1; //Для выхода
-        tft.Font_Smooth_Load(page_generator.font);
+        temp_item[index].field.exit = 1; //Для выхода
+        tft.Font_Smooth_Load(menu_generator.font);
 	}
 
 	if (i == INDEX_CH1_AM_MOD) //AM mod
 	{
 		sprintf(Gen.CH1.AM_mod,"%s", temp_item[index].text);
         Gen.Create_AM_Modulation(&Gen.CH1);
-        temp_item[index].exit = 1; //Для выхода
-        tft.Font_Smooth_Load(page_generator.font);
+        temp_item[index].field.exit = 1; //Для выхода
+        tft.Font_Smooth_Load(menu_generator.font);
 	}
 
 	if (i == INDEX_CH1_FM_MOD) //AM mod
 	{
 		sprintf(Gen.CH1.FM_mod,"%s", temp_item[index].text);
         Gen.Create_FM_Modulation(&Gen.CH1);
-        temp_item[index].exit = 1; //Для выхода
-        tft.Font_Smooth_Load(page_generator.font);
+        temp_item[index].field.exit = 1; //Для выхода
+        tft.Font_Smooth_Load(menu_generator.font);
 	}
 
 	if (i == INDEX_CH2_CR) //Carrier
 	{
 		sprintf(Gen.CH2.Carrier_mod,"%s", temp_item[index].text);
         Gen.Create_Carrier(&Gen.CH2);
-        temp_item[index].exit = 1; //Для выхода
-        tft.Font_Smooth_Load(page_generator.font);
+        temp_item[index].field.exit = 1; //Для выхода
+        tft.Font_Smooth_Load(menu_generator.font);
 	}
 
 	if (i == INDEX_CH2_AM_MOD) //AM mod
 	{
 		sprintf(Gen.CH2.AM_mod,"%s", temp_item[index].text);
         Gen.Create_AM_Modulation(&Gen.CH2);
-        temp_item[index].exit = 1; //Для выхода
-        tft.Font_Smooth_Load(page_generator.font);
+        temp_item[index].field.exit = 1; //Для выхода
+        tft.Font_Smooth_Load(menu_generator.font);
 	}
 
 	if (i == INDEX_CH2_FM_MOD) //AM mod
 	{
 		sprintf(Gen.CH2.FM_mod,"%s", temp_item[index].text);
         Gen.Create_FM_Modulation(&Gen.CH2);
-        temp_item[index].exit = 1; //Для выхода
-        tft.Font_Smooth_Load(page_generator.font);
+        temp_item[index].field.exit = 1; //Для выхода
+        tft.Font_Smooth_Load(menu_generator.font);
 	}
 }
 
@@ -84,7 +84,7 @@ void postPageSelectModulation(void)
     char filename[32]={0};
     UINT testByte;
 
-    uint32_t i = page_generator.index;
+    uint32_t i = menu_generator.index;
 
    if (index)
    {
@@ -149,7 +149,7 @@ void postPageSelectModulation(void)
 //Создаем списки и по ним рендерим графику и рисуем списки
 void PAGE_generator_select_modulation(void)
 {
-	uint32_t i = page_generator.index;
+	uint32_t i = menu_generator.index;
 
 	//Поиск файлов в папке
 	char * path;
@@ -177,11 +177,11 @@ void PAGE_generator_select_modulation(void)
         f_closedir(&dir);
     }
 
-    PAGE_Menu_item_typedef    item[Dir_File_Info[0].maxFileCount+1] = {0};
-    PAGE_Menu_config_typedef  menu = {0};
+    item_typedef    item[Dir_File_Info[0].maxFileCount+1] = {0};
+    menu_typedef    menu = {0};
 
     sprintf(item[0].text, "%s","<-Назад");
-    item[0].exit = 1; //Для выхода
+    item[0].field.exit = 1; //Для выхода
 
     for(int i = 1; i<Dir_File_Info[0].maxFileCount+1;i++){
     	sprintf(item[i].text, "%s",Dir_File_Info[i-1].Name);
@@ -208,7 +208,7 @@ void PAGE_generator_select_modulation(void)
     temp_menu = &menu;
 
     PAGE_Menu( &menu,  &item[0], Dir_File_Info[0].maxFileCount+1);
-    tft.Font_Smooth_Load(page_setting.font);
+    tft.Font_Smooth_Load(menu_setting.font);
 
 #ifdef USE_CLI
     if (page_generator.index <12)
@@ -228,6 +228,9 @@ void PAGE_generator_CH1_CH_EN_switch(void)
 	  Gen.CH1.CH_EN = 0;
     else
 	  Gen.CH1.CH_EN = 1;
+
+	menu_generator.field.needUpdate = 1;
+
 #ifdef USE_CLI
     sendStructCHtoHost(0);
 #endif
@@ -235,6 +238,7 @@ void PAGE_generator_CH1_CH_EN_switch(void)
 
 void PAGE_generator_CH1_AM_EN_switch(void)
 { if (Gen.CH1.AM_EN) Gen.CH1.AM_EN = 0; else Gen.CH1.AM_EN = 1;
+menu_generator.field.needUpdate = 1;
 #ifdef USE_CLI
     sendStructCHtoHost(0);
 #endif
@@ -242,6 +246,7 @@ void PAGE_generator_CH1_AM_EN_switch(void)
 
 void PAGE_generator_CH1_FM_EN_switch(void)
 { if (Gen.CH1.FM_EN) Gen.CH1.FM_EN = 0; else Gen.CH1.FM_EN = 1;
+menu_generator.field.needUpdate = 1;
 #ifdef USE_CLI
     sendStructCHtoHost(0);
 #endif
@@ -249,6 +254,7 @@ void PAGE_generator_CH1_FM_EN_switch(void)
 
 void PAGE_generator_CH2_CH_EN_switch(void)
 { if (Gen.CH2.CH_EN) Gen.CH2.CH_EN = 0; else Gen.CH2.CH_EN = 1;
+menu_generator.field.needUpdate = 1;
 #ifdef USE_CLI
     sendStructCHtoHost(1);
 #endif
@@ -256,6 +262,7 @@ void PAGE_generator_CH2_CH_EN_switch(void)
 
 void PAGE_generator_CH2_AM_EN_switch(void)
 { if (Gen.CH2.AM_EN) Gen.CH2.AM_EN = 0; else Gen.CH2.AM_EN = 1;
+menu_generator.field.needUpdate = 1;
 #ifdef USE_CLI
     sendStructCHtoHost(1);
 #endif
@@ -263,6 +270,7 @@ void PAGE_generator_CH2_AM_EN_switch(void)
 
 void PAGE_generator_CH2_FM_EN_switch(void)
 { if (Gen.CH2.FM_EN) Gen.CH2.FM_EN = 0; else Gen.CH2.FM_EN = 1;
+menu_generator.field.needUpdate = 1;
 #ifdef USE_CLI
 	sendStructCHtoHost(1);
 #endif
@@ -270,22 +278,22 @@ void PAGE_generator_CH2_FM_EN_switch(void)
 
 //Включение отключение блокировки
 void PAGE_generator_encoder_block_switch(void){
-if (page_generator.field.encoder_block)
-	page_generator.field.encoder_block = 0;
+if (menu_generator.field.encoder_block)
+	menu_generator.field.encoder_block = 0;
 else
-	page_generator.field.encoder_block = 1;
+	menu_generator.field.encoder_block = 1;
 
-    page_generator.field.needUpdate = 1;
+    menu_generator.field.needUpdate = 1;
 }
 
 //Пред функция для картинки генератор, обрабатывем крутилки
 void prePageGenerator(void)
 {
-	uint32_t i = page_generator.index;
+	uint32_t i = menu_generator.index;
 	uint32_t temp;
 	float    tempf;
 
-	if (page_generator.field.encoder_block){
+	if (menu_generator.field.encoder_block){
 
         ///////////////////////////////////////
 		if (i == INDEX_CH1_FR) //CH1 Carrier Fr
@@ -310,7 +318,7 @@ void prePageGenerator(void)
 					sendStructCHtoHost(0);
 #endif
 				}
-				sprintf(page_item_generator[INDEX_CH1_FR].text,"* %d *", Gen.CH1.Carrier_fr);
+				sprintf(item_generator[INDEX_CH1_FR].text,"* %d *", Gen.CH1.Carrier_fr);
 
 		}
 
@@ -336,7 +344,7 @@ void prePageGenerator(void)
 				sendStructCHtoHost(1);
 #endif
 			}
-			sprintf(page_item_generator[INDEX_CH2_FR].text,"* %d *", Gen.CH2.Carrier_fr);
+			sprintf(item_generator[INDEX_CH2_FR].text,"* %d *", Gen.CH2.Carrier_fr);
 
 		}
 		///////////////////////////////////////
@@ -375,7 +383,7 @@ void prePageGenerator(void)
 					sendStructCHtoHost(0);
 #endif
 				}
-				sprintf(page_item_generator[INDEX_CH1_AM_FR].text,"> %.1f Hz <", Gen.CH1.AM_fr);
+				sprintf(item_generator[INDEX_CH1_AM_FR].text,"> %.1f Hz <", Gen.CH1.AM_fr);
 		}
 
 		if (i == INDEX_CH2_AM_FR) //CH1 AM Fr
@@ -413,7 +421,7 @@ void prePageGenerator(void)
 					sendStructCHtoHost(1);
 #endif
 				}
-				sprintf(page_item_generator[INDEX_CH2_AM_FR].text,"> %.1f Hz <", Gen.CH2.AM_fr);
+				sprintf(item_generator[INDEX_CH2_AM_FR].text,"> %.1f Hz <", Gen.CH2.AM_fr);
 		}
 		///////////////////////////////////////
 		if (i == INDEX_CH1_FM_BASE) //CH1 FM Base
@@ -439,7 +447,7 @@ void prePageGenerator(void)
 					sendStructCHtoHost(0);
 #endif
 				}
-				sprintf(page_item_generator[INDEX_CH1_FM_BASE].text," Base * %d *", Gen.CH1.FM_Base);
+				sprintf(item_generator[INDEX_CH1_FM_BASE].text," Base * %d *", Gen.CH1.FM_Base);
 		}
 
 		if (i == INDEX_CH2_FM_BASE) //CH1 FM Base
@@ -465,7 +473,7 @@ void prePageGenerator(void)
 					sendStructCHtoHost(1);
 #endif
 				}
-				sprintf(page_item_generator[INDEX_CH2_FM_BASE].text," Base * %d *", Gen.CH2.FM_Base);
+				sprintf(item_generator[INDEX_CH2_FM_BASE].text," Base * %d *", Gen.CH2.FM_Base);
 		}
 
 		///////////////////////////////////////
@@ -492,7 +500,7 @@ void prePageGenerator(void)
 					sendStructCHtoHost(0);
 #endif
 				}
-				sprintf(page_item_generator[INDEX_CH1_FM_DEV].text," Dev * %d *", Gen.CH1.FM_Dev);
+				sprintf(item_generator[INDEX_CH1_FM_DEV].text," Dev * %d *", Gen.CH1.FM_Dev);
 		}
 
 		if (i == INDEX_CH2_FM_DEV) //CH1 FM Dev
@@ -518,7 +526,7 @@ void prePageGenerator(void)
 					sendStructCHtoHost(1);
 #endif
 				}
-				sprintf(page_item_generator[INDEX_CH2_FM_DEV].text," Dev * %d *", Gen.CH2.FM_Dev);
+				sprintf(item_generator[INDEX_CH2_FM_DEV].text," Dev * %d *", Gen.CH2.FM_Dev);
 		}
 
 
@@ -552,7 +560,7 @@ void prePageGenerator(void)
 					sendStructCHtoHost(0);
 #endif
 				}
-				sprintf(page_item_generator[INDEX_CH1_FM_FR].text,"> %.1f Hz <", Gen.CH1.FM_mod_fr);
+				sprintf(item_generator[INDEX_CH1_FM_FR].text,"> %.1f Hz <", Gen.CH1.FM_mod_fr);
 		}
 
 		if (i == INDEX_CH2_FM_FR) //CH1 FM_mod_fr
@@ -588,11 +596,11 @@ void prePageGenerator(void)
 					sendStructCHtoHost(1);
 #endif
 				}
-				sprintf(page_item_generator[INDEX_CH2_FM_FR].text,"> %.1f Hz <", Gen.CH2.FM_mod_fr);
+				sprintf(item_generator[INDEX_CH2_FM_FR].text,"> %.1f Hz <", Gen.CH2.FM_mod_fr);
 		}
 
 		//tft.needUpdate = 1;
-		page_generator.field.needUpdate = 1;
+		menu_generator.field.needUpdate = 1;
 	}
 	else
 	{
@@ -600,60 +608,60 @@ void prePageGenerator(void)
 
 		//Обновляем названия структуры по структуре CH1 и CH2
 		if (Gen.CH1.CH_EN)
-		  sprintf(page_item_generator[0].text,"CH1 [  Вкл  ]");
+		  sprintf(item_generator[0].text,"CH1 [  Вкл  ]");
 		else
-		  sprintf(page_item_generator[0].text,"CH1 [ Откл ]");
+		  sprintf(item_generator[0].text,"CH1 [ Откл ]");
 
-	    sprintf(page_item_generator[1].text," %d Hz", Gen.CH1.Carrier_fr);
+	    sprintf(item_generator[1].text," %d Hz", Gen.CH1.Carrier_fr);
 
-		sprintf(page_item_generator[2].text," %s", convert_item_modulation(Gen.CH1.Carrier_mod));
+		sprintf(item_generator[2].text," %s", convert_item_modulation(Gen.CH1.Carrier_mod));
 
 		if (Gen.CH1.AM_EN)
-		  sprintf(page_item_generator[3].text,"AM [  Вкл  ]");
+		  sprintf(item_generator[3].text,"AM [  Вкл  ]");
 		else
-		  sprintf(page_item_generator[3].text,"AM [ Откл ]");
+		  sprintf(item_generator[3].text,"AM [ Откл ]");
 
-		sprintf(page_item_generator[4].text," %s", convert_item_modulation(Gen.CH1.AM_mod));
-		sprintf(page_item_generator[5].text," %.1f Hz", Gen.CH1.AM_fr);
+		sprintf(item_generator[4].text," %s", convert_item_modulation(Gen.CH1.AM_mod));
+		sprintf(item_generator[5].text," %.1f Hz", Gen.CH1.AM_fr);
 
 		if (Gen.CH1.FM_EN)
-		  sprintf(page_item_generator[6].text,"FM [  Вкл  ]");
+		  sprintf(item_generator[6].text,"FM [  Вкл  ]");
 		else
-		  sprintf(page_item_generator[6].text,"FM [ Откл ]");
+		  sprintf(item_generator[6].text,"FM [ Откл ]");
 
-		sprintf(page_item_generator[7].text," Base %d Hz", Gen.CH1.FM_Base);
-		sprintf(page_item_generator[8].text," Dev   %d Hz", Gen.CH1.FM_Dev);
-		sprintf(page_item_generator[9].text," %s", convert_item_modulation(Gen.CH1.FM_mod));
-		sprintf(page_item_generator[10].text," %.1f Hz", Gen.CH1.FM_mod_fr);
+		sprintf(item_generator[7].text," Base %d Hz", Gen.CH1.FM_Base);
+		sprintf(item_generator[8].text," Dev   %d Hz", Gen.CH1.FM_Dev);
+		sprintf(item_generator[9].text," %s", convert_item_modulation(Gen.CH1.FM_mod));
+		sprintf(item_generator[10].text," %.1f Hz", Gen.CH1.FM_mod_fr);
 
-		sprintf(page_item_generator[11].text, "---DMA{%.1f}---", DMA_zagruzka);
+		sprintf(item_generator[11].text, "---DMA{%.1f}---", DMA_zagruzka);
 
 		if (Gen.CH2.CH_EN)
-		  sprintf(page_item_generator[12].text,"CH2 [  Вкл  ]");
+		  sprintf(item_generator[12].text,"CH2 [  Вкл  ]");
 		else
-		  sprintf(page_item_generator[12].text,"CH2 [ Откл ]");
+		  sprintf(item_generator[12].text,"CH2 [ Откл ]");
 
-		sprintf(page_item_generator[13].text," %d Hz", Gen.CH2.Carrier_fr);
+		sprintf(item_generator[13].text," %d Hz", Gen.CH2.Carrier_fr);
 
-		sprintf(page_item_generator[14].text," %s", convert_item_modulation(Gen.CH2.Carrier_mod));
+		sprintf(item_generator[14].text," %s", convert_item_modulation(Gen.CH2.Carrier_mod));
 
 		if (Gen.CH2.AM_EN)
-		  sprintf(page_item_generator[15].text,"AM [  Вкл  ]");
+		  sprintf(item_generator[15].text,"AM [  Вкл  ]");
 		else
-		  sprintf(page_item_generator[15].text,"AM [ Откл ]");
+		  sprintf(item_generator[15].text,"AM [ Откл ]");
 
-		sprintf(page_item_generator[16].text," %s", convert_item_modulation(Gen.CH2.AM_mod));
-		sprintf(page_item_generator[17].text," %.1f Hz", Gen.CH2.AM_fr);
+		sprintf(item_generator[16].text," %s", convert_item_modulation(Gen.CH2.AM_mod));
+		sprintf(item_generator[17].text," %.1f Hz", Gen.CH2.AM_fr);
 
 		if (Gen.CH2.FM_EN)
-		  sprintf(page_item_generator[18].text,"FM [  Вкл  ]");
+		  sprintf(item_generator[18].text,"FM [  Вкл  ]");
 		else
-		  sprintf(page_item_generator[18].text,"FM [ Откл ]");
+		  sprintf(item_generator[18].text,"FM [ Откл ]");
 
-		sprintf(page_item_generator[19].text," Base %d Hz", Gen.CH2.FM_Base);
-		sprintf(page_item_generator[20].text," Dev   %d Hz", Gen.CH2.FM_Dev);
-		sprintf(page_item_generator[21].text," %s", convert_item_modulation(Gen.CH2.FM_mod));
-		sprintf(page_item_generator[22].text," %.1f Hz", Gen.CH2.FM_mod_fr);
+		sprintf(item_generator[19].text," Base %d Hz", Gen.CH2.FM_Base);
+		sprintf(item_generator[20].text," Dev   %d Hz", Gen.CH2.FM_Dev);
+		sprintf(item_generator[21].text," %s", convert_item_modulation(Gen.CH2.FM_mod));
+		sprintf(item_generator[22].text," %.1f Hz", Gen.CH2.FM_mod_fr);
 
 	}
 }

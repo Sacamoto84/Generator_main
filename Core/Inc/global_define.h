@@ -101,9 +101,6 @@ typedef struct    //
    //int8_t value_dx;
    //int8_t value_dy;
 
-   uint8_t bitmap_always_on;
-   uint8_t exit;
-
    //uint8_t select;
 
    void (*callBackFunc_isClick)  (void);
@@ -112,14 +109,20 @@ typedef struct    //
 
    //Bitmap *bmp;  //Картинка 32x32
 
-   char *     nameGif = 0; //Имя гифки
-   TFT_gif *      gif = 0;  //Указатель на гифку
-   int8_t      resid = -1; //Номер картинки ресурса
+   char *     nameGif  = 0; //Имя гифки
+   TFT_gif *      gif  = 0;  //Указатель на гифку
+   int8_t  resid_first =-1 ; //Номер картинки ресурса первый кадр
+   int8_t  resid_last  =-1;   //Номер картинки ресурса последний кадр
 
+	struct fieldbite {
+	   unsigned  bitmap_always_on : 1 ;
+	   unsigned  exit :1;
+	   unsigned  focus:1;
+	} field;
 
    int32_t text_color = -1; //Цвет текста -1 использовать значения по умолчанию
 
- } PAGE_Menu_item_typedef;
+ } item_typedef;
 
  /*********************************/
 
@@ -144,7 +147,7 @@ typedef struct    //
    uint32_t temp;
    uint32_t tempf;
 
-   PAGE_Menu_item_typedef * items;
+   item_typedef * items;
 
 
    struct fieldbite
@@ -168,7 +171,7 @@ typedef struct    //
 
 
 
- } PAGE_Menu_config_typedef;
+ } menu_typedef;
 
  /*********************************/
 
@@ -200,11 +203,11 @@ extern float    fVolume;
 
 extern uTFT_LCD_t LCD_0;
 
-extern PAGE_Menu_config_typedef page_generator;
-extern PAGE_Menu_config_typedef page_setting;
+extern menu_typedef menu_generator;
+extern menu_typedef menu_setting;
 
-extern PAGE_Menu_item_typedef page_item_setting[]   CCMRAM;
-extern PAGE_Menu_item_typedef page_item_generator[] CCMRAM;
+extern item_typedef item_setting[]   CCMRAM;
+extern item_typedef item_generator[] CCMRAM;
 
 extern Dir_File_Info_Array Dir_File_Info[50] CCMRAM; //Массив всех файлов в папке
 

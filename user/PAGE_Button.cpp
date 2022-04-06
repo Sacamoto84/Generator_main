@@ -155,7 +155,7 @@ void PAGE_Background_Board(void) {
 	tft.LineV(234, 5, 234, palitra[9]); //uTFT_VLine(234 , 5, 234, RGB565(186,207,178));
 }
 
-void PAGE_Menu(PAGE_Menu_config_typedef *menu, PAGE_Menu_item_typedef *item,
+void PAGE_Menu(menu_typedef *menu, item_typedef *item,
 		int NUM) {
 
 	Gen.pause();
@@ -217,7 +217,7 @@ void PAGE_Menu(PAGE_Menu_config_typedef *menu, PAGE_Menu_item_typedef *item,
 				item[i].gif->init(&tft);
 				item[i].gif->setName(item[i].nameGif);
 
-                id = item[i].resid;
+                id = item[i].resid_first;
 				item[i].gif->bmpStop = tft.getResBitmapID(id);
 
 				item[i].gif->setDelay(0);
@@ -456,7 +456,7 @@ void PAGE_Menu(PAGE_Menu_config_typedef *menu, PAGE_Menu_item_typedef *item,
 				func_name();
 				tft.needUpdate = 1;
 			}
-			if (item[index].exit)
+			if (item[index].field.exit)
 				return;
 		}
 
