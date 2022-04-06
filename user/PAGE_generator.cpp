@@ -274,6 +274,8 @@ if (page_generator.field.encoder_block)
 	page_generator.field.encoder_block = 0;
 else
 	page_generator.field.encoder_block = 1;
+
+    page_generator.field.needUpdate = 1;
 }
 
 //Пред функция для картинки генератор, обрабатывем крутилки

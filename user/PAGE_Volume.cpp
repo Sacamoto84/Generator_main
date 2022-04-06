@@ -15,7 +15,7 @@ void PAGE_Volume(void)
 
     TFT_gif gif;
     gif.init(&tft);
-    gif.setName((char *)"Q12");
+    gif.setName((char *)"tA");
 
     gif.setDelay(0);
 
@@ -26,7 +26,7 @@ void PAGE_Volume(void)
 
     TFT_gif gif2;
     gif2.init(&tft);
-    gif2.setName((char *)"Q12");
+    gif2.setName((char *)"tA");
 
     gif2.setDelay(0);
 
@@ -38,7 +38,7 @@ void PAGE_Volume(void)
 
     TFT_gif gif3;
     gif3.init(&tft);
-    gif3.setName((char *)"Q12");
+    gif3.setName((char *)"tA");
 
     gif3.setDelay(0);
 
@@ -49,7 +49,7 @@ void PAGE_Volume(void)
 
     TFT_gif gif4;
     gif4.init(&tft);
-    gif4.setName((char *)"Q12");
+    gif4.setName((char *)"tA");
 
     gif4.setDelay(0);
 

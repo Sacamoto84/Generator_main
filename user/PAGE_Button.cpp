@@ -268,7 +268,8 @@ void PAGE_Menu(PAGE_Menu_config_typedef *menu, PAGE_Menu_item_typedef *item,
 					window_start = index;
 					window_end = window_start + max_window_item;
 				}
-				tft.needUpdate = 1;
+				menu->field.needUpdate = 1;
+				//tft.needUpdate = 1;
 			}
 
 			if (Encoder.Right) {
@@ -280,7 +281,8 @@ void PAGE_Menu(PAGE_Menu_config_typedef *menu, PAGE_Menu_item_typedef *item,
 					window_end = index;
 					window_start = window_end - max_window_item;
 				}
-				tft.needUpdate = 1;
+				//tft.needUpdate = 1;
+				menu->field.needUpdate = 1;
 			}
 		}
 
@@ -337,7 +339,7 @@ void PAGE_Menu(PAGE_Menu_config_typedef *menu, PAGE_Menu_item_typedef *item,
 
 			B[i].setY(StartY + H * (ii % menu->item_count));
 			//TimerT5.Start();
-		//	B[i].run();  //116 us -Of Gen on
+			B[i].run();  //116 us -Of Gen on
 			//TimerT5.Loger("B[i].run()");
 
 
@@ -345,9 +347,9 @@ void PAGE_Menu(PAGE_Menu_config_typedef *menu, PAGE_Menu_item_typedef *item,
 
 			//1500us
 			if (item[i].text_color != -1)
-				tft.Font_Smooth_drawStr(9 - 1 + menu->item_text_delta_x, 8 + H * (ii++ % menu->item_count) - 1 + StartY + menu->item_text_delta_y, item[i].text, (uint16_t) item[i].text_color);
+				tft.Font_Smooth_drawStr(9 - 1 + menu->item_text_delta_x, 8 + H * (ii % menu->item_count) - 1 + StartY + menu->item_text_delta_y, item[i].text, (uint16_t) item[i].text_color);
 			else
-				tft.Font_Smooth_drawStr(9 - 1 + menu->item_text_delta_x, 8 + H * (ii++ % menu->item_count) - 1 + StartY + menu->item_text_delta_y, item[i].text, (index == i) ? palitra[20] : palitra[22]);
+				tft.Font_Smooth_drawStr(9 - 1 + menu->item_text_delta_x, 8 + H * (ii % menu->item_count) - 1 + StartY + menu->item_text_delta_y, item[i].text, (index == i) ? palitra[20] : palitra[22]);
 
 
 
@@ -376,7 +378,7 @@ void PAGE_Menu(PAGE_Menu_config_typedef *menu, PAGE_Menu_item_typedef *item,
 
 			//if(	item[i].bitmap_always_on )
 			//		tft.Bitmap_From_Flash_Alpha(200, (i - window_start)*H+3 + StartY, item[i].bmp, 1);
-
+			ii++;
 		}
 
 		for (i = window_start; i <= window_end; i++) {

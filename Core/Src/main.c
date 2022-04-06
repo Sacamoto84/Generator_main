@@ -77,7 +77,8 @@ int main(void)
 {
   /* USER CODE BEGIN 1 */
 	__disable_irq(); //????????? ??????????
-	SCB->VTOR = 0x8060000;
+	//SCB->VTOR = 0x8060000;
+	SCB->VTOR = 0x80C0000;
 
 	uint32_t *p;
 	p = (uint32_t *)(0x10000000);

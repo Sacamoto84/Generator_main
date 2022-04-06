@@ -33,8 +33,8 @@ void PAGE_init_struct_generator(void)
 	page_item_generator[INDEX_CH1_EN].text_color = -1;
 	page_item_generator[INDEX_CH1_EN].callBackFunc_isHolded = &PAGE_Setting;
 	page_item_generator[INDEX_CH1_EN].callBackFunc_isClick = &PAGE_generator_CH1_CH_EN_switch;
-	page_item_generator[INDEX_CH1_EN].nameGif = (char*)"serv24";
-	page_item_generator[INDEX_CH1_EN].resid = 6;
+	//page_item_generator[INDEX_CH1_EN].nameGif = (char*)"serv24";
+	//page_item_generator[INDEX_CH1_EN].resid = 6;
 
 	//page_item_generator[1].text = (char*) "CH1 1000Hz";
 	page_item_generator[INDEX_CH1_FR].text_color = -1;
