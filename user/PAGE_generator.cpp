@@ -608,60 +608,60 @@ void prePageGenerator(void)
 
 		//Обновляем названия структуры по структуре CH1 и CH2
 		if (Gen.CH1.CH_EN)
-		  sprintf(item_generator[0].text,"CH1 [  Вкл  ]");
+		  sprintf(item_generator[INDEX_CH1_EN].text,"CH1 [  Вкл  ]");
 		else
-		  sprintf(item_generator[0].text,"CH1 [ Откл ]");
+		  sprintf(item_generator[INDEX_CH1_EN].text,"CH1 [ Откл ]");
 
-	    sprintf(item_generator[1].text," %d Hz", Gen.CH1.Carrier_fr);
+	    sprintf(item_generator[INDEX_CH1_FR].text," %d Hz", Gen.CH1.Carrier_fr);
 
-		sprintf(item_generator[2].text," %s", convert_item_modulation(Gen.CH1.Carrier_mod));
+		sprintf(item_generator[INDEX_CH1_CR].text," %s", convert_item_modulation(Gen.CH1.Carrier_mod));
 
 		if (Gen.CH1.AM_EN)
-		  sprintf(item_generator[3].text,"AM [  Вкл  ]");
+		  sprintf(item_generator[INDEX_CH1_AM_EN].text,"AM [  Вкл  ]");
 		else
-		  sprintf(item_generator[3].text,"AM [ Откл ]");
+		  sprintf(item_generator[INDEX_CH1_AM_EN].text,"AM [ Откл ]");
 
-		sprintf(item_generator[4].text," %s", convert_item_modulation(Gen.CH1.AM_mod));
-		sprintf(item_generator[5].text," %.1f Hz", Gen.CH1.AM_fr);
+		sprintf(item_generator[INDEX_CH1_AM_MOD].text," %s", convert_item_modulation(Gen.CH1.AM_mod));
+		sprintf(item_generator[INDEX_CH1_AM_FR].text," %.1f Hz", Gen.CH1.AM_fr);
 
 		if (Gen.CH1.FM_EN)
-		  sprintf(item_generator[6].text,"FM [  Вкл  ]");
+		  sprintf(item_generator[INDEX_CH1_FM_EN].text,"FM [  Вкл  ]");
 		else
-		  sprintf(item_generator[6].text,"FM [ Откл ]");
+		  sprintf(item_generator[INDEX_CH1_FM_EN].text,"FM [ Откл ]");
 
-		sprintf(item_generator[7].text," Base %d Hz", Gen.CH1.FM_Base);
-		sprintf(item_generator[8].text," Dev   %d Hz", Gen.CH1.FM_Dev);
-		sprintf(item_generator[9].text," %s", convert_item_modulation(Gen.CH1.FM_mod));
-		sprintf(item_generator[10].text," %.1f Hz", Gen.CH1.FM_mod_fr);
+		sprintf(item_generator[INDEX_CH1_FM_BASE].text," Base %d Hz", Gen.CH1.FM_Base);
+		sprintf(item_generator[INDEX_CH1_FM_DEV].text," Dev   %d Hz", Gen.CH1.FM_Dev);
+		sprintf(item_generator[INDEX_CH1_FM_MOD].text," %s", convert_item_modulation(Gen.CH1.FM_mod));
+		sprintf(item_generator[INDEX_CH1_FM_FR].text," %.1f Hz", Gen.CH1.FM_mod_fr);
 
-		sprintf(item_generator[11].text, "---DMA{%.1f}---", DMA_zagruzka);
+		sprintf(item_generator[INDEX_SEPARATOR].text, "---DMA{%.1f}---", DMA_zagruzka);
 
 		if (Gen.CH2.CH_EN)
-		  sprintf(item_generator[12].text,"CH2 [  Вкл  ]");
+		  sprintf(item_generator[INDEX_CH2_EN].text,"CH2 [  Вкл  ]");
 		else
-		  sprintf(item_generator[12].text,"CH2 [ Откл ]");
+		  sprintf(item_generator[INDEX_CH2_EN].text,"CH2 [ Откл ]");
 
-		sprintf(item_generator[13].text," %d Hz", Gen.CH2.Carrier_fr);
+		sprintf(item_generator[INDEX_CH2_FR].text," %d Hz", Gen.CH2.Carrier_fr);
 
-		sprintf(item_generator[14].text," %s", convert_item_modulation(Gen.CH2.Carrier_mod));
+		sprintf(item_generator[INDEX_CH2_CR].text," %s", convert_item_modulation(Gen.CH2.Carrier_mod));
 
 		if (Gen.CH2.AM_EN)
-		  sprintf(item_generator[15].text,"AM [  Вкл  ]");
+		  sprintf(item_generator[INDEX_CH2_AM_EN].text,"AM [  Вкл  ]");
 		else
-		  sprintf(item_generator[15].text,"AM [ Откл ]");
+		  sprintf(item_generator[INDEX_CH2_AM_EN].text,"AM [ Откл ]");
 
-		sprintf(item_generator[16].text," %s", convert_item_modulation(Gen.CH2.AM_mod));
-		sprintf(item_generator[17].text," %.1f Hz", Gen.CH2.AM_fr);
+		sprintf(item_generator[INDEX_CH2_AM_MOD].text," %s", convert_item_modulation(Gen.CH2.AM_mod));
+		sprintf(item_generator[INDEX_CH2_AM_FR].text," %.1f Hz", Gen.CH2.AM_fr);
 
 		if (Gen.CH2.FM_EN)
-		  sprintf(item_generator[18].text,"FM [  Вкл  ]");
+		  sprintf(item_generator[INDEX_CH2_FM_EN].text,"FM [  Вкл  ]");
 		else
-		  sprintf(item_generator[18].text,"FM [ Откл ]");
+		  sprintf(item_generator[INDEX_CH2_FM_EN].text,"FM [ Откл ]");
 
-		sprintf(item_generator[19].text," Base %d Hz", Gen.CH2.FM_Base);
-		sprintf(item_generator[20].text," Dev   %d Hz", Gen.CH2.FM_Dev);
-		sprintf(item_generator[21].text," %s", convert_item_modulation(Gen.CH2.FM_mod));
-		sprintf(item_generator[22].text," %.1f Hz", Gen.CH2.FM_mod_fr);
+		sprintf(item_generator[INDEX_CH2_FM_BASE].text," Base %d Hz", Gen.CH2.FM_Base);
+		sprintf(item_generator[INDEX_CH2_FM_DEV].text," Dev   %d Hz", Gen.CH2.FM_Dev);
+		sprintf(item_generator[INDEX_CH2_FM_MOD].text," %s", convert_item_modulation(Gen.CH2.FM_mod));
+		sprintf(item_generator[INDEX_CH2_FM_FR].text," %.1f Hz", Gen.CH2.FM_mod_fr);
 
 	}
 }
