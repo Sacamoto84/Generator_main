@@ -11,6 +11,7 @@
 
 #include "TFT_gif.h"
 
+
 extern Bitmap bmpBackground240240;
 
 extern void BLE_Task(void);
@@ -322,34 +323,45 @@ void PAGE_Menu(menu_typedef *menu, item_typedef *item,
 		ii = 0;
 		//TimerT5.Start();
 
+        //Очищаем все фокусы
+		for (i = 0; i < max_imem; i++)
+			item[i].field.focus = 0;
 
 
+	    //item[index].field.focus = 1; //Выдали фокус выбранному елементу
+
+	    menu->ii = 0;
+	    for (i = window_start; i <= window_end; i++) {
+            menu->run(i);
+            menu->ii++;
+	    }
 
 
+/*
 		//4.1ms
 		for (i = window_start; i <= window_end; i++) {
 
 
 
-			if (i == index)
-				B[i].select(1);
-			else
-				B[i].select(0);
+		//	if (i == index)
+		//		B[i].select(1);
+		//	else
+		//		B[i].select(0);
 
 
-			B[i].setY(StartY + H * (ii % menu->item_count));
-			//TimerT5.Start();
-			B[i].run();  //116 us -Of Gen on
-			//TimerT5.Loger("B[i].run()");
+		//	B[i].setY(StartY + H * (ii % menu->item_count));
+		//	//TimerT5.Start();
+		//	B[i].run();  //116 us -Of Gen on
+		//	//TimerT5.Loger("B[i].run()");
 
 
 
 
 			//1500us
-			if (item[i].text_color != -1)
-				tft.Font_Smooth_drawStr(9 - 1 + menu->item_text_delta_x, 8 + H * (ii % menu->item_count) - 1 + StartY + menu->item_text_delta_y, item[i].text, (uint16_t) item[i].text_color);
-			else
-				tft.Font_Smooth_drawStr(9 - 1 + menu->item_text_delta_x, 8 + H * (ii % menu->item_count) - 1 + StartY + menu->item_text_delta_y, item[i].text, (index == i) ? palitra[20] : palitra[22]);
+			//if (item[i].text_color != -1)
+			//	tft.Font_Smooth_drawStr(9 - 1 + menu->item_text_delta_x, 8 + H * (ii % menu->item_count) - 1 + StartY + menu->item_text_delta_y, item[i].text, (uint16_t) item[i].text_color);
+			//else
+			//	tft.Font_Smooth_drawStr(9 - 1 + menu->item_text_delta_x, 8 + H * (ii % menu->item_count) - 1 + StartY + menu->item_text_delta_y, item[i].text, (index == i) ? palitra[20] : palitra[22]);
 
 
 
@@ -380,6 +392,12 @@ void PAGE_Menu(menu_typedef *menu, item_typedef *item,
 			//		tft.Bitmap_From_Flash_Alpha(200, (i - window_start)*H+3 + StartY, item[i].bmp, 1);
 			ii++;
 		}
+
+		*/
+
+
+
+
 
 		for (i = window_start; i <= window_end; i++) {
 

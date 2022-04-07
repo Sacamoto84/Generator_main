@@ -4,8 +4,7 @@
 
 //static int temp;
 static item_typedef   * temp_item;
-static menu_typedef * temp_menu;
-
+static menu_typedef  * temp_menu;
 
 static char * convert_item_modulation(char * s)
 {
@@ -220,8 +219,6 @@ void PAGE_generator_select_modulation(void)
 
 }
 
-
-
 void PAGE_generator_CH1_CH_EN_switch(void)
 {
 	if (Gen.CH1.CH_EN)
@@ -237,8 +234,14 @@ void PAGE_generator_CH1_CH_EN_switch(void)
 }
 
 void PAGE_generator_CH1_AM_EN_switch(void)
-{ if (Gen.CH1.AM_EN) Gen.CH1.AM_EN = 0; else Gen.CH1.AM_EN = 1;
+{
+
+if (Gen.CH1.AM_EN)
+	Gen.CH1.AM_EN = 0;
+else
+	Gen.CH1.AM_EN = 1;
 menu_generator.field.needUpdate = 1;
+
 #ifdef USE_CLI
     sendStructCHtoHost(0);
 #endif
@@ -289,382 +292,27 @@ else
 //Пред функция для картинки генератор, обрабатывем крутилки
 void prePageGenerator(void)
 {
-	uint32_t i = menu_generator.index;
-	uint32_t temp;
-	float    tempf;
-
 	if (menu_generator.field.encoder_block){
 
-        ///////////////////////////////////////
-		if (i == INDEX_CH1_FR) //CH1 Carrier Fr
-		{
-			    temp = Gen.CH1.Carrier_fr;
-				if (Encoder.Left) {
-					Encoder.Left = 0;
-					temp -=100;
-					if (temp < 200) temp = 200;
-					Gen.CH1.Carrier_fr = temp;
-#ifdef USE_CLI
-					sendStructCHtoHost(0);
-#endif
-				}
-
-				if (Encoder.Right) {
-					Encoder.Right = 0;
-					temp +=100;
-					if (temp > 10000) temp = 10000;
-					Gen.CH1.Carrier_fr = temp;
-#ifdef USE_CLI
-					sendStructCHtoHost(0);
-#endif
-				}
-				sprintf(item_generator[INDEX_CH1_FR].text,"* %d *", Gen.CH1.Carrier_fr);
-
-		}
-
-		if (i == INDEX_CH2_FR) //CH2 Carrier Fr
-		{
-		    temp = Gen.CH2.Carrier_fr;
-			if (Encoder.Left) {
-				Encoder.Left = 0;
-				temp -=100;
-				if (temp < 200) temp = 200;
-				Gen.CH2.Carrier_fr = temp;
-#ifdef USE_CLI
-				sendStructCHtoHost(1);
-#endif
-			}
-
-			if (Encoder.Right) {
-				Encoder.Right = 0;
-				temp +=100;
-				if (temp > 4000) temp = 4000;
-				Gen.CH2.Carrier_fr = temp;
-#ifdef USE_CLI
-				sendStructCHtoHost(1);
-#endif
-			}
-			sprintf(item_generator[INDEX_CH2_FR].text,"* %d *", Gen.CH2.Carrier_fr);
-
-		}
-		///////////////////////////////////////
-		if (i == INDEX_CH1_AM_FR) //CH1 AM Fr
-		{
-			    tempf = Gen.CH1.AM_fr;
-
-				if (Encoder.Left) {
-					Encoder.Left = 0;
-
-					if (tempf <= 10.0F)
-						tempf -=0.1F;
-					else
-						tempf -=1.0F;
-
-					if (tempf < 0.1F) tempf = 0.1F;
-
-					Gen.CH1.AM_fr = tempf;
-#ifdef USE_CLI
-					sendStructCHtoHost(0);
-#endif
-				}
-
-				if (Encoder.Right) {
-					Encoder.Right = 0;
-
-					if (tempf< 10.0F)
-					  tempf +=0.1F;
-					else
-					  tempf +=1.0F;
-
-					if (tempf> 100.0F) tempf = 100.0F;
-
-					Gen.CH1.AM_fr = tempf;
-#ifdef USE_CLI
-					sendStructCHtoHost(0);
-#endif
-				}
-				sprintf(item_generator[INDEX_CH1_AM_FR].text,"> %.1f Hz <", Gen.CH1.AM_fr);
-		}
-
-		if (i == INDEX_CH2_AM_FR) //CH1 AM Fr
-		{
-			    tempf = Gen.CH2.AM_fr;
-
-				if (Encoder.Left) {
-					Encoder.Left = 0;
-
-					if (tempf <= 10.0F)
-						tempf -=0.1F;
-					else
-						tempf -=1.0F;
-
-					if (tempf < 0.1F) tempf = 0.1F;
-
-					Gen.CH2.AM_fr = tempf;
-#ifdef USE_CLI
-					sendStructCHtoHost(1);
-#endif
-				}
-
-				if (Encoder.Right) {
-					Encoder.Right = 0;
-
-					if (tempf< 10.0F)
-					  tempf +=0.1F;
-					else
-					  tempf +=1.0F;
-
-					if (tempf> 100.0F) tempf = 100.0F;
-
-					Gen.CH2.AM_fr = tempf;
-#ifdef USE_CLI
-					sendStructCHtoHost(1);
-#endif
-				}
-				sprintf(item_generator[INDEX_CH2_AM_FR].text,"> %.1f Hz <", Gen.CH2.AM_fr);
-		}
-		///////////////////////////////////////
-		if (i == INDEX_CH1_FM_BASE) //CH1 FM Base
-		{
-				if (Encoder.Left) {
-					Encoder.Left = 0;
-					temp = Gen.CH1.FM_Base;
-					temp -=100;
-					if (temp < 200) temp = 200;
-					Gen.CH1.FM_Base = temp;
-#ifdef USE_CLI
-					sendStructCHtoHost(0);
-#endif
-				}
-
-				if (Encoder.Right) {
-					Encoder.Right = 0;
-					temp = Gen.CH1.FM_Base;
-					temp +=100;
-					if (temp > 5000) temp = 5000;
-					Gen.CH1.FM_Base = temp;
-#ifdef USE_CLI
-					sendStructCHtoHost(0);
-#endif
-				}
-				sprintf(item_generator[INDEX_CH1_FM_BASE].text," Base * %d *", Gen.CH1.FM_Base);
-		}
-
-		if (i == INDEX_CH2_FM_BASE) //CH1 FM Base
-		{
-				if (Encoder.Left) {
-					Encoder.Left = 0;
-					temp = Gen.CH2.FM_Base;
-					temp -=100;
-					if (temp < 200) temp = 200;
-					Gen.CH2.FM_Base = temp;
-#ifdef USE_CLI
-					sendStructCHtoHost(1);
-#endif
-				}
-
-				if (Encoder.Right) {
-					Encoder.Right = 0;
-					temp = Gen.CH2.FM_Base;
-					temp +=100;
-					if (temp > 5000) temp = 5000;
-					Gen.CH2.FM_Base = temp;
-#ifdef USE_CLI
-					sendStructCHtoHost(1);
-#endif
-				}
-				sprintf(item_generator[INDEX_CH2_FM_BASE].text," Base * %d *", Gen.CH2.FM_Base);
-		}
-
-		///////////////////////////////////////
-		if (i == INDEX_CH1_FM_DEV) //CH1 FM Dev
-		{
-				if (Encoder.Left) {
-					Encoder.Left = 0;
-					temp = Gen.CH1.FM_Dev;
-					temp -=100;
-					if (temp < 200) temp = 200;
-					Gen.CH1.FM_Dev = temp;
-#ifdef USE_CLI
-					sendStructCHtoHost(0);
-#endif
-				}
-
-				if (Encoder.Right) {
-					Encoder.Right = 0;
-					temp = Gen.CH1.FM_Dev;
-					temp +=100;
-					if (temp > 5000) temp = 5000;
-					Gen.CH1.FM_Dev = temp;
-#ifdef USE_CLI
-					sendStructCHtoHost(0);
-#endif
-				}
-				sprintf(item_generator[INDEX_CH1_FM_DEV].text," Dev * %d *", Gen.CH1.FM_Dev);
-		}
-
-		if (i == INDEX_CH2_FM_DEV) //CH1 FM Dev
-		{
-				if (Encoder.Left) {
-					Encoder.Left = 0;
-					temp = Gen.CH2.FM_Dev;
-					temp -=100;
-					if (temp < 200) temp = 200;
-					Gen.CH2.FM_Dev = temp;
-#ifdef USE_CLI
-					sendStructCHtoHost(1);
-#endif
-				}
-
-				if (Encoder.Right) {
-					Encoder.Right = 0;
-					temp = Gen.CH2.FM_Dev;
-					temp +=100;
-					if (temp > 5000) temp = 5000;
-					Gen.CH2.FM_Dev = temp;
-#ifdef USE_CLI
-					sendStructCHtoHost(1);
-#endif
-				}
-				sprintf(item_generator[INDEX_CH2_FM_DEV].text," Dev * %d *", Gen.CH2.FM_Dev);
-		}
-
-
-
-		if (i == INDEX_CH1_FM_FR) //CH1 FM_mod_fr
-		{
-			    tempf = Gen.CH1.FM_mod_fr;
-
-				if (Encoder.Left) {
-					Encoder.Left = 0;
-					if (tempf <= 10.0F)
-						tempf -=0.1F;
-					else
-						tempf -=1.0F;
-					if (tempf < 0.1F) tempf = 0.1F;
-					Gen.CH1.FM_mod_fr = tempf;
-#ifdef USE_CLI
-					sendStructCHtoHost(0);
-#endif
-				}
-
-				if (Encoder.Right) {
-					Encoder.Right = 0;
-					if (tempf< 10.0F)
-					  tempf +=0.1F;
-					else
-					  tempf +=1.0F;
-					if (tempf> 100.0F) tempf = 100.0F;
-					Gen.CH1.FM_mod_fr = tempf;
-#ifdef USE_CLI
-					sendStructCHtoHost(0);
-#endif
-				}
-				sprintf(item_generator[INDEX_CH1_FM_FR].text,"> %.1f Hz <", Gen.CH1.FM_mod_fr);
-		}
-
-		if (i == INDEX_CH2_FM_FR) //CH1 FM_mod_fr
-		{
-			    tempf = Gen.CH2.FM_mod_fr;
-
-				if (Encoder.Left) {
-					Encoder.Left = 0;
-
-					if (tempf <= 10.0F)
-						tempf -=0.1F;
-					else
-						tempf -=1.0F;
-
-					if (tempf < 0.1F) tempf = 0.1F;
-
-					Gen.CH2.FM_mod_fr = tempf;
-#ifdef USE_CLI
-					sendStructCHtoHost(1);
-#endif
-				}
-
-				if (Encoder.Right) {
-					Encoder.Right = 0;
-
-					if (tempf< 10.0F)
-					  tempf +=0.1F;
-					else
-					  tempf +=1.0F;
-					if (tempf> 100.0F) tempf = 100.0F;
-					Gen.CH2.FM_mod_fr = tempf;
-#ifdef USE_CLI
-					sendStructCHtoHost(1);
-#endif
-				}
-				sprintf(item_generator[INDEX_CH2_FM_FR].text,"> %.1f Hz <", Gen.CH2.FM_mod_fr);
-		}
-
-		//tft.needUpdate = 1;
-		menu_generator.field.needUpdate = 1;
 	}
 	else
 	{
 		//187 us
-
-		//Обновляем названия структуры по структуре CH1 и CH2
-		if (Gen.CH1.CH_EN)
-		  sprintf(item_generator[INDEX_CH1_EN].text,"CH1 [  Вкл  ]");
-		else
-		  sprintf(item_generator[INDEX_CH1_EN].text,"CH1 [ Откл ]");
-
-	    sprintf(item_generator[INDEX_CH1_FR].text," %d Hz", Gen.CH1.Carrier_fr);
-
 		sprintf(item_generator[INDEX_CH1_CR].text," %s", convert_item_modulation(Gen.CH1.Carrier_mod));
-
-		if (Gen.CH1.AM_EN)
-		  sprintf(item_generator[INDEX_CH1_AM_EN].text,"AM [  Вкл  ]");
-		else
-		  sprintf(item_generator[INDEX_CH1_AM_EN].text,"AM [ Откл ]");
-
 		sprintf(item_generator[INDEX_CH1_AM_MOD].text," %s", convert_item_modulation(Gen.CH1.AM_mod));
-		sprintf(item_generator[INDEX_CH1_AM_FR].text," %.1f Hz", Gen.CH1.AM_fr);
-
-		if (Gen.CH1.FM_EN)
-		  sprintf(item_generator[INDEX_CH1_FM_EN].text,"FM [  Вкл  ]");
-		else
-		  sprintf(item_generator[INDEX_CH1_FM_EN].text,"FM [ Откл ]");
-
-		sprintf(item_generator[INDEX_CH1_FM_BASE].text," Base %d Hz", Gen.CH1.FM_Base);
-		sprintf(item_generator[INDEX_CH1_FM_DEV].text," Dev   %d Hz", Gen.CH1.FM_Dev);
 		sprintf(item_generator[INDEX_CH1_FM_MOD].text," %s", convert_item_modulation(Gen.CH1.FM_mod));
-		sprintf(item_generator[INDEX_CH1_FM_FR].text," %.1f Hz", Gen.CH1.FM_mod_fr);
-
 		sprintf(item_generator[INDEX_SEPARATOR].text, "---DMA{%.1f}---", DMA_zagruzka);
-
-		if (Gen.CH2.CH_EN)
-		  sprintf(item_generator[INDEX_CH2_EN].text,"CH2 [  Вкл  ]");
-		else
-		  sprintf(item_generator[INDEX_CH2_EN].text,"CH2 [ Откл ]");
-
-		sprintf(item_generator[INDEX_CH2_FR].text," %d Hz", Gen.CH2.Carrier_fr);
-
 		sprintf(item_generator[INDEX_CH2_CR].text," %s", convert_item_modulation(Gen.CH2.Carrier_mod));
-
-		if (Gen.CH2.AM_EN)
-		  sprintf(item_generator[INDEX_CH2_AM_EN].text,"AM [  Вкл  ]");
-		else
-		  sprintf(item_generator[INDEX_CH2_AM_EN].text,"AM [ Откл ]");
-
 		sprintf(item_generator[INDEX_CH2_AM_MOD].text," %s", convert_item_modulation(Gen.CH2.AM_mod));
-		sprintf(item_generator[INDEX_CH2_AM_FR].text," %.1f Hz", Gen.CH2.AM_fr);
-
-		if (Gen.CH2.FM_EN)
-		  sprintf(item_generator[INDEX_CH2_FM_EN].text,"FM [  Вкл  ]");
-		else
-		  sprintf(item_generator[INDEX_CH2_FM_EN].text,"FM [ Откл ]");
-
-		sprintf(item_generator[INDEX_CH2_FM_BASE].text," Base %d Hz", Gen.CH2.FM_Base);
-		sprintf(item_generator[INDEX_CH2_FM_DEV].text," Dev   %d Hz", Gen.CH2.FM_Dev);
 		sprintf(item_generator[INDEX_CH2_FM_MOD].text," %s", convert_item_modulation(Gen.CH2.FM_mod));
-		sprintf(item_generator[INDEX_CH2_FM_FR].text," %.1f Hz", Gen.CH2.FM_mod_fr);
-
 	}
 }
+
+
+
+
+
+
 
 
 

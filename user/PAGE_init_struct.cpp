@@ -35,12 +35,17 @@ void PAGE_init_struct_generator(void)
 	item_generator[INDEX_CH1_EN].callBackFunc_isClick = &PAGE_generator_CH1_CH_EN_switch;
 	//page_item_generator[INDEX_CH1_EN].nameGif = (char*)"serv24";
 	//page_item_generator[INDEX_CH1_EN].resid = 6;
+	item_generator[INDEX_CH1_EN].preCallBackFunc = &generator_pre_CH1_EN;
+
+
 
 	//page_item_generator[1].text = (char*) "CH1 1000Hz";
 	item_generator[INDEX_CH1_FR].text_color = -1;
 	item_generator[INDEX_CH1_FR].callBackFunc_isHolded = &PAGE_Setting;
 	item_generator[INDEX_CH1_FR].callBackFunc_isClick = &PAGE_generator_encoder_block_switch;
 	item_generator[INDEX_CH1_FR].nameGif = (char*)"serv";
+	item_generator[INDEX_CH1_FR].preCallBackFunc = &generator_pre_CH1_FR;
+
 
 
 	//page_item_generator[2].text = (char*) "CH1 SINUS";
@@ -50,12 +55,15 @@ void PAGE_init_struct_generator(void)
 	item_generator[INDEX_CH1_CR].nameGif = (char*)"usb";
 	item_generator[INDEX_CH1_CR].resid_first   = 6;
 
+
+
 	//page_item_generator[3].text = (char*) "AM Enable";
 	item_generator[INDEX_CH1_AM_EN].text_color = -1;
 	item_generator[INDEX_CH1_AM_EN].callBackFunc_isHolded = &PAGE_Setting;
 	item_generator[INDEX_CH1_AM_EN].callBackFunc_isClick = &PAGE_generator_CH1_AM_EN_switch;
 	item_generator[INDEX_CH1_AM_EN].nameGif = (char*)"serv";
 	//page_item_generator[INDEX_CH1_AM_EN].resid   = 4;
+	item_generator[INDEX_CH1_AM_EN].preCallBackFunc = &generator_pre_CH1_AM_EN;
 
 
 	//page_item_generator[4].text = (char*) "AM-CHARP";
@@ -64,63 +72,82 @@ void PAGE_init_struct_generator(void)
 	item_generator[INDEX_CH1_AM_MOD].callBackFunc_isClick  = &PAGE_generator_select_modulation;
 	item_generator[INDEX_CH1_AM_MOD].nameGif = (char*)"Q12";
 	//page_item_generator[INDEX_CH1_AM_MOD].resid   = 5;
+	//item_generator[INDEX_CH1_AM_MOD].menu = &menu_generator;
+
+
 
 	//page_item_generator[5].text = (char*) "AM-10.4 Hz";
 	item_generator[INDEX_CH1_AM_FR].text_color = -1;
 	item_generator[INDEX_CH1_AM_FR].callBackFunc_isHolded = &PAGE_Setting;
 	item_generator[INDEX_CH1_AM_FR].callBackFunc_isClick  = &PAGE_generator_encoder_block_switch;
+	//item_generator[INDEX_CH1_AM_FR].menu = &menu_generator;
+	item_generator[INDEX_CH1_AM_FR].preCallBackFunc = &generator_pre_CH1_AM_FR;
+
+
 
 	//page_item_generator[6].text = (char*) "FM Enable";
 	item_generator[INDEX_CH1_FM_EN].text_color = -1;
 	item_generator[INDEX_CH1_FM_EN].callBackFunc_isHolded = &PAGE_Setting;
 	item_generator[INDEX_CH1_FM_EN].callBackFunc_isClick  = &PAGE_generator_CH1_FM_EN_switch;
+	item_generator[INDEX_CH1_FM_EN].preCallBackFunc = &generator_pre_CH1_FM_EN;
 
 	//page_item_generator[7].text = (char*) "FM-Base 2500";
 	item_generator[INDEX_CH1_FM_BASE].text_color = -1;
 	item_generator[INDEX_CH1_FM_BASE].callBackFunc_isHolded = &PAGE_Setting;
 	item_generator[INDEX_CH1_FM_BASE].callBackFunc_isClick = &PAGE_generator_encoder_block_switch;
+	item_generator[INDEX_CH1_FM_BASE].preCallBackFunc = &generator_pre_CH1_FM_BASE;
 
 	//page_item_generator[8].text = (char*) "FM-Div  200";
 	item_generator[INDEX_CH1_FM_DEV].text_color = -1;
 	item_generator[INDEX_CH1_FM_DEV].callBackFunc_isHolded = &PAGE_Setting;
 	item_generator[INDEX_CH1_FM_DEV].callBackFunc_isClick = &PAGE_generator_encoder_block_switch;
+	item_generator[INDEX_CH1_FM_DEV].preCallBackFunc = &generator_pre_CH1_FM_DEV;
+
+
+
 
 	//page_item_generator[9].text = (char*) "FM-SINus ";
 	item_generator[INDEX_CH1_FM_MOD].text_color = -1;
 	item_generator[INDEX_CH1_FM_MOD].callBackFunc_isHolded = &PAGE_Setting;
 	item_generator[INDEX_CH1_FM_MOD].callBackFunc_isClick  = &PAGE_generator_select_modulation;
+	//item_generator[INDEX_CH1_FM_MOD].menu = &menu_generator;
 
 	//page_item_generator[10].text = (char*) "FM-12.5 Hz ";
 	item_generator[INDEX_CH1_FM_FR].text_color = -1;
 	item_generator[INDEX_CH1_FM_FR].callBackFunc_isHolded = &PAGE_Setting;
 	item_generator[INDEX_CH1_FM_FR].callBackFunc_isClick  = &PAGE_generator_encoder_block_switch;
+	item_generator[INDEX_CH1_FM_FR].preCallBackFunc = &generator_pre_CH1_FM_FR;
+
 
 
 	//page_item_generator[11].text = (char*) "--------------";
 	item_generator[INDEX_SEPARATOR].text_color = tft.RGB565(0, 0, 255);
 	item_generator[INDEX_SEPARATOR].callBackFunc_isHolded = &PAGE_Setting;
 	//page_item_generator[INDEX_SEPARATOR].text_color = -1;
+	//item_generator[INDEX_SEPARATOR].menu = &menu_generator;
 
 
 	//page_item_generator[12].text = (char*) "CH2 EN";
 	item_generator[INDEX_CH2_EN].callBackFunc_isHolded = &PAGE_Setting;
-	item_generator[INDEX_CH2_EN].text_color = -1;
 	item_generator[INDEX_CH2_EN].callBackFunc_isClick = &PAGE_generator_CH2_CH_EN_switch;
+	item_generator[INDEX_CH2_EN].preCallBackFunc = &generator_pre_CH1_EN;
 
 	//page_item_generator[13].text = (char*) "CR 1000Hz";
 	item_generator[INDEX_CH2_FR].callBackFunc_isHolded = &PAGE_Setting;
-	item_generator[INDEX_CH2_FR].text_color = -1;
 	item_generator[INDEX_CH2_FR].callBackFunc_isClick = &PAGE_generator_encoder_block_switch;
+	item_generator[INDEX_CH2_FR].preCallBackFunc = &generator_pre_CH2_FR;
+	//item_generator[INDEX_CH2_FR].menu = &menu_generator;
 
 	//page_item_generator[14].text = (char*) "CR SINUS";
 	item_generator[INDEX_CH2_CR].callBackFunc_isHolded = &PAGE_Setting;
-	item_generator[INDEX_CH2_CR].text_color = -1;
 	item_generator[INDEX_CH2_CR].callBackFunc_isClick = &PAGE_generator_select_modulation;
+	//item_generator[INDEX_CH2_CR].menu = &menu_generator;
 
 	//page_item_generator[15].text = (char*) "AM EN";
 	item_generator[INDEX_CH2_AM_EN].callBackFunc_isHolded = &PAGE_Setting;
-	item_generator[INDEX_CH2_AM_EN].text_color = -1;
 	item_generator[INDEX_CH2_AM_EN].callBackFunc_isClick = &PAGE_generator_CH2_AM_EN_switch;
+	item_generator[INDEX_CH2_AM_EN].preCallBackFunc = &generator_pre_CH2_AM_EN;
+
 
 	//page_item_generator[16].text = (char*) "--CHARP";
 	item_generator[INDEX_CH2_AM_MOD].callBackFunc_isHolded = &PAGE_Setting;
@@ -129,33 +156,34 @@ void PAGE_init_struct_generator(void)
 
 	//page_item_generator[17].text = (char*) "AM 10.4 Hz";
 	item_generator[INDEX_CH2_AM_FR].callBackFunc_isHolded = &PAGE_Setting;
-	item_generator[INDEX_CH2_AM_FR].text_color = -1;
 	item_generator[INDEX_CH2_AM_FR].callBackFunc_isClick  = &PAGE_generator_encoder_block_switch;
-
+	item_generator[INDEX_CH2_AM_FR].preCallBackFunc = &generator_pre_CH2_AM_FR;
 
 	//page_item_generator[18].text = (char*) "FM Base 2500";
 	item_generator[INDEX_CH2_FM_EN].callBackFunc_isHolded = &PAGE_Setting;
-	item_generator[INDEX_CH2_FM_EN].text_color = -1;
 	item_generator[INDEX_CH2_FM_EN].callBackFunc_isClick  = &PAGE_generator_CH2_FM_EN_switch;
+	item_generator[INDEX_CH2_FM_EN].preCallBackFunc = &generator_pre_CH2_FM_EN;
 
 	//page_item_generator[19].text = (char*) "--Div 200";
 	item_generator[INDEX_CH2_FM_BASE].callBackFunc_isHolded = &PAGE_Setting;
-	item_generator[INDEX_CH2_FM_BASE].text_color = -1;
 	item_generator[INDEX_CH2_FM_BASE].callBackFunc_isClick = &PAGE_generator_encoder_block_switch;
+	item_generator[INDEX_CH2_FM_BASE].preCallBackFunc = &generator_pre_CH2_FM_BASE;
+
 
 	//page_item_generator[20].text = (char*) "--SIN ";
 	item_generator[INDEX_CH2_FM_DEV].callBackFunc_isHolded = &PAGE_Setting;
-	item_generator[INDEX_CH2_FM_DEV].text_color = -1;
 	item_generator[INDEX_CH2_FM_DEV].callBackFunc_isClick = &PAGE_generator_encoder_block_switch;
+	item_generator[INDEX_CH2_FM_DEV].preCallBackFunc = &generator_pre_CH2_FM_DEV;
+
 
 	//page_item_generator[21].text = (char*) "--12.5 Hz ";
 	item_generator[INDEX_CH2_FM_MOD].callBackFunc_isHolded = &PAGE_Setting;
-	item_generator[INDEX_CH2_FM_MOD].text_color = -1;
 	item_generator[INDEX_CH2_FM_MOD].callBackFunc_isClick  = &PAGE_generator_select_modulation;
+	//item_generator[INDEX_CH2_FM_MOD].menu = &menu_generator;
 
 	item_generator[INDEX_CH2_FM_FR].callBackFunc_isHolded = &PAGE_Setting;
-	item_generator[INDEX_CH2_FM_FR].text_color = -1;
 	item_generator[INDEX_CH2_FM_FR].callBackFunc_isClick  = &PAGE_generator_encoder_block_switch;
+	item_generator[INDEX_CH2_FM_FR].preCallBackFunc = &generator_pre_CH2_FM_FR;
 
 	//Описание как рендерить меню
 	//page_generator.item_count   = 10;
@@ -170,6 +198,8 @@ void PAGE_init_struct_generator(void)
 	menu_generator.preCallBackFunc = &prePageGenerator;
     menu_generator.item_text_delta_y = -3;
     menu_generator.field.verticalScroll = 1; //Включит скролл
+
+    menu_generator.items = &item_generator[0];
 }
 
 void PAGE_init_struct_setting(void) {

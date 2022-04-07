@@ -57,4 +57,28 @@ void PAGE_generator_CH2_FM_EN_switch(void);
 void PAGE_generator_encoder_block_switch(void);
 void PAGE_generator_select_modulation(void);
 
+
+
+
+
+
+
+
+void generator_pre_CH1_FR(uint32_t index);
+void generator_pre_CH2_FR(uint32_t index);
+void generator_pre_CH1_AM_FR(uint32_t index);
+void generator_pre_CH2_AM_FR(uint32_t index);
+void generator_pre_CH1_FM_BASE(uint32_t index);
+void generator_pre_CH2_FM_BASE(uint32_t index);
+void generator_pre_CH1_FM_DEV(uint32_t index);
+void generator_pre_CH2_FM_DEV(uint32_t index);
+void generator_pre_CH1_FM_FR(uint32_t index);
+void generator_pre_CH2_FM_FR(uint32_t index);
+void generator_pre_CH1_EN(uint32_t index);
+void generator_pre_CH2_EN(uint32_t index);
+void generator_pre_CH1_AM_EN(uint32_t index);
+void generator_pre_CH2_AM_EN(uint32_t index);
+void generator_pre_CH1_FM_EN(uint32_t index);
+void generator_pre_CH2_FM_EN(uint32_t index);
+
 #endif

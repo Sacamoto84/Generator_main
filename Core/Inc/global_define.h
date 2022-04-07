@@ -77,8 +77,10 @@
 #include "HiSpeedDWT.h"         //
 #include "LOG.h"                //
 #include "TFT_gif.h"            //
-//////////////////////////////////
 
+//////////////////////////////////
+extern TFT tft CCMRAM ;
+extern uint16_t palitra[256] CCMRAM;
 ///////////////
 //  typedef  //
 ///////////////
@@ -106,6 +108,10 @@ typedef struct    //
    void (*callBackFunc_isClick)  (void);
    void (*callBackFunc_isHolded) (void);
    void (*callBackFunc_isDouble) (void);
+   void (*preCallBackFunc)(uint32_t);
+
+
+
 
    //Bitmap *bmp;  //Картинка 32x32
 
@@ -121,6 +127,7 @@ typedef struct    //
 	} field;
 
    int32_t text_color = -1; //Цвет текста -1 использовать значения по умолчанию
+
 
  } item_typedef;
 
@@ -139,16 +146,14 @@ typedef struct    //
 
    const unsigned char * font; //Используеммый шрифт
 
-
    //Callback
    void (*preCallBackFunc)  (void);
    void (*postCallBackFunc) (void);
 
-   uint32_t temp;
-   uint32_t tempf;
-
    item_typedef * items;
 
+   uint32_t temp;
+   uint32_t tempf;
 
    struct fieldbite
    {
@@ -158,10 +163,6 @@ typedef struct    //
 		unsigned needRender :1;
    } field;
 
-
-
-
-
    uint8_t index;
    uint8_t window_start;
    uint8_t window_end;
@@ -169,7 +170,30 @@ typedef struct    //
 
 
 
+   uint8_t ii = 0;
+   void run(uint8_t i)
+   {
 
+
+	   //Выполняем пре для этого елемента
+	   if (items[i].preCallBackFunc) {
+		   void (*fcnPtr)(uint32_t) = items[i].preCallBackFunc;
+		   fcnPtr(index);
+		}
+
+		//uint32_t H = item_height;
+		//uint32_t StartY = item_start_y;
+
+	   //sprintf(items[i].text, "test %d", i);
+
+	   //1500us
+	   if (items[i].text_color != -1)
+	     tft.Font_Smooth_drawStr(9 - 1 + item_text_delta_x, 8 + item_height * (ii % item_count) - 1 + item_start_y + item_text_delta_y, items[i].text, (uint16_t) items[i].text_color);
+	   else
+	     tft.Font_Smooth_drawStr(9 - 1 + item_text_delta_x, 8 + item_height * (ii % item_count) - 1 + item_start_y + item_text_delta_y, items[i].text, (i == index) ? palitra[20] : palitra[22]);
+
+
+   }
 
  } menu_typedef;
 
@@ -194,7 +218,7 @@ extern Encoder_typedef Encoder;
 
 extern TIM_HandleTypeDef htim2;
 
-extern uint16_t palitra[256] CCMRAM;
+
 
 extern GButton KEY;
 

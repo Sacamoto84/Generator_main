@@ -63,7 +63,7 @@
 							</tool>
 							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.1556246771" name="MCU G++ Compiler" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler">
 								<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.option.debuglevel.27369356" name="Debug level" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.option.debuglevel" useByScannerDiscovery="false" value="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.option.debuglevel.value.g3" valueType="enumerated"/>
-								<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.option.optimization.level.391665331" name="Optimization level" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.option.optimization.level" useByScannerDiscovery="false" value="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.option.optimization.level.value.ofast" valueType="enumerated"/>
+								<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.option.optimization.level.391665331" name="Optimization level" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.option.optimization.level" useByScannerDiscovery="false" value="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.option.optimization.level.value.o0" valueType="enumerated"/>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.option.includepaths.1155472174" name="Include paths (-I)" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.option.includepaths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="../Core/Inc"/>
 									<listOptionValue builtIn="false" value="../Drivers/STM32F4xx_HAL_Driver/Inc"/>
@@ -168,7 +168,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/SW}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/Utils}&quot;"/>
 								</option>
-								<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.option.optimization.level.719377391" name="Optimization level" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.option.optimization.level" useByScannerDiscovery="false" value="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.option.optimization.level.value.ofast" valueType="enumerated"/>
+								<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.option.optimization.level.719377391" name="Optimization level" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.option.optimization.level" useByScannerDiscovery="false" value="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.option.optimization.level.value.o0" valueType="enumerated"/>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.input.cpp.372207983" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.input.cpp"/>
 							</tool>
 							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.linker.607775545" name="MCU GCC Linker" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.linker.843120"/>
@@ -221,7 +221,7 @@
 									<listOptionValue builtIn="false" value="../Drivers/CMSIS/Include"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2/Font/gfx_fonts_rus}&quot;"/>
 								</option>
-								<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.option.optimization.level.1692254131" name="Optimization level" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.option.optimization.level" value="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.option.optimization.level.value.ofast" valueType="enumerated"/>
+								<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.option.optimization.level.1692254131" name="Optimization level" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.option.optimization.level" value="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.option.optimization.level.value.o0" valueType="enumerated"/>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.input.cpp.326979880" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.input.cpp"/>
 							</tool>
 							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.linker.1948255304" name="MCU GCC Linker" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.linker.843120"/>
@@ -617,6 +617,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/TimerDWT}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/TimerDWT}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/Utils}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/user}&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.input.1814575180" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.input"/>
 							</tool>
@@ -649,6 +650,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/taskCLI}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/TimerDWT}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/Utils}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/user}&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c.711559371" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c"/>
 							</tool>
@@ -682,6 +684,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/GyverButton}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/BLE}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/Utils}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/user}&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.input.cpp.1532153530" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.input.cpp"/>
 							</tool>
@@ -778,6 +781,11 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/USB_DEVICE/Target}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/IniFile}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/GyverButton}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Generator}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2/Font}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2/Font/gfx_fonts}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2/Font/gfx_fonts_rus}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/TimerDWT}&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.input.597107255" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.input"/>
 							</tool>
@@ -800,6 +808,11 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/USB_DEVICE/Target}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/IniFile}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/GyverButton}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Generator}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2/Font}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2/Font/gfx_fonts}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2/Font/gfx_fonts_rus}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/TimerDWT}&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c.141288384" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c"/>
 							</tool>
@@ -822,6 +835,11 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Middlewares/Third_Party/FatFs/src/option}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/IniFile}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/GyverButton}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Generator}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2/Font}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2/Font/gfx_fonts}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2/Font/gfx_fonts_rus}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/TimerDWT}&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.input.cpp.1340792991" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.input.cpp"/>
 							</tool>
@@ -835,95 +853,6 @@
 							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.verilog.1979859851" name="MCU Output Converter Verilog" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.verilog.772661484"/>
 							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.srec.447426522" name="MCU Output Converter Motorola S-rec" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.srec.910446264"/>
 							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.symbolsrec.1821190577" name="MCU Output Converter Motorola S-rec with symbols" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.symbolsrec.302316391"/>
-						</toolChain>
-					</folderInfo>
-					<folderInfo id="com.st.stm32cube.ide.mcu.gnu.managedbuild.config.exe.debug.2121127081.285503406" name="/" resourcePath="Core/Src/it">
-						<toolChain id="com.st.stm32cube.ide.mcu.gnu.managedbuild.toolchain.exe.debug.1381571688" name="MCU ARM GCC" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.toolchain.exe.debug" unusedChildren="">
-							<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.target_mcu.1016013124.1338114433.752748048" name="MCU" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.target_mcu.1016013124.1338114433"/>
-							<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.target_cpuid.368383373.1172120730.1813344906" name="CPU" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.target_cpuid.368383373.1172120730"/>
-							<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.target_coreid.145436325.126176183.1643521367" name="Core" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.target_coreid.145436325.126176183"/>
-							<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.fpu.269644186.531059209.2136987220" name="Floating-point unit" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.fpu.269644186.531059209"/>
-							<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.floatabi.525303966.1292687468.2136041798" name="Floating-point ABI" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.floatabi.525303966.1292687468"/>
-							<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.target_board.1343184545.11748696.2142453374" name="Board" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.target_board.1343184545.11748696"/>
-							<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.defaults.1965962144.638973537.395359927" name="Defaults" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.defaults.1965962144.638973537"/>
-							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="com.st.stm32cube.ide.mcu.gnu.managedbuild.targetplatform" isAbstract="false" osList="all" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.targetplatform"/>
-							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.1680182269" name="MCU GCC Assembler" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.917614356">
-								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.option.includepaths.881591853" name="Include paths (-I)" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.option.includepaths" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/SW}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/filter}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/GyverButton}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Generator}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/IniFile}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/FATFS/App}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/FATFS/Target}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Middlewares/Third_Party/FatFs/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Middlewares/Third_Party/FatFs/src/option}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2/Font}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2/Font/gfx_fonts}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2/Font/gfx_fonts_rus}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/TimerDWT}&quot;"/>
-								</option>
-								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.input.127110890" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.input"/>
-							</tool>
-							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.127879098" name="MCU GCC Compiler" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.1887472912">
-								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.includepaths.387695222" name="Include paths (-I)" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.includepaths" valueType="includePath">
-									<listOptionValue builtIn="false" value="../Core/Inc"/>
-									<listOptionValue builtIn="false" value="../Drivers/STM32F4xx_HAL_Driver/Inc"/>
-									<listOptionValue builtIn="false" value="../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy"/>
-									<listOptionValue builtIn="false" value="../Drivers/CMSIS/Device/ST/STM32F4xx/Include"/>
-									<listOptionValue builtIn="false" value="../Drivers/CMSIS/Include"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/SW}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/filter}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/GyverButton}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Generator}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/IniFile}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/FATFS/App}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/FATFS/Target}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Middlewares/Third_Party/FatFs/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Middlewares/Third_Party/FatFs/src/option}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2/Font}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2/Font/gfx_fonts}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2/Font/gfx_fonts_rus}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/TimerDWT}&quot;"/>
-								</option>
-								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c.475251449" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c"/>
-							</tool>
-							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.1524489034" name="MCU G++ Compiler" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.865999534">
-								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.option.includepaths.285970423" name="Include paths (-I)" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.option.includepaths" valueType="includePath">
-									<listOptionValue builtIn="false" value="../Core/Inc"/>
-									<listOptionValue builtIn="false" value="../Drivers/STM32F4xx_HAL_Driver/Inc"/>
-									<listOptionValue builtIn="false" value="../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy"/>
-									<listOptionValue builtIn="false" value="../Drivers/CMSIS/Device/ST/STM32F4xx/Include"/>
-									<listOptionValue builtIn="false" value="../Drivers/CMSIS/Include"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/SW}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/filter}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Generator}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/FATFS/App}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/FATFS/Target}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Middlewares/Third_Party/FatFs/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Middlewares/Third_Party/FatFs/src/option}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2/Font}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2/Font/gfx_fonts}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2/Font/gfx_fonts_rus}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/IniFile}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/TimerDWT}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/GyverButton}&quot;"/>
-								</option>
-								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.input.cpp.1575956273" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.input.cpp"/>
-							</tool>
-							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.linker.655583431" name="MCU GCC Linker" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.linker.1724043545"/>
-							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.linker.7594126" name="MCU G++ Linker" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.linker.736327808"/>
-							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.archiver.1452372023" name="MCU GCC Archiver" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.archiver.130924377"/>
-							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.size.677229772" name="MCU Size" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.size.607164917"/>
-							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objdump.listfile.1333993661" name="MCU Output Converter list file" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objdump.listfile.576262049"/>
-							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.hex.1630590334" name="MCU Output Converter Hex" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.hex.1831750908"/>
-							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.binary.1866608959" name="MCU Output Converter Binary" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.binary.1244931567"/>
-							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.verilog.2037597636" name="MCU Output Converter Verilog" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.verilog.1979859851"/>
-							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.srec.1897596564" name="MCU Output Converter Motorola S-rec" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.srec.447426522"/>
-							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.symbolsrec.1710639891" name="MCU Output Converter Motorola S-rec with symbols" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.symbolsrec.1821190577"/>
 						</toolChain>
 					</folderInfo>
 					<folderInfo id="com.st.stm32cube.ide.mcu.gnu.managedbuild.config.exe.debug.2121127081.1726703479" name="/" resourcePath="Core/Inc">
@@ -943,6 +872,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/taskCLI}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/TimerDWT}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/IniFile}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/user}&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.input.117718269" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.input"/>
 							</tool>
@@ -958,6 +888,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/taskCLI}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/IniFile}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/TimerDWT}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/user}&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c.628170039" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c"/>
 							</tool>
@@ -973,6 +904,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/IniFile}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/TimerDWT}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/GyverButton}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/user}&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.input.cpp.1091411280" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.input.cpp"/>
 							</tool>
@@ -1802,6 +1734,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/TimerDWT}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/TimerDWT}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/Utils}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/user}&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.input.1190209297" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.input"/>
 							</tool>
@@ -1835,6 +1768,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/TimerDWT}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/TimerDWT}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/Utils}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/user}&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c.1457285687" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c"/>
 							</tool>
@@ -1868,6 +1802,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/TimerDWT}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/TimerDWT}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/Utils}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/user}&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.input.cpp.1582451753" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.input.cpp"/>
 							</tool>
@@ -1963,6 +1898,11 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/USB_DEVICE/Target}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/IniFile}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/GyverButton}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Generator}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2/Font}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2/Font/gfx_fonts}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2/Font/gfx_fonts_rus}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/TimerDWT}&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.input.99566909" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.input"/>
 							</tool>
@@ -1985,6 +1925,11 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/USB_DEVICE/Target}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/IniFile}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/GyverButton}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Generator}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2/Font}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2/Font/gfx_fonts}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2/Font/gfx_fonts_rus}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/TimerDWT}&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c.1412980505" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c"/>
 							</tool>
@@ -2007,6 +1952,11 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/USB_DEVICE/Target}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/IniFile}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/GyverButton}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Generator}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2/Font}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2/Font/gfx_fonts}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2/Font/gfx_fonts_rus}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/TimerDWT}&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.input.cpp.308995899" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.input.cpp"/>
 							</tool>
@@ -2020,95 +1970,6 @@
 							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.verilog.996543136" name="MCU Output Converter Verilog" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.verilog.1070586566"/>
 							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.srec.1652894711" name="MCU Output Converter Motorola S-rec" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.srec.88236722"/>
 							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.symbolsrec.664996631" name="MCU Output Converter Motorola S-rec with symbols" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.symbolsrec.598115404"/>
-						</toolChain>
-					</folderInfo>
-					<folderInfo id="com.st.stm32cube.ide.mcu.gnu.managedbuild.config.exe.release.181841915.1747559780" name="/" resourcePath="Core/Src/it">
-						<toolChain id="com.st.stm32cube.ide.mcu.gnu.managedbuild.toolchain.exe.release.290059172" name="MCU ARM GCC" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.toolchain.exe.release" unusedChildren="">
-							<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.target_mcu.435209415.682377685.69094530" name="MCU" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.target_mcu.435209415.682377685"/>
-							<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.target_cpuid.1658814656.330470169.158209382" name="CPU" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.target_cpuid.1658814656.330470169"/>
-							<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.target_coreid.689779231.27811173.36843239" name="Core" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.target_coreid.689779231.27811173"/>
-							<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.fpu.1081716811.817886315.639778714" name="Floating-point unit" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.fpu.1081716811.817886315"/>
-							<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.floatabi.209882281.628762201.934096432" name="Floating-point ABI" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.floatabi.209882281.628762201"/>
-							<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.target_board.2072276120.484889290.456175833" name="Board" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.target_board.2072276120.484889290"/>
-							<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.defaults.1059575078.809258479.825473161" name="Defaults" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.defaults.1059575078.809258479"/>
-							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="com.st.stm32cube.ide.mcu.gnu.managedbuild.targetplatform" isAbstract="false" osList="all" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.targetplatform"/>
-							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.1468721081" name="MCU GCC Assembler" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.1124256032">
-								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.option.includepaths.655911196" name="Include paths (-I)" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.option.includepaths" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/SW}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/filter}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/GyverButton}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Generator}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/IniFile}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/FATFS/App}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/FATFS/Target}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Middlewares/Third_Party/FatFs/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Middlewares/Third_Party/FatFs/src/option}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2/Font}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2/Font/gfx_fonts}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2/Font/gfx_fonts_rus}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/TimerDWT}&quot;"/>
-								</option>
-								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.input.2087433206" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.input"/>
-							</tool>
-							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.392338690" name="MCU GCC Compiler" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.352353453">
-								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.includepaths.1890285077" name="Include paths (-I)" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.includepaths" valueType="includePath">
-									<listOptionValue builtIn="false" value="../Core/Inc"/>
-									<listOptionValue builtIn="false" value="../Drivers/STM32F4xx_HAL_Driver/Inc"/>
-									<listOptionValue builtIn="false" value="../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy"/>
-									<listOptionValue builtIn="false" value="../Drivers/CMSIS/Device/ST/STM32F4xx/Include"/>
-									<listOptionValue builtIn="false" value="../Drivers/CMSIS/Include"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/SW}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/filter}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/GyverButton}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Generator}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/IniFile}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/FATFS/App}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/FATFS/Target}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Middlewares/Third_Party/FatFs/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Middlewares/Third_Party/FatFs/src/option}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2/Font}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2/Font/gfx_fonts}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2/Font/gfx_fonts_rus}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/TimerDWT}&quot;"/>
-								</option>
-								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c.796565220" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c"/>
-							</tool>
-							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.840793876" name="MCU G++ Compiler" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.693606788">
-								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.option.includepaths.1637157304" name="Include paths (-I)" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.option.includepaths" valueType="includePath">
-									<listOptionValue builtIn="false" value="../Core/Inc"/>
-									<listOptionValue builtIn="false" value="../Drivers/STM32F4xx_HAL_Driver/Inc"/>
-									<listOptionValue builtIn="false" value="../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy"/>
-									<listOptionValue builtIn="false" value="../Drivers/CMSIS/Device/ST/STM32F4xx/Include"/>
-									<listOptionValue builtIn="false" value="../Drivers/CMSIS/Include"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/SW}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/filter}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/GyverButton}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Generator}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/IniFile}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/FATFS/App}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/FATFS/Target}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Middlewares/Third_Party/FatFs/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Middlewares/Third_Party/FatFs/src/option}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2/Font}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2/Font/gfx_fonts}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/uTFT2/Font/gfx_fonts_rus}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/TimerDWT}&quot;"/>
-								</option>
-								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.input.cpp.1244027465" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.input.cpp"/>
-							</tool>
-							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.linker.251200670" name="MCU GCC Linker" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.linker.1028424994"/>
-							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.linker.1477436126" name="MCU G++ Linker" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.linker.142028150"/>
-							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.archiver.310187531" name="MCU GCC Archiver" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.archiver.317368042"/>
-							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.size.1615709352" name="MCU Size" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.size.490298575"/>
-							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objdump.listfile.561291725" name="MCU Output Converter list file" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objdump.listfile.858582224"/>
-							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.hex.2019651512" name="MCU Output Converter Hex" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.hex.867790334"/>
-							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.binary.2081444945" name="MCU Output Converter Binary" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.binary.797211708"/>
-							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.verilog.1277575454" name="MCU Output Converter Verilog" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.verilog.996543136"/>
-							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.srec.1939451032" name="MCU Output Converter Motorola S-rec" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.srec.1652894711"/>
-							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.symbolsrec.1535475185" name="MCU Output Converter Motorola S-rec with symbols" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.symbolsrec.664996631"/>
 						</toolChain>
 					</folderInfo>
 					<folderInfo id="com.st.stm32cube.ide.mcu.gnu.managedbuild.config.exe.release.181841915.88859234" name="/" resourcePath="Core/Inc">
@@ -2128,6 +1989,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/taskCLI}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/TimerDWT}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/IniFile}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/user}&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.input.1255217755" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.input"/>
 							</tool>
@@ -2143,6 +2005,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/taskCLI}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/TimerDWT}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/IniFile}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/user}&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c.1756873879" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c"/>
 							</tool>
@@ -2158,6 +2021,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/taskCLI}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/TimerDWT}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/IniFile}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/user}&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.input.cpp.343065825" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.input.cpp"/>
 							</tool>
