@@ -190,11 +190,11 @@ void PAGE_Menu(menu_typedef *menu, item_typedef *item,
 	for (int i = 0; i < max_imem; i++) {
 		B[i].init_tft(&tft);
 		B[i].setHW(H, 230);
-		B[i].typeAnimation = 2;
+		B[i].typeAnimation = 0;
 	}
 
-	B[0].typeAnimation = 0;
-	B[1].typeAnimation = 1;
+	//B[0].typeAnimation = 0;
+	//B[1].typeAnimation = 0;
 
 	int gif_count = 0;  //Количество гифок
 	for (int i = 0; i < max_imem; i++) {
@@ -223,10 +223,11 @@ void PAGE_Menu(menu_typedef *menu, item_typedef *item,
 
 				item[i].gif->setDelay(0);
 
-				item[i].gif->setXY(170, 10);
+				item[i].gif->setXY(150, 10);
 
-				item[i].gif->trigger = HOVER;
-				item[i].gif->command(PLAY);
+				item[i].gif->trigger = item[i].gif_trigger;
+
+				//item[i].gif->command(PLAY);
 
 				gif_count++;
 			}
@@ -237,7 +238,7 @@ void PAGE_Menu(menu_typedef *menu, item_typedef *item,
 	//item[1].gif->field.bit32 = 0;
 
 
-	char str[32];
+	char str[64];
 
 	menu->field.needUpdate = 1;
 
@@ -332,8 +333,46 @@ void PAGE_Menu(menu_typedef *menu, item_typedef *item,
 
 	    menu->ii = 0;
 	    for (i = window_start; i <= window_end; i++) {
+
+	    	if (i == index)
+	    		B[i].select(1);
+	    	else
+	    		B[i].select(0);
+
+	    	B[i].setY(StartY + H * (menu->ii % menu->item_count));
+	    	B[i].run();  //116 us -Of Gen on
+
             menu->run(i);
-            menu->ii++;
+
+
+    		if (item[i].gif) {
+
+    				//if (i == index)
+    				//	item[i].gif->command(PLAY);
+    				//else
+    				//	item[i].gif->command(STOP);
+
+    				item[i].gif->setY(StartY + H * (menu->ii % menu->item_count));
+    				item[i].gif->run(); //32x32x32 4800us(914285 Байт/Сек) -Of Gen Off    5000us Gen On 4096байт
+    				sprintf(str, "item[%d].gif->run();", i);
+    				LOG((char*)"MENU",'I',str);
+    			}
+
+
+    		if (B[i].needUpdate()) {
+    				sprintf(str, "B[%d].needUpdate()", i);
+    				LOG((char*)"MENU",'I',str);
+    				//List_Update_Particle U;
+    				//U = B[i].info();
+    			//	U.y1 += 1;
+    				tft.ST7789_Update(B[i].info());
+    				//SEGGER_RTT_printf(0, "i:%d H:%d W:%d x0:%d y0:%d x1:%d y1:%d\n",
+    				//	i, U.H, U.W, U.x0, U.y0, U.x1, U.y1);
+    			}
+
+    		if (item[i].gif) {tft.ST7789_Update(item[i].gif->info());}
+
+    		menu->ii++;
 	    }
 
 
@@ -349,9 +388,9 @@ void PAGE_Menu(menu_typedef *menu, item_typedef *item,
 		//		B[i].select(0);
 
 
-		//	B[i].setY(StartY + H * (ii % menu->item_count));
+		//
 		//	//TimerT5.Start();
-		//	B[i].run();  //116 us -Of Gen on
+		//
 		//	//TimerT5.Loger("B[i].run()");
 
 
@@ -401,16 +440,16 @@ void PAGE_Menu(menu_typedef *menu, item_typedef *item,
 
 		for (i = window_start; i <= window_end; i++) {
 
-			if (B[i].needUpdate()) {
-				sprintf(str, "B[%d].needUpdate()", i);
-				LOG((char*)"MENU",'I',str);
-				List_Update_Particle U;
-				U = B[i].info();
-				U.y1 += 1;
-				tft.ST7789_Update(U);
-				//SEGGER_RTT_printf(0, "i:%d H:%d W:%d x0:%d y0:%d x1:%d y1:%d\n",
-				//		i, U.H, U.W, U.x0, U.y0, U.x1, U.y1);
-			}
+			//if (B[i].needUpdate()) {
+			//	sprintf(str, "B[%d].needUpdate()", i);
+			////	LOG((char*)"MENU",'I',str);
+			//	List_Update_Particle U;
+			//	U = B[i].info();
+			//	U.y1 += 1;
+			//	tft.ST7789_Update(U);
+			//	//SEGGER_RTT_printf(0, "i:%d H:%d W:%d x0:%d y0:%d x1:%d y1:%d\n",
+			//	//		i, U.H, U.W, U.x0, U.y0, U.x1, U.y1);
+			//}
 
 		}
 

@@ -115,10 +115,12 @@ typedef struct    //
 
    //Bitmap *bmp;  //Картинка 32x32
 
-   char *     nameGif  = 0; //Имя гифки
-   TFT_gif *      gif  = 0;  //Указатель на гифку
-   int8_t  resid_first =-1 ; //Номер картинки ресурса первый кадр
-   int8_t  resid_last  =-1;   //Номер картинки ресурса последний кадр
+   char *     nameGif  = 0;       //Имя гифки
+   TFT_gif *      gif  = 0;       //Указатель на гифку
+   int8_t  resid_first =-1 ;      //Номер картинки ресурса первый кадр
+   int8_t  resid_last  =-1;       //Номер картинки ресурса последний кадр
+   ANIMATION_TRIGGERS      gif_trigger; //Тип анимации
+   //ANIMATION_COMMAND_STATE gif_command;
 
 	struct fieldbite {
 	   unsigned  bitmap_always_on : 1 ;
@@ -176,6 +178,7 @@ typedef struct    //
 
 
 	   //Выполняем пре для этого елемента
+	   //Создание текста
 	   if (items[i].preCallBackFunc) {
 		   void (*fcnPtr)(uint32_t) = items[i].preCallBackFunc;
 		   fcnPtr(index);

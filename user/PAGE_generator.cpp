@@ -206,6 +206,8 @@ void PAGE_generator_select_modulation(void)
     temp_item = &item[0];
     temp_menu = &menu;
 
+    menu.items = item;
+
     PAGE_Menu( &menu,  &item[0], Dir_File_Info[0].maxFileCount+1);
     tft.Font_Smooth_Load(menu_setting.font);
 

@@ -3,9 +3,8 @@
 menu_typedef menu_generator;
 menu_typedef menu_setting;
 
+item_typedef   item_generator[23] CCMRAM;
 item_typedef   item_setting[9] CCMRAM;
-item_typedef   item_generator[NUM_ITEM_GENERETOR] CCMRAM;
-
 
 GButton KEY(ENTER_GPIO_Port, ENTER_Pin);
 
