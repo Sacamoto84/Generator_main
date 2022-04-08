@@ -283,11 +283,14 @@ menu_generator.field.needUpdate = 1;
 
 //Включение отключение блокировки
 void PAGE_generator_encoder_block_switch(void){
-if (menu_generator.field.encoder_block)
-	menu_generator.field.encoder_block = 0;
-else
-	menu_generator.field.encoder_block = 1;
 
+if (item_generator[menu_generator.index].field.disable == 0)
+{
+	if (menu_generator.field.encoder_block)
+		menu_generator.field.encoder_block = 0;
+	else
+		menu_generator.field.encoder_block = 1;
+}
     menu_generator.field.needUpdate = 1;
 }
 

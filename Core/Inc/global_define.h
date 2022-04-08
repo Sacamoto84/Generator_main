@@ -5,6 +5,10 @@
 //#define USE_CLI
 
 
+//COLOR
+#define COLOR_BACKGROUND     tft.RGB565(0, 0, 16) //tft.RGB565(0, 7, 43)   // Фон
+#define COLOR_DISABLE_TEXT   tft.RGB565(128, 128, 128) // Текст отключенного текста
+//#define COLOR_ENABLE_TEXT
 
 //ID Ресурсов
 
@@ -115,17 +119,20 @@ typedef struct    //
 
    //Bitmap *bmp;  //Картинка 32x32
 
+   /////////////////////////////////////////////////////////
    char *     nameGif  = 0;       //Имя гифки
    TFT_gif *      gif  = 0;       //Указатель на гифку
    int8_t  resid_first =-1 ;      //Номер картинки ресурса первый кадр
    int8_t  resid_last  =-1;       //Номер картинки ресурса последний кадр
-   ANIMATION_TRIGGERS      gif_trigger; //Тип анимации
-   //ANIMATION_COMMAND_STATE gif_command;
+   ANIMATION_TRIGGERS      gif_trigger;  //Тип анимации
+   uint8_t  gif_x;                       //Координата X гифки
+   uint8_t*  gif_init_state;              //Для начального значения
+   /////////////////////////////////////////////////////////
 
 	struct fieldbite {
 	   unsigned  bitmap_always_on : 1 ;
 	   unsigned  exit :1;
-	   unsigned  focus:1;
+	   unsigned  disable:1;  //Если 1 то отключен
 	} field;
 
    int32_t text_color = -1; //Цвет текста -1 использовать значения по умолчанию
@@ -152,6 +159,7 @@ typedef struct    //
    void (*preCallBackFunc)  (void);
    void (*postCallBackFunc) (void);
 
+
    item_typedef * items;
 
    uint32_t temp;
@@ -170,13 +178,12 @@ typedef struct    //
    uint8_t window_end;
    uint8_t max_item;
 
-
-
    uint8_t ii = 0;
+
+   uint16_t ColorBackground; //Цвет фона
+
    void run(uint8_t i)
    {
-
-
 	   //Выполняем пре для этого елемента
 	   //Создание текста
 	   if (items[i].preCallBackFunc) {
@@ -184,17 +191,17 @@ typedef struct    //
 		   fcnPtr(index);
 		}
 
-		//uint32_t H = item_height;
-		//uint32_t StartY = item_start_y;
 
-	   //sprintf(items[i].text, "test %d", i);
-
-	   //1500us
-	   if (items[i].text_color != -1)
-	     tft.Font_Smooth_drawStr(9 - 1 + item_text_delta_x, 8 + item_height * (ii % item_count) - 1 + item_start_y + item_text_delta_y, items[i].text, (uint16_t) items[i].text_color);
+	   if (items[i].field.disable == 0)
+	   {
+		   //1500us
+		   if (items[i].text_color != -1)
+			   tft.Font_Smooth_drawStr(9 - 1 + item_text_delta_x, 8 + item_height * (ii % item_count) - 1 + item_start_y + item_text_delta_y, items[i].text, (uint16_t) items[i].text_color);
+		   else
+			   tft.Font_Smooth_drawStr(9 - 1 + item_text_delta_x, 8 + item_height * (ii % item_count) - 1 + item_start_y + item_text_delta_y, items[i].text, (i == index) ? palitra[20] : palitra[22]);
+	   }
 	   else
-	     tft.Font_Smooth_drawStr(9 - 1 + item_text_delta_x, 8 + item_height * (ii % item_count) - 1 + item_start_y + item_text_delta_y, items[i].text, (i == index) ? palitra[20] : palitra[22]);
-
+		   tft.Font_Smooth_drawStr(9 - 1 + item_text_delta_x, 8 + item_height * (ii % item_count) - 1 + item_start_y + item_text_delta_y, items[i].text, COLOR_DISABLE_TEXT);
 
    }
 

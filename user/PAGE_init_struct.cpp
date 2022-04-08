@@ -38,8 +38,10 @@ void PAGE_init_struct_generator(void)
 	item_generator[INDEX_CH1_EN].callBackFunc_isClick = &PAGE_generator_CH1_CH_EN_switch;
 	//page_item_generator[INDEX_CH1_EN].resid = 6;
 	item_generator[INDEX_CH1_EN].preCallBackFunc = &generator_pre_CH1_EN;
-	item_generator[INDEX_CH1_EN].nameGif = (char*)"tA";
+	item_generator[INDEX_CH1_EN].nameGif = (char*)"tB";
 	item_generator[INDEX_CH1_EN].gif_trigger = MORPH;
+	item_generator[INDEX_CH1_EN].gif_init_state = &Gen.CH1.CH_EN;
+
 
 	//page_item_generator[1].text = (char*) "CH1 1000Hz";
 	item_generator[INDEX_CH1_FR].callBackFunc_isClick = &PAGE_generator_encoder_block_switch;
@@ -56,8 +58,14 @@ void PAGE_init_struct_generator(void)
 	//item_generator[INDEX_CH1_AM_EN].nameGif = (char*)"serv";
 	//page_item_generator[INDEX_CH1_AM_EN].resid   = 4;
 	item_generator[INDEX_CH1_AM_EN].preCallBackFunc = &generator_pre_CH1_AM_EN;
-	item_generator[INDEX_CH1_AM_EN].nameGif = (char*)"tA";
+	item_generator[INDEX_CH1_AM_EN].nameGif = (char*)"tB";
 	item_generator[INDEX_CH1_AM_EN].gif_trigger = MORPH;
+	item_generator[INDEX_CH1_AM_EN].gif_x = 0;
+	item_generator[INDEX_CH1_AM_EN].gif_init_state = &Gen.CH1.AM_EN;
+
+
+
+
 
 	//page_item_generator[4].text = (char*) "AM-CHARP";
 	item_generator[INDEX_CH1_AM_MOD].callBackFunc_isClick  = &PAGE_generator_select_modulation;
@@ -72,9 +80,9 @@ void PAGE_init_struct_generator(void)
 	//page_item_generator[6].text = (char*) "FM Enable";
 	item_generator[INDEX_CH1_FM_EN].callBackFunc_isClick  = &PAGE_generator_CH1_FM_EN_switch;
 	item_generator[INDEX_CH1_FM_EN].preCallBackFunc = &generator_pre_CH1_FM_EN;
-	item_generator[INDEX_CH1_FM_EN].nameGif = (char*)"tA";
+	item_generator[INDEX_CH1_FM_EN].nameGif = (char*)"tB";
 	item_generator[INDEX_CH1_FM_EN].gif_trigger = MORPH;
-
+	item_generator[INDEX_CH1_FM_EN].gif_init_state = &Gen.CH1.FM_EN;
 
 
 
@@ -98,7 +106,7 @@ void PAGE_init_struct_generator(void)
 
 
 	//page_item_generator[11].text = (char*) "--------------";
-	item_generator[INDEX_SEPARATOR].text_color = tft.RGB565(0, 0, 255);
+	item_generator[INDEX_SEPARATOR].text_color = tft.RGB565(170, 170, 170);
 	item_generator[INDEX_SEPARATOR].callBackFunc_isHolded = &PAGE_Setting;
 	//page_item_generator[INDEX_SEPARATOR].text_color = -1;
 	//item_generator[INDEX_SEPARATOR].menu = &menu_generator;
@@ -106,10 +114,10 @@ void PAGE_init_struct_generator(void)
 
 	//page_item_generator[12].text = (char*) "CH2 EN";
 	item_generator[INDEX_CH2_EN].callBackFunc_isClick = &PAGE_generator_CH2_CH_EN_switch;
-	item_generator[INDEX_CH2_EN].preCallBackFunc = &generator_pre_CH1_EN;
-	item_generator[INDEX_CH2_EN].nameGif = (char*)"tA";
+	item_generator[INDEX_CH2_EN].preCallBackFunc = &generator_pre_CH2_EN;
+	item_generator[INDEX_CH2_EN].nameGif = (char*)"tB";
 	item_generator[INDEX_CH2_EN].gif_trigger = MORPH;
-
+	item_generator[INDEX_CH2_EN].gif_init_state = &Gen.CH2.CH_EN;
 
 	//page_item_generator[13].text = (char*) "CR 1000Hz";
 	item_generator[INDEX_CH2_FR].callBackFunc_isClick = &PAGE_generator_encoder_block_switch;
@@ -122,8 +130,9 @@ void PAGE_init_struct_generator(void)
 	//page_item_generator[15].text = (char*) "AM EN";
 	item_generator[INDEX_CH2_AM_EN].callBackFunc_isClick = &PAGE_generator_CH2_AM_EN_switch;
 	item_generator[INDEX_CH2_AM_EN].preCallBackFunc = &generator_pre_CH2_AM_EN;
-	item_generator[INDEX_CH2_AM_EN].nameGif = (char*)"tA";
+	item_generator[INDEX_CH2_AM_EN].nameGif = (char*)"tB";
 	item_generator[INDEX_CH2_AM_EN].gif_trigger = MORPH;
+	item_generator[INDEX_CH2_AM_EN].gif_init_state = &Gen.CH2.AM_EN;
 
 	//page_item_generator[16].text = (char*) "--CHARP";
 	item_generator[INDEX_CH2_AM_MOD].callBackFunc_isClick  = &PAGE_generator_select_modulation;
@@ -135,8 +144,9 @@ void PAGE_init_struct_generator(void)
 	//page_item_generator[18].text = (char*) "FM Base 2500";
 	item_generator[INDEX_CH2_FM_EN].callBackFunc_isClick  = &PAGE_generator_CH2_FM_EN_switch;
 	item_generator[INDEX_CH2_FM_EN].preCallBackFunc = &generator_pre_CH2_FM_EN;
-	item_generator[INDEX_CH2_FM_EN].nameGif = (char*)"tA";
+	item_generator[INDEX_CH2_FM_EN].nameGif = (char*)"tB";
 	item_generator[INDEX_CH2_FM_EN].gif_trigger = MORPH;
+	item_generator[INDEX_CH2_FM_EN].gif_init_state = &Gen.CH2.FM_EN;
 
 	//page_item_generator[19].text = (char*) "--Div 200";
 	item_generator[INDEX_CH2_FM_BASE].callBackFunc_isClick = &PAGE_generator_encoder_block_switch;
@@ -167,6 +177,9 @@ void PAGE_init_struct_generator(void)
     menu_generator.field.verticalScroll = 1; //Включит скролл
 
     menu_generator.items = &item_generator[0];
+
+    menu_generator.ColorBackground = COLOR_BACKGROUND; //Фон
+
 }
 
 void PAGE_init_struct_setting(void) {
@@ -229,6 +242,7 @@ void PAGE_init_struct_setting(void) {
 
 	menu_setting.items = item_setting;
 
+	menu_setting.ColorBackground = COLOR_BACKGROUND; //Фон
 }
 
 void PAGE_Setting(void)

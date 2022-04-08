@@ -190,7 +190,7 @@ void PAGE_Menu(menu_typedef *menu, item_typedef *item,
 	for (int i = 0; i < max_imem; i++) {
 		B[i].init_tft(&tft);
 		B[i].setHW(H, 230);
-		B[i].typeAnimation = 0;
+		B[i].typeAnimation = 2;
 	}
 
 	//B[0].typeAnimation = 0;
@@ -223,11 +223,15 @@ void PAGE_Menu(menu_typedef *menu, item_typedef *item,
 
 				item[i].gif->setDelay(0);
 
-				item[i].gif->setXY(150, 10);
+				item[i].gif->setX(item[i].gif_x);
 
 				item[i].gif->trigger = item[i].gif_trigger;
 
-				//item[i].gif->command(PLAY);
+				if (item[i].gif_init_state != NULL)
+				{
+					if (*item[i].gif_init_state != 0)
+						item[i].gif->setIndexMax();
+				}
 
 				gif_count++;
 			}
@@ -236,6 +240,7 @@ void PAGE_Menu(menu_typedef *menu, item_typedef *item,
 	}
 
 	//item[1].gif->field.bit32 = 0;
+
 
 
 	char str[64];
@@ -293,11 +298,9 @@ void PAGE_Menu(menu_typedef *menu, item_typedef *item,
 		menu->index = index;
 		menu->max_item = max_imem - 1;
 
-
-
 		//tft.needUpdate = 1;
 
-		tft.Fill(tft.RGB565(0, 7, 43)); //Фон
+		tft.Fill(menu->ColorBackground); //Фон
 
 		//Фон
 		//tft.Bitmap_From_Flash_Background_16bit(&bmpBackground240240); // 756us
@@ -320,27 +323,23 @@ void PAGE_Menu(menu_typedef *menu, item_typedef *item,
 		//tft.LineH((H-3) + (index - window_start) * H + StartY, 0, 239,	palitra[19]);
 		//tft.LineH((H-2) + (index - window_start) * H + StartY, 0, 239, palitra[19]);
 
-		uint8_t ii;
-		ii = 0;
+		//uint8_t ii;
+		//ii = 0;
 		//TimerT5.Start();
 
-        //Очищаем все фокусы
-		for (i = 0; i < max_imem; i++)
-			item[i].field.focus = 0;
-
-
-	    //item[index].field.focus = 1; //Выдали фокус выбранному елементу
-
-	    menu->ii = 0;
+		menu->ii = 0;
 	    for (i = window_start; i <= window_end; i++) {
 
-	    	if (i == index)
-	    		B[i].select(1);
-	    	else
-	    		B[i].select(0);
+	    	//if (i == index)
+	    	//	B[i].select(1);
+	    	//else
+	    	//	B[i].select(0);
 
-	    	B[i].setY(StartY + H * (menu->ii % menu->item_count));
-	    	B[i].run();  //116 us -Of Gen on
+	    	//B[i].setY(StartY + H * (menu->ii % menu->item_count));
+	    	//B[i].run();  //116 us -Of Gen on
+
+	    	if (i == menu->index) tft.RectangleFilled(0, StartY + H * (menu->ii % menu->item_count), 239, H, palitra[18]);
+
 
             menu->run(i);
 
@@ -376,82 +375,6 @@ void PAGE_Menu(menu_typedef *menu, item_typedef *item,
 	    }
 
 
-/*
-		//4.1ms
-		for (i = window_start; i <= window_end; i++) {
-
-
-
-		//	if (i == index)
-		//		B[i].select(1);
-		//	else
-		//		B[i].select(0);
-
-
-		//
-		//	//TimerT5.Start();
-		//
-		//	//TimerT5.Loger("B[i].run()");
-
-
-
-
-			//1500us
-			//if (item[i].text_color != -1)
-			//	tft.Font_Smooth_drawStr(9 - 1 + menu->item_text_delta_x, 8 + H * (ii % menu->item_count) - 1 + StartY + menu->item_text_delta_y, item[i].text, (uint16_t) item[i].text_color);
-			//else
-			//	tft.Font_Smooth_drawStr(9 - 1 + menu->item_text_delta_x, 8 + H * (ii % menu->item_count) - 1 + StartY + menu->item_text_delta_y, item[i].text, (index == i) ? palitra[20] : palitra[22]);
-
-
-
-
-
-
-			if (item[i].gif) {
-
-				if (i == index)
-					item[i].gif->command(PLAY);
-				else
-					item[i].gif->command(STOP);
-
-				item[i].gif->setY(StartY + H * (ii % menu->item_count));
-
-				//TimerT5.Start();
-				item[i].gif->run(); //32x32x32 4800us(914285 Байт/Сек) -Of Gen Off    5000us Gen On 4096байт
-
-				sprintf(str, "item[%d].gif->run();", i);
-				//TimerT5.Loger(str);
-
-				tft.ST7789_Update(item[i].gif->info());
-			}
-			//if (item[index].bmp)
-			//  tft.Bitmap_From_Flash_Alpha(200, (index - window_start)*H+3 + StartY, item[index].bmp, 1);
-
-			//if(	item[i].bitmap_always_on )
-			//		tft.Bitmap_From_Flash_Alpha(200, (i - window_start)*H+3 + StartY, item[i].bmp, 1);
-			ii++;
-		}
-
-		*/
-
-
-
-
-
-		for (i = window_start; i <= window_end; i++) {
-
-			//if (B[i].needUpdate()) {
-			//	sprintf(str, "B[%d].needUpdate()", i);
-			////	LOG((char*)"MENU",'I',str);
-			//	List_Update_Particle U;
-			//	U = B[i].info();
-			//	U.y1 += 1;
-			//	tft.ST7789_Update(U);
-			//	//SEGGER_RTT_printf(0, "i:%d H:%d W:%d x0:%d y0:%d x1:%d y1:%d\n",
-			//	//		i, U.H, U.W, U.x0, U.y0, U.x1, U.y1);
-			//}
-
-		}
 
 		//TimerT5.Loger("for (i = window_start; i <= window_end; i++)");
 
@@ -481,7 +404,7 @@ void PAGE_Menu(menu_typedef *menu, item_typedef *item,
 		}
 
 
-		if (menu->field.needUpdate) {
+		if ((menu->field.needUpdate) || (tft.needUpdate)) {
 			menu->field.needUpdate = 0;
 		    LOG((char*)"MENU",'I',(char*)"ST7789_UpdateDMA16bitV3");
 			tft.ST7789_UpdateDMA16bitV3(); //DMA8bitV2();
@@ -504,17 +427,24 @@ void PAGE_Menu(menu_typedef *menu, item_typedef *item,
 		}
 
 		if (KEY.isClick()) {
-			//menu->index = index;
+
 			KEY.isHolded();
 			KEY.isDouble();
 
-			if (item[index].callBackFunc_isClick) {
-				func_name = item[index].callBackFunc_isClick;
-				func_name();
-				tft.needUpdate = 1;
+			if (item[index].field.disable == 0)
+			{
+				if (item[index].callBackFunc_isClick) {
+					func_name = item[index].callBackFunc_isClick;
+					func_name();
+					menu->field.needUpdate = 1; //При выходе из события обновляем экран
+				}
 			}
+
 			if (item[index].field.exit)
+			{
+				tft.needUpdate = 1; //При выходе из события обновляем экран
 				return;
+			}
 		}
 
 #ifdef USE_CLI

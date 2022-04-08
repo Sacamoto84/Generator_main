@@ -307,12 +307,12 @@ void generator_pre_CH2_FM_BASE(uint32_t index) {
 			sendStructCHtoHost(0);
 #endif
 			}
-			sprintf(item_generator[INDEX_CH1_FM_BASE].text, " Base * %d *",
+			sprintf(item_generator[INDEX_CH2_FM_BASE].text, " Base * %d *",
 					Gen.CH2.FM_Base);
 		}
 		menu_generator.field.needUpdate = 1;
 	} else {
-		sprintf(item_generator[INDEX_CH1_FM_BASE].text, " Base %d Hz",
+		sprintf(item_generator[INDEX_CH2_FM_BASE].text, " Base %d Hz",
 				Gen.CH2.FM_Base);
 	}
 }
@@ -395,9 +395,9 @@ void generator_pre_CH2_FM_DEV(uint32_t index) {
 			}
 
             if (Gen.CH2.FM_Dev >= 10.0F)
-			  sprintf(item_generator[INDEX_CH1_FM_DEV].text, " Dev * %.0f *", Gen.CH2.FM_Dev);
+			  sprintf(item_generator[INDEX_CH2_FM_DEV].text, " Dev * %.0f *", Gen.CH2.FM_Dev);
             else
-              sprintf(item_generator[INDEX_CH1_FM_DEV].text, " Dev * %.1f *", Gen.CH2.FM_Dev);
+              sprintf(item_generator[INDEX_CH2_FM_DEV].text, " Dev * %.1f *", Gen.CH2.FM_Dev);
 		}
 		menu_generator.field.needUpdate = 1;
 
@@ -406,9 +406,9 @@ void generator_pre_CH2_FM_DEV(uint32_t index) {
 	else
 	{
 		if (Gen.CH2.FM_Dev >= 10.0F)
-		  sprintf(item_generator[INDEX_CH1_FM_DEV].text, " Dev %.0f Hz", Gen.CH2.FM_Dev);
+		  sprintf(item_generator[INDEX_CH2_FM_DEV].text, " Dev %.0f Hz", Gen.CH2.FM_Dev);
 		else
-		  sprintf(item_generator[INDEX_CH1_FM_DEV].text, " Dev %.1f Hz", Gen.CH2.FM_Dev);
+		  sprintf(item_generator[INDEX_CH2_FM_DEV].text, " Dev %.1f Hz", Gen.CH2.FM_Dev);
 	}
 }
 
@@ -498,12 +498,12 @@ void generator_pre_CH2_FM_FR(uint32_t index) {
 					sendStructCHtoHost(0);
 #endif
 			}
-			sprintf(item_generator[INDEX_CH1_FM_FR].text, "* %.1f Hz *",
+			sprintf(item_generator[INDEX_CH2_FM_FR].text, "* %.1f Hz *",
 					Gen.CH2.FM_mod_fr);
 		}
 		menu_generator.field.needUpdate = 1;
 	} else {
-		sprintf(item_generator[INDEX_CH1_FM_FR].text, " %.1f Hz",
+		sprintf(item_generator[INDEX_CH2_FM_FR].text, " %.1f Hz",
 				Gen.CH2.FM_mod_fr);
 	}
 }
@@ -512,12 +512,12 @@ void generator_pre_CH1_EN(uint32_t index)
 {
 	if (Gen.CH1.CH_EN)
 	{
-	  sprintf(item_generator[INDEX_CH1_EN].text,"CH1");
-	  item_generator[INDEX_CH1_EN].gif->command(PLAY);
+	  sprintf(item_generator[INDEX_CH1_EN].text,"          CH1 --");
+	  item_generator[INDEX_CH1_EN].gif->command(PLAYMORPH);
 	}
 	else
 	{
-	  sprintf(item_generator[INDEX_CH1_EN].text,"CH1");
+	  sprintf(item_generator[INDEX_CH1_EN].text,"          CH1 --");
 	  item_generator[INDEX_CH1_EN].gif->command(STOP);
 	}
 
@@ -529,12 +529,12 @@ void generator_pre_CH2_EN(uint32_t index)
 {
 	if (Gen.CH2.CH_EN)
 	{
-	  sprintf(item_generator[INDEX_CH2_EN].text,"CH2");
-	  item_generator[INDEX_CH2_EN].gif->command(PLAY);
+	  sprintf(item_generator[INDEX_CH2_EN].text,"         -- CH 2");
+	  item_generator[INDEX_CH2_EN].gif->command(PLAYMORPH);
 	}
 	else
 	{
-	  sprintf(item_generator[INDEX_CH2_EN].text,"CH2");
+	  sprintf(item_generator[INDEX_CH2_EN].text,"         -- CH 2");
 	  item_generator[INDEX_CH2_EN].gif->command(STOP);
 	}
 
@@ -544,13 +544,19 @@ void generator_pre_CH1_AM_EN(uint32_t index)
 {
 	if (Gen.CH1.AM_EN)
 	{
-	  sprintf(item_generator[INDEX_CH1_AM_EN].text,"AM");
-	  item_generator[INDEX_CH1_AM_EN].gif->command(PLAY);
+	  sprintf(item_generator[INDEX_CH1_AM_EN].text,"         -- AM 1");
+	  item_generator[INDEX_CH1_AM_EN].gif->command(PLAYMORPH);
+
+	  item_generator[INDEX_CH1_AM_FR].field.disable  = 0; //Разблокировали
+	  item_generator[INDEX_CH1_AM_MOD].field.disable = 0;
 	}
 	else
 	{
-	  sprintf(item_generator[INDEX_CH1_AM_EN].text,"AM");
+	  sprintf(item_generator[INDEX_CH1_AM_EN].text,"         -- AM 1");
 	  item_generator[INDEX_CH1_AM_EN].gif->command(STOP);
+
+	  item_generator[INDEX_CH1_AM_FR].field.disable  = 1; //Блокируем
+	  item_generator[INDEX_CH1_AM_MOD].field.disable = 1; //Блокируем
 	}
 }
 
@@ -558,13 +564,19 @@ void generator_pre_CH2_AM_EN(uint32_t index)
 {
 	if (Gen.CH2.AM_EN)
 	{
-	  sprintf(item_generator[INDEX_CH2_AM_EN].text,"AM");
-	  item_generator[INDEX_CH2_AM_EN].gif->command(PLAY);
+	  sprintf(item_generator[INDEX_CH2_AM_EN].text,"         -- AM 2");
+	  item_generator[INDEX_CH2_AM_EN].gif->command(PLAYMORPH);
+
+	  item_generator[INDEX_CH2_AM_FR].field.disable  = 0; //Разблокировали
+	  item_generator[INDEX_CH2_AM_MOD].field.disable = 0;
 	}
 	else
 	{
-	  sprintf(item_generator[INDEX_CH2_AM_EN].text,"AM");
+	  sprintf(item_generator[INDEX_CH2_AM_EN].text,"         -- AM 2");
 	  item_generator[INDEX_CH2_AM_EN].gif->command(STOP);
+
+	  item_generator[INDEX_CH2_AM_FR].field.disable  = 1; //Блокируем
+	  item_generator[INDEX_CH2_AM_MOD].field.disable = 1; //Блокируем
 	}
 }
 
@@ -572,13 +584,29 @@ void generator_pre_CH1_FM_EN(uint32_t index)
 {
 	if (Gen.CH1.FM_EN)
 	{
-	  sprintf(item_generator[INDEX_CH1_FM_EN].text,"FM");
-	  item_generator[INDEX_CH1_FM_EN].gif->command(PLAY);
+	  sprintf(item_generator[INDEX_CH1_FM_EN].text,"         -- FM 1");
+	  item_generator[INDEX_CH1_FM_EN].gif->command(PLAYMORPH);
+
+	  item_generator[INDEX_CH1_FM_BASE].field.disable  = 0;
+	  item_generator[INDEX_CH1_FM_DEV].field.disable  = 0;
+	  item_generator[INDEX_CH1_FM_MOD].field.disable  = 0;
+	  item_generator[INDEX_CH1_FM_FR].field.disable  = 0;
+
+	  item_generator[INDEX_CH1_FR].field.disable  = 1;
+
 	}
 	else
 	{
-	  sprintf(item_generator[INDEX_CH1_FM_EN].text,"FM [ Откл ]");
+	  sprintf(item_generator[INDEX_CH1_FM_EN].text,"         -- FM 1");
 	  item_generator[INDEX_CH1_FM_EN].gif->command(STOP);
+
+	  item_generator[INDEX_CH1_FM_BASE].field.disable  = 1;
+	  item_generator[INDEX_CH1_FM_DEV].field.disable  = 1;
+	  item_generator[INDEX_CH1_FM_MOD].field.disable  = 1;
+	  item_generator[INDEX_CH1_FM_FR].field.disable  = 1;
+
+	  item_generator[INDEX_CH1_FR].field.disable  = 0;
+
 	}
 }
 
@@ -586,12 +614,29 @@ void generator_pre_CH2_FM_EN(uint32_t index)
 {
 	if (Gen.CH2.FM_EN)
 	{
-	  sprintf(item_generator[INDEX_CH2_FM_EN].text,"FM");
-	  item_generator[INDEX_CH2_FM_EN].gif->command(PLAY);
+	  sprintf(item_generator[INDEX_CH2_FM_EN].text,"         -- FM 2");
+	  item_generator[INDEX_CH2_FM_EN].gif->command(PLAYMORPH);
+
+	  item_generator[INDEX_CH2_FM_BASE].field.disable  = 0;
+	  item_generator[INDEX_CH2_FM_DEV].field.disable   = 0;
+	  item_generator[INDEX_CH2_FM_MOD].field.disable   = 0;
+	  item_generator[INDEX_CH2_FM_FR].field.disable    = 0;
+
+	  item_generator[INDEX_CH2_FR].field.disable  = 1;
+
 	}
 	else
 	{
-	  sprintf(item_generator[INDEX_CH2_FM_EN].text,"FM [ Откл ]");
+	  sprintf(item_generator[INDEX_CH2_FM_EN].text,"         -- FM 2");
 	  item_generator[INDEX_CH2_FM_EN].gif->command(STOP);
+
+	  item_generator[INDEX_CH2_FM_BASE].field.disable  = 1;
+	  item_generator[INDEX_CH2_FM_DEV].field.disable   = 1;
+	  item_generator[INDEX_CH2_FM_MOD].field.disable   = 1;
+	  item_generator[INDEX_CH2_FM_FR].field.disable    = 1;
+
+	  item_generator[INDEX_CH2_FR].field.disable  = 0;
 	}
 }
+
+
