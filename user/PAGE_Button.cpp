@@ -159,7 +159,7 @@ void PAGE_Background_Board(void) {
 void PAGE_Menu(menu_typedef *menu, item_typedef *item,
 		int NUM) {
 
-	Gen.pause();
+	//Gen.pause();
 
 	tft.Font_Smooth_Load(menu->font);
 
@@ -338,7 +338,7 @@ void PAGE_Menu(menu_typedef *menu, item_typedef *item,
 	    	//B[i].setY(StartY + H * (menu->ii % menu->item_count));
 	    	//B[i].run();  //116 us -Of Gen on
 
-	    	if (i == menu->index) tft.RectangleFilled(0, StartY + H * (menu->ii % menu->item_count), 239, H, palitra[18]);
+	    	if (i == menu->index) tft.RectangleFilled(0, StartY + H * (menu->ii % menu->item_count), 239, H, palitra_COLOR_RECTAGLE);
 
 
             menu->run(i);

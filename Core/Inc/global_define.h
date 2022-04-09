@@ -3,15 +3,35 @@
 
 //Если нужно использовать CLI
 //#define USE_CLI
-
+#define USE_GEN
+//#define USE_CLI_GEN
+//#define USE_CLI_LCD
 
 //COLOR
-#define COLOR_BACKGROUND     tft.RGB565(0, 0, 16) //tft.RGB565(0, 7, 43)   // Фон
-#define COLOR_DISABLE_TEXT   tft.RGB565(128, 128, 128) // Текст отключенного текста
-//#define COLOR_ENABLE_TEXT
+//#define COLOR_TEXT_SELECT    tft.RGB565(255, 200, 11)   //Цвет текста выбранной строки
+//#define COLOR_TEXT_DEFAULT   tft.RGB565(234, 236, 255)  //Цвет текста по умолчанию
+//#define COLOR_TEXT_DISABLE   tft.RGB565(128, 128, 128)  // Текст отключенного текста
+
+//#define COLOR_RECTAGLE       tft.RGB565(2, 78, 153)     // Текст выделенной строки
+//#define COLOR_BACKGROUND     tft.RGB565(0, 0, 16)       //tft.RGB565(0, 7, 43)   // Фон
+
+//#define COLOR_TEXT_SELECT    tft.RGB565(6, 17, 60)   //Цвет текста выбранной строки
+//#define COLOR_RECTAGLE       tft.RGB565(255, 140, 50)     // Текст выделенной строки
+//#define COLOR_BACKGROUND     tft.RGB565(6, 17, 60)       //tft.RGB565(0, 7, 43)   // Фон
+
+#define COLOR_TEXT_DEFAULT   tft.RGB565(229, 229, 229)  //Цвет текста по умолчанию         100
+#define COLOR_TEXT_SELECT    tft.RGB565(16, 16, 16)        //Цвет текста выбранной строки     101
+#define COLOR_TEXT_DISABLE   tft.RGB565(128, 128, 128)  // Текст отключенного текста       102
+#define COLOR_RECTAGLE       tft.RGB565(255, 140, 50)   // Текст выделенной строки         103
+#define COLOR_BACKGROUND     tft.RGB565(0, 0, 7)        //tft.RGB565(0, 7, 43)   // Фон    104
+
+#define palitra_COLOR_TEXT_DEFAULT   palitra[100]  //Цвет текста по умолчанию         100
+#define palitra_COLOR_TEXT_SELECT    palitra[101]         //Цвет текста выбранной строки     101
+#define palitra_COLOR_TEXT_DISABLE   palitra[102]   // Текст отключенного текста       102
+#define palitra_COLOR_RECTAGLE       palitra[103]    // Текст выделенной строки         103
+#define palitra_COLOR_BACKGROUND     palitra[104]         //tft.RGB565(0, 7, 43)   // Фон    104
 
 //ID Ресурсов
-
 #define Roboto_Medium_en_ru_30 (uint8_t *)(tft.getResAdressFontID(0))
 #define Roboto_Medium_en_ru_18 (uint8_t *)(tft.getResAdressFontID(1))
 
@@ -103,21 +123,10 @@ typedef struct    //
  {
    char text [20];
 
-   //char * value;
-   //int8_t value_dx;
-   //int8_t value_dy;
-
-   //uint8_t select;
-
    void (*callBackFunc_isClick)  (void);
    void (*callBackFunc_isHolded) (void);
    void (*callBackFunc_isDouble) (void);
    void (*preCallBackFunc)(uint32_t);
-
-
-
-
-   //Bitmap *bmp;  //Картинка 32x32
 
    /////////////////////////////////////////////////////////
    char *     nameGif  = 0;       //Имя гифки
@@ -136,7 +145,6 @@ typedef struct    //
 	} field;
 
    int32_t text_color = -1; //Цвет текста -1 использовать значения по умолчанию
-
 
  } item_typedef;
 
@@ -198,10 +206,10 @@ typedef struct    //
 		   if (items[i].text_color != -1)
 			   tft.Font_Smooth_drawStr(9 - 1 + item_text_delta_x, 8 + item_height * (ii % item_count) - 1 + item_start_y + item_text_delta_y, items[i].text, (uint16_t) items[i].text_color);
 		   else
-			   tft.Font_Smooth_drawStr(9 - 1 + item_text_delta_x, 8 + item_height * (ii % item_count) - 1 + item_start_y + item_text_delta_y, items[i].text, (i == index) ? palitra[20] : palitra[22]);
+			   tft.Font_Smooth_drawStr(9 - 1 + item_text_delta_x, 8 + item_height * (ii % item_count) - 1 + item_start_y + item_text_delta_y, items[i].text, (i == index) ? palitra_COLOR_TEXT_SELECT : palitra_COLOR_TEXT_DEFAULT);
 	   }
 	   else
-		   tft.Font_Smooth_drawStr(9 - 1 + item_text_delta_x, 8 + item_height * (ii % item_count) - 1 + item_start_y + item_text_delta_y, items[i].text, COLOR_DISABLE_TEXT);
+		   tft.Font_Smooth_drawStr(9 - 1 + item_text_delta_x, 8 + item_height * (ii % item_count) - 1 + item_start_y + item_text_delta_y, items[i].text, palitra_COLOR_TEXT_DISABLE); //COLOR_TEXT_DISABLE
 
    }
 
@@ -239,9 +247,11 @@ extern uTFT_LCD_t LCD_0;
 
 extern menu_typedef menu_generator;
 extern menu_typedef menu_setting;
+extern menu_typedef menu_palitra;
 
 extern item_typedef item_setting[]   CCMRAM;
 extern item_typedef item_generator[] CCMRAM;
+extern item_typedef item_palitra[] CCMRAM;
 
 extern Dir_File_Info_Array Dir_File_Info[50] CCMRAM; //Массив всех файлов в папке
 

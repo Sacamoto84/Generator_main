@@ -1,10 +1,8 @@
+#include "taskCLI.h"
+#include "HiSpeedDWT.h"
+#include "global_define.h"
 
 #ifdef USE_CLI
-
-#include "taskCLI.h"
-
-#include "HiSpeedDWT.h"
-
 void BT_Send_toCLI(char * str);
 extern uint8_t CRC8(char *pcBlock, unsigned int len);
 
@@ -60,7 +58,6 @@ int StrToInt(String s)
 	return atoi(str);
 }
 
-
 float StrToFloat(String s)
 {
   char str[32]={0};
@@ -77,7 +74,6 @@ float StrToFloat(String s)
 	
 	return atof(str);
 }
-
 
 //Конвертирование DOS866 в W1251
 char DosToChar(unsigned char Byte)
@@ -132,9 +128,6 @@ void ConvertString1251ToDos ( char *str )
 			str [ i ] = table [ (int)(str[i] - 128) ];
 } // ConvertStringDosTo1251
 
-
-
-
 //Сформировать и отправить текущие настройки
 void sendStructCHtoHost(unsigned int ch)
 {
@@ -147,7 +140,6 @@ void sendStructCHtoHost(unsigned int ch)
 	memset(str_temp, 0 , 32);
 
 	LOG( (char*)"F", 'I',(char*)"sendStructCHtoHost");
-
 
 	strcat(buffer, (ch) ? "!51#" : "!50#");
 
@@ -190,8 +182,6 @@ void sendStructCHtoHost(unsigned int ch)
 
 	BT_Send_RAW(&buffer[0]);
 }
-
-
 
 //Получить список файлов в папке
 void File_Read_Dir_Callback(cmd* c) {
@@ -254,7 +244,6 @@ void comandRead_ConfCallback(cmd* c)
 
 }
 
-
 //Получить список файлов в папке
 void Read_File_Callback(cmd* c) {
 	SEGGER_RTT_printf(0,"CLI>Read_File Start...\n");
@@ -311,15 +300,12 @@ void Read_File_Callback(cmd* c) {
 	SEGGER_SYSVIEW_Error("CLI>Read_File End\n");
 }
 
-
-//
 //Сброс контроллера
 void MCU_Reset_Callback(cmd* c) {
   SEGGER_RTT_printf(0,">MCU_Reset\n");
 	HAL_NVIC_SystemReset();
 }
-//
-//
+
 // Callback in case of an error
 void errorCallback(cmd_error* e) {
     CommandError cmdError(e); // Create wrapper object
@@ -340,7 +326,6 @@ void errorCallback(cmd_error* e) {
     //}
 }
 
-
 void Generator_Pause_Callback(cmd* c)
 {
 	SEGGER_RTT_printf(0,"Generator_Pause_Callback!\n");
@@ -353,10 +338,6 @@ void Generator_Start_Callback(cmd* c)
 	Gen.start();
 }
 
-
-
-
-
 //////////////////////////////
 //Настройка
 //////////////////////////////
@@ -368,6 +349,8 @@ void taskCLI_setup(void)
 
 	MCU_Reset  = cli.addSingleArgCmd("MCU_Reset", MCU_Reset_Callback);
 	
+#ifdef USE_CLI_GEN
+
 	File_Read_Dir = cli.addSingleArgCmd("File_Read_Dir", File_Read_Dir_Callback); //Получить список файлов в папке
 	Command_Read_File = cli.addSingleArgCmd("Read_File", Read_File_Callback);
 
@@ -391,13 +374,13 @@ void taskCLI_setup(void)
 
 	Generator_Read_Config = cli.addSingleArgCmd("Read_Conf",  comandRead_ConfCallback);
 
+#endif
 
 
 
 
 
-
-
+#ifdef USE_CLI_LCD
 
 	LCD_Invers = cli.addSingleArgCmd("LCD_Invers", LCD_Invers_Callback);
 
@@ -435,6 +418,16 @@ void taskCLI_setup(void)
 	LCD_Read_gn        = cli.addSingleArgCmd("LCD_Read_gn", LCD_Read_gn_Callback);
 
 	LCD_Init_Custom = cli.addSingleArgCmd("LCD_Init_Custom", LCD_Init_Custom_Callback);
+#endif
+
+
+
+	RGB_DEF = cli.addBoundlessCommand("RGB", RGB_callback);  //Text по умолчанию
+	//RGB_TS;   //Text Select
+	//RGB_TD;   //Текст Disable
+	//RGB_REC;  //Установить прямоугольник
+	//RGB_BG;   //Установить фон
+
 
 	char *p;
 	char str[16];

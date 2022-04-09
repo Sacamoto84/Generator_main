@@ -81,4 +81,6 @@ void generator_pre_CH2_AM_EN(uint32_t index);
 void generator_pre_CH1_FM_EN(uint32_t index);
 void generator_pre_CH2_FM_EN(uint32_t index);
 
+void setting_save_click(void);
+
 #endif

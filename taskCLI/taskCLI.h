@@ -95,4 +95,10 @@ extern Command Command_Read_File;
 extern Command MCU_Reset;//Сброс контроллера
 extern Command MCU_Reset;//Сброс контроллера
 
+extern Command RGB_DEF;  //Text по умолчанию
+extern Command RGB_TS;   //Text Select
+extern Command RGB_TD;   //Текст Disable
+extern Command RGB_REC;  //Установить прямоугольник
+extern Command RGB_BG;   //Установить фон
+
 #endif /* TASKCLI_H_ */

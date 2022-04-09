@@ -115,7 +115,7 @@ int main(void)
   MX_TIM1_Init();
   MX_TIM2_Init();
   MX_TIM6_Init();
-  MX_USART3_UART_Init();
+  //MX_USART3_UART_Init();
   //MX_DMA_Init();
   MX_TIM3_Init();
   MX_FATFS_Init();
@@ -135,9 +135,9 @@ int main(void)
 	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
 
 	SEGGER_RTT_Init();
-	SEGGER_SYSVIEW_Conf();
-	SEGGER_SYSVIEW_Start();
-	SEGGER_SYSVIEW_Print("Start");
+	//SEGGER_SYSVIEW_Conf();
+	//SEGGER_SYSVIEW_Start();
+	//SEGGER_SYSVIEW_Print("Start");
 
 	//while(1);
 

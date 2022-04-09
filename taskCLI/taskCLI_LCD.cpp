@@ -1,6 +1,9 @@
-#ifdef USE_CLI
+
 
 #include "taskCLI.h"
+#include "global_define.h"
+
+#ifdef USE_CLI
 
 extern TFT tft;
 

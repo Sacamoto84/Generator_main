@@ -1,6 +1,7 @@
-#ifdef USE_CLI
-
 #include "taskCLI.h"
+#include "global_define.h"
+
+#ifdef USE_CLI
 
 Command comandCH1_EN;
 Command comandCH1_CARRIER_FR;

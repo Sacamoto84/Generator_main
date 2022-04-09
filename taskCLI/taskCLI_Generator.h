@@ -21,4 +21,6 @@ void comandCH1_FM_FR_Callback(cmd *c);
 void comandCH1_FM_MODCallback(cmd *c);
 
 
+void RGB_callback(cmd *c);
+
 #endif /* TASKCLI_GENERATOR_H_ */

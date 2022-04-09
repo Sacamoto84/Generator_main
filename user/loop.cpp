@@ -11,7 +11,10 @@
 #include "IniFile.h"
 #include "BLE_Commands.h"
 
+#include "usart.h"
+
 extern void PAGE_Palitra0_15(void);
+extern void taskCLI_setup(void);
 
 char str[256] CCMRAM;
 
@@ -30,10 +33,10 @@ void setup(void) {
 
 #ifdef USE_CLI
 	  taskCLI_setup();
-#endif
 
-	USART3->CR1 |=  USART_CR1_RXNEIE; //Interupt RX
-    USART3->CR3 |=  USART_CR3_DMAT;
+	  USART3->CR1 |=  USART_CR1_RXNEIE; //Interupt RX
+	  USART3->CR3 |=  USART_CR3_DMAT;
+#endif
 
 	HAL_Delay(1000);
 
@@ -43,28 +46,25 @@ void setup(void) {
 
 	tft.init(&LCD_0);
 
-
-
-
-
     __HAL_SPI_DISABLE(&hspi1);
     SPI1->CR1 &= ~(0x1UL << (5U));
     __HAL_SPI_ENABLE(&hspi1);
 
-
 	tft.ST77XX_Update_MADCTL();
 
-
-
-
-
+#ifdef USE_GEN
 	Gen.Init();//Инициализация генератора
+#endif
 
 	PAGE_init_palitra();
 
 	gfxfont.init(&tft);
 
 	tft.setResStartAdress(0x08020000); //Установим начало ресурсов
+
+
+
+
 
 
 
@@ -131,9 +131,9 @@ void loop() {
 
 
 	while (1) {
-		SEGGER_SYSVIEW_Warn("loop\n");
-		HAL_Delay(10000);
-		tft.ST7789_UpdateDMA4bit();
+		//SEGGER_SYSVIEW_Warn("loop\n");
+		//HAL_Delay(10000);
+		//tft.ST7789_UpdateDMA4bit();
 
 		//BLE_Task();
 
@@ -155,6 +155,8 @@ extern "C" void main_cpp(void) {
 extern "C" void DMA1_Stream5_IRQHandler(void)
 {
 	SEGGER_SYSVIEW_RecordEnterISR(); //SEGGER SW
+
+#ifdef USE_GEN
 	//Other_Run_Tick = TimerT5.End(); //Получаем время работы без тиков
 	DMA_Sum_Tick   = Other_Run_Tick + DMA_Run_Tick;
 	DMA_zagruzka = (float)DMA_Run_Tick / (float)DMA_Sum_Tick * 100.0F;
@@ -179,6 +181,9 @@ extern "C" void DMA1_Stream5_IRQHandler(void)
 
 	//DMA_Run_Tick = TimerT5.End(); //Получили тики работы
 	//TimerT5.Start();
+
+#endif
+
 	SEGGER_SYSVIEW_RecordExitISR(); //SEGGER SW
 }
 

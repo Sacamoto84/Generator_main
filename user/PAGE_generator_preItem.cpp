@@ -639,4 +639,7 @@ void generator_pre_CH2_FM_EN(uint32_t index)
 	}
 }
 
-
+void setting_save_click(void)
+{
+		item_setting[1].gif->command(PLAY);
+}

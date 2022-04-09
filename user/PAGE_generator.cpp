@@ -200,7 +200,7 @@ void PAGE_generator_select_modulation(void)
     //menu.title = NULL;
     menu.postCallBackFunc = &postPageSelectModulation; //Рисовалка
     menu.count_item = Dir_File_Info[0].maxFileCount+1;
-
+    menu.ColorBackground = palitra_COLOR_BACKGROUND;
 
 
     temp_item = &item[0];
@@ -212,7 +212,7 @@ void PAGE_generator_select_modulation(void)
     tft.Font_Smooth_Load(menu_setting.font);
 
 #ifdef USE_CLI
-    if (page_generator.index <12)
+    if (menu_generator.index <12)
     	sendStructCHtoHost(0);
     else
     	sendStructCHtoHost(1);
