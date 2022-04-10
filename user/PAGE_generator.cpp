@@ -209,7 +209,8 @@ void PAGE_generator_select_modulation(void)
     menu.items = item;
 
     PAGE_Menu( &menu,  &item[0], Dir_File_Info[0].maxFileCount+1);
-    tft.Font_Smooth_Load(menu_setting.font);
+
+    tft.Font_Smooth_Load(menu_generator.font);
 
 #ifdef USE_CLI
     if (menu_generator.index <12)
@@ -229,56 +230,41 @@ void PAGE_generator_CH1_CH_EN_switch(void)
 	  Gen.CH1.CH_EN = 1;
 
 	menu_generator.field.needUpdate = 1;
-
-#ifdef USE_CLI
-    sendStructCHtoHost(0);
-#endif
+	menu_generator.field.needRender = 1;
 }
 
 void PAGE_generator_CH1_AM_EN_switch(void)
 {
-
 if (Gen.CH1.AM_EN)
 	Gen.CH1.AM_EN = 0;
 else
 	Gen.CH1.AM_EN = 1;
-menu_generator.field.needUpdate = 1;
-
-#ifdef USE_CLI
-    sendStructCHtoHost(0);
-#endif
+  menu_generator.field.needUpdate = 1;
+  menu_generator.field.needRender = 1;
 }
 
 void PAGE_generator_CH1_FM_EN_switch(void)
 { if (Gen.CH1.FM_EN) Gen.CH1.FM_EN = 0; else Gen.CH1.FM_EN = 1;
-menu_generator.field.needUpdate = 1;
-#ifdef USE_CLI
-    sendStructCHtoHost(0);
-#endif
+  menu_generator.field.needUpdate = 1;
+  menu_generator.field.needRender = 1;
 }
 
 void PAGE_generator_CH2_CH_EN_switch(void)
 { if (Gen.CH2.CH_EN) Gen.CH2.CH_EN = 0; else Gen.CH2.CH_EN = 1;
-menu_generator.field.needUpdate = 1;
-#ifdef USE_CLI
-    sendStructCHtoHost(1);
-#endif
+  menu_generator.field.needUpdate = 1;
+  menu_generator.field.needRender = 1;
 }
 
 void PAGE_generator_CH2_AM_EN_switch(void)
 { if (Gen.CH2.AM_EN) Gen.CH2.AM_EN = 0; else Gen.CH2.AM_EN = 1;
-menu_generator.field.needUpdate = 1;
-#ifdef USE_CLI
-    sendStructCHtoHost(1);
-#endif
+  menu_generator.field.needUpdate = 1;
+  menu_generator.field.needRender = 1;
 }
 
 void PAGE_generator_CH2_FM_EN_switch(void)
 { if (Gen.CH2.FM_EN) Gen.CH2.FM_EN = 0; else Gen.CH2.FM_EN = 1;
-menu_generator.field.needUpdate = 1;
-#ifdef USE_CLI
-	sendStructCHtoHost(1);
-#endif
+  menu_generator.field.needUpdate = 1;
+  menu_generator.field.needRender = 1;
 }
 
 //Включение отключение блокировки
@@ -291,7 +277,10 @@ if (item_generator[menu_generator.index].field.disable == 0)
 	else
 		menu_generator.field.encoder_block = 1;
 }
-    menu_generator.field.needUpdate = 1;
+
+menu_generator.field.needUpdate = 1;
+menu_generator.field.needRender = 1;
+
 }
 
 //Пред функция для картинки генератор, обрабатывем крутилки
@@ -306,7 +295,7 @@ void prePageGenerator(void)
 		sprintf(item_generator[INDEX_CH1_CR].text," %s", convert_item_modulation(Gen.CH1.Carrier_mod));
 		sprintf(item_generator[INDEX_CH1_AM_MOD].text," %s", convert_item_modulation(Gen.CH1.AM_mod));
 		sprintf(item_generator[INDEX_CH1_FM_MOD].text," %s", convert_item_modulation(Gen.CH1.FM_mod));
-		sprintf(item_generator[INDEX_SEPARATOR].text, "---DMA{%.1f}---", DMA_zagruzka);
+		//sprintf(item_generator[INDEX_SEPARATOR].text, "---DMA{%.1f}---", DMA_zagruzka);
 		sprintf(item_generator[INDEX_CH2_CR].text," %s", convert_item_modulation(Gen.CH2.Carrier_mod));
 		sprintf(item_generator[INDEX_CH2_AM_MOD].text," %s", convert_item_modulation(Gen.CH2.AM_mod));
 		sprintf(item_generator[INDEX_CH2_FM_MOD].text," %s", convert_item_modulation(Gen.CH2.FM_mod));

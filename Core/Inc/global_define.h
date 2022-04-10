@@ -7,6 +7,8 @@
 //#define USE_CLI_GEN
 //#define USE_CLI_LCD
 
+///#define USE_NOTSAVE_FONT  --Использование не безопасных фонтов
+
 //COLOR
 //#define COLOR_TEXT_SELECT    tft.RGB565(255, 200, 11)   //Цвет текста выбранной строки
 //#define COLOR_TEXT_DEFAULT   tft.RGB565(234, 236, 255)  //Цвет текста по умолчанию
@@ -59,20 +61,20 @@
 #define INDEX_CH1_FM_DEV  8
 #define INDEX_CH1_FM_MOD  9
 #define INDEX_CH1_FM_FR   10
-#define INDEX_SEPARATOR   11
-#define INDEX_CH2_EN      12
-#define INDEX_CH2_FR      13
-#define INDEX_CH2_CR      14
-#define INDEX_CH2_AM_EN   15
-#define INDEX_CH2_AM_MOD  16
-#define INDEX_CH2_AM_FR   17
-#define INDEX_CH2_FM_EN   18
-#define INDEX_CH2_FM_BASE 19
-#define INDEX_CH2_FM_DEV  20
-#define INDEX_CH2_FM_MOD  21
-#define INDEX_CH2_FM_FR   22
 
-#define NUM_ITEM_GENERETOR   23
+#define INDEX_CH2_EN      11
+#define INDEX_CH2_FR      12
+#define INDEX_CH2_CR      13
+#define INDEX_CH2_AM_EN   14
+#define INDEX_CH2_AM_MOD  15
+#define INDEX_CH2_AM_FR   16
+#define INDEX_CH2_FM_EN   17
+#define INDEX_CH2_FM_BASE 18
+#define INDEX_CH2_FM_DEV  19
+#define INDEX_CH2_FM_MOD  20
+#define INDEX_CH2_FM_FR   21
+
+#define NUM_ITEM_GENERETOR   22
 
 
 
@@ -105,6 +107,11 @@
 //////////////////////////////////
 extern TFT tft CCMRAM ;
 extern uint16_t palitra[256] CCMRAM;
+extern GENERATOR Gen CCMRAM;
+
+
+
+
 ///////////////
 //  typedef  //
 ///////////////
@@ -156,7 +163,7 @@ typedef struct    //
    uint8_t item_count;    //Количество отображаемых строк
    uint8_t item_height;   //Высота одной строки
    uint8_t item_start_y;  //Координата Y начала списка
-   uint8_t count_item; //Максимальное количество элементов
+   uint8_t count_item;    //Максимальное количество элементов
 
    int8_t  item_text_delta_x;  //Смещение текста по X
    int8_t  item_text_delta_y;  //Смещение текста по Y
@@ -199,7 +206,6 @@ typedef struct    //
 		   fcnPtr(index);
 		}
 
-
 	   if (items[i].field.disable == 0)
 	   {
 		   //1500us
@@ -212,6 +218,172 @@ typedef struct    //
 		   tft.Font_Smooth_drawStr(9 - 1 + item_text_delta_x, 8 + item_height * (ii % item_count) - 1 + item_start_y + item_text_delta_y, items[i].text, palitra_COLOR_TEXT_DISABLE); //COLOR_TEXT_DISABLE
 
    }
+
+   void run2(uint8_t i)
+   {
+	    //33us -Of GenOn На выделенном
+	    if (i == index)
+	    {
+	    	tft.RectangleFilled( (i < ((max_item+1)/2)) ? 0 : 119 , item_start_y + item_height * (ii % ((max_item+1)/2)), 119, item_height, palitra_COLOR_RECTAGLE);
+	    	tft.uTFT.GetColor = 1;
+	    }
+	    else
+	      tft.uTFT.GetColor = 0;
+
+	   //Выполняем пре для этого елемента
+	   //Создание текста
+	   if (items[i].preCallBackFunc) {
+		   void (*fcnPtr)(uint32_t) = items[i].preCallBackFunc;
+		   fcnPtr(index);
+		}
+
+	   field.needRender = field.encoder_block;
+
+	   if (Gen.CH1.CH_EN)
+	   {
+		   items[INDEX_CH1_CR].field.disable      = 0;
+		   items[INDEX_CH1_AM_EN].field.disable   = 0;
+		   if (Gen.CH1.AM_EN)
+		   {
+		     items[INDEX_CH1_AM_MOD].field.disable  = 0;
+		     items[INDEX_CH1_AM_FR].field.disable   = 0;
+		   }
+		   else
+		   {
+			 items[INDEX_CH1_AM_MOD].field.disable  = 1;
+			 items[INDEX_CH1_AM_FR].field.disable   = 1;
+		   }
+		   items[INDEX_CH1_FM_EN].field.disable   = 0;
+		   if (Gen.CH1.FM_EN)
+	        {
+			   items[INDEX_CH1_FM_BASE].field.disable = 0;
+			   items[INDEX_CH1_FM_DEV].field.disable  = 0;
+			   items[INDEX_CH1_FM_MOD].field.disable  = 0;
+			   items[INDEX_CH1_FM_FR].field.disable   = 0;
+			   items[INDEX_CH1_FR].field.disable  = 1;
+			}
+		   else
+		   {
+			   items[INDEX_CH1_FM_BASE].field.disable = 1;
+			   items[INDEX_CH1_FM_DEV].field.disable  = 1;
+			   items[INDEX_CH1_FM_MOD].field.disable  = 1;
+			   items[INDEX_CH1_FM_FR].field.disable   = 1;
+			   items[INDEX_CH1_FR].field.disable  = 0;
+		   }
+	   }
+	   else
+	   {
+		   items[INDEX_CH1_FR].field.disable      = 1;
+		   items[INDEX_CH1_CR].field.disable      = 1;
+		   items[INDEX_CH1_AM_EN].field.disable   = 1;
+		   items[INDEX_CH1_AM_MOD].field.disable  = 1;
+		   items[INDEX_CH1_AM_FR].field.disable   = 1;
+		   items[INDEX_CH1_FM_EN].field.disable   = 1;
+		   items[INDEX_CH1_FM_BASE].field.disable = 1;
+		   items[INDEX_CH1_FM_DEV].field.disable  = 1;
+		   items[INDEX_CH1_FM_MOD].field.disable  = 1;
+		   items[INDEX_CH1_FM_FR].field.disable   = 1;
+	   }
+
+	   if (Gen.CH2.CH_EN)
+	   {
+		   items[INDEX_CH2_CR].field.disable      = 0;
+		   items[INDEX_CH2_AM_EN].field.disable   = 0;
+		   if (Gen.CH2.AM_EN)
+		   {
+		     items[INDEX_CH2_AM_MOD].field.disable  = 0;
+		     items[INDEX_CH2_AM_FR].field.disable   = 0;
+		   }
+		   else
+		   {
+			 items[INDEX_CH2_AM_MOD].field.disable  = 1;
+			 items[INDEX_CH2_AM_FR].field.disable   = 1;
+		   }
+		   items[INDEX_CH2_FM_EN].field.disable   = 0;
+		   if (Gen.CH2.FM_EN)
+	        {
+			   items[INDEX_CH2_FM_BASE].field.disable = 0;
+			   items[INDEX_CH2_FM_DEV].field.disable  = 0;
+			   items[INDEX_CH2_FM_MOD].field.disable  = 0;
+			   items[INDEX_CH2_FM_FR].field.disable   = 0;
+			   items[INDEX_CH2_FR].field.disable  = 1;
+			}
+		   else
+		   {
+			   items[INDEX_CH2_FM_BASE].field.disable = 1;
+			   items[INDEX_CH2_FM_DEV].field.disable  = 1;
+			   items[INDEX_CH2_FM_MOD].field.disable  = 1;
+			   items[INDEX_CH2_FM_FR].field.disable   = 1;
+			   items[INDEX_CH2_FR].field.disable  = 0;
+		   }
+	   }
+	   else
+	   {
+		   items[INDEX_CH2_FR].field.disable      = 1;
+		   items[INDEX_CH2_CR].field.disable      = 1;
+		   items[INDEX_CH2_AM_EN].field.disable   = 1;
+		   items[INDEX_CH2_AM_MOD].field.disable  = 1;
+		   items[INDEX_CH2_AM_FR].field.disable   = 1;
+		   items[INDEX_CH2_FM_EN].field.disable   = 1;
+		   items[INDEX_CH2_FM_BASE].field.disable = 1;
+		   items[INDEX_CH2_FM_DEV].field.disable  = 1;
+		   items[INDEX_CH2_FM_MOD].field.disable  = 1;
+		   items[INDEX_CH2_FM_FR].field.disable   = 1;
+	   }
+
+	   if (items[i].field.disable == 0)
+	   {
+		   //1500us
+		   if (items[i].text_color != -1)
+			   tft.Font_Smooth_drawStr( (i < ((max_item+1)/2)) ? 0 : 119  + item_text_delta_x, 8 + item_height * (ii % item_count) - 1 + item_start_y + item_text_delta_y, items[i].text, (uint16_t) items[i].text_color);
+		   else
+			   tft.Font_Smooth_drawStr( (i < ((max_item+1)/2)) ? 0 : 119  + item_text_delta_x, 8 + item_height * (ii % item_count) - 1 + item_start_y + item_text_delta_y, items[i].text, (i == index) ? palitra_COLOR_TEXT_SELECT : palitra_COLOR_TEXT_DEFAULT);
+	   }
+	   else
+		   tft.Font_Smooth_drawStr( (i < ((max_item+1)/2)) ? 0 : 119  + item_text_delta_x, 8 + item_height * (ii % item_count) - 1 + item_start_y + item_text_delta_y, items[i].text, palitra_COLOR_TEXT_DISABLE); //COLOR_TEXT_DISABLE
+
+	    if (items[i].gif_init_state) //Если есть источник данных
+	    {
+	    	Bitmap bmp = {0};
+
+	    	uint8_t* p;
+			p = items[i].gif_init_state;
+
+	    	if (*p)  //Если 1
+	    	{
+	    		if (items[i].resid_first) //Если id не 0
+	    		{
+                   bmp = tft.getResBitmapID(items[i].resid_first);
+
+                   switch (bmp.bit)
+                   {
+                   	  case 32: tft.Bitmap_From_Flash_32b((i < ((max_item+1)/2)) ? 0 : 119, item_start_y + item_height * (ii % ((max_item+1)/2)), &bmp);	break;
+                   	  case 24: tft.Bitmap_From_Flash_24b((i < ((max_item+1)/2)) ? 0 : 119, item_start_y + item_height * (ii % ((max_item+1)/2)), &bmp);	break;
+                      case 16: tft.Bitmap_From_Flash_16b((i < ((max_item+1)/2)) ? 0 : 119, item_start_y + item_height * (ii % ((max_item+1)/2)), &bmp);	break;
+                   }
+
+	    		}
+	    	}
+	    	else
+	    	{
+	    		if (items[i].resid_last) //Если id не 0
+	    		{
+	    			bmp = tft.getResBitmapID(items[i].resid_last);
+
+	    			switch (bmp.bit)
+	                {
+	                   case 32: tft.Bitmap_From_Flash_32b((i < ((max_item+1)/2)) ? 0 : 119, item_start_y + item_height * (ii % ((max_item+1)/2)), &bmp);	break;
+	                   case 24: tft.Bitmap_From_Flash_24b((i < ((max_item+1)/2)) ? 0 : 119, item_start_y + item_height * (ii % ((max_item+1)/2)), &bmp);	break;
+	                   case 16: tft.Bitmap_From_Flash_16b((i < ((max_item+1)/2)) ? 0 : 119, item_start_y + item_height * (ii % ((max_item+1)/2)), &bmp);	break;
+	                }
+
+	    		}
+	    	}
+	    }
+
+
+   }
+
 
  } menu_typedef;
 
@@ -229,6 +401,16 @@ typedef struct    //
  //  extern
  //////////////
 
+ extern menu_typedef menu_generator;
+ extern menu_typedef menu_setting;
+ extern menu_typedef menu_palitra;
+
+ extern item_typedef item_setting[]   CCMRAM;
+ extern item_typedef item_generator[] CCMRAM;
+ extern item_typedef item_palitra[]   CCMRAM;
+
+
+
 extern HiSpeedDWT TimerDWT;
 extern HiSpeedDWT TimerT5;
 
@@ -245,13 +427,7 @@ extern float    fVolume;
 
 extern uTFT_LCD_t LCD_0;
 
-extern menu_typedef menu_generator;
-extern menu_typedef menu_setting;
-extern menu_typedef menu_palitra;
 
-extern item_typedef item_setting[]   CCMRAM;
-extern item_typedef item_generator[] CCMRAM;
-extern item_typedef item_palitra[] CCMRAM;
 
 extern Dir_File_Info_Array Dir_File_Info[50] CCMRAM; //Массив всех файлов в папке
 

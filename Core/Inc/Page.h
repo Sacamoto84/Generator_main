@@ -27,6 +27,7 @@ void PAGE_Button(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t select
 void PAGE_Button_Pressed(uint16_t x, uint16_t y, uint16_t w, uint16_t h, char *str);
 void PAGE_Background_Board(void);
 void PAGE_Menu(menu_typedef * menu , item_typedef * item, int NUM);
+void PAGE_Menu2(menu_typedef * menu , item_typedef * item, int NUM);
 void PAGE_Palitra(void);
 void PAGE_Font(void);
 

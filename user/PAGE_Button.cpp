@@ -156,6 +156,158 @@ void PAGE_Background_Board(void) {
 	tft.LineV(234, 5, 234, palitra[9]); //uTFT_VLine(234 , 5, 234, RGB565(186,207,178));
 }
 
+void PAGE_Menu2(menu_typedef *menu, item_typedef *item,
+		int NUM) {
+
+	//Gen.pause();
+
+	tft.Font_Smooth_Load(menu->font);
+
+	volatile uint8_t i;
+
+	int8_t index = 0;
+
+	int max_imem;
+	int max_window_item;
+	int window_start;
+	int window_end;
+
+	max_imem = NUM; //NUM_OF(&item);
+
+	max_window_item = NUM - 1; //6 реальных
+	window_start = 0;
+	window_end = (max_imem >= max_window_item) ? max_window_item : max_imem;
+
+	void (*func_name)(void); //объявляем указатель на функцию
+
+	tft.needUpdate = 1;
+
+	menu->field.needUpdate = 1;
+	menu->field.needRender = 1;
+
+	tft.uTFT.BColor = 0;
+	tft.uTFT.GetColor = 0;
+
+	while (1) {
+
+		KEY.tick();
+
+		//tft.needUpdate = 0;
+
+
+		if (menu->preCallBackFunc) {
+			menu->index = index;
+			func_name = menu->preCallBackFunc;
+			func_name();
+		}
+
+		//Блокировка энкодера, нужно чтобы обрабатывать в пре
+		if (menu->field.encoder_block == 0) {
+			if (Encoder.Left) {
+				Encoder.Left = 0;
+				index--;
+				if (index < 0)
+					index = max_imem - 1;
+				menu->field.needUpdate = 1;
+				menu->field.needRender = 1;
+			}
+
+			if (Encoder.Right) {
+				Encoder.Right = 0;
+				index++;
+				if (index >= max_imem) index = 0;
+				menu->field.needUpdate = 1;
+				menu->field.needRender = 1;
+			}
+		}
+
+		menu->window_start = window_start;
+		menu->window_end = window_end;
+		menu->index = index;
+		menu->max_item = max_imem - 1;
+
+
+
+
+		if(menu->field.needRender)
+		{
+			//TimerDWT.Start();
+			menu->field.needRender = 0;
+			tft.Fill(menu->ColorBackground); //Фон
+			menu->ii = 0;
+	    	for (i = 0; i < NUM; i++) {
+            	menu->run2(i);
+            	menu->ii++;
+	    	}
+	    	//TimerDWT.Loger("menu->run2(i);");
+
+		}
+
+		if (menu->postCallBackFunc) {
+			func_name = menu->postCallBackFunc;
+			func_name();
+		}
+
+		if ((menu->field.needUpdate) || (tft.needUpdate)) {
+			menu->field.needUpdate = 0;
+			tft.needUpdate = 0;
+		    LOG((char*)"MENU",'I',(char*)"ST7789_UpdateDMA16bitV3");
+			tft.ST7789_UpdateDMA16bitV3(); //DMA8bitV2();
+		}
+
+		if (KEY.isHolded()) {
+			if (item[index].callBackFunc_isHolded) {
+				func_name = item[index].callBackFunc_isHolded;
+				func_name();
+				tft.needUpdate = 1;
+				tft.Font_Smooth_Load(menu->font);
+			}
+		}
+
+		if (KEY.isDouble()) {
+			if (item[index].callBackFunc_isDouble) {
+				func_name = item[index].callBackFunc_isDouble;
+				func_name();
+				tft.needUpdate = 1;
+			}
+		}
+
+
+
+		if (KEY.isClick()) {
+
+			KEY.isHolded();
+			KEY.isDouble();
+
+			if (item[index].field.disable == 0)
+			{
+				if (item[index].callBackFunc_isClick) {
+					func_name = item[index].callBackFunc_isClick;
+					func_name();
+					menu->field.needUpdate = 1; //При выходе из события обновляем экран
+				}
+			}
+
+			if (item[index].field.exit)
+			{
+				menu->field.needRender  = 1;
+			}
+
+			tft.needUpdate = 1; //При выходе из события обновляем экран
+			menu->field.needRender  = 1;
+		}
+
+
+
+
+	}
+
+}
+
+
+
+
+
 void PAGE_Menu(menu_typedef *menu, item_typedef *item,
 		int NUM) {
 
@@ -456,4 +608,5 @@ void PAGE_Menu(menu_typedef *menu, item_typedef *item,
 	}
 
 }
+
 
