@@ -20,8 +20,8 @@ void PAGE_init_struct_generator(void)
 	item_generator[INDEX_CH1_EN].callBackFunc_isClick = &PAGE_generator_CH1_CH_EN_switch;
 	item_generator[INDEX_CH1_EN].preCallBackFunc      = &generator_pre_CH1_EN;
 	item_generator[INDEX_CH1_EN].gif_init_state       = &Gen.CH1.CH_EN;
-	item_generator[INDEX_CH1_EN].resid_last  = 2;
-	item_generator[INDEX_CH1_EN].resid_first = 4;
+	item_generator[INDEX_CH1_EN].resid_last  = OFF;
+	item_generator[INDEX_CH1_EN].resid_first = ON;
 
 	//page_item_generator[1].text = (char*) "CH1 1000Hz";
 	item_generator[INDEX_CH1_FR].callBackFunc_isClick = &PAGE_generator_encoder_block_switch;
@@ -34,8 +34,8 @@ void PAGE_init_struct_generator(void)
 	item_generator[INDEX_CH1_AM_EN].callBackFunc_isClick = &PAGE_generator_CH1_AM_EN_switch;
 	item_generator[INDEX_CH1_AM_EN].preCallBackFunc      = &generator_pre_CH1_AM_EN;
 	item_generator[INDEX_CH1_AM_EN].gif_init_state       = &Gen.CH1.AM_EN;
-	item_generator[INDEX_CH1_AM_EN].resid_last  = 3;
-	item_generator[INDEX_CH1_AM_EN].resid_first = 5;
+	item_generator[INDEX_CH1_AM_EN].resid_last  = OFF;
+	item_generator[INDEX_CH1_AM_EN].resid_first = ON;
 
 
 	//page_item_generator[4].text = (char*) "AM-CHARP";
@@ -54,8 +54,8 @@ void PAGE_init_struct_generator(void)
 	/////////////item_generator[INDEX_CH1_FM_EN].nameGif = (char*)"tB";
 	item_generator[INDEX_CH1_FM_EN].gif_trigger = MORPH;
 	item_generator[INDEX_CH1_FM_EN].gif_init_state = &Gen.CH1.FM_EN;
-	item_generator[INDEX_CH1_FM_EN].resid_last  = 3;
-	item_generator[INDEX_CH1_FM_EN].resid_first = 4;
+	item_generator[INDEX_CH1_FM_EN].resid_last  = OFF;
+	item_generator[INDEX_CH1_FM_EN].resid_first = ON;
 
 
 	//page_item_generator[7].text = (char*) "FM-Base 2500";
@@ -81,8 +81,8 @@ void PAGE_init_struct_generator(void)
 	item_generator[INDEX_CH2_EN].callBackFunc_isClick = &PAGE_generator_CH2_CH_EN_switch;
 	item_generator[INDEX_CH2_EN].preCallBackFunc      = &generator_pre_CH2_EN;
 	item_generator[INDEX_CH2_EN].gif_init_state       = &Gen.CH2.CH_EN;
-	item_generator[INDEX_CH2_EN].resid_last  = 2;
-	item_generator[INDEX_CH2_EN].resid_first = 5;
+	item_generator[INDEX_CH2_EN].resid_last  = OFF;
+	item_generator[INDEX_CH2_EN].resid_first = ON;
 
 	//page_item_generator[13].text = (char*) "CR 1000Hz";
 	item_generator[INDEX_CH2_FR].callBackFunc_isClick = &PAGE_generator_encoder_block_switch;
@@ -96,8 +96,8 @@ void PAGE_init_struct_generator(void)
 	item_generator[INDEX_CH2_AM_EN].callBackFunc_isClick = &PAGE_generator_CH2_AM_EN_switch;
 	item_generator[INDEX_CH2_AM_EN].preCallBackFunc = &generator_pre_CH2_AM_EN;
 	item_generator[INDEX_CH2_AM_EN].gif_init_state = &Gen.CH2.AM_EN;
-	item_generator[INDEX_CH2_AM_EN].resid_last  = 2;
-	item_generator[INDEX_CH2_AM_EN].resid_first = 5;
+	item_generator[INDEX_CH2_AM_EN].resid_last  = OFF;
+	item_generator[INDEX_CH2_AM_EN].resid_first = ON;
 
 	//page_item_generator[16].text = (char*) "--CHARP";
 	item_generator[INDEX_CH2_AM_MOD].callBackFunc_isClick  = &PAGE_generator_select_modulation;
@@ -110,8 +110,8 @@ void PAGE_init_struct_generator(void)
 	item_generator[INDEX_CH2_FM_EN].callBackFunc_isClick  = &PAGE_generator_CH2_FM_EN_switch;
 	item_generator[INDEX_CH2_FM_EN].preCallBackFunc = &generator_pre_CH2_FM_EN;
 	item_generator[INDEX_CH2_FM_EN].gif_init_state = &Gen.CH2.FM_EN;
-	item_generator[INDEX_CH2_FM_EN].resid_last  = 2;
-	item_generator[INDEX_CH2_FM_EN].resid_first = 5;
+	item_generator[INDEX_CH2_FM_EN].resid_last  = OFF;
+	item_generator[INDEX_CH2_FM_EN].resid_first = ON;
 
 
 	//page_item_generator[19].text = (char*) "--Div 200";

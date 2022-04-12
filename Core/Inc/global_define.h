@@ -37,9 +37,10 @@
 #define Roboto_Medium_en_ru_30 (uint8_t *)(tft.getResAdressFontID(0))
 #define Roboto_Medium_en_ru_18 (uint8_t *)(tft.getResAdressFontID(1))
 
-
-
-
+#define ON_DISABLE  2
+#define OFF_DISABLE 3
+#define ON          4
+#define OFF         5
 
 
 
@@ -342,9 +343,11 @@ typedef struct    //
 	   else
 		   tft.Font_Smooth_drawStr( (i < ((max_item+1)/2)) ? 0 : 119  + item_text_delta_x, 8 + item_height * (ii % item_count) - 1 + item_start_y + item_text_delta_y, items[i].text, palitra_COLOR_TEXT_DISABLE); //COLOR_TEXT_DISABLE
 
+	    static Bitmap bmp = {0};
+
 	    if (items[i].gif_init_state) //Если есть источник данных
 	    {
-	    	Bitmap bmp = {0};
+
 
 	    	uint8_t* p;
 			p = items[i].gif_init_state;
@@ -380,6 +383,66 @@ typedef struct    //
 	    		}
 	    	}
 	    }
+
+
+
+	    if   ( (i == INDEX_CH1_AM_EN) && (Gen.CH1.CH_EN == 0))
+	    {
+	    	if (Gen.CH1.AM_EN)
+	    	{
+	    	  bmp = tft.getResBitmapID(ON_DISABLE);
+              tft.Bitmap_From_Flash_16b((i < ((max_item+1)/2)) ? 0 : 119, item_start_y + item_height * (ii % ((max_item+1)/2)), &bmp);
+	    	}
+	    	else
+	    	{
+	    	  bmp = tft.getResBitmapID(OFF_DISABLE);
+              tft.Bitmap_From_Flash_16b((i < ((max_item+1)/2)) ? 0 : 119, item_start_y + item_height * (ii % ((max_item+1)/2)), &bmp);
+	    	}
+	    }
+
+	    if   ( (i == INDEX_CH1_FM_EN) && (Gen.CH1.CH_EN == 0))
+	    {
+	    	if (Gen.CH1.FM_EN)
+	    	{
+	    	  bmp = tft.getResBitmapID(ON_DISABLE);
+              tft.Bitmap_From_Flash_16b((i < ((max_item+1)/2)) ? 0 : 119, item_start_y + item_height * (ii % ((max_item+1)/2)), &bmp);
+	    	}
+	    	else
+	    	{
+	    	  bmp = tft.getResBitmapID(OFF_DISABLE);
+              tft.Bitmap_From_Flash_16b((i < ((max_item+1)/2)) ? 0 : 119, item_start_y + item_height * (ii % ((max_item+1)/2)), &bmp);
+	    	}
+	    }
+
+	    if   ( (i == INDEX_CH2_AM_EN) && (Gen.CH2.CH_EN == 0))
+	    {
+	    	if (Gen.CH2.AM_EN)
+	    	{
+	    	  bmp = tft.getResBitmapID(ON_DISABLE);
+              tft.Bitmap_From_Flash_16b((i < ((max_item+1)/2)) ? 0 : 119, item_start_y + item_height * (ii % ((max_item+1)/2)), &bmp);
+	    	}
+	    	else
+	    	{
+	    	  bmp = tft.getResBitmapID(OFF_DISABLE);
+              tft.Bitmap_From_Flash_16b((i < ((max_item+1)/2)) ? 0 : 119, item_start_y + item_height * (ii % ((max_item+1)/2)), &bmp);
+	    	}
+	    }
+
+	    if   ( (i == INDEX_CH2_FM_EN) && (Gen.CH2.CH_EN == 0))
+	    {
+	    	if (Gen.CH2.FM_EN)
+	    	{
+	    	  bmp = tft.getResBitmapID(ON_DISABLE);
+              tft.Bitmap_From_Flash_16b((i < ((max_item+1)/2)) ? 0 : 119, item_start_y + item_height * (ii % ((max_item+1)/2)), &bmp);
+	    	}
+	    	else
+	    	{
+	    	  bmp = tft.getResBitmapID(OFF_DISABLE);
+              tft.Bitmap_From_Flash_16b((i < ((max_item+1)/2)) ? 0 : 119, item_start_y + item_height * (ii % ((max_item+1)/2)), &bmp);
+	    	}
+	    }
+
+
 
 
    }
