@@ -159,7 +159,7 @@ void PAGE_Background_Board(void) {
 void PAGE_Menu2(menu_typedef *menu, item_typedef *item,
 		int NUM) {
 
-	//Gen.pause();
+	Gen.pause();
 
 	tft.Font_Smooth_Load(menu->font);
 
