@@ -200,7 +200,9 @@ void PAGE_generator_select_modulation(void)
     //menu.title = NULL;
     menu.postCallBackFunc = &postPageSelectModulation; //Рисовалка
     menu.count_item = Dir_File_Info[0].maxFileCount+1;
-    menu.ColorBackground = palitra_COLOR_BACKGROUND;
+    menu.ColorBackground = tft.RGB565(8, 8, 8);
+
+    menu.field.verticalScroll = 1;
 
 
     temp_item = &item[0];
@@ -211,14 +213,6 @@ void PAGE_generator_select_modulation(void)
     PAGE_Menu( &menu,  &item[0], Dir_File_Info[0].maxFileCount+1);
 
     tft.Font_Smooth_Load(menu_generator.font);
-
-#ifdef USE_CLI
-    if (menu_generator.index <12)
-    	sendStructCHtoHost(0);
-    else
-    	sendStructCHtoHost(1);
-#endif
-
 
 }
 

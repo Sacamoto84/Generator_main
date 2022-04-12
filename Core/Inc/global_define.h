@@ -27,12 +27,6 @@
 #define COLOR_RECTAGLE       tft.RGB565(255, 140, 50)   // Текст выделенной строки         103
 #define COLOR_BACKGROUND     tft.RGB565(0, 0, 7)        //tft.RGB565(0, 7, 43)   // Фон    104
 
-#define palitra_COLOR_TEXT_DEFAULT   palitra[100]  //Цвет текста по умолчанию         100
-#define palitra_COLOR_TEXT_SELECT    palitra[101]         //Цвет текста выбранной строки     101
-#define palitra_COLOR_TEXT_DISABLE   palitra[102]   // Текст отключенного текста       102
-#define palitra_COLOR_RECTAGLE       palitra[103]    // Текст выделенной строки         103
-#define palitra_COLOR_BACKGROUND     palitra[104]         //tft.RGB565(0, 7, 43)   // Фон    104
-
 //ID Ресурсов
 #define Roboto_Medium_en_ru_30 (uint8_t *)(tft.getResAdressFontID(0))
 #define Roboto_Medium_en_ru_18 (uint8_t *)(tft.getResAdressFontID(1))
@@ -107,7 +101,7 @@
 
 //////////////////////////////////
 extern TFT tft CCMRAM ;
-extern uint16_t palitra[256] CCMRAM;
+
 extern GENERATOR Gen CCMRAM;
 
 
@@ -155,7 +149,7 @@ typedef struct    //
    int32_t text_color = -1; //Цвет текста -1 использовать значения по умолчанию
 
  } item_typedef;
-
+//////////////////////////////////////////////
  /*********************************/
 
  typedef struct
@@ -213,10 +207,10 @@ typedef struct    //
 		   if (items[i].text_color != -1)
 			   tft.Font_Smooth_drawStr(9 - 1 + item_text_delta_x, 8 + item_height * (ii % item_count) - 1 + item_start_y + item_text_delta_y, items[i].text, (uint16_t) items[i].text_color);
 		   else
-			   tft.Font_Smooth_drawStr(9 - 1 + item_text_delta_x, 8 + item_height * (ii % item_count) - 1 + item_start_y + item_text_delta_y, items[i].text, (i == index) ? palitra_COLOR_TEXT_SELECT : palitra_COLOR_TEXT_DEFAULT);
+			   tft.Font_Smooth_drawStr(9 - 1 + item_text_delta_x, 8 + item_height * (ii % item_count) - 1 + item_start_y + item_text_delta_y, items[i].text, (i == index) ? COLOR_TEXT_SELECT : COLOR_TEXT_DEFAULT);
 	   }
 	   else
-		   tft.Font_Smooth_drawStr(9 - 1 + item_text_delta_x, 8 + item_height * (ii % item_count) - 1 + item_start_y + item_text_delta_y, items[i].text, palitra_COLOR_TEXT_DISABLE); //COLOR_TEXT_DISABLE
+		   tft.Font_Smooth_drawStr(9 - 1 + item_text_delta_x, 8 + item_height * (ii % item_count) - 1 + item_start_y + item_text_delta_y, items[i].text, COLOR_TEXT_DISABLE); //COLOR_TEXT_DISABLE
 
    }
 
@@ -225,7 +219,7 @@ typedef struct    //
 	    //33us -Of GenOn На выделенном
 	    if (i == index)
 	    {
-	    	tft.RectangleFilled( (i < ((max_item+1)/2)) ? 0 : 119 , item_start_y + item_height * (ii % ((max_item+1)/2)), 119, item_height, palitra_COLOR_RECTAGLE);
+	    	tft.RectangleFilled( (i < ((max_item+1)/2)) ? 0 : 119 , item_start_y + item_height * (ii % ((max_item+1)/2)), 119, item_height, COLOR_RECTAGLE);
 	    	tft.uTFT.GetColor = 1;
 	    }
 	    else
@@ -338,17 +332,15 @@ typedef struct    //
 		   if (items[i].text_color != -1)
 			   tft.Font_Smooth_drawStr( (i < ((max_item+1)/2)) ? 0 : 119  + item_text_delta_x, 8 + item_height * (ii % item_count) - 1 + item_start_y + item_text_delta_y, items[i].text, (uint16_t) items[i].text_color);
 		   else
-			   tft.Font_Smooth_drawStr( (i < ((max_item+1)/2)) ? 0 : 119  + item_text_delta_x, 8 + item_height * (ii % item_count) - 1 + item_start_y + item_text_delta_y, items[i].text, (i == index) ? palitra_COLOR_TEXT_SELECT : palitra_COLOR_TEXT_DEFAULT);
+			   tft.Font_Smooth_drawStr( (i < ((max_item+1)/2)) ? 0 : 119  + item_text_delta_x, 8 + item_height * (ii % item_count) - 1 + item_start_y + item_text_delta_y, items[i].text, (i == index) ? COLOR_TEXT_SELECT : COLOR_TEXT_DEFAULT);
 	   }
 	   else
-		   tft.Font_Smooth_drawStr( (i < ((max_item+1)/2)) ? 0 : 119  + item_text_delta_x, 8 + item_height * (ii % item_count) - 1 + item_start_y + item_text_delta_y, items[i].text, palitra_COLOR_TEXT_DISABLE); //COLOR_TEXT_DISABLE
+		   tft.Font_Smooth_drawStr( (i < ((max_item+1)/2)) ? 0 : 119  + item_text_delta_x, 8 + item_height * (ii % item_count) - 1 + item_start_y + item_text_delta_y, items[i].text, COLOR_TEXT_DISABLE); //COLOR_TEXT_DISABLE
 
 	    static Bitmap bmp = {0};
 
 	    if (items[i].gif_init_state) //Если есть источник данных
 	    {
-
-
 	    	uint8_t* p;
 			p = items[i].gif_init_state;
 
@@ -364,7 +356,6 @@ typedef struct    //
                    	  case 24: tft.Bitmap_From_Flash_24b((i < ((max_item+1)/2)) ? 0 : 119, item_start_y + item_height * (ii % ((max_item+1)/2)), &bmp);	break;
                       case 16: tft.Bitmap_From_Flash_16b((i < ((max_item+1)/2)) ? 0 : 119, item_start_y + item_height * (ii % ((max_item+1)/2)), &bmp);	break;
                    }
-
 	    		}
 	    	}
 	    	else
@@ -383,8 +374,6 @@ typedef struct    //
 	    		}
 	    	}
 	    }
-
-
 
 	    if   ( (i == INDEX_CH1_AM_EN) && (Gen.CH1.CH_EN == 0))
 	    {
@@ -442,9 +431,6 @@ typedef struct    //
 	    	}
 	    }
 
-
-
-
    }
 
 
@@ -466,11 +452,11 @@ typedef struct    //
 
  extern menu_typedef menu_generator;
  extern menu_typedef menu_setting;
- extern menu_typedef menu_palitra;
+
 
  extern item_typedef item_setting[]   CCMRAM;
  extern item_typedef item_generator[] CCMRAM;
- extern item_typedef item_palitra[]   CCMRAM;
+
 
 
 

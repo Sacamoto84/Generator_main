@@ -151,16 +151,6 @@ void PAGE_init_struct_generator(void)
 
 void PAGE_init_struct_setting(void) {
 
-	palitra[16] = tft.RGB565(0, 130, 200);
-	palitra[17] = tft.RGB565(1, 28, 105);
-	palitra[18] = tft.RGB565(2, 78, 153);
-	palitra[19] = tft.RGB565(2, 166, 255);
-	palitra[20] = tft.RGB565(255, 200, 11);
-	palitra[21] = tft.RGB565(5, 56, 122);
-	palitra[22] = tft.RGB565(234, 236, 255);
-	palitra[23] = tft.RGB565(15, 91, 169);
-
-	//
 	sprintf(item_setting[0].text, "Назад");
 	item_setting[0].field.exit = 1;
 
@@ -185,8 +175,8 @@ void PAGE_init_struct_setting(void) {
 	item_setting[4].callBackFunc_isClick = &PAGE_MSD; //По нажатию
 
 	//
-	sprintf(item_setting[5].text, "Палитра");
-	item_setting[5].callBackFunc_isClick = &PAGE_Palitra;
+	sprintf(item_setting[5].text, "Видео");
+	item_setting[5].callBackFunc_isClick = &PAGE_Video;
 
 
 	sprintf(item_setting[6].text, "BT Audio");
@@ -213,7 +203,7 @@ void PAGE_init_struct_setting(void) {
 	menu_setting.field.verticalScroll = 1; //Включит скролл
 	menu_setting.items = item_setting;
 
-	menu_setting.ColorBackground = palitra_COLOR_BACKGROUND; //Фон
+	menu_setting.ColorBackground = COLOR_BACKGROUND; //Фон
 }
 
 
@@ -221,64 +211,6 @@ void PAGE_init_struct_setting(void) {
 void PAGE_Setting(void)
 {
   PAGE_Menu(&menu_setting , &item_setting[0], 8);
-}
-
-
-menu_typedef menu_palitra;
-item_typedef item_palitra[4] CCMRAM;
-
-void PAGE_init_struct_palitra(void) {
-
-	//
-	sprintf(item_setting[0].text, "Назад");
-	item_setting[0].field.exit = 1;
-
-    //
-	sprintf(item_setting[1].text, "Сохранить");
-	//page_item_setting[1].bmp = &bmpSave13232;
-	item_setting[1].nameGif = (char*)"save";
-	item_setting[1].gif_trigger = ONCE;
-	item_setting[1].gif_x = 170;
-	item_setting[1].callBackFunc_isClick = &setting_save_click;
-
-
-    //
-	sprintf(item_setting[2].text, "Загрузить");
-	//page_item_setting[2].bmp = &bmpProgram3232;
-
-    //
-	sprintf(item_setting[3].text, "Яркость");
-
-	//
-	sprintf(item_setting[4].text, "USB MSD");
-	item_setting[4].callBackFunc_isClick = &PAGE_MSD; //По нажатию
-
-	//
-	sprintf(item_setting[5].text, "Палитра");
-	item_setting[5].callBackFunc_isClick = &PAGE_Palitra;
-
-
-	sprintf(item_setting[6].text, "BT Audio");
-	item_setting[6].callBackFunc_isClick = &PAGE_BT_Audio;
-
-
-	sprintf(item_setting[7].text, "Wiget");
-	item_setting[7].callBackFunc_isClick = &PAGE_Volume;
-
-
-	for(int i = 0; i < 8 ; i++)
-	{
-		item_setting[i].text_color = -1;
-	}
-
-	//Описание как рендерить меню
-	menu_setting.item_count   = 6;
-	menu_setting.item_height  = 40;
-	menu_setting.item_start_y = 0;
-	menu_setting.font = Roboto_Medium_en_ru_30; //&_acRoboto_Medium_en_ru_30[0];
-	menu_setting.field.verticalScroll = 1; //Включит скролл
-	menu_setting.items = item_setting;
-	menu_setting.ColorBackground = palitra_COLOR_BACKGROUND; //Фон
 }
 
 

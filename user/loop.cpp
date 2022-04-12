@@ -9,14 +9,6 @@
 
 #include "TimesNRCyr16.h"
 #include "IniFile.h"
-#include "BLE_Commands.h"
-
-#include "usart.h"
-
-extern void PAGE_Palitra0_15(void);
-extern void taskCLI_setup(void);
-
-char str[256] CCMRAM;
 
 void illegal_instruction_execution(void) {
 	void (*func_name) (void);
@@ -30,13 +22,6 @@ void setup(void) {
 
 	TimerDWT.init();
 	TimerT5.init(&htim5);
-
-#ifdef USE_CLI
-	  taskCLI_setup();
-
-	  USART3->CR1 |=  USART_CR1_RXNEIE; //Interupt RX
-	  USART3->CR3 |=  USART_CR3_DMAT;
-#endif
 
 	HAL_Delay(1000);
 
@@ -52,21 +37,16 @@ void setup(void) {
 
 	tft.ST77XX_Update_MADCTL();
 
+	tft.video_play((char*)"intro.raw", 20);
+	tft.video_play((char*)"intro.raw", 20);
+
 #ifdef USE_GEN
 	Gen.Init();//Инициализация генератора
 #endif
 
-	PAGE_init_palitra();
-
 	gfxfont.init(&tft);
 
 	tft.setResStartAdress(0x08020000); //Установим начало ресурсов
-
-
-
-
-
-
 
 	//gfxfont.setFont(&FreeMonoBold12pt7b);
 	//gfxfont.setFont(&FreeSansBold12pt7b);

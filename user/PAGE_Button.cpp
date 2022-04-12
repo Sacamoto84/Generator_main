@@ -226,9 +226,6 @@ void PAGE_Menu2(menu_typedef *menu, item_typedef *item,
 		menu->index = index;
 		menu->max_item = max_imem - 1;
 
-
-
-
 		if(menu->field.needRender)
 		{
 			//TimerDWT.Start();
@@ -260,6 +257,7 @@ void PAGE_Menu2(menu_typedef *menu, item_typedef *item,
 				func_name = item[index].callBackFunc_isHolded;
 				func_name();
 				tft.needUpdate = 1;
+				menu->field.needRender  = 1;
 				tft.Font_Smooth_Load(menu->font);
 			}
 		}
@@ -272,8 +270,6 @@ void PAGE_Menu2(menu_typedef *menu, item_typedef *item,
 			}
 		}
 
-
-
 		if (KEY.isClick()) {
 
 			KEY.isHolded();
@@ -285,12 +281,8 @@ void PAGE_Menu2(menu_typedef *menu, item_typedef *item,
 					func_name = item[index].callBackFunc_isClick;
 					func_name();
 					menu->field.needUpdate = 1; //При выходе из события обновляем экран
-				}
-			}
 
-			if (item[index].field.exit)
-			{
-				menu->field.needRender  = 1;
+				}
 			}
 
 			tft.needUpdate = 1; //При выходе из события обновляем экран
@@ -399,6 +391,9 @@ void PAGE_Menu(menu_typedef *menu, item_typedef *item,
 
 	menu->field.needUpdate = 1;
 
+
+	tft.uTFT.GetColor = 1;
+
 	while (1) {
 
 		KEY.tick();
@@ -490,7 +485,7 @@ void PAGE_Menu(menu_typedef *menu, item_typedef *item,
 	    	//B[i].setY(StartY + H * (menu->ii % menu->item_count));
 	    	//B[i].run();  //116 us -Of Gen on
 
-	    	if (i == menu->index) tft.RectangleFilled(0, StartY + H * (menu->ii % menu->item_count), 239, H, palitra_COLOR_RECTAGLE);
+	    	if (i == menu->index) tft.RectangleFilled(0, StartY + H * (menu->ii % menu->item_count), 239, H, COLOR_RECTAGLE);
 
 
             menu->run(i);

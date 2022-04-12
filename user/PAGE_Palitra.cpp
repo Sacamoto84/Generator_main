@@ -4,91 +4,109 @@
 
 #include "stdio.h"
 
-#define pColor_0  tft.RGB565(158,158,158)    // ��� �������, ���������
-#define pColor_1  tft.RGB565(77,85,74)       // ��� �������� ������ ���
-#define pColor_2  tft.RGB565(148,165,142)    // ������� ��� ��������� ������
-#define pColor_3  tft.RGB565(208,231,199)    // ������� ����� ��������� ������� ������
-#define pColor_4  tft.RGB565(89,99,85)       // ������ ����� ��������� ������� ������
-#define pColor_5  tft.RGB565(166,170,165)    // ������� ����� ��������� ������ ������
-#define pColor_6  tft.RGB565(46,51,44)       // ������ ����� ��������� ������ ������
-#define pColor_7  tft.RGB565(16,16,16)
-#define pColor_8  0
-#define pColor_9  tft.RGB565(209,209,209)
-#define pColor_10 COLOR_DARKCYAN
-#define pColor_11 tft.RGB565(255,0,0)
-#define pColor_12 tft.RGB565(0,255,0)
-#define pColor_13 tft.RGB565(0,0,255)
-#define pColor14_WHITE tft.RGB565(255,255,255)    // WHITE
-#define pColor15_BLACK tft.RGB565(0,0,0)          // BLACK
+ typedef struct
+ {
+   char text [20];
+ } item_files;
 
-uint16_t palitra[256];
 
-void PAGE_init_palitra(void) {
-	palitra[0] = pColor_0;
-	palitra[1] = pColor_1;
-	palitra[2] = pColor_2;
-	palitra[3] = pColor_3;
-	palitra[4] = pColor_4;
-	palitra[5] = pColor_5;
-	palitra[6] = pColor_6;
-	palitra[7] = pColor_7;
-	palitra[8] = pColor_8;
-	palitra[9] = pColor_9;
-	palitra[10] = pColor_10;
-	palitra[11] = pColor_11;
-	palitra[12] = pColor_12;
-	palitra[13] = pColor_13;
-	palitra[14] = pColor14_WHITE;
-	palitra[15] = pColor15_BLACK;
+ uint32_t callback_video_stop(uint32_t i)
+ {
+	 KEY.tick();
+	 if (KEY.isClick())
+	 {
+		tft.video_stop = 1;
+		return 1;
+	 }
 
-	palitra_COLOR_TEXT_DEFAULT = COLOR_TEXT_DEFAULT; //Цвет текста по умолчанию         100
-	palitra_COLOR_TEXT_SELECT  = COLOR_TEXT_SELECT;  //Цвет текста выбранной строки     101
-	palitra_COLOR_TEXT_DISABLE = COLOR_TEXT_DISABLE;
-	palitra_COLOR_RECTAGLE     = COLOR_RECTAGLE;     //Текст выделенной строки         102
-	palitra_COLOR_BACKGROUND   = COLOR_BACKGROUND;   // Фон    103
+	 return 0;
+ }
 
-}
 
-void PAGE_Palitra(void) {
-	palitra[255] = tft.RGB565(128, 128, 128);
-	tft.SetColor(palitra[255]);
-	//gfxfont.set_delta_x(2);
-	char str[8];
-	int start;
-	start = 0;
+void PAGE_Video(void) {
+	    static FRESULT res;
+	    DIR dir;
+	    FILINFO fno;
+	    Dir_File_Info[0].maxFileCount = 0;
+	    memset(&Dir_File_Info, 0, sizeof(Dir_File_Info_Array)*50);
+	    res = f_opendir(&dir, (char*)"/video");                       /* Open the directory */
+	    if (res == FR_OK) {
+	        for (;;) {
+				res = f_readdir(&dir, &fno);                   /* Read a directory item */
+				if (res != FR_OK || fno.fname[0] == 0) break;  /* Break on error or end of dir */
+				sprintf(Dir_File_Info[Dir_File_Info[0].maxFileCount++].Name,"%s", fno.fname);
+	        }
+	        f_closedir(&dir);
+	    }
+
+	int count;
+	count = Dir_File_Info[0].maxFileCount;
+
+	int window_start = 0;
+	int window_end;
+	int index = 0;
+	int max_item = count;
+
+	int window_item_count = 6 - 1; //6 реальных
+	window_start = 0;
+	window_end = (count >= window_item_count) ? window_item_count : count;
+
+	uint32_t H = 40;
+	uint32_t StartY = 0;
+
+	tft.uTFT.GetColor = 1;
+	tft.videoCallBackFunc = &callback_video_stop;
+
 	while (1) {
-
 		KEY.tick();
 
-		if (Encoder.Left) {
-			Encoder.Left = 0;
-			start -= 16;
-			if (start < 0)
-				start = 240;
-		}
-
-		if (Encoder.Right) {
-			Encoder.Right = 0;
-			start += 16;
-			if (start > 255) {
-				start = 0;
+			if (Encoder.Left) {
+				Encoder.Left = 0;
+				index--;
+				if (index < 0)
+					index = 0;
+				if (index < window_start) {
+					window_start = index;
+					window_end = window_start + window_item_count;
+				}
 			}
-		}
 
-		//tft.Fill(palitra[7]);
+			if (Encoder.Right) {
+				Encoder.Right = 0;
+				index++;
+				if (index >= count)
+					index = count - 1;
+				if (index > window_end) {
+					window_end = index;
+					window_start = window_end - window_item_count;
+				}
+			}
 
-		int max = 16 + start;
-		for (int i = start; i < max; i++) {
-			tft.RectangleFilled(60 * (i % 4), 60 * ((i % 16) / 4), 59, 59,
-					palitra[i]);
-			sprintf(str, "%d", i);
-			gfxfont.Puts(60 * (i % 4) + 2, 60 * ((i % 16) / 4) + 22, str);
-		}
+			tft.Fill(COLOR_BACKGROUND); //Фон
 
-		if (KEY.isClick())
+			int ii = 0;
+		    for (int i = window_start; i <= window_end; i++) {
+				if (i == index)	tft.RectangleFilled(0, StartY + H * (ii % 6), 239, H, COLOR_RECTAGLE);
+				tft.Font_Smooth_drawStr(10, 8 + 40 * (ii % 6), Dir_File_Info[i].Name , (i == index)? tft.RGB565(8, 8, 8) : tft.RGB565(128, 128, 128));
+			    ii++;
+			}
+
+		    tft.ST7789_UpdateDMA16bitV3();
+
+		    if (KEY.isClick()) {
+             char str[32];
+             sprintf(str, "/video/%s",  Dir_File_Info[index].Name);
+             KEY.isClick();
+             tft.video_stop = 0;
+              while(tft.video_stop == 0)
+              {
+            	tft.video_play(str, 0);
+              }
+            }
+
+		if (KEY.isHolded())
 			return;
 
-		tft.ST7789_Update();
 	}
 
 }
