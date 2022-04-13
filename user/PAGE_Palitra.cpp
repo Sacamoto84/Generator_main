@@ -12,8 +12,9 @@
 
  uint32_t callback_video_stop(uint32_t i)
  {
+	 KEY.isRelease();
 	 KEY.tick();
-	 if (KEY.isClick())
+	 if (KEY.isRelease())
 	 {
 		tft.video_stop = 1;
 		return 1;
@@ -24,6 +25,7 @@
 
 
 void PAGE_Video(void) {
+	    char str [32];
 	    static FRESULT res;
 	    DIR dir;
 	    FILINFO fno;
@@ -34,7 +36,12 @@ void PAGE_Video(void) {
 	        for (;;) {
 				res = f_readdir(&dir, &fno);                   /* Read a directory item */
 				if (res != FR_OK || fno.fname[0] == 0) break;  /* Break on error or end of dir */
-				sprintf(Dir_File_Info[Dir_File_Info[0].maxFileCount++].Name,"%s", fno.fname);
+				   if (strstr (fno.fname, "rawi") == NULL)
+				   {
+					   memset(str, 0, 32);
+					   strncpy (str, fno.fname, strlen(fno.fname) - 4);
+					   sprintf(Dir_File_Info[Dir_File_Info[0].maxFileCount++].Name,"%s", str);
+				   }
 	        }
 	        f_closedir(&dir);
 	    }
@@ -94,14 +101,28 @@ void PAGE_Video(void) {
 		    tft.ST7789_UpdateDMA16bitV3();
 
 		    if (KEY.isClick()) {
-             char str[32];
-             sprintf(str, "/video/%s",  Dir_File_Info[index].Name);
-             KEY.isClick();
-             tft.video_stop = 0;
+
+             int time = 0;
+             sprintf(str, "/video/%s.rawi",  Dir_File_Info[index].Name);
+             res = f_open(&SDFile, str, FA_READ );
+             if (res == FR_OK)
+             {
+            	SEGGER_RTT_printf(0, "res == FR_OK\n");
+            	UINT * br;
+            	*br = 0;
+            	res = f_read (&SDFile, &str, 16, br);
+            	if (res == FR_OK)
+            	   time =  atoi(str);
+             }
+             f_close(&SDFile);
+             sprintf(str, "/video/%s.raw",  Dir_File_Info[index].Name);
+
+              tft.video_stop = 0;
               while(tft.video_stop == 0)
               {
-            	tft.video_play(str, 0);
+            	tft.video_play(str, time);
               }
+              KEY.isClick();
             }
 
 		if (KEY.isHolded())
