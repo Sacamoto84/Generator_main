@@ -11,7 +11,7 @@ GButton KEY(ENTER_GPIO_Port, ENTER_Pin);
 uint8_t u8Volume;
 float    fVolume;
 
-Dir_File_Info_Array Dir_File_Info[50] CCMRAM; //Массив всех файлов в папке
+Dir_File_Info_Array Dir_File_Info[32] CCMRAM; //Массив всех файлов в папке
 
 TFT tft CCMRAM;
 

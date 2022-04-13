@@ -104,9 +104,6 @@ extern TFT tft CCMRAM ;
 
 extern GENERATOR Gen CCMRAM;
 
-
-
-
 ///////////////
 //  typedef  //
 ///////////////
@@ -432,53 +429,40 @@ typedef struct    //
 	    }
 
    }
-
-
  } menu_typedef;
 
  /*********************************/
 
- //Создается для каждого файла в папке
- typedef struct
- {
- 	char  Name[16];    //Имя файла
- 	uint8_t  maxFileCount = 0;
- } Dir_File_Info_Array;
+//Создается для каждого файла в папке
+typedef struct
+{
+ char  Name[16];    //Имя файла
+ uint8_t  maxFileCount = 0;
+} Dir_File_Info_Array;
 
+///////////////
+//  extern
+//////////////
+extern menu_typedef menu_generator;
+extern menu_typedef menu_setting;
 
- ///////////////
- //  extern
- //////////////
-
- extern menu_typedef menu_generator;
- extern menu_typedef menu_setting;
-
-
- extern item_typedef item_setting[]   CCMRAM;
- extern item_typedef item_generator[] CCMRAM;
-
-
-
+extern item_typedef item_setting[]   CCMRAM;
+extern item_typedef item_generator[] CCMRAM;
 
 extern HiSpeedDWT TimerDWT;
 extern HiSpeedDWT TimerT5;
 
 extern Encoder_typedef Encoder;
-
 extern TIM_HandleTypeDef htim2;
-
-
 
 extern GButton KEY;
 
-extern uint8_t u8Volume;
+extern uint8_t  u8Volume;
 extern float    fVolume;
 
 extern uTFT_LCD_t LCD_0;
 
-
-
-extern Dir_File_Info_Array Dir_File_Info[50] CCMRAM; //Массив всех файлов в папке
+extern Dir_File_Info_Array Dir_File_Info[] CCMRAM; //Массив всех файлов в папке
 
 //Сформировать и отправить текущие настройки
 extern void sendStructCHtoHost(unsigned int ch);
