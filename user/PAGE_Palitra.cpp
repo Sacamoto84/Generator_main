@@ -149,7 +149,7 @@ void PAGE_Video(void) {
              res = f_open(&SDFile, str, FA_READ );
              if (res == FR_OK)
              {
-            	SEGGER_RTT_printf(0, "res == FR_OK\n");
+            	SEGGER_RTT_printf(0, "res == FR_OK\r\n");
             	UINT * br;
             	*br = 0;
             	res = f_read (&SDFile, &str, 16, br);

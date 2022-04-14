@@ -139,27 +139,20 @@ int main(void)
 	//SEGGER_SYSVIEW_Start();
 	//SEGGER_SYSVIEW_Print("Start");
 
-	//while(1);
-
-
-	//ADC
-	//HAL_ADC_Start_IT(&hadc1);
-	//HAL_ADC_Start_IT(&hadc2);
-	//HAL_TIM_Base_Start(&htim3);
-
 	res = f_mount(&SDFatFS, SDPath, 1);       //Mount MicroSd
 
-	SEGGER_RTT_WriteString(0, RTT_CTRL_RESET);
+	SEGGER_RTT_WriteString(0, "\r\n\033[01;03;38;05;226;48;05;24m");
+	SEGGER_RTT_WriteString(0, "Start");
+	SEGGER_RTT_WriteString(0, "\x1B[0m\r\n");
 
-	SEGGER_RTT_WriteString(0, "Start\n");
 
 	if (f_open(&SDFile, "b1.bmp", FA_OPEN_EXISTING | FA_READ)
 			== FR_OK) {
-		SEGGER_RTT_WriteString(0, " test f_open == OK\n");
+		SEGGER_RTT_WriteString(0, "Тест f_open == OK\r\n");
 		f_close(&SDFile);
 
 	} else {
-		SEGGER_RTT_WriteString(0, "test f_open == ERROR\n");
+		SEGGER_RTT_WriteString(0, "Тест f_open == ERROR\r\n");
 	}
 
 	//ESP_ON;

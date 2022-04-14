@@ -11,7 +11,7 @@ void PAGE_Volume(void)
 {
 	int i = 0;
 
-    SEGGER_RTT_WriteString(0, "Wiget\n");
+    SEGGER_RTT_WriteString(0, "Wiget\r\n");
 
     TFT_gif gif;
     gif.init(&tft);

@@ -46,7 +46,7 @@ void generator_pre_CH1_FR(uint32_t index) {
 		///////////////////////////////////////
 		if (index == INDEX_CH1_FR) //CH1 Carrier Fr
 		{
-			SEGGER_RTT_WriteString(0, "index == INDEX_CH1_FR\n");
+			SEGGER_RTT_WriteString(0, "index == INDEX_CH1_FR\r\n");
 
 			temp = Gen.CH1.Carrier_fr;
 			if (Encoder.Left) {
@@ -55,7 +55,7 @@ void generator_pre_CH1_FR(uint32_t index) {
 				if (temp < 200)
 					temp = 200;
 				Gen.CH1.Carrier_fr = temp;
-				SEGGER_RTT_WriteString(0, "Left\n");
+				SEGGER_RTT_WriteString(0, "Left\r\n");
 			}
 
 			if (Encoder.Right) {
@@ -64,7 +64,7 @@ void generator_pre_CH1_FR(uint32_t index) {
 				if (temp > 10000)
 					temp = 10000;
 				Gen.CH1.Carrier_fr = temp;
-				SEGGER_RTT_WriteString(0, "Right\n");
+				SEGGER_RTT_WriteString(0, "Right\r\n");
 			}
 			sprintf(item_generator[INDEX_CH1_FR].text, "* %d *",
 					Gen.CH1.Carrier_fr);

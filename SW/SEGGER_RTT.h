@@ -415,6 +415,8 @@ int SEGGER_RTT_vprintf(unsigned BufferIndex, const char * sFormat, va_list * pPa
 #define RTT_CTRL_BG_BRIGHT_WHITE      "\x1B[4;47m"
 
 
+#define RTT_TEST  "\033[04;38;05;226;48;05;24m"
+
 #endif
 
 /*************************** End of file ****************************/

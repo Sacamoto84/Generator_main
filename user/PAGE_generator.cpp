@@ -96,12 +96,12 @@ void postPageSelectModulation(void)
 
 	//Открывам файл
 	if (f_open(&SDFile, filename, FA_OPEN_EXISTING | FA_READ) == FR_OK) {
-			SEGGER_RTT_printf(0, ">Open OK %s\n", filename);
+			SEGGER_RTT_printf(0, ">Open OK %s\r\n", filename);
 			f_read(&SDFile, &Gen.buffer_temp, 2048, &testByte);
 			f_close(&SDFile);
 		} else
 		{
-			SEGGER_RTT_printf(0, ">Open Error %s\n", filename);
+			SEGGER_RTT_printf(0, ">Open Error %s\r\n", filename);
 			return;
 		}
 
