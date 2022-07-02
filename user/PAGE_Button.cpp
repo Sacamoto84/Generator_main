@@ -2,7 +2,7 @@
 #include "global_define.h"
 
 #include "SEGGER.h"
-#include "SEGGER_SYSVIEW.h"
+//#include "SEGGER_SYSVIEW.h"
 #include "stdio.h"
 
 #include "BLE_Commands.h"
@@ -126,33 +126,33 @@ void PAGE_Button_Pressed(uint16_t x, uint16_t y, uint16_t w, uint16_t h,
 void PAGE_Background_Board(void) {
 	//
 
-	SEGGER_SYSVIEW_Warn("Fill(0)");
+	//SEGGER_SYSVIEW_Warn("Fill(0)");
 	tft.Fill(palitra[0]); //Окантовка
 
-	SEGGER_SYSVIEW_Warn("RectangleFilled");
+	//SEGGER_SYSVIEW_Warn("RectangleFilled");
 	//tft.RectangleFilled(5, 5, 229, 229, 1); //Основной фон
 	tft.RectangleFilled(5, 5, 229, 229, palitra[15]); //Основной фон
 
 	//Темное
-	SEGGER_SYSVIEW_Warn("LineH");
+	//SEGGER_SYSVIEW_Warn("LineH");
 	tft.LineH(5, 5, 234, palitra[7]);
-	SEGGER_SYSVIEW_Warn("LineH");
+	//SEGGER_SYSVIEW_Warn("LineH");
 	tft.LineH(6, 5, 234, palitra[7]);
 
-	SEGGER_SYSVIEW_Warn("LineV");
+	//SEGGER_SYSVIEW_Warn("LineV");
 	tft.LineV(5, 5, 234, palitra[7]);
-	SEGGER_SYSVIEW_Warn("LineV");
+	//SEGGER_SYSVIEW_Warn("LineV");
 	tft.LineV(6, 5, 234, palitra[7]);
 
 	//Светлое
-	SEGGER_SYSVIEW_Warn("LineH");
+	//SEGGER_SYSVIEW_Warn("LineH");
 	tft.LineH(234, 5, 234, palitra[9]);
-	SEGGER_SYSVIEW_Warn("LineH");
+	//SEGGER_SYSVIEW_Warn("LineH");
 	tft.LineH(233, 6, 234, palitra[9]);
 
-	SEGGER_SYSVIEW_Warn("LineV");
+	//SEGGER_SYSVIEW_Warn("LineV");
 	tft.LineV(233, 6, 234, palitra[9]);
-	SEGGER_SYSVIEW_Warn("LineV");
+	//SEGGER_SYSVIEW_Warn("LineV");
 	tft.LineV(234, 5, 234, palitra[9]); //uTFT_VLine(234 , 5, 234, RGB565(186,207,178));
 }
 

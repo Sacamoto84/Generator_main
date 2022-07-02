@@ -134,7 +134,7 @@ extern "C" void main_cpp(void) {
 
 extern "C" void DMA1_Stream5_IRQHandler(void)
 {
-	SEGGER_SYSVIEW_RecordEnterISR(); //SEGGER SW
+	//SEGGER_SYSVIEW_RecordEnterISR(); //SEGGER SW
 
 #ifdef USE_GEN
 	//Other_Run_Tick = TimerT5.End(); //Получаем время работы без тиков
@@ -164,7 +164,7 @@ extern "C" void DMA1_Stream5_IRQHandler(void)
 
 #endif
 
-	SEGGER_SYSVIEW_RecordExitISR(); //SEGGER SW
+	//SEGGER_SYSVIEW_RecordExitISR(); //SEGGER SW
 }
 
 

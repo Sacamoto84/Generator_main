@@ -5,7 +5,6 @@ Encoder_typedef Encoder;
 //Правый энкодер
 extern "C" void TIM2_IRQHandler(void)
 {
-
 	if (TIM2->CR1 & TIM_CR1_DIR)
 	{  
 	  Encoder.Right = 1;

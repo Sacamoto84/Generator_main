@@ -35,7 +35,7 @@
 #include "SEGGER.h"
 #include "SEGGER_RTT.h"
 #include "SEGGER_RTT_Conf.h"
-#include "SEGGER_SYSVIEW.h"
+//#include "SEGGER_SYSVIEW.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -116,7 +116,6 @@ int main(void)
   MX_TIM2_Init();
   MX_TIM6_Init();
   //MX_USART3_UART_Init();
-  //MX_DMA_Init();
   MX_TIM3_Init();
   MX_FATFS_Init();
   MX_TIM5_Init();
@@ -142,8 +141,25 @@ int main(void)
 	res = f_mount(&SDFatFS, SDPath, 1);       //Mount MicroSd
 
 	SEGGER_RTT_WriteString(0, "\r\n\033[01;03;38;05;226;48;05;24m");
-	SEGGER_RTT_WriteString(0, "Start");
-	SEGGER_RTT_WriteString(0, "\x1B[0m\r\n");
+	SEGGER_RTT_WriteString(0, "Start\x1B[0m\r\n");
+
+	SEGGER_RTT_WriteString(0, "\r\n\033[01;38;05;226;48;05;24m");
+	SEGGER_RTT_WriteString(0, "Start\x1B[0m\r\n");
+
+	SEGGER_RTT_WriteString(0, "\r\n\033[03;38;05;226;48;05;24m");
+	SEGGER_RTT_WriteString(0, "Start\x1B[0m\r\n");
+
+	SEGGER_RTT_WriteString(0, "\r\n\033[04;38;05;226;48;05;24m");
+	SEGGER_RTT_WriteString(0, "Start\x1B[0m\r\n");
+
+	SEGGER_RTT_WriteString(0, "\r\n\033[03;38;05;226;48;05;24m");
+	SEGGER_RTT_WriteString(0, "Start\x1B[0m\r\n");
+
+	SEGGER_RTT_WriteString(0, "\r\n\033[03;07;38;05;226;48;05;24m");
+	SEGGER_RTT_WriteString(0, "Start\x1B[0m\r\n");
+
+	SEGGER_RTT_WriteString(0, "\r\n\033[03;07;08;38;05;226;48;05;24m");
+	SEGGER_RTT_WriteString(0, "Start\x1B[0m\r\n");
 
 
 	if (f_open(&SDFile, "b1.bmp", FA_OPEN_EXISTING | FA_READ)

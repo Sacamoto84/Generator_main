@@ -2,7 +2,7 @@
 #include "global_define.h"
 
 #include "SEGGER.h"
-#include "SEGGER_SYSVIEW.h"
+//#include "SEGGER_SYSVIEW.h"
 #include "stdio.h"
 
 void PAGE_Setting(void);

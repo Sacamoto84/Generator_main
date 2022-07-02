@@ -1,10 +1,3 @@
-/*
- * PAGE_BT_Audio.cpp
- *
- *  Created on: 15 февр. 2022 г.
- *      Author: Ivan
- */
-
 #include "Page.h"
 #include "global_define.h"
 #include "stdio.h"
@@ -12,8 +5,9 @@
 
 #include "TFT_gif.h"
 
-
 void PAGE_BT_Audio(void) {
+
+ //Включить реле
  HAL_GPIO_WritePin(BT_Audio_GPIO_Port, BT_Audio_Pin, GPIO_PIN_SET);
 
  TFT_gif gif;
@@ -22,17 +16,11 @@ void PAGE_BT_Audio(void) {
 
  gif.setDelay(0);
 
-
-
  TFT_gif gif2;
  gif2.init(&tft);
  gif2.setName((char *)"Q1");
-
  gif2.setDelay(0);
-
-
  gif2.setXY(120, 120);
-
 
  Gen.pause(); //Останавливаем таймер6
 
@@ -50,10 +38,7 @@ void PAGE_BT_Audio(void) {
 		return;
 	}
 
-
-
    tft.Fill(BLUE);
-
    tft.Font_Smooth_drawStr(30, 100, "BT Audio");
 
    gif.run();

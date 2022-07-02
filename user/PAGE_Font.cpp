@@ -16,8 +16,3 @@ void PAGE_Font(void)
 
 	}
 }
-
-
-
-
-
