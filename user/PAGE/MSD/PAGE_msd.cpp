@@ -22,7 +22,7 @@ void Go_To_User_App(void)
 
 void PAGE_MSD(void)
 {
-	tft.Fill(BLUE);
+	tft.Fill16(BLUE);
 	tft.Font_Smooth_Load(Roboto_Medium_en_ru_30); //(&_acRoboto_Medium_en_ru_30[0]);
 	tft.Font_Smooth_drawStr(30, 100, "MSD");
 	tft.Font_Smooth_drawStr(0, 130, "Press to Reset");

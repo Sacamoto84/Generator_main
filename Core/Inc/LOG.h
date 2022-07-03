@@ -1,10 +1,3 @@
-/*
- * LOG.h
- *
- *  Created on: 27 дек. 2021 г.
- *      Author: Ivan
- */
-
 #ifndef SRC_LOG_H_
 #define SRC_LOG_H_
 

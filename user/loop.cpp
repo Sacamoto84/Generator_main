@@ -62,8 +62,6 @@ void setup(void) {
 	//gfxfont.setFont(&CourierCyr14pt8b);
 	//gfxfont.setFont(&Cooper18pt8b);
 
-
-
 	tft.SetFontColor(4, 14);
 
 	//tft.Font_Smooth_Load(&_acJetBrainsMono_Bold_en_ru_32[0]);
@@ -75,17 +73,11 @@ void setup(void) {
 
 	//tft.Font_Smooth_Load(&_acRoboto_Medium_en_ru_30[0]);
 	//tft.Font_Smooth_Load(&_acJetBrainsMono_Medium_en_ru_30[0]);
-
-
-
-
 	//HardFault_Handler();
 
 	//illegal_instruction_execution();
 
-	PAGE_Menu2( &menu_generator,  &item_generator[0], NUM_ITEM_GENERETOR);
-
-
+	PAGE_Generator();
 
 	//tft.Font_Smooth_Load(&_acJetBrainsMono_Medium_en_ru_30[0]);
 	//PAGE_Palitra0_15();

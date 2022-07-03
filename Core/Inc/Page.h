@@ -16,11 +16,9 @@ extern GFXFONT gfxfont;
 extern GFXFONT gfxfontVdd;
 
 #include "global_define.h"
-
 #include "generator.h"
 
 extern GENERATOR Gen CCMRAM;
-
 extern uint16_t palitra_0[16];
 
 void PAGE_Button(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t select, char *str);
@@ -34,6 +32,9 @@ void PAGE_Font(void);
 void PAGE_BT_Audio(void);
 
 void PAGE_Volume(void);
+
+void PAGE_Generator();
+
 //Wifi
 void PAGE_wifi(void);
 void PAGE_wifi_switch(void);
@@ -57,13 +58,6 @@ void PAGE_generator_CH2_FM_EN_switch(void);
 
 void PAGE_generator_encoder_block_switch(void);
 void PAGE_generator_select_modulation(void);
-
-
-
-
-
-
-
 
 void generator_pre_CH1_FR(uint32_t index);
 void generator_pre_CH2_FR(uint32_t index);

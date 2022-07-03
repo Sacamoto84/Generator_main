@@ -7,44 +7,52 @@
 
 void PAGE_BT_Audio(void) {
 
- //Включить реле
- HAL_GPIO_WritePin(BT_Audio_GPIO_Port, BT_Audio_Pin, GPIO_PIN_SET);
 
- TFT_gif gif;
- gif.init(&tft);
- gif.setName((char *)"BT");
+ Gen.pause();	                                                    //Отключить генератор
+ HAL_GPIO_WritePin(BT_Audio_GPIO_Port, BT_Audio_Pin, GPIO_PIN_SET); //Включить реле
 
- gif.setDelay(0);
+ //┌─────┬──────────────────────┐
+ //│ Gif │                      │
+ //└─────┴──────────────────────┤
+ TFT_gif gif;                 //│
+ gif.init(&tft);              //│
+ gif.setName((char *)"BT");   //│
+ gif.setDelay(0);             //│
+                              //│
+ TFT_gif gif2;                //│
+ gif2.init(&tft);             //│
+ gif2.setName((char *)"Q1");  //│
+ gif2.setDelay(0);            //│
+ gif2.setXY(120, 120);        //│
+ //─────────────────────────────┘
 
- TFT_gif gif2;
- gif2.init(&tft);
- gif2.setName((char *)"Q1");
- gif2.setDelay(0);
- gif2.setXY(120, 120);
-
- Gen.pause(); //Останавливаем таймер6
-
- //sprintf(str, "%d", i);
- tft.Fill(BLUE);
+ tft.Fill16(BLUE);
  tft.Font_Smooth_Load( Roboto_Medium_en_ru_30 ); //(&_acRoboto_Medium_en_ru_30[0]);
  tft.Font_Smooth_drawStr(30, 100, "BT Audio");
 
  //gfxfont.Puts(10, 22, "USB Audio");
 
  while (1) {
-	KEY.tick();
-	if (KEY.isClick()){
-		HAL_GPIO_WritePin(BT_Audio_GPIO_Port, BT_Audio_Pin, GPIO_PIN_RESET);
-		return;
-	}
 
-   tft.Fill(BLUE);
+   //──────────────────────────────────────────────────────┬───────────────────┬─────────────────────┐
+   KEY.tick();                                           //│ Выход при нажатии │                     │
+   if (KEY.isClick()){                                   //└───────────────────┤                     │
+		HAL_GPIO_WritePin(BT_Audio_GPIO_Port, BT_Audio_Pin, GPIO_PIN_RESET); //│ Отключаем реле      │
+		Gen.start();                                                         //│ Запускаем генератор │
+    	return;                                                              //│                     │
+   }                                                                         //│                     │
+   //──────────────────────────────────────────────────────────────────────────┴─────────────────────┘
+
+   tft.Fill16(BLUE); //Фон
    tft.Font_Smooth_drawStr(30, 100, "BT Audio");
 
    gif.run();
    gif2.run();
 
+   tft.ST7789_Update();
+
    tft.ST7789_Update(gif.info());
    tft.ST7789_Update(gif2.info());
+
  }
 }

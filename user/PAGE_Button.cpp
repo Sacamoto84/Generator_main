@@ -127,7 +127,7 @@ void PAGE_Background_Board(void) {
 	//
 
 	//SEGGER_SYSVIEW_Warn("Fill(0)");
-	tft.Fill(palitra[0]); //Окантовка
+	tft.Fill16(palitra[0]); //Окантовка
 
 	//SEGGER_SYSVIEW_Warn("RectangleFilled");
 	//tft.RectangleFilled(5, 5, 229, 229, 1); //Основной фон
@@ -156,154 +156,15 @@ void PAGE_Background_Board(void) {
 	tft.LineV(234, 5, 234, palitra[9]); //uTFT_VLine(234 , 5, 234, RGB565(186,207,178));
 }
 
-void PAGE_Menu2(menu_typedef *menu, item_typedef *item,
-		int NUM) {
-
-	Gen.pause();
-
-	tft.Font_Smooth_Load(menu->font);
-
-	volatile uint8_t i;
-
-	int8_t index = 0;
-
-	int max_imem;
-	int max_window_item;
-	int window_start;
-	int window_end;
-
-	max_imem = NUM; //NUM_OF(&item);
-
-	max_window_item = NUM - 1; //6 реальных
-	window_start = 0;
-	window_end = (max_imem >= max_window_item) ? max_window_item : max_imem;
-
-	void (*func_name)(void); //объявляем указатель на функцию
-
-	tft.needUpdate = 1;
-
-	menu->field.needUpdate = 1;
-	menu->field.needRender = 1;
-
-	tft.uTFT.BColor = 0;
-	tft.uTFT.GetColor = 0;
-
-	while (1) {
-
-		KEY.tick();
-
-		//tft.needUpdate = 0;
-
-
-		if (menu->preCallBackFunc) {
-			menu->index = index;
-			func_name = menu->preCallBackFunc;
-			func_name();
-		}
-
-		//Блокировка энкодера, нужно чтобы обрабатывать в пре
-		if (menu->field.encoder_block == 0) {
-			if (Encoder.Left) {
-				Encoder.Left = 0;
-				index--;
-				if (index < 0)
-					index = max_imem - 1;
-				menu->field.needUpdate = 1;
-				menu->field.needRender = 1;
-			}
-
-			if (Encoder.Right) {
-				Encoder.Right = 0;
-				index++;
-				if (index >= max_imem) index = 0;
-				menu->field.needUpdate = 1;
-				menu->field.needRender = 1;
-			}
-		}
-
-		menu->window_start = window_start;
-		menu->window_end = window_end;
-		menu->index = index;
-		menu->max_item = max_imem - 1;
-
-		if(menu->field.needRender)
-		{
-			//TimerDWT.Start();
-			menu->field.needRender = 0;
-			tft.Fill(menu->ColorBackground); //Фон
-			menu->ii = 0;
-	    	for (i = 0; i < NUM; i++) {
-            	menu->run2(i);
-            	menu->ii++;
-	    	}
-	    	//TimerDWT.Loger("menu->run2(i);");
-
-		}
-
-		if (menu->postCallBackFunc) {
-			func_name = menu->postCallBackFunc;
-			func_name();
-		}
-
-		if ((menu->field.needUpdate) || (tft.needUpdate)) {
-			menu->field.needUpdate = 0;
-			tft.needUpdate = 0;
-		    LOG((char*)"MENU",'I',(char*)"ST7789_UpdateDMA16bitV3");
-			tft.ST7789_UpdateDMA16bitV3(); //DMA8bitV2();
-		}
-
-		if (KEY.isHolded()) {
-			if (item[index].callBackFunc_isHolded) {
-				func_name = item[index].callBackFunc_isHolded;
-				func_name();
-				tft.needUpdate = 1;
-				menu->field.needRender  = 1;
-				tft.Font_Smooth_Load(menu->font);
-			}
-		}
-
-		if (KEY.isDouble()) {
-			if (item[index].callBackFunc_isDouble) {
-				func_name = item[index].callBackFunc_isDouble;
-				func_name();
-				tft.needUpdate = 1;
-			}
-		}
-
-		if (KEY.isClick()) {
-
-			KEY.isHolded();
-			KEY.isDouble();
-
-			if (item[index].field.disable == 0)
-			{
-				if (item[index].callBackFunc_isClick) {
-					func_name = item[index].callBackFunc_isClick;
-					func_name();
-					menu->field.needUpdate = 1; //При выходе из события обновляем экран
-
-				}
-			}
-
-			tft.needUpdate = 1; //При выходе из события обновляем экран
-			menu->field.needRender  = 1;
-		}
-
-
-
-
-	}
-
-}
 
 
 
 
 
-void PAGE_Menu(menu_typedef *menu, item_typedef *item,
-		int NUM) {
 
-	//Gen.pause();
+
+
+void PAGE_Menu(menu_typedef *menu, item_typedef *item, int NUM) {
 
 	tft.Font_Smooth_Load(menu->font);
 
@@ -316,11 +177,11 @@ void PAGE_Menu(menu_typedef *menu, item_typedef *item,
 	int window_start;
 	int window_end;
 
-	max_imem = NUM; //NUM_OF(&item);
+	//max_imem = NUM; //NUM_OF(&item);
 
 	max_window_item = menu->item_count - 1; //6 реальных
 	window_start = 0;
-	window_end = (max_imem >= max_window_item) ? max_window_item : max_imem;
+	window_end = (NUM >= max_window_item) ? max_window_item : NUM;
 
 	void (*func_name)(void); //объявляем указатель на функцию
 
@@ -329,9 +190,9 @@ void PAGE_Menu(menu_typedef *menu, item_typedef *item,
 
 	tft.needUpdate = 1;
 
-	TFT_Wiget_Animated_Rectagle B[max_imem];
+	TFT_Wiget_Animated_Rectagle B[NUM];
 
-	for (int i = 0; i < max_imem; i++) {
+	for (int i = 0; i < NUM; i++) {
 		B[i].init_tft(&tft);
 		B[i].setHW(H, 230);
 		B[i].typeAnimation = 2;
@@ -340,11 +201,14 @@ void PAGE_Menu(menu_typedef *menu, item_typedef *item,
 	//B[0].typeAnimation = 0;
 	//B[1].typeAnimation = 0;
 
-	int gif_count = 0;  //Количество гифок
-	for (int i = 0; i < max_imem; i++) {
-		if (item[i].nameGif)
-			gif_count++;
-	}
+	//* ┌ ┐ └ ┘├ ┤ ┬ ┴ ┼ ─ │
+	//──────────────────────────────────┬──────────────────┐
+	int gif_count = 0;                //│ Количество гифок │
+	for (int i = 0; i < NUM; i++) {   //└──────────────────┤
+		if (item[i].nameGif)                             //│
+			gif_count++;                                 //│
+	}                                                    //│
+	//─────────────────────────────────────────────────────┘
 
 	TFT_gif gif1[gif_count];
 	//Bitmap  bmp [gif_count];
@@ -353,35 +217,28 @@ void PAGE_Menu(menu_typedef *menu, item_typedef *item,
 	if (gif_count) {
 		gif_count = 0;
 
-		for (int i = 0; i < max_imem; i++) {
+		for (int i = 0; i < NUM; i++) {
 
 			if (item[i].nameGif) {
-
 				item[i].gif = &gif1[gif_count];
-
 				item[i].gif->init(&tft);
 				item[i].gif->setName(item[i].nameGif);
-
                 id = item[i].resid_first;
 				item[i].gif->bmpStop = tft.getResBitmapID(id);
-
 				item[i].gif->setDelay(0);
-
 				item[i].gif->setX(item[i].gif_x);
-
 				item[i].gif->trigger = item[i].gif_trigger;
-
 				if (item[i].gif_init_state != NULL)
 				{
 					if (*item[i].gif_init_state != 0)
 						item[i].gif->setIndexMax();
 				}
-
 				gif_count++;
 			}
-
 		}
 	}
+	//─────────────────────────────────────────────────────┘
+
 
 	//item[1].gif->field.bit32 = 0;
 
@@ -390,8 +247,6 @@ void PAGE_Menu(menu_typedef *menu, item_typedef *item,
 	char str[64];
 
 	menu->field.needUpdate = 1;
-
-
 	tft.uTFT.GetColor = 1;
 
 	while (1) {
@@ -400,16 +255,11 @@ void PAGE_Menu(menu_typedef *menu, item_typedef *item,
 
 		//tft.needUpdate = 0;
 
-
-
-
 		if (menu->preCallBackFunc) {
 			menu->index = index;
 			func_name = menu->preCallBackFunc;
 			func_name();
 		}
-
-
 
 		//Блокировка энкодера, нужно чтобы обрабатывать в пре
 		if (menu->field.encoder_block == 0) {
@@ -429,8 +279,8 @@ void PAGE_Menu(menu_typedef *menu, item_typedef *item,
 			if (Encoder.Right) {
 				Encoder.Right = 0;
 				index++;
-				if (index >= max_imem)
-					index = max_imem - 1;
+				if (index >= NUM)
+					index = NUM - 1;
 				if (index > window_end) {
 					window_end = index;
 					window_start = window_end - max_window_item;
@@ -443,11 +293,11 @@ void PAGE_Menu(menu_typedef *menu, item_typedef *item,
 		menu->window_start = window_start;
 		menu->window_end = window_end;
 		menu->index = index;
-		menu->max_item = max_imem - 1;
+		menu->max_item = NUM - 1;
 
 		//tft.needUpdate = 1;
 
-		tft.Fill(menu->ColorBackground); //Фон
+		tft.Fill16(menu->ColorBackground); //Фон
 
 		//Фон
 		//tft.Bitmap_From_Flash_Background_16bit(&bmpBackground240240); // 756us
@@ -485,10 +335,11 @@ void PAGE_Menu(menu_typedef *menu, item_typedef *item,
 	    	//B[i].setY(StartY + H * (menu->ii % menu->item_count));
 	    	//B[i].run();  //116 us -Of Gen on
 
-	    	if (i == menu->index) tft.RectangleFilled(0, StartY + H * (menu->ii % menu->item_count), 239, H, COLOR_RECTAGLE);
 
-
+	    	if (i == menu->index) tft.RectangleFilled(0, StartY + H * (menu->ii % menu->item_count),
+	    			239, H, COLOR_RECTAGLE);
             menu->run(i);
+
 
 
     		if (item[i].gif) {
@@ -517,7 +368,6 @@ void PAGE_Menu(menu_typedef *menu, item_typedef *item,
     			}
 
     		if (item[i].gif) {tft.ST7789_Update(item[i].gif->info());}
-
     		menu->ii++;
 	    }
 
@@ -525,31 +375,31 @@ void PAGE_Menu(menu_typedef *menu, item_typedef *item,
 
 		//TimerT5.Loger("for (i = window_start; i <= window_end; i++)");
 
-		//menu->verticalScroll = 1;
+
 		//TimerT5.Start();
 
-		//Рисуем вертикальный скролл //87 us
-		if (menu->field.verticalScroll) {
-			tft.RectangleFilled(230, menu->item_start_y, 14,
-					menu->item_count * menu->item_height, tft.RGB565(0, 0, 0));
-			int H = (menu->item_count * menu->item_height) - 4; //Общая высота области в которой идет рисование
-			float Hw =
-					H
-							* ((float) (menu->item_count)
-									/ (float) (menu->max_item + 1)); //Размер самого ползунка
-			float delta = float(H - Hw)
-					/ (float) (menu->max_item + 1 - menu->item_count);
-			tft.RectangleFilled(222 + 5 + 5,
-					menu->item_start_y + 2 + delta * (menu->window_start),
-					10 - 5, Hw, tft.RGB565(205, 205, 205));
-		}
-		//TimerT5.Loger("verticalScroll");
+
+	    //┌───────────────────────────────────────────────────────────────────────┐
+	    //│ Рисуем вертикальный скролл //87 us                                    │
+	    //└───────────────────────────────────────────────────────────────────────┤
+		if (menu->field.verticalScroll) {                                       //│
+			tft.RectangleFilled(230, menu->item_start_y, 14,                    //│
+					menu->item_count * menu->item_height, tft.RGB565(0, 0, 0)); //│
+			int H = (menu->item_count * menu->item_height) - 4;                 //│ Общая высота области в которой идет рисование
+			float Hw = H * ((float) (menu->item_count)                          //│
+									/ (float) (menu->max_item + 1));            //│ Размер самого ползунка
+			float delta = float(H - Hw)                                         //│
+					/ (float) (menu->max_item + 1 - menu->item_count);          //│
+			tft.RectangleFilled(222 + 5 + 5,                                    //│
+					menu->item_start_y + 2 + delta * (menu->window_start),      //│
+					10 - 5, Hw, tft.RGB565(205, 205, 205));                     //│
+		}                                                                       //│
+		//────────────────────────────────────────────────────────────────────────┘
 
 		if (menu->postCallBackFunc) {
 			func_name = menu->postCallBackFunc;
 			func_name();
 		}
-
 
 		if ((menu->field.needUpdate) || (tft.needUpdate)) {
 			menu->field.needUpdate = 0;

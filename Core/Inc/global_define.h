@@ -1,15 +1,13 @@
 #ifndef __GLOBAL_DEFINE_H
 #define __GLOBAL_DEFINE_H
 
-//┌───────┬──────────────────────────────────────────────────────────────────────────────────────────┐
-//Если нужно использовать CLI
-//#define USE_CLI
-   #define USE_GEN
-//#define USE_CLI_GEN
-//#define USE_CLI_LCD
-
-///#define USE_NOTSAVE_FONT  --Использование не безопасных фонтов
-//────────────────────────────────────────────────────────────┴──────────────────────────────────────┘
+//┌───────────────────────────┬─────────────────────────────────────┐
+   #define USE_GEN          //│                                     │
+//#define USE_CLI           //│ Если нужно использовать CLI         │
+//#define USE_CLI_GEN       //│                                     │
+//#define USE_CLI_LCD       //│                                     │
+///#define USE_NOTSAVE_FONT //│ Использование не безопасных фонтов  │
+//────────────────────────────┴─────────────────────────────────────┘
 
 //┌───────┬──────────────────────────────────────────────────────────────────────────────────────────┐
 //│ COLOR │                                                                                          │
@@ -21,50 +19,53 @@
 	#define COLOR_BACKGROUND     tft.RGB565(0, 0, 7)        //│ tft.RGB565(0, 7, 43)   // Фон   104  │
 //────────────────────────────────────────────────────────────┴──────────────────────────────────────┘
 
-//* ┌ ┐ └ ┘├ ┤ ┬ ┴ ┼ ─ │
-
 //┌──────────────┬──────────────────────────────────────────────────────────┐
 //│ ID Ресурсов  │                                                          │
 //└──────────────┴──────────────────────────────────────────────────────────┤
     #define Roboto_Medium_en_ru_30 (uint8_t *)(tft.getResAdressFontID(0)) //│
     #define Roboto_Medium_en_ru_18 (uint8_t *)(tft.getResAdressFontID(1)) //│
 //──────────────────────────────────────────────────────────────────────────┤
-    #define ON_DISABLE  2                                                 //│
-    #define OFF_DISABLE 3                                                 //│
-    #define ON          4                                                 //│
-    #define OFF         5                                                 //│
+    #define id_ON_DISABLE  2                                              //│
+    #define id_OFF_DISABLE 3                                              //│
+    #define id_ON          4                                              //│
+    #define id_OFF         5                                              //│
 //──────────────────────────────────────────────────────────────────────────┘
 
- ///////////////
- //  define
- ///////////////
+//┌─────────────────────────────────────────┐
+	//Для картинки генератора индексы строк │
+	#define INDEX_CH1_EN      0           //│
+	#define INDEX_CH1_FR      1           //│
+	#define INDEX_CH1_CR      2           //│
+	#define INDEX_CH1_AM_EN   3 		  //│
+	#define INDEX_CH1_AM_MOD  4 		  //│
+	#define INDEX_CH1_AM_FR   5 		  //│
+	#define INDEX_CH1_FM_EN   6 	      //│
+	#define INDEX_CH1_FM_BASE 7 	      //│
+	#define INDEX_CH1_FM_DEV  8 	      //│
+	#define INDEX_CH1_FM_MOD  9 	      //│
+	#define INDEX_CH1_FM_FR   10 	      //│
+ 	 	 	 	 	 	 	 	 	      //│
+	#define INDEX_CH2_EN      11 	 	  //│
+	#define INDEX_CH2_FR      12 	 	  //│
+	#define INDEX_CH2_CR      13 	 	  //│
+	#define INDEX_CH2_AM_EN   14 	 	  //│
+	#define INDEX_CH2_AM_MOD  15 	 	  //│
+	#define INDEX_CH2_AM_FR   16 	 	  //│
+	#define INDEX_CH2_FM_EN   17 	 	  //│
+	#define INDEX_CH2_FM_BASE 18 	 	  //│
+	#define INDEX_CH2_FM_DEV  19 	      //│
+	#define INDEX_CH2_FM_MOD  20 	      //│
+	#define INDEX_CH2_FM_FR   21 	      //│
+									      //│
+	#define NUM_ITEM_GENERETOR   22       //│
+//└─────────────────────────────────────────┘
 
-	//Для картинки генератора индексы строк
-	#define INDEX_CH1_EN      0
-	#define INDEX_CH1_FR      1
-	#define INDEX_CH1_CR      2
-	#define INDEX_CH1_AM_EN   3
-	#define INDEX_CH1_AM_MOD  4
-	#define INDEX_CH1_AM_FR   5
-	#define INDEX_CH1_FM_EN   6
-	#define INDEX_CH1_FM_BASE 7
-	#define INDEX_CH1_FM_DEV  8
-	#define INDEX_CH1_FM_MOD  9
-	#define INDEX_CH1_FM_FR   10
 
-	#define INDEX_CH2_EN      11
-	#define INDEX_CH2_FR      12
-	#define INDEX_CH2_CR      13
-	#define INDEX_CH2_AM_EN   14
-	#define INDEX_CH2_AM_MOD  15
-	#define INDEX_CH2_AM_FR   16
-	#define INDEX_CH2_FM_EN   17
-	#define INDEX_CH2_FM_BASE 18
-	#define INDEX_CH2_FM_DEV  19
-	#define INDEX_CH2_FM_MOD  20
-	#define INDEX_CH2_FM_FR   21
 
-	#define NUM_ITEM_GENERETOR   22
+
+
+
+
 
 //┌─────────┬─────────────────────────┐
 //│ include │                         │
@@ -96,7 +97,7 @@
 //┌─────────┬──────────────────────┐
 //│ extern  │                      │
 //└─────────┴──────────────────────┤
-	extern TFT tft CCMRAM ;      //│
+	extern TFT       tft CCMRAM; //│
 	extern GENERATOR Gen CCMRAM; //│
 //─────────────────────────────────┘
 
@@ -112,36 +113,41 @@
 		uint8_t Left;                                //│
 		uint8_t Right;                               //│
 	}Encoder_typedef;                                //│
-//─────────────────────────────────────────────────────┴────────────────┐
- typedef struct                                                       //│
- {                                                                    //│
-   char text [20];        											  //│
-                                 	 	 	 	 	 	 	 	 	  //│
-   void (*callBackFunc_isClick)  (void); 							  //│
-   void (*callBackFunc_isHolded) (void); 							  //│
-   void (*callBackFunc_isDouble) (void); 							  //│
-   void (*preCallBackFunc)(uint32_t);  								  //│
-   	   	   	   	   	   	   	   	   	   	   	   	   	   	   	   	   	  //│
-   /////////////////////////////////////////////////////////            │
-   char *     nameGif  = 0;     //Имя гифки                             │
-   TFT_gif *      gif  = 0;     //Указатель на гифку                    │
-   int8_t  resid_first =-1 ;    //Номер картинки ресурса первый кадр    │
-   int8_t  resid_last  =-1;     //Номер картинки ресурса последний кадр │
-   ANIMATION_TRIGGERS      gif_trigger;  //Тип анимации                 │
-   uint8_t  gif_x;                       //Координата X гифки           │
-   uint8_t*  gif_init_state;             //Для начального значения      │
-   /////////////////////////////////////////////////////////
+//─────────────────────────────────────────────────────┘
 
-	struct fieldbite {
-	   unsigned  bitmap_always_on : 1 ;
-	   unsigned  exit :1;
-	   unsigned  disable:1;  //Если 1 то отключен
-	} field;
+//───────────────────────────────────────────────┬───────────────────────────┐
+ typedef struct                                //│ Item                      │
+ {                                             //├───────────────────────────┤
+   char text [20];        					   //│ Текст                     │
+                                 	 	 	   //│                           │
+   void (*callBackFunc_isClick)  (void); 	   //│ Обработчик нажатий        │
+   void (*callBackFunc_isHolded) (void); 	   //│                           │
+   void (*callBackFunc_isDouble) (void); 	   //│                           │
+   void (*preCallBackFunc)(uint32_t);  		   //│ Формирование строк        │
+   	   	   	   	   	   	   	   	   	   	   	   //│                           │
+   //──── gif ───────────────────────┬───────────┴───────────────────────────┤
+   char *     nameGif  = 0;        //│ Имя гифки                             │  ┌ В двустроковом варианте gif_init_state
+   TFT_gif *  gif  = 0;            //│ Указатель на гифку                    │  │ если 1 то отображаем resid_first
+   int8_t  resid_first =-1;        //│ Номер картинки ресурса первый кадр    │<-┤ если 0 то отображаем resid_last
+   int8_t  resid_last  =-1;        //│ Номер картинки ресурса последний кадр │<-┤
+   ANIMATION_TRIGGERS gif_trigger; //│ Тип анимации                          │  │  item_setting[1].nameGif = (char*)"save";
+   uint8_t  gif_x;                 //│ Координата X гифки                    │  │  item_setting[1].gif_trigger = ONCE;
+   uint8_t* gif_init_state;        //│ Источник данных                       │<-┘  item_setting[1].gif_x = 170;
+   //────────────────────────────────┴───────────────────────────────────────┤
+                                                                           //│
+	struct fieldbite {                                                     //│
+	   unsigned  bitmap_always_on : 1 ;                                    //│
+	   unsigned  exit :1;                                                  //│
+	   unsigned  disable:1;             //Если 1 то отключен               //│
+	} field;                                                               //│
+	                                                                       //│
+   int32_t text_color = -1;             //│ Цвет текста                    //│
+                                                                           //│
+ } item_typedef;                                                           //│
+//───────────────────────────────────────────────────────────────────────────┘
 
-   int32_t text_color = -1; //Цвет текста
 
- } item_typedef;
-//──────────────────────────────────────────────────────────────────────────────────┤
+
  typedef struct                                                                   //│
  {                                                                                //│
    //Блок инициализации                                                             │
@@ -204,16 +210,126 @@
 
    }
 
+
+
+
+   //Обновить биты Disable
+   void refreshDisable()
+   {
+	       //┌────────────────────────────────────────────────────┐
+	   	   //│ Делаем блокировки                                  │
+	   	   //└────────────────────────────────────────────────────┤
+	   	   if (Gen.CH1.CH_EN)                                   //│
+	   	   {                                                    //│
+	   		   items[INDEX_CH1_CR].field.disable      = 0;      //│
+	   		   items[INDEX_CH1_AM_EN].field.disable   = 0;      //│
+	   		   if (Gen.CH1.AM_EN)                               //│
+	   		   {                                                //│
+	   		     items[INDEX_CH1_AM_MOD].field.disable  = 0;    //│
+	   		     items[INDEX_CH1_AM_FR].field.disable   = 0;    //│
+	   		   }                                                //│
+	   		   else                                             //│
+	   		   {                                                //│
+	   			 items[INDEX_CH1_AM_MOD].field.disable  = 1;    //│
+	   			 items[INDEX_CH1_AM_FR].field.disable   = 1;    //│
+	   		   }                                                //│
+	   		   items[INDEX_CH1_FM_EN].field.disable   = 0;      //│
+	   		   if (Gen.CH1.FM_EN)                               //│
+	   	        {                                               //│
+	   			   items[INDEX_CH1_FM_BASE].field.disable = 0;  //│
+	   			   items[INDEX_CH1_FM_DEV].field.disable  = 0;  //│
+	   			   items[INDEX_CH1_FM_MOD].field.disable  = 0;  //│
+	   			   items[INDEX_CH1_FM_FR].field.disable   = 0;  //│
+	   			   items[INDEX_CH1_FR].field.disable  = 1;      //│
+	   			}                                               //│
+	   		   else                                             //│
+	   		   {                                                //│
+	   			   items[INDEX_CH1_FM_BASE].field.disable = 1;  //│
+	   			   items[INDEX_CH1_FM_DEV].field.disable  = 1;  //│
+	   			   items[INDEX_CH1_FM_MOD].field.disable  = 1;  //│
+	   			   items[INDEX_CH1_FM_FR].field.disable   = 1;  //│
+	   			   items[INDEX_CH1_FR].field.disable      = 0;  //│
+	   		   }                                                //│
+	   	   }                                                    //│
+	   	   else                                                 //│
+	   	   {                                                    //│
+	   		   items[INDEX_CH1_FR].field.disable      = 1;      //│
+	   		   items[INDEX_CH1_CR].field.disable      = 1;      //│
+	   		   items[INDEX_CH1_AM_EN].field.disable   = 1;      //│
+	   		   items[INDEX_CH1_AM_MOD].field.disable  = 1;      //│
+	   		   items[INDEX_CH1_AM_FR].field.disable   = 1;      //│
+	   		   items[INDEX_CH1_FM_EN].field.disable   = 1;      //│
+	   		   items[INDEX_CH1_FM_BASE].field.disable = 1;      //│
+	   		   items[INDEX_CH1_FM_DEV].field.disable  = 1;      //│
+	   		   items[INDEX_CH1_FM_MOD].field.disable  = 1;      //│
+	   		   items[INDEX_CH1_FM_FR].field.disable   = 1;      //│
+	   	   }                                                    //│
+	   	                                                        //│
+	   	   if (Gen.CH2.CH_EN)                                   //│
+	   	   {                                                    //│
+	   		   items[INDEX_CH2_CR].field.disable      = 0;      //│
+	   		   items[INDEX_CH2_AM_EN].field.disable   = 0;      //│
+	   		   if (Gen.CH2.AM_EN)                               //│
+	   		   {                                                //│
+	   		     items[INDEX_CH2_AM_MOD].field.disable  = 0;    //│
+	   		     items[INDEX_CH2_AM_FR].field.disable   = 0;    //│
+	   		   }                                                //│
+	   		   else                                             //│
+	   		   {                                                //│
+	   			 items[INDEX_CH2_AM_MOD].field.disable  = 1;    //│
+	   			 items[INDEX_CH2_AM_FR].field.disable   = 1;    //│
+	   		   }                                                //│
+	   		   items[INDEX_CH2_FM_EN].field.disable   = 0;      //│
+	   		   if (Gen.CH2.FM_EN)                               //│
+	   	        {                                               //│
+	   			   items[INDEX_CH2_FM_BASE].field.disable = 0;  //│
+	   			   items[INDEX_CH2_FM_DEV].field.disable  = 0;  //│
+	   			   items[INDEX_CH2_FM_MOD].field.disable  = 0;  //│
+	   			   items[INDEX_CH2_FM_FR].field.disable   = 0;  //│
+	   			   items[INDEX_CH2_FR].field.disable      = 1;  //│
+	   			}                                               //│
+	   		   else                                             //│
+	   		   {                                                //│
+	   			   items[INDEX_CH2_FM_BASE].field.disable = 1;  //│
+	   			   items[INDEX_CH2_FM_DEV].field.disable  = 1;  //│
+	   			   items[INDEX_CH2_FM_MOD].field.disable  = 1;  //│
+	   			   items[INDEX_CH2_FM_FR].field.disable   = 1;  //│
+	   			   items[INDEX_CH2_FR].field.disable      = 0;  //│
+	   		   }                                                //│
+	   	   }                                                    //│
+	   	   else                                                 //│
+	   	   {                                                    //│
+	   		   items[INDEX_CH2_FR].field.disable      = 1;      //│
+	   		   items[INDEX_CH2_CR].field.disable      = 1;      //│
+	   		   items[INDEX_CH2_AM_EN].field.disable   = 1;      //│
+	   		   items[INDEX_CH2_AM_MOD].field.disable  = 1;      //│
+	   		   items[INDEX_CH2_AM_FR].field.disable   = 1;      //│
+	   		   items[INDEX_CH2_FM_EN].field.disable   = 1;      //│
+	   		   items[INDEX_CH2_FM_BASE].field.disable = 1;      //│
+	   		   items[INDEX_CH2_FM_DEV].field.disable  = 1;      //│
+	   		   items[INDEX_CH2_FM_MOD].field.disable  = 1;      //│
+	   		   items[INDEX_CH2_FM_FR].field.disable   = 1;      //│
+	   	   }                                                    //│
+	   	   //─────────────────────────────────────────────────────┘
+   }
+
+   //┌───────────────────────────────────────────────────┐
+   //│ Рендер в две колонки                              │
+   //└───────────────────────────────────────────────────┤
    void run2(uint8_t i)
    {
-	    //33us -Of GenOn На выделенном
-	    if (i == index)
-	    {
-	    	tft.RectangleFilled( (i < ((max_item+1)/2)) ? 0 : 119 , item_start_y + item_height * (ii % ((max_item+1)/2)), 119, item_height, COLOR_RECTAGLE);
-	    	tft.uTFT.GetColor = 1;
-	    }
-	    else
-	      tft.uTFT.GetColor = 0;
+	   //┌─────────────────────────────────────────────────────────────────────────────────────────────────────┐
+	   //│ Рисуем выбранную строку                                                33us -Of GenOn На выделенном │
+	   //└─────────────────────────────────────────────────────────────────────────────────────────────────────┤
+	   if (i == index)                                                                                       //│
+	   {                                                                                                     //│
+	      tft.RectangleFilled( (i < ((max_item+1)/2)) ? 0 : 119,                                             //│
+	    			item_start_y + item_height * (i % ((max_item+1)/2)), 119, item_height, COLOR_RECTAGLE); //│
+	      tft.uTFT.GetColor = 1;                                                                             //│
+	   }                                                                                                     //│
+	   else                                                                                                  //│
+	      tft.uTFT.GetColor = 0;                                                                             //│
+	   //──────────────────────────────────────────────────────────────────────────────────────────────────────┘
 
 	   //Выполняем пре для этого елемента
 	   //Создание текста
@@ -221,112 +337,26 @@
 		   void (*fcnPtr)(uint32_t) = items[i].preCallBackFunc;
 		   fcnPtr(index);
 		}
-
 	   field.needRender = field.encoder_block;
 
-	   if (Gen.CH1.CH_EN)
-	   {
-		   items[INDEX_CH1_CR].field.disable      = 0;
-		   items[INDEX_CH1_AM_EN].field.disable   = 0;
-		   if (Gen.CH1.AM_EN)
-		   {
-		     items[INDEX_CH1_AM_MOD].field.disable  = 0;
-		     items[INDEX_CH1_AM_FR].field.disable   = 0;
-		   }
-		   else
-		   {
-			 items[INDEX_CH1_AM_MOD].field.disable  = 1;
-			 items[INDEX_CH1_AM_FR].field.disable   = 1;
-		   }
-		   items[INDEX_CH1_FM_EN].field.disable   = 0;
-		   if (Gen.CH1.FM_EN)
-	        {
-			   items[INDEX_CH1_FM_BASE].field.disable = 0;
-			   items[INDEX_CH1_FM_DEV].field.disable  = 0;
-			   items[INDEX_CH1_FM_MOD].field.disable  = 0;
-			   items[INDEX_CH1_FM_FR].field.disable   = 0;
-			   items[INDEX_CH1_FR].field.disable  = 1;
-			}
-		   else
-		   {
-			   items[INDEX_CH1_FM_BASE].field.disable = 1;
-			   items[INDEX_CH1_FM_DEV].field.disable  = 1;
-			   items[INDEX_CH1_FM_MOD].field.disable  = 1;
-			   items[INDEX_CH1_FM_FR].field.disable   = 1;
-			   items[INDEX_CH1_FR].field.disable  = 0;
-		   }
-	   }
-	   else
-	   {
-		   items[INDEX_CH1_FR].field.disable      = 1;
-		   items[INDEX_CH1_CR].field.disable      = 1;
-		   items[INDEX_CH1_AM_EN].field.disable   = 1;
-		   items[INDEX_CH1_AM_MOD].field.disable  = 1;
-		   items[INDEX_CH1_AM_FR].field.disable   = 1;
-		   items[INDEX_CH1_FM_EN].field.disable   = 1;
-		   items[INDEX_CH1_FM_BASE].field.disable = 1;
-		   items[INDEX_CH1_FM_DEV].field.disable  = 1;
-		   items[INDEX_CH1_FM_MOD].field.disable  = 1;
-		   items[INDEX_CH1_FM_FR].field.disable   = 1;
-	   }
-
-	   if (Gen.CH2.CH_EN)
-	   {
-		   items[INDEX_CH2_CR].field.disable      = 0;
-		   items[INDEX_CH2_AM_EN].field.disable   = 0;
-		   if (Gen.CH2.AM_EN)
-		   {
-		     items[INDEX_CH2_AM_MOD].field.disable  = 0;
-		     items[INDEX_CH2_AM_FR].field.disable   = 0;
-		   }
-		   else
-		   {
-			 items[INDEX_CH2_AM_MOD].field.disable  = 1;
-			 items[INDEX_CH2_AM_FR].field.disable   = 1;
-		   }
-		   items[INDEX_CH2_FM_EN].field.disable   = 0;
-		   if (Gen.CH2.FM_EN)
-	        {
-			   items[INDEX_CH2_FM_BASE].field.disable = 0;
-			   items[INDEX_CH2_FM_DEV].field.disable  = 0;
-			   items[INDEX_CH2_FM_MOD].field.disable  = 0;
-			   items[INDEX_CH2_FM_FR].field.disable   = 0;
-			   items[INDEX_CH2_FR].field.disable  = 1;
-			}
-		   else
-		   {
-			   items[INDEX_CH2_FM_BASE].field.disable = 1;
-			   items[INDEX_CH2_FM_DEV].field.disable  = 1;
-			   items[INDEX_CH2_FM_MOD].field.disable  = 1;
-			   items[INDEX_CH2_FM_FR].field.disable   = 1;
-			   items[INDEX_CH2_FR].field.disable  = 0;
-		   }
-	   }
-	   else
-	   {
-		   items[INDEX_CH2_FR].field.disable      = 1;
-		   items[INDEX_CH2_CR].field.disable      = 1;
-		   items[INDEX_CH2_AM_EN].field.disable   = 1;
-		   items[INDEX_CH2_AM_MOD].field.disable  = 1;
-		   items[INDEX_CH2_AM_FR].field.disable   = 1;
-		   items[INDEX_CH2_FM_EN].field.disable   = 1;
-		   items[INDEX_CH2_FM_BASE].field.disable = 1;
-		   items[INDEX_CH2_FM_DEV].field.disable  = 1;
-		   items[INDEX_CH2_FM_MOD].field.disable  = 1;
-		   items[INDEX_CH2_FM_FR].field.disable   = 1;
-	   }
-
+	   //┌────────────────────────────────────────────────────┐
+	   //│ Рисуем текст                                       │
+	   //└────────────────────────────────────────────────────┤
 	   if (items[i].field.disable == 0)
 	   {
 		   //1500us
 		   if (items[i].text_color != -1)
-			   tft.Font_Smooth_drawStr( (i < ((max_item+1)/2)) ? 0 : 119  + item_text_delta_x, 8 + item_height * (ii % item_count) - 1 + item_start_y + item_text_delta_y, items[i].text, (uint16_t) items[i].text_color);
+			   tft.Font_Smooth_drawStr( (i < ((max_item+1)/2)) ? 0 : 119  + item_text_delta_x, 8 + item_height * (i % item_count) - 1 + item_start_y + item_text_delta_y, items[i].text, (uint16_t) items[i].text_color);
 		   else
-			   tft.Font_Smooth_drawStr( (i < ((max_item+1)/2)) ? 0 : 119  + item_text_delta_x, 8 + item_height * (ii % item_count) - 1 + item_start_y + item_text_delta_y, items[i].text, (i == index) ? COLOR_TEXT_SELECT : COLOR_TEXT_DEFAULT);
+			   tft.Font_Smooth_drawStr( (i < ((max_item+1)/2)) ? 0 : 119  + item_text_delta_x, 8 + item_height * (i % item_count) - 1 + item_start_y + item_text_delta_y, items[i].text, (i == index) ? COLOR_TEXT_SELECT : COLOR_TEXT_DEFAULT);
 	   }
 	   else
-		   tft.Font_Smooth_drawStr( (i < ((max_item+1)/2)) ? 0 : 119  + item_text_delta_x, 8 + item_height * (ii % item_count) - 1 + item_start_y + item_text_delta_y, items[i].text, COLOR_TEXT_DISABLE); //COLOR_TEXT_DISABLE
+		   tft.Font_Smooth_drawStr( (i < ((max_item+1)/2)) ? 0 : 119  + item_text_delta_x, 8 + item_height * (i % item_count) - 1 + item_start_y + item_text_delta_y, items[i].text, COLOR_TEXT_DISABLE);
+	   //─────────────────────────────────────────────────────┘
 
+	   //┌────────────────────────────────────────────────────┐
+	   //│ Рисуем Bitmap                                      │
+	   //└────────────────────────────────────────────────────┤
 	    static Bitmap bmp = {0};
 
 	    if (items[i].gif_init_state) //Если есть источник данных
@@ -342,9 +372,9 @@
 
                    switch (bmp.bit)
                    {
-                   	  case 32: tft.Bitmap_From_Flash_32b((i < ((max_item+1)/2)) ? 0 : 119, item_start_y + item_height * (ii % ((max_item+1)/2)), &bmp);	break;
-                   	  case 24: tft.Bitmap_From_Flash_24b((i < ((max_item+1)/2)) ? 0 : 119, item_start_y + item_height * (ii % ((max_item+1)/2)), &bmp);	break;
-                      case 16: tft.Bitmap_From_Flash_16b((i < ((max_item+1)/2)) ? 0 : 119, item_start_y + item_height * (ii % ((max_item+1)/2)), &bmp);	break;
+                   	  case 32: tft.Bitmap_From_Flash_32b((i < ((max_item+1)/2)) ? 0 : 119, item_start_y + item_height * (i % ((max_item+1)/2)), &bmp);	break;
+                   	  case 24: tft.Bitmap_From_Flash_24b((i < ((max_item+1)/2)) ? 0 : 119, item_start_y + item_height * (i % ((max_item+1)/2)), &bmp);	break;
+                      case 16: tft.Bitmap_From_Flash_16b((i < ((max_item+1)/2)) ? 0 : 119, item_start_y + item_height * (i % ((max_item+1)/2)), &bmp);	break;
                    }
 	    		}
 	    	}
@@ -356,26 +386,29 @@
 
 	    			switch (bmp.bit)
 	                {
-	                   case 32: tft.Bitmap_From_Flash_32b((i < ((max_item+1)/2)) ? 0 : 119, item_start_y + item_height * (ii % ((max_item+1)/2)), &bmp);	break;
-	                   case 24: tft.Bitmap_From_Flash_24b((i < ((max_item+1)/2)) ? 0 : 119, item_start_y + item_height * (ii % ((max_item+1)/2)), &bmp);	break;
-	                   case 16: tft.Bitmap_From_Flash_16b((i < ((max_item+1)/2)) ? 0 : 119, item_start_y + item_height * (ii % ((max_item+1)/2)), &bmp);	break;
+	                   case 32: tft.Bitmap_From_Flash_32b((i < ((max_item+1)/2)) ? 0 : 119, item_start_y + item_height * (i % ((max_item+1)/2)), &bmp);	break;
+	                   case 24: tft.Bitmap_From_Flash_24b((i < ((max_item+1)/2)) ? 0 : 119, item_start_y + item_height * (i % ((max_item+1)/2)), &bmp);	break;
+	                   case 16: tft.Bitmap_From_Flash_16b((i < ((max_item+1)/2)) ? 0 : 119, item_start_y + item_height * (i % ((max_item+1)/2)), &bmp);	break;
 	                }
 
 	    		}
 	    	}
 	    }
 
+        //Рисуем Disable картинки с учетом того были они ON или OFF 16бит
 	    if   ( (i == INDEX_CH1_AM_EN) && (Gen.CH1.CH_EN == 0))
 	    {
 	    	if (Gen.CH1.AM_EN)
 	    	{
-	    	  bmp = tft.getResBitmapID(ON_DISABLE);
-              tft.Bitmap_From_Flash_16b((i < ((max_item+1)/2)) ? 0 : 119, item_start_y + item_height * (ii % ((max_item+1)/2)), &bmp);
+	    	  bmp = tft.getResBitmapID(id_ON_DISABLE);
+              tft.Bitmap_From_Flash_16b((i < ((max_item+1)/2)) ? 0 : 119,
+            		  item_start_y + item_height * (i % ((max_item+1)/2)), &bmp);
 	    	}
 	    	else
 	    	{
-	    	  bmp = tft.getResBitmapID(OFF_DISABLE);
-              tft.Bitmap_From_Flash_16b((i < ((max_item+1)/2)) ? 0 : 119, item_start_y + item_height * (ii % ((max_item+1)/2)), &bmp);
+	    	  bmp = tft.getResBitmapID(id_OFF_DISABLE);
+              tft.Bitmap_From_Flash_16b((i < ((max_item+1)/2)) ? 0 : 119,
+            		  item_start_y + item_height * (i % ((max_item+1)/2)), &bmp);
 	    	}
 	    }
 
@@ -383,13 +416,15 @@
 	    {
 	    	if (Gen.CH1.FM_EN)
 	    	{
-	    	  bmp = tft.getResBitmapID(ON_DISABLE);
-              tft.Bitmap_From_Flash_16b((i < ((max_item+1)/2)) ? 0 : 119, item_start_y + item_height * (ii % ((max_item+1)/2)), &bmp);
+	    	  bmp = tft.getResBitmapID(id_ON_DISABLE);
+              tft.Bitmap_From_Flash_16b((i < ((max_item+1)/2)) ? 0 : 119,
+            		  item_start_y + item_height * (i % ((max_item+1)/2)), &bmp);
 	    	}
 	    	else
 	    	{
-	    	  bmp = tft.getResBitmapID(OFF_DISABLE);
-              tft.Bitmap_From_Flash_16b((i < ((max_item+1)/2)) ? 0 : 119, item_start_y + item_height * (ii % ((max_item+1)/2)), &bmp);
+	    	  bmp = tft.getResBitmapID(id_OFF_DISABLE);
+              tft.Bitmap_From_Flash_16b((i < ((max_item+1)/2)) ? 0 : 119,
+            		  item_start_y + item_height * (i % ((max_item+1)/2)), &bmp);
 	    	}
 	    }
 
@@ -397,13 +432,15 @@
 	    {
 	    	if (Gen.CH2.AM_EN)
 	    	{
-	    	  bmp = tft.getResBitmapID(ON_DISABLE);
-              tft.Bitmap_From_Flash_16b((i < ((max_item+1)/2)) ? 0 : 119, item_start_y + item_height * (ii % ((max_item+1)/2)), &bmp);
+	    	  bmp = tft.getResBitmapID(id_ON_DISABLE);
+              tft.Bitmap_From_Flash_16b((i < ((max_item+1)/2)) ? 0 : 119,
+            		  item_start_y + item_height * (i % ((max_item+1)/2)), &bmp);
 	    	}
 	    	else
 	    	{
-	    	  bmp = tft.getResBitmapID(OFF_DISABLE);
-              tft.Bitmap_From_Flash_16b((i < ((max_item+1)/2)) ? 0 : 119, item_start_y + item_height * (ii % ((max_item+1)/2)), &bmp);
+	    	  bmp = tft.getResBitmapID(id_OFF_DISABLE);
+              tft.Bitmap_From_Flash_16b((i < ((max_item+1)/2)) ? 0 : 119,
+            		  item_start_y + item_height * (i % ((max_item+1)/2)), &bmp);
 	    	}
 	    }
 
@@ -411,17 +448,23 @@
 	    {
 	    	if (Gen.CH2.FM_EN)
 	    	{
-	    	  bmp = tft.getResBitmapID(ON_DISABLE);
-              tft.Bitmap_From_Flash_16b((i < ((max_item+1)/2)) ? 0 : 119, item_start_y + item_height * (ii % ((max_item+1)/2)), &bmp);
+	    	  bmp = tft.getResBitmapID(id_ON_DISABLE);
+              tft.Bitmap_From_Flash_16b((i < ((max_item+1)/2)) ? 0 : 119,
+            		  item_start_y + item_height * (i % ((max_item+1)/2)), &bmp);
 	    	}
 	    	else
 	    	{
-	    	  bmp = tft.getResBitmapID(OFF_DISABLE);
-              tft.Bitmap_From_Flash_16b((i < ((max_item+1)/2)) ? 0 : 119, item_start_y + item_height * (ii % ((max_item+1)/2)), &bmp);
+	    	  bmp = tft.getResBitmapID(id_OFF_DISABLE);
+              tft.Bitmap_From_Flash_16b((i < ((max_item+1)/2)) ? 0 : 119,
+            		  item_start_y + item_height * (i % ((max_item+1)/2)), &bmp);
 	    	}
 	    }
 
+
+
+
    }
+
  } menu_typedef;
 //───────────────────────────────────────────────────────────────────────────────────┤
 //Создается для каждого файла в папке                                              //│

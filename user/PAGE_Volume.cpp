@@ -59,7 +59,7 @@ void PAGE_Volume(void)
     gif4.trigger = BOOMERANG;
 
 
-    tft.Fill(COLOR_DARKBLUE);
+    tft.Fill16(COLOR_DARKBLUE);
 
     tft.ST7789_UpdateDMA16bitV3();
 
@@ -89,7 +89,7 @@ void PAGE_Volume(void)
 			gif4.command(PLAY);
 		}
 
-		tft.Fill(COLOR_DARKBLUE);
+		tft.Fill16(COLOR_DARKBLUE);
 		//tft.Font_Smooth_drawStr(30, 30, "Wiget");
 
 

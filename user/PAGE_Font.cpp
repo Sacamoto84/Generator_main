@@ -7,7 +7,7 @@ void PAGE_Font(void)
 	while(1)
 	{
 		KEY.tick();
-		tft.Fill(COLOR_BACKGROUND);
+		tft.Fill16(COLOR_BACKGROUND);
 
 		if (KEY.isRelease())
 					return;

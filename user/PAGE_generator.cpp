@@ -4,7 +4,7 @@
 
 //static int temp;
 static item_typedef   * temp_item;
-static menu_typedef  * temp_menu;
+static menu_typedef   * temp_menu;
 
 static char * convert_item_modulation(char * s)
 {
