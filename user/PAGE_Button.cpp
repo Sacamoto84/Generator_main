@@ -172,12 +172,9 @@ void PAGE_Menu(menu_typedef *menu, item_typedef *item, int NUM) {
 
 	uint8_t index = 0;
 
-	int max_imem;
 	int max_window_item;
 	int window_start;
 	int window_end;
-
-	//max_imem = NUM; //NUM_OF(&item);
 
 	max_window_item = menu->item_count - 1; //6 реальных
 	window_start = 0;
@@ -189,17 +186,6 @@ void PAGE_Menu(menu_typedef *menu, item_typedef *item, int NUM) {
 	uint32_t StartY = menu->item_start_y;
 
 	tft.needUpdate = 1;
-
-	TFT_Wiget_Animated_Rectagle B[NUM];
-
-	for (int i = 0; i < NUM; i++) {
-		B[i].init_tft(&tft);
-		B[i].setHW(H, 230);
-		B[i].typeAnimation = 2;
-	}
-
-	//B[0].typeAnimation = 0;
-	//B[1].typeAnimation = 0;
 
 	//* ┌ ┐ └ ┘├ ┤ ┬ ┴ ┼ ─ │
 	//──────────────────────────────────┬──────────────────┐
@@ -295,80 +281,28 @@ void PAGE_Menu(menu_typedef *menu, item_typedef *item, int NUM) {
 		menu->index = index;
 		menu->max_item = NUM - 1;
 
-		//tft.needUpdate = 1;
-
 		tft.Fill16(menu->ColorBackground); //Фон
 
-		//Фон
-		//tft.Bitmap_From_Flash_Background_16bit(&bmpBackground240240); // 756us
-
-		//if (index < 12)
-		//	tft.Gradient_Vertical(0, 0, 239, 239, 0x12, 0x0C, 0x6E, 0x0B, 0x07,
-		//			0x42); //670us
-		//else
-		//	tft.Gradient_Vertical(0, 0, 239, 239, 0x4D, 0x44, 0x6f, 0x26, 0x4d,
-		//			0x59);
-
-		//tft.Gradient_Vertical(0, 0, 239, 239, 0x26, 0x4d, 0x59, 0x43, 0x97, 0x8d);
-		//tft.Gradient_Vertical(0, 0, 239, 239, 0x68, 0x82, 0xa0, 0x2c, 0x69, 0x75);
-		//tft.Gradient_Vertical(0, 0, 239, 239, 0x26, 0x4d, 0x59, 0x2c, 0x69, 0x75);
-		//tft.BMP_From_File(0, 0, "b10.bmp");
-
-		//tft.LineH(0  + (index - window_start) * H + StartY, 0, 239,  palitra[17]);
-		//tft.LineH(1  + (index - window_start) * H + StartY, 0, 239,  palitra[17]);
-		//tft.RectangleFilled(0, 2 + (index - window_start) * H  + StartY, 239, H - 4, palitra[18]);
-		//tft.LineH((H-3) + (index - window_start) * H + StartY, 0, 239,	palitra[19]);
-		//tft.LineH((H-2) + (index - window_start) * H + StartY, 0, 239, palitra[19]);
-
-		//uint8_t ii;
-		//ii = 0;
 		//TimerT5.Start();
 
 		menu->ii = 0;
 	    for (i = window_start; i <= window_end; i++) {
 
-	    	//if (i == index)
-	    	//	B[i].select(1);
-	    	//else
-	    	//	B[i].select(0);
-
-	    	//B[i].setY(StartY + H * (menu->ii % menu->item_count));
-	    	//B[i].run();  //116 us -Of Gen on
-
-
 	    	if (i == menu->index) tft.RectangleFilled(0, StartY + H * (menu->ii % menu->item_count),
 	    			239, H, COLOR_RECTAGLE);
+
             menu->run(i);
 
-
-
     		if (item[i].gif) {
-
-    				//if (i == index)
-    				//	item[i].gif->command(PLAY);
-    				//else
-    				//	item[i].gif->command(STOP);
-
     				item[i].gif->setY(StartY + H * (menu->ii % menu->item_count));
     				item[i].gif->run(); //32x32x32 4800us(914285 Байт/Сек) -Of Gen Off    5000us Gen On 4096байт
     				sprintf(str, "item[%d].gif->run();", i);
     				LOG((char*)"MENU",'I',str);
     			}
 
-
-    		if (B[i].needUpdate()) {
-    				sprintf(str, "B[%d].needUpdate()", i);
-    				LOG((char*)"MENU",'I',str);
-    				//List_Update_Particle U;
-    				//U = B[i].info();
-    			//	U.y1 += 1;
-    				tft.ST7789_Update(B[i].info());
-    				//SEGGER_RTT_printf(0, "i:%d H:%d W:%d x0:%d y0:%d x1:%d y1:%d\n",
-    				//	i, U.H, U.W, U.x0, U.y0, U.x1, U.y1);
-    			}
-
     		if (item[i].gif) {tft.ST7789_Update(item[i].gif->info());}
     		menu->ii++;
+
 	    }
 
 

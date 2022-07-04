@@ -76,8 +76,7 @@ void PageSelectModulation_onClick(void)
 }
 
 //Пре рисуем по index
-void postPageSelectModulation(void)
-{
+void postPageSelectModulation(void){
 	tft.RectangleFilled(0, 0, 239, 119, BLACK);
     int index = temp_menu->index; //Текущий выбранный индекс
     char filename[32]={0};
@@ -145,6 +144,7 @@ void postPageSelectModulation(void)
    tft.needUpdate = 1;
 }
 
+
 //Создаем списки и по ним рендерим графику и рисуем списки
 void PAGE_generator_select_modulation(void)
 {
@@ -160,10 +160,14 @@ void PAGE_generator_select_modulation(void)
 
 	//temp = i; //Определяет тип модуляции несущая или модуляция
 
+	Dir_File_Info_Array Dir_File_Info[32]; //Массив всех файлов в папке
+
     static FRESULT res;
     DIR dir;
     FILINFO fno;
     Dir_File_Info[0].maxFileCount = 0;
+
+
 
     res = f_opendir(&dir, path);                       /* Open the directory */
 
@@ -216,66 +220,8 @@ void PAGE_generator_select_modulation(void)
 
 }
 
-void PAGE_generator_CH1_CH_EN_switch(void)
-{
-	if (Gen.CH1.CH_EN)
-	  Gen.CH1.CH_EN = 0;
-    else
-	  Gen.CH1.CH_EN = 1;
 
-	menu_generator.field.needUpdate = 1;
-	menu_generator.field.needRender = 1;
-}
 
-void PAGE_generator_CH1_AM_EN_switch(void)
-{
-if (Gen.CH1.AM_EN)
-	Gen.CH1.AM_EN = 0;
-else
-	Gen.CH1.AM_EN = 1;
-  menu_generator.field.needUpdate = 1;
-  menu_generator.field.needRender = 1;
-}
-
-void PAGE_generator_CH1_FM_EN_switch(void)
-{ if (Gen.CH1.FM_EN) Gen.CH1.FM_EN = 0; else Gen.CH1.FM_EN = 1;
-  menu_generator.field.needUpdate = 1;
-  menu_generator.field.needRender = 1;
-}
-
-void PAGE_generator_CH2_CH_EN_switch(void)
-{ if (Gen.CH2.CH_EN) Gen.CH2.CH_EN = 0; else Gen.CH2.CH_EN = 1;
-  menu_generator.field.needUpdate = 1;
-  menu_generator.field.needRender = 1;
-}
-
-void PAGE_generator_CH2_AM_EN_switch(void)
-{ if (Gen.CH2.AM_EN) Gen.CH2.AM_EN = 0; else Gen.CH2.AM_EN = 1;
-  menu_generator.field.needUpdate = 1;
-  menu_generator.field.needRender = 1;
-}
-
-void PAGE_generator_CH2_FM_EN_switch(void)
-{ if (Gen.CH2.FM_EN) Gen.CH2.FM_EN = 0; else Gen.CH2.FM_EN = 1;
-  menu_generator.field.needUpdate = 1;
-  menu_generator.field.needRender = 1;
-}
-
-//Включение отключение блокировки
-void PAGE_generator_encoder_block_switch(void){
-
-if (item_generator[menu_generator.index].field.disable == 0)
-{
-	if (menu_generator.field.encoder_block)
-		menu_generator.field.encoder_block = 0;
-	else
-		menu_generator.field.encoder_block = 1;
-}
-
-menu_generator.field.needUpdate = 1;
-menu_generator.field.needRender = 1;
-
-}
 
 //Пред функция для картинки генератор, обрабатывем крутилки
 void prePageGenerator(void)
@@ -289,7 +235,6 @@ void prePageGenerator(void)
 		sprintf(item_generator[INDEX_CH1_CR].text," %s", convert_item_modulation(Gen.CH1.Carrier_mod));
 		sprintf(item_generator[INDEX_CH1_AM_MOD].text," %s", convert_item_modulation(Gen.CH1.AM_mod));
 		sprintf(item_generator[INDEX_CH1_FM_MOD].text," %s", convert_item_modulation(Gen.CH1.FM_mod));
-		//sprintf(item_generator[INDEX_SEPARATOR].text, "---DMA{%.1f}---", DMA_zagruzka);
 		sprintf(item_generator[INDEX_CH2_CR].text," %s", convert_item_modulation(Gen.CH2.Carrier_mod));
 		sprintf(item_generator[INDEX_CH2_AM_MOD].text," %s", convert_item_modulation(Gen.CH2.AM_mod));
 		sprintf(item_generator[INDEX_CH2_FM_MOD].text," %s", convert_item_modulation(Gen.CH2.FM_mod));

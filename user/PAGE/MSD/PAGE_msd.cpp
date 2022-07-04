@@ -22,15 +22,20 @@ void Go_To_User_App(void)
 
 void PAGE_MSD(void)
 {
+	Gen.pause();
+
 	tft.Fill16(BLUE);
-	tft.Font_Smooth_Load(Roboto_Medium_en_ru_30); //(&_acRoboto_Medium_en_ru_30[0]);
-	tft.Font_Smooth_drawStr(30, 100, "MSD");
-	tft.Font_Smooth_drawStr(0, 130, "Press to Reset");
+
+	tft.BMP_From_File(0, 0, (char*)"/Config/MSD.bmp");
+
+	tft.Font_Smooth_Load(Roboto_Medium_en_ru_30);
+	tft.Font_Smooth_drawStr(90, 100, "MSD");
+	tft.Font_Smooth_drawStr(18, 200, "Press to Reset");
 
 	//tft.Bitmap_From_Flash_Background_16bit(&bmpBackground240240);
 
 
-    tft.BMP_From_File(0, 0, (char*)"/Config/MSD.bmp");
+    //tft.BMP_From_File(0, 0, (char*)"/Config/MSD.bmp");
 
 
 	//SEGGER_SYSVIEW_Warn("END tft.BMP_From_File(0, 0, /Config/MSD.bmp)");

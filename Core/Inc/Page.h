@@ -35,6 +35,9 @@ void PAGE_Volume(void);
 
 void PAGE_Generator();
 
+void PAGE_Setting();
+
+
 //Wifi
 void PAGE_wifi(void);
 void PAGE_wifi_switch(void);

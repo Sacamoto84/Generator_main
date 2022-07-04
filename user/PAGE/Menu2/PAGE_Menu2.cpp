@@ -74,14 +74,12 @@ void PAGE_Menu2(menu_typedef *menu, item_typedef *item, int NUM) {
 
 		if(menu->field.needRender) //Перерисовка экрана ~7ms
 		{
-			TimerDWT.Start();
 			menu->field.needRender = 0;
 			tft.Fill16(menu->ColorBackground); //Фон
             menu->refreshDisable();            //Обновим признаки Disable
 	    	for (i = 0; i < NUM; i++) {
             	menu->run2(i);                 //Рендер строки экрана
 	    	}
-	    	TimerDWT.Loger("menu->run2(i);");
 		}
 
 		if ((menu->field.needUpdate) || (tft.needUpdate)) {

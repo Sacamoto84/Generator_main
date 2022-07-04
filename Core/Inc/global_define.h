@@ -123,7 +123,7 @@
    void (*callBackFunc_isClick)  (void); 	   //│ Обработчик нажатий        │
    void (*callBackFunc_isHolded) (void); 	   //│                           │
    void (*callBackFunc_isDouble) (void); 	   //│                           │
-   void (*preCallBackFunc)(uint32_t);  		   //│ Формирование строк        │
+   void (*preCallBackFunc)(uint32_t);  		   //│ Формирование строк, всегда вызывается перед рисованием строки
    	   	   	   	   	   	   	   	   	   	   	   //│                           │
    //──── gif ───────────────────────┬───────────┴───────────────────────────┤
    char *     nameGif  = 0;        //│ Имя гифки                             │  ┌ В двустроковом варианте gif_init_state
@@ -137,14 +137,14 @@
                                                                            //│
 	struct fieldbite {                                                     //│
 	   unsigned  bitmap_always_on : 1 ;                                    //│
-	   unsigned  exit :1;                                                  //│
-	   unsigned  disable:1;             //Если 1 то отключен               //│
+	   unsigned  exit :1;                      //│ If 1 то по Click Выход  //│
+	   unsigned  disable:1;                    //│ Если 1 то отключен      //│
 	} field;                                                               //│
 	                                                                       //│
-   int32_t text_color = -1;             //│ Цвет текста                    //│
+   int32_t text_color = -1;                    //│ Цвет текста             //│
                                                                            //│
  } item_typedef;                                                           //│
-//───────────────────────────────────────────────────────────────────────────┘
+//───────────────────────────────────────────────┴───────────────────────────┘
 
 
 

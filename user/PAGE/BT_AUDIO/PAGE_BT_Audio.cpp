@@ -7,7 +7,6 @@
 
 void PAGE_BT_Audio(void) {
 
-
  Gen.pause();	                                                    //Отключить генератор
  HAL_GPIO_WritePin(BT_Audio_GPIO_Port, BT_Audio_Pin, GPIO_PIN_SET); //Включить реле
 
@@ -27,8 +26,9 @@ void PAGE_BT_Audio(void) {
  //─────────────────────────────┘
 
  tft.Fill16(BLUE);
- tft.Font_Smooth_Load( Roboto_Medium_en_ru_30 ); //(&_acRoboto_Medium_en_ru_30[0]);
- tft.Font_Smooth_drawStr(30, 100, "BT Audio");
+ tft.Font_Smooth_Load( Roboto_Medium_en_ru_30 );
+ tft.Font_Smooth_drawStr(40, 100, "BT Audio");
+ tft.Font_Smooth_drawStr(18, 200, "Press to Back");
 
  //gfxfont.Puts(10, 22, "USB Audio");
 
