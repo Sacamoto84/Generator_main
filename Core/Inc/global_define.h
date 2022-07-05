@@ -92,6 +92,8 @@
 	#include "HiSpeedDWT.h"         //│
 	#include "LOG.h"                //│
 	#include "TFT_gif.h"            //│
+	#include "scripting.h"          //│
+	#include "mString.h"            //│
 //────────────────────────────────────┘
 
 //┌─────────┬──────────────────────┐
@@ -480,6 +482,9 @@ typedef struct                                                                  
 //┌─────────┬────────────────────────────────┐
 //│ extern  │                                │
 //└─────────┴────────────────────────────────┤
+
+extern Scripting script;
+
 extern menu_typedef menu_generator;
 extern menu_typedef menu_setting;
 

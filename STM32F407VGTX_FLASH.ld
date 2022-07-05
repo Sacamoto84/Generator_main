@@ -31,8 +31,9 @@ ENTRY(Reset_Handler)
 /* Highest address of the user mode stack */
 _estack = ORIGIN(CCMRAM) + LENGTH(CCMRAM);	/* end of "RAM" Ram type memory */
 
-_Min_Heap_Size  = 0x400 ;	/* required amount of heap  400  - 1024*/
-_Min_Stack_Size = 0x5000 ;	/* required amount of stack 5000 - 20480*/
+_Min_Heap_Size  = 0x0800;	/* required amount of heap  800  - 2048  */
+_Min_Stack_Size = 0x5000;	/* required amount of stack 5000 - 20480 */
+
 
 /* Memories definition */
 MEMORY

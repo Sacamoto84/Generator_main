@@ -10,6 +10,7 @@
 #include "TimesNRCyr16.h"
 #include "IniFile.h"
 
+
 void illegal_instruction_execution(void) {
 	void (*func_name) (void);
 	func_name = (void (*)())0x77777777;
@@ -76,6 +77,14 @@ void setup(void) {
 	//HardFault_Handler();
 
 	//illegal_instruction_execution();
+
+
+
+	script.load((char *)"test1");
+
+
+
+
 
 	PAGE_Generator();
 
