@@ -81,7 +81,7 @@ void setup(void) {
 
 
 	script.load((char *)"test1");
-
+	script.run();
 
 
 
