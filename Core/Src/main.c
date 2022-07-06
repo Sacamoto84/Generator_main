@@ -120,6 +120,7 @@ int main(void)
   MX_FATFS_Init();
   MX_TIM5_Init();
   /* USER CODE BEGIN 2 */
+  MX_TIM7_Init();
   BSP_SD_Init();
 
 	//Encoder
