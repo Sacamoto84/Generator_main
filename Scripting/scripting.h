@@ -45,36 +45,34 @@
  */
 
 /*
- * Y-> YIELD
- *
- * G-> GOTO
- *
- *┌─ Задержка──┬────┐
+ *┌─ Выйти ────┬────┐
+ *│ YIELD      │ OK │
+ *└────────────┴────┘
+ *┌─ Переход ──┬────┐
+ *│ GOTO 2     │ OK │
+ *└────────────┴────┘
+ *┌─ Задержка ─┬────┐
  *│ DELAY 4000 │ OK │
  *└────────────┴────┘
- *
- * I-> IF
- *
- *┌─ Завершение──┬────┐
+ *┌─ Завершение ─┬────┐
  *│ END          │ OK │
  *└──────────────┴────┘
- *
- * TEXT-> T Текст Нужно протестировать
- *
+ *┌─ Текст ──────┬────┐
+ *│ TEXT Текст   │ OK │
+ *└──────────────┴────┘
  *┌── Арифметика ────┬──────────────────────────────┬────┐
- *│ MINUS R1 5000    │  R1 - 5000-> R1     R0-R9    │ OK │ !Добавить принт
- *│ MINUS F1 5000.0  │  F1 - 5.1 -> F1     F0-F9    │ ?? │
+ *│ MINUS R1 5000    │  R1 - 5000-> R1     R0-R9    │ OK │
+ *│ MINUS F1 5000.0  │  F1 - 5.1 -> F1     F0-F9    │ OK │
  *│                  │                              │    │
  *│ MINUS R1 R2      │  R1-R2->R1                   │ OK │
- *│ MINUS F1 F2      │  F1-F2->F1                   │ ?? │
+ *│ MINUS F1 F2      │  F1-F2->F1                   │ OK │
  *│                  │                              │    │
- *│ PLUS R1 4555     │  R1 + 4555 -> 4555    R0-R9  │ ?? │
- *│ PLUS F1 4555.5   │  F1 + 4555.5 -> 4555  R0-R9  │ ?? │
+ *│ PLUS R1 4555     │  R1 + 4555 -> 4555    R0-R9  │ OK │
+ *│ PLUS F1 4555.5   │  F1 + 4555.5 -> 4555  R0-R9  │ OK │
  *│                  │                              │    │
- *│ PLUS R1 R2       │  R1+R2->R1                   │ ?? │
- *│ PLUS F1 F2       │  F1+F2->F1                   │ ?? │
+ *│ PLUS R1 R2       │  R1+R2->R1                   │ OK │
+ *│ PLUS F1 F2       │  F1+F2->F1                   │ OK │
  *└──────────────────┴──────────────────────────────┴────┘
- *
  *//* ┌ ┐ └ ┘├ ┤ ┬ ┴ ┼ ─ │
  *┌── Загрузка константы в регистр ─┬────┐
  *│ LOAD  R1 2344    │ 2344 -> R1   │ OK │
@@ -86,7 +84,7 @@
  *└──────────────────┴────────┘
  *┌── Отобразить дамп регистров ─┬────┐
  *│ PRINTR - Дамп регистров R    │ OK │
- *│ PRINTF - Дамп регистров F    │    │
+ *│ PRINTF - Дамп регистров F    │ OK │
  *└──────────────────────────────┴────┘
  *
  *
@@ -157,15 +155,19 @@ public:
 		mString<20> comand;
 		comand = list[pc];
 
+		SEGGER_RTT_WriteString(0, "\x1B[01;38;05;208;48;05;234mScript \x1B[01;38;05;7;48;05;234m:");
+		SEGGER_RTT_printf(0, "%d \x1B[01;38;05;10;48;05;234m%s", pc, comand.buf);
+		SEGGER_RTT_WriteString(0, "\x1B[0m");
+
 		//┌── END ─────────────────────────────────────┐
 		if (comand.indexOf((char*) "END", 0) == 0) {
-			SEGGER_RTT_printf(0, "Script:%d:END\r\n", pc);
 			end = true;
 			return;
 		}
 		//└────────────────────────────────────────────┘
 
 		char c = comand.buf[0];
+
 		switch (c) {
 
 		//┌── MINUS ───────────────────────────────────┐
@@ -196,7 +198,6 @@ public:
 		case 'G':
 			if (comand.indexOf((char*) "GOTO", 0) == 0) {
 				pc = comand.toUint(4);
-				SEGGER_RTT_printf(0, "S:GOTO->pc:%d\r\n", pc);
 			}
 			break;
 		//└────────────────────────────────────────────┘
@@ -204,7 +205,6 @@ public:
 		case 'Y':
 			if (comand.indexOf((char*) "YIELD", 0) == 0) {
 				yield = true;
-				SEGGER_RTT_printf(0, "\x1B[0mScript:%d:YIELD\r\n", pc);
 				pc++;
 			}
 			break;
@@ -212,10 +212,7 @@ public:
 		//┌── DELAY ───────────────────────────────────┐
 		case 'D':
 			if (comand.indexOf((char*) "DELAY", 0) == 0) {
-				//TimerDWT.Start();
 				uint32_t d = comand.toUint(5);
-				sprintf(str, "\x1B[0mScript:%lu:DELAY %lu\r\n", pc, d);
-				SEGGER_RTT_WriteString(0, str);
 				endTime = uwTick + d;
 				pc++;
 			}
@@ -223,7 +220,6 @@ public:
 		//└────────────────────────────────────────────┘
 		//┌── TEXT ────────────────────────────────────┐
 		case 'T': {
-			SEGGER_RTT_printf(0, "\x1B[0mScript:%d:%s", pc, comand.buf[5]);
 			pc++;
 			break;
 		}
@@ -231,7 +227,6 @@ public:
 
 		//┌── LOAD ────────────────────────────────────┐
 		case 'L': {
-			SEGGER_RTT_printf(0, "\x1B[0mScript:%d:%s", pc, comand.buf);
 			triple = excretionTripleOperand(comand);
 			if (triple.operand0 == (char*)"LOAD")
 			{
@@ -246,7 +241,6 @@ public:
 			break;
 		}
 		//└────────────────────────────────────────────┘
-
 
 		default:
 			SEGGER_RTT_printf(0, "Script:? pc:%d:%s\r\n", pc, comand.buf);
@@ -344,7 +338,9 @@ public:
 
 	void printF()
 	{
-		SEGGER_RTT_printf(0, "\x1B[0mF 0:%.1f 1:%.1f 2:%.1f 3:%.1f 4:%.1f 5:%.1f 6:%.1f 7:%.1f 8:%.1f 9:%.1f\r\n", F[0],F[1],F[2],F[3],F[4],F[5],F[6],F[7],F[8],F[9]);
+		char s[80];
+		sprintf(s, "\x1B[0mF 0:%.1f 1:%.1f 2:%.1f 3:%.1f 4:%.1f 5:%.1f 6:%.1f 7:%.1f 8:%.1f 9:%.1f\r\n", F[0],F[1],F[2],F[3],F[4],F[5],F[6],F[7],F[8],F[9]);
+		SEGGER_RTT_printf(0, s );
 	}
 
 
