@@ -79,6 +79,8 @@ void setup(void) {
 	//illegal_instruction_execution();
 
 
+	//Gen.pause();
+
 	HAL_TIM_Base_Start_IT(&htim7);
 	script.load((char *)"test1");
 	HAL_Delay(50);
