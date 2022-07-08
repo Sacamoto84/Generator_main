@@ -80,8 +80,10 @@ void setup(void) {
 
 
 	//Gen.pause();
+	script.G = &Gen; //Привязать генератор
 
-	HAL_TIM_Base_Start_IT(&htim7);
+	//HAL_TIM_Base_Start_IT(&htim7);
+
 	script.load((char *)"test1");
 	HAL_Delay(50);
 	script.start();

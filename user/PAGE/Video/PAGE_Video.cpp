@@ -132,8 +132,8 @@ void PAGE_Video(void) {
              if (res == FR_OK)
              {
             	SEGGER_RTT_printf(0, "res == FR_OK\r\n");
-            	UINT * br;
-            	*br = 0;
+            	UINT * br = NULL;
+            	//*br = 0;
             	res = f_read (&SDFile, &str, 16, br); //Читаем строку времени задержки
             	if (res == FR_OK)
             	   time =  atoi(str); //Получили время кадра в ms

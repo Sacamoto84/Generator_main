@@ -6,6 +6,8 @@ void PAGE_Generator()
   PAGE_Menu2( &menu_generator,  &item_generator[0], NUM_ITEM_GENERETOR);
 }
 
+uint8_t render;
+
 //┌───────────────────────────────────────────────────────────────────┐
 //│  Построение в две строки                                          │
 //└──────────────────────────────────────────────────┬────────────────┤
@@ -42,6 +44,8 @@ void PAGE_Menu2(menu_typedef *menu, item_typedef *item, int NUM) {
 
 	while (1) {
 
+		script.run();
+
 		KEY.tick();
 
 		if (menu->preCallBackFunc) {
@@ -72,6 +76,13 @@ void PAGE_Menu2(menu_typedef *menu, item_typedef *item, int NUM) {
 			}
 		}
 
+		if (render)
+		{
+			render = 0;
+			menu->field.needRender = 1;
+			menu->field.needUpdate = 1;
+		}
+
 		if(menu->field.needRender) //Перерисовка экрана ~7ms
 		{
 			menu->field.needRender = 0;
@@ -85,7 +96,7 @@ void PAGE_Menu2(menu_typedef *menu, item_typedef *item, int NUM) {
 		if ((menu->field.needUpdate) || (tft.needUpdate)) {
 			menu->field.needUpdate = 0;
 			tft.needUpdate = 0;
-		    LOG((char*)"MENU2",'I',(char*)"ST7789_UpdateDMA16bitV3");
+		    //LOG((char*)"MENU2",'I',(char*)"ST7789_UpdateDMA16bitV3");
 			tft.ST7789_UpdateDMA16bitV3(); //DMA8bitV2();
 		}
 

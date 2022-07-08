@@ -18,17 +18,16 @@
 
 #include "HiSpeedDWT.h"
 
+#include "generator.h"
+
+extern uint8_t render;
+
 //Команда максимум 12 байт [128]
 //Скрипты лежат в папке script
+
 /*
- * CH1 ON OFF -
- * CH2 ON OFF -
  *
- * CR1 SINUS
- *
- *
- *
- *
+
  * ----------------- Логика -----------------
  * GOTO 10
  *
@@ -45,50 +44,50 @@
  */
 
 /*
- *┌─ Выйти ────┬────┐
- *│ YIELD      │ OK │
- *└────────────┴────┘
- *┌─ Переход ──┬────┐
- *│ GOTO 2     │ OK │
- *└────────────┴────┘
- *┌─ Задержка ─┬────┐
- *│ DELAY 4000 │ OK │
- *└────────────┴────┘
- *┌─ Завершение ─┬────┐
- *│ END          │ OK │
- *└──────────────┴────┘
- *┌─ Текст ──────┬────┐
- *│ TEXT Текст   │ OK │
- *└──────────────┴────┘
- *┌── Арифметика ────┬──────────────────────────────┬────┐
- *│ MINUS R1 5000    │  R1 - 5000-> R1     R0-R9    │ OK │
- *│ MINUS F1 5000.0  │  F1 - 5.1 -> F1     F0-F9    │ OK │
- *│                  │                              │    │
- *│ MINUS R1 R2      │  R1-R2->R1                   │ OK │
- *│ MINUS F1 F2      │  F1-F2->F1                   │ OK │
- *│                  │                              │    │
- *│ PLUS R1 4555     │  R1 + 4555 -> 4555    R0-R9  │ OK │
- *│ PLUS F1 4555.5   │  F1 + 4555.5 -> 4555  R0-R9  │ OK │
- *│                  │                              │    │
- *│ PLUS R1 R2       │  R1+R2->R1                   │ OK │
- *│ PLUS F1 F2       │  F1+F2->F1                   │ OK │
- *└──────────────────┴──────────────────────────────┴────┘
- *//* ┌ ┐ └ ┘├ ┤ ┬ ┴ ┼ ─ │
- *┌── Загрузка константы в регистр ─┬────┐
- *│ LOAD  R1 2344    │ 2344 -> R1   │ OK │
- *│ LOAD  F1 2344.0  │ 2344 -> F1   │ OK │
- *└──────────────────┴──────────────┴────┘
- *┌── Копирование регистров───┐ Не готово
+ *╭─ Выйти ─╮╭─ Переход ─╮╭─ Задержка ─╮╭─ Завершение ─╮╭─ Текст ────╮
+ *│ YIELD   ││ GOTO 2    ││ DELAY 4000 ││ END          ││ TEXT Текст │
+ *╰─────────╯╰───────────╯╰────────────╯╰──────────────╯╰────────────╯
+ *╭─ Арифметика ────┬─────────────────────╮╭─ Загрузка константы в регистр ─╮
+ *│ MINUS R1 5000   │ R1 - 5000-> R1      ││ LOAD R1 2344    │ 2344 -> R1   │
+ *│ MINUS F1 5000.0 │ F1 - 5.1 -> F1      ││ LOAD F1 2344.0  │ 2344 -> F1   │
+ *│                 │                     │╰─────────────────┴──────────────╯
+ *│ MINUS R1 R2     │ R1-R2->R1           │╭─ Отобразить дамп регистров ──╮
+ *│ MINUS F1 F2     │ F1-F2->F1           ││ PRINTR - Дамп регистров R    │
+ *│                 │                     ││ PRINTF - Дамп регистров F    │
+ *│ PLUS R1 4555    │ R1 + 4555 -> 4555   │╰──────────────────────────────╯
+ *│ PLUS F1 4555.5  │ F1 + 4555.5 -> 4555 │
+ *│                 │                     │
+ *│ PLUS R1 R2      │ R1+R2->R1           │
+ *│ PLUS F1 F2      │ F1+F2->F1           │
+ *╰─────────────────┴─────────────────────╯
+ *╭─ Генератор ─────────────────╮
+ *│ CH[1 2] [CR AM FM] [ON OFF] │
+ *│                             │
+ *│ AM[1 2] FR 1000.3           │
+ *│ AM[1 2] MOD 02_HWawe        │
+ *│                             │
+ *│ FM[1 2] BASE 1234.6         │
+ *│ FM[1 2] DEV  123.8          │
+ *│ FM[1 2] MOD  02_HWawe       │
+ *│ FM[1 2] FR   3.5            │
+ *╰─────────────────────────────╯
+ * ┌ ┐ └ ┘├ ┤ ┬ ┴ ┼ ─ │
+
+ *╭─ Копирование регистров ───╮ Не готово
  *│ COPY R1 R2       │ R2->R1 │
  *│ COPY F1 F2       │ F2->F1 │
- *└──────────────────┴────────┘
- *┌── Отобразить дамп регистров ─┬────┐
- *│ PRINTR - Дамп регистров R    │ OK │
- *│ PRINTF - Дамп регистров F    │ OK │
- *└──────────────────────────────┴────┘
+ *╰──────────────────┴────────┘
  *
  *
  * Переход если равно и не равно
+ *
+ *
+ *
+ *          ╭╮╯╰│─✓
+ *
+ *
+ *
+ *
  *
  */
 
@@ -155,9 +154,13 @@ public:
 		mString<20> comand;
 		comand = list[pc];
 
+		mString<20> com;
+		com = comand;
+		com.truncate(1);
 		SEGGER_RTT_WriteString(0, "\x1B[01;38;05;208;48;05;234mScript \x1B[01;38;05;7;48;05;234m:");
-		SEGGER_RTT_printf(0, "%d \x1B[01;38;05;10;48;05;234m%s", pc, comand.buf);
-		SEGGER_RTT_WriteString(0, "\x1B[0m");
+		SEGGER_RTT_printf(0, "%d \x1B[01;38;05;10;48;05;234m%s \x1B[0m \n", pc, com.buf);
+
+		//SEGGER_RTT_WriteString(0, "\x1B[0m");
 
 		//┌── END ─────────────────────────────────────┐
 		if (comand.indexOf((char*) "END", 0) == 0) {
@@ -169,6 +172,24 @@ public:
 		char c = comand.buf[0];
 
 		switch (c) {
+
+		//┌── Генератор ──────────────────────────────┐
+		case 'C':
+			generatorComand();
+			pc++;
+			break;
+
+		case 'A':
+			generatorComand();
+			pc++;
+			break;
+
+		case 'F':
+			generatorComand();
+			pc++;
+			break;
+		//└────────────────────────────────────────────┘
+
 
 		//┌── MINUS ───────────────────────────────────┐
 		case 'M':
@@ -254,6 +275,7 @@ public:
 
 
 	void comandPlusMinus()	{
+
 		mString<20> comand;
 		comand = list[pc];
 
@@ -383,6 +405,154 @@ public:
 	mString<20> list[128]; //Список команд
 
 	uint8_t line = 0; //Текучая строка
+
+	GENERATOR * G;
+
+	/*
+	*╭─ Генератор ─────────────────╮
+	*│ CH[1 2] [CR AM FM] [ON OFF] │ ✓
+	*│                             │
+	*│ CR[1 2] FR 1000.0           │
+	*│ CR[1 2] MOD 02_HWawe        │
+	*│                             │
+	*│ AM[1 2] FR 1000.3           │
+	*│ AM[1 2] MOD 02_HWawe        │
+	*│                             │
+	*│ FM[1 2] BASE 1234.6         │
+	*│ FM[1 2] DEV  123.8          │
+	*│ FM[1 2] MOD  02_HWawe       │
+	*│ FM[1 2] FR   3.5            │
+	*╰─────────────────────────────╯
+	*/
+
+	void generatorComand(void)
+	{
+		mString<20> comand;
+		comand = list[pc];
+
+		triple = excretionTripleOperand(comand);
+
+		uint8_t chanel = 1;
+		chanel = triple.operand0.buf[2] - 0x30; //Номер канала
+
+		uint8_t onoff = 0;
+
+	//╭─ CH1 CH2 ────────────────────────────╮
+	    if ((triple.operand0 == (char*)"CH1")||(triple.operand0 == (char*)"CH2"))
+	    {
+	      if (triple.operand2 == (char*)"ON") onoff = 1; else onoff = 0;
+
+	      if (triple.operand1 == (char*)"CR")
+	      {
+	    	  SEGGER_RTT_WriteString(0, "2\r\n");
+	    	  if (chanel == 1)
+	    		  G->CH1.CH_EN = onoff;
+	    	  else
+	    		  G->CH2.CH_EN = onoff;
+	      }
+
+	      if (triple.operand1 == (char*)"AM")
+	      {
+	    	  SEGGER_RTT_WriteString(0, "3\r\n");
+	    	  if (chanel == 1)
+	    		  G->CH1.AM_EN = onoff;
+	    	  else
+	    		  G->CH2.AM_EN = onoff;
+	      }
+
+	      if (triple.operand1 == (char*)"FM")
+	      {
+	    	  SEGGER_RTT_WriteString(0, "4\r\n");
+	    	  if (chanel == 1)
+	    		  G->CH1.FM_EN = onoff;
+	    	  else
+	    		  G->CH2.FM_EN = onoff;
+	      }
+
+	      render = 1;
+
+	      return;
+	    }
+	//╰──────────────────────────────────────╯
+
+
+
+
+
+	//╭─ AM1 AM2 ────────────────────────────╮
+	    if ((triple.operand0 == (char*)"AM1")||(triple.operand0 == (char*)"AM2"))
+	    {
+
+	      //SEGGER_RTT_printf(0, "╭─ AM1 AM2 ─╮\n");
+
+	      //AM[1 2] FR 1000.3
+	      if (triple.operand1 == (char*)"FR")
+	      {
+             float value = triple.operand2.toFloat();
+
+             if (chanel == 1)
+               G->CH1.AM_fr = value;
+             else
+               G->CH2.AM_fr = value;
+
+             render = 1;
+
+	      }
+
+	      //AM[1 2] MOD 02_HWawe
+	      if (triple.operand1 == (char*)"MOD")
+	      {
+	         if (chanel == 1){
+	        	sprintf(G->CH1.AM_mod,"%s.dat",triple.operand2.buf);
+                G->Create_AM_Modulation1();
+	         }
+	         else
+	         {
+	        	sprintf(G->CH2.AM_mod,"%s.dat",triple.operand2.buf);
+	        	G->Create_AM_Modulation2();
+	         }
+	    	  render = 1;
+	      }
+	      return;
+	    }
+	//╰───────────────────────────────────────╯
+	//╭─ FM1 FM2 ────────────────────────────╮
+	    if ((triple.operand0 == (char*)"FM1")||(triple.operand0 == (char*)"FM2"))
+	    {
+
+
+
+
+
+
+	      return;
+	    }
+	//╰───────────────────────────────────────╯
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 };
+
+
+
+
+
+
+
 
 #endif

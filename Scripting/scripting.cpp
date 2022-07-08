@@ -10,7 +10,7 @@ int i;
 
 //Каждые 10ms
 extern "C" void TIM7_IRQHandler(void) {
-	script.run();
+	//script.run();
 	HAL_TIM_IRQHandler(&htim7);
 }
 
