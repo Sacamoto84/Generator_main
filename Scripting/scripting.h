@@ -159,59 +159,63 @@ public:
 
 		//SEGGER_RTT_WriteString(0, "\x1B[0m");
 
-		//┌── END ─────────────────────────────────────┐
-		if (comand.indexOf((char*) "END", 0) == 0) {
-			end = true;
-			return;
-		}
-		//└────────────────────────────────────────────┘
+		//╭── END ──────────────────────────────────────╮
+		if (comand.indexOf((char*) "END", 0) == 0) {  //│
+			end = true; return; }                     //│
+		//╰─────────────────────────────────────────────╯
 
 		char c = comand.buf[0];
 
 		switch (c) {
+		//╭─ ENDIF ELSE ───╮
+		case 'E':        //│
+		    pc++;        //│
+		    break;       //│
+		//╰────────────────╯
+		//╭─ IF ───────────╮
+		case 'I':        //│
+		    ifComand();  //│
+		    break;       //│
+		//╰────────────────╯
+		//╭── Генератор ──────────╮
+		case 'C':               //│
+			generatorComand();  //│
+			pc++;               //│
+			break;              //│
+		                        //│
+		case 'A':               //│
+			generatorComand();  //│
+			pc++;               //│
+			break;              //│
+		                        //│
+		case 'F':               //│
+			generatorComand();  //│
+			pc++;               //│
+			break;              //│
+		//╰───────────────────────╯
 
-		//┌── Генератор ──────────────────────────────┐
-		case 'C':
-			generatorComand();
-			pc++;
-			break;
 
-		case 'A':
-			generatorComand();
-			pc++;
-			break;
-
-		case 'F':
-			generatorComand();
-			pc++;
-			break;
-		//└────────────────────────────────────────────┘
-
-
-		//┌── MINUS ───────────────────────────────────┐
-		case 'M':
-			comandPlusMinus();
-			pc++;
-			break;
-		//└────────────────────────────────────────────┘
-		//┌── PLUS ───────────────────────────────────┐
-		case 'P':
-
-			if (comand.indexOf((char*) "PLUS", 0) == 0) {
-			  comandPlusMinus();
-			}
-
-			if (comand.indexOf((char*) "PRINTR", 0) == 0) {
-			  printR();
-			}
-
-			if (comand.indexOf((char*) "PRINTF", 0) == 0) {
-			  printF();
-			}
-
-			pc++;
-			break;
-		//└────────────────────────────────────────────┘
+		//╭── MINUS ─────────────╮
+		case 'M':              //│
+			comandPlusMinus(); //│
+			pc++;              //│
+			break;             //│
+		//╰──────────────────────╯
+		//╭── PLUS ─ PRINTR ─ PRINTF ───────────────────────╮
+		case 'P':                                         //│
+                                                          //│
+			if (comand.indexOf((char*) "PLUS", 0) == 0)   //│
+			  comandPlusMinus();                          //│
+                                                          //│
+			if (comand.indexOf((char*) "PRINTR", 0) == 0) //│
+			  printR();                                   //│
+                                                          //│
+			if (comand.indexOf((char*) "PRINTF", 0) == 0) //│
+			  printF();                                   //│
+                                                          //│
+			pc++;                                         //│
+			break;                                        //│
+		//╰─────────────────────────────────────────────────╯
 		//┌── GOTO ────────────────────────────────────┐
 		case 'G':
 			if (comand.indexOf((char*) "GOTO", 0) == 0) {
@@ -584,6 +588,11 @@ public:
 
 
 
+	void ifComand(void)
+	{
+
+
+	}
 
 
 
@@ -597,8 +606,27 @@ public:
 
 
 
+ void Unit5Load(void)
+ {
+	list[0] = "Unit test";
+	list[1] = "T Юнит тест\r\n";
+	list[2] = "LOAD R1 2000\r\n";
+	list[3] = "IF R1 > 1000\r\n";
+	list[4] = "MINUS R1 100\r\n";
+	list[5] = "T XXX\r\n";
+    list[6] = "GOTO 3\r\n";
+    list[7] = "ENDIF\r\n";
+    list[8] = "T Выход\r\n";
+    list[9] = "END\r\n";
+
+
+
+ }
 
 };
+
+
+
 
 
 
