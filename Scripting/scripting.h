@@ -24,15 +24,11 @@ extern uint8_t render;
 
 extern HiSpeedDWT TimerT5;
 
-//Команда максимум 12 байт [128]
+//Команда максимум 20 байт [128]
 //Скрипты лежат в папке script
 
 /*
- *
-
  * ----------------- Логика -----------------
- * GOTO 10
- *
  * IF R1 = 2
  * ...
  * ELSE
@@ -40,9 +36,6 @@ extern HiSpeedDWT TimerT5;
  * ENDIF
  *
  * DELAY 1000 - Задержка работы
- *
- *
- *
  */
 
 /*
@@ -62,19 +55,21 @@ extern HiSpeedDWT TimerT5;
  *│ PLUS R1 R2      │ R1+R2->R1           │
  *│ PLUS F1 F2      │ F1+F2->F1           │
  *╰─────────────────┴─────────────────────╯
- *╭─ Генератор ─────────────────╮
- *│ CH[1 2] [CR AM FM] [ON OFF] │
- *│                             │
- *│ AM[1 2] FR 1000.3           │
- *│ AM[1 2] MOD 02_HWawe        │
- *│                             │
- *│ FM[1 2] BASE 1234.6         │
- *│ FM[1 2] DEV  123.8          │
- *│ FM[1 2] MOD  02_HWawe       │
- *│ FM[1 2] FR   3.5            │
- *╰─────────────────────────────╯
- * ┌ ┐ └ ┘├ ┤ ┬ ┴ ┼ ─ │
-
+ *╭─ Генератор ─────────────────╮╭─╮
+ *│ CH[1 2] [CR AM FM] [ON OFF] ││✓│
+ *│                             ││ │
+ *│ CR[1 2] FR 1000.0           ││✓│
+ *│ CR[1 2] MOD 02_HWawe        ││✓│
+ *│                             ││ │
+ *│ AM[1 2] FR 1000.3           ││✓│
+ *│ AM[1 2] MOD 02_HWawe        ││✓│
+ *│                             ││ │
+ *│ FM[1 2] BASE 1234.6         ││✓│
+ *│ FM[1 2] DEV  123.8          ││✓│
+ *│ FM[1 2] MOD  02_HWawe       ││✓│
+ *│ FM[1 2] FR   3.5            ││✓│
+ *╰─────────────────────────────╯╰─╯
+ * ┌ ┐ └ ┘├ ┤ ┬ ┴ ┼ ─ │╭╮╯╰│ ─ ✓
  *╭─ Копирование регистров ───╮ Не готово
  *│ COPY R1 R2       │ R2->R1 │
  *│ COPY F1 F2       │ F2->F1 │
@@ -85,7 +80,7 @@ extern HiSpeedDWT TimerT5;
  *
  *
  *
- *          ╭╮╯╰│─✓
+ *
  *
  *
  *
@@ -309,8 +304,8 @@ public:
 		{
 
 		  //Второй операнд это константа
-	      int value;
-	      float fvalue;
+	      int   value  = 0;
+	      float fvalue = 0.0F;
 
 		  if (triple.operand1.buf[0] == 'R'){
 			  value = triple.operand2.toInt(); }
@@ -405,22 +400,7 @@ public:
 
 	GENERATOR * G;
 
-	/*
-	*╭─ Генератор ─────────────────╮
-	*│ CH[1 2] [CR AM FM] [ON OFF] │ ✓
-	*│                             │
-	*│ CR[1 2] FR 1000.0           │
-	*│ CR[1 2] MOD 02_HWawe        │
-	*│                             │
-	*│ AM[1 2] FR 1000.3           │
-	*│ AM[1 2] MOD 02_HWawe        │
-	*│                             │
-	*│ FM[1 2] BASE 1234.6         │
-	*│ FM[1 2] DEV  123.8          │
-	*│ FM[1 2] MOD  02_HWawe       │
-	*│ FM[1 2] FR   3.5            │
-	*╰─────────────────────────────╯
-	*/
+
 
 	void generatorComand(void)
 	{
@@ -434,98 +414,172 @@ public:
 
 		uint8_t onoff = 0;
 
-	//╭─ CH1 CH2 ────────────────────────────╮
-	    if ((triple.operand0 == (char*)"CH1")||(triple.operand0 == (char*)"CH2"))
-	    {
-	      if (triple.operand2 == (char*)"ON") onoff = 1; else onoff = 0;
+	//╭─ CH1 CH2 ───────────────────────────────────────────────────────────────────╮
+	    if ((triple.operand0 == (char*)"CH1")||(triple.operand0 == (char*)"CH2")) //│
+	    {                                                                         //│
+	      if (triple.operand2 == (char*)"ON") onoff = 1; else onoff = 0;          //│
+	                                                                              //│
+	      if (triple.operand1 == (char*)"CR")                                     //│
+	      {                                                                       //│
+	    	  if (chanel == 1)                                                    //│
+	    		  G->CH1.CH_EN = onoff;                                           //│
+	    	  else                                                                //│
+	    		  G->CH2.CH_EN = onoff;                                           //│
+	      }                                                                       //│
+	                                                                              //│
+	      if (triple.operand1 == (char*)"AM")                                     //│
+	      {                                                                       //│
+	    	  if (chanel == 1)                                                    //│
+	    		  G->CH1.AM_EN = onoff;                                           //│
+	    	  else                                                                //│
+	    		  G->CH2.AM_EN = onoff;                                           //│
+	      }                                                                       //│
+	                                                                              //│
+	      if (triple.operand1 == (char*)"FM")                                     //│
+	      {                                                                       //│
+	    	  if (chanel == 1)                                                    //│
+	    		  G->CH1.FM_EN = onoff;                                           //│
+	    	  else                                                                //│
+	    		  G->CH2.FM_EN = onoff;                                           //│
+	      }                                                                       //│
+	                                                                              //│
+	      render = 1;                                                             //│
+	                                                                              //│
+	      return;                                                                 //│
+	    }                                                                         //│
+	//╰─────────────────────────────────────────────────────────────────────────────╯
 
-	      if (triple.operand1 == (char*)"CR")
-	      {
-	    	  SEGGER_RTT_WriteString(0, "2\r\n");
-	    	  if (chanel == 1)
-	    		  G->CH1.CH_EN = onoff;
-	    	  else
-	    		  G->CH2.CH_EN = onoff;
-	      }
+	//╭─ CR1 CR2 ───────────────────────────────────────────────────────────────────╮
+		if ((triple.operand0 == (char*)"CR1")||(triple.operand0 == (char*)"CR2")) //│
+		{                                                                         //│
+			//CR[1 2] MOD 01_Sine_12b                                             //│
+		    if (triple.operand1 == (char*)"MOD")                                  //│
+		    {                                                                     //│
+		       if (chanel == 1){                                                  //│
+		      	sprintf(G->CH1.Carrier_mod,"%s.dat",triple.operand2.buf);         //│
+	              G->Create_Carrier1();                                           //│
+		       }                                                                  //│
+		       else                                                               //│
+		       {                                                                  //│
+		      	sprintf(G->CH2.Carrier_mod,"%s.dat",triple.operand2.buf);         //│
+		      	G->Create_Carrier2();                                             //│
+		       }                                                                  //│
+		      render = 1;                                                         //│
+		    }                                                                     //│
+		                                                                          //│
+			//CR[1 2] FR 1000.3                                                   //│
+		    if (triple.operand1 == (char*)"FR")                                   //│
+			{                                                                     //│
+			   float value = triple.operand2.toFloat();                           //│
+			   if (chanel == 1)                                                   //│
+			     G->CH1.Carrier_fr = (uint16_t)value;                             //│
+			   else                                                               //│
+			     G->CH2.Carrier_fr = (uint16_t)value;                             //│
+			   render = 1;                                                        //│
+			}                                                                     //│
+                                                                                  //│
+		  return;                                                                 //│
+		}                                                                         //│
+	//╰─────────────────────────────────────────────────────────────────────────────╯
 
-	      if (triple.operand1 == (char*)"AM")
-	      {
-	    	  SEGGER_RTT_WriteString(0, "3\r\n");
-	    	  if (chanel == 1)
-	    		  G->CH1.AM_EN = onoff;
-	    	  else
-	    		  G->CH2.AM_EN = onoff;
-	      }
-
-	      if (triple.operand1 == (char*)"FM")
-	      {
-	    	  SEGGER_RTT_WriteString(0, "4\r\n");
-	    	  if (chanel == 1)
-	    		  G->CH1.FM_EN = onoff;
-	    	  else
-	    		  G->CH2.FM_EN = onoff;
-	      }
-
-	      render = 1;
-
-	      return;
-	    }
-	//╰──────────────────────────────────────╯
-
-
-	//╭─ AM1 AM2 ────────────────────────────╮
-	    if ((triple.operand0 == (char*)"AM1")||(triple.operand0 == (char*)"AM2"))
-	    {
-
-	      //SEGGER_RTT_printf(0, "╭─ AM1 AM2 ─╮\n");
-
-	      //AM[1 2] FR 1000.3
-	      if (triple.operand1 == (char*)"FR")
-	      {
-             float value = triple.operand2.toFloat();
-
-             if (chanel == 1)
-               G->CH1.AM_fr = value;
-             else
-               G->CH2.AM_fr = value;
-
-             render = 1;
-
-	      }
-
-	      //AM[1 2] MOD 02_HWawe { 1.9ms }
-	      if (triple.operand1 == (char*)"MOD")
-	      {
-	    	  TimerT5.Start();
-	         if (chanel == 1){
-	        	sprintf(G->CH1.AM_mod,"%s.dat",triple.operand2.buf);
-                G->Create_AM_Modulation1();
-	         }
-	         else
-	         {
-	        	sprintf(G->CH2.AM_mod,"%s.dat",triple.operand2.buf);
-	        	G->Create_AM_Modulation2();
-	         }
-
-
-
-	        render = 1;
-	      }
-	      return;
-	    }
-	//╰───────────────────────────────────────╯
-	//╭─ FM1 FM2 ────────────────────────────╮
-	    if ((triple.operand0 == (char*)"FM1")||(triple.operand0 == (char*)"FM2"))
-	    {
-
-
-
-
-
-
-	      return;
-	    }
-	//╰───────────────────────────────────────╯
+	//╭─ AM1 AM2 ───────────────────────────────────────────────────────────────────╮
+	    if ((triple.operand0 == (char*)"AM1")||(triple.operand0 == (char*)"AM2")) //│
+	    {                                                                         //│
+	      //SEGGER_RTT_printf(0, "╭─ AM1 AM2 ─╮\n");                              //│
+	    	                                                                      //│
+	      //AM[1 2] FR 1000.3                                                     //│
+	      if (triple.operand1 == (char*)"FR")                                     //│
+	      {                                                                       //│
+             float value = triple.operand2.toFloat();                             //│
+             if (chanel == 1)                                                     //│
+               G->CH1.AM_fr = value;                                              //│
+             else                                                                 //│
+               G->CH2.AM_fr = value;                                              //│
+             render = 1;                                                          //│
+	      }                                                                       //│
+	                                                                              //│
+	      //AM[1 2] MOD 02_HWawe { 1.9ms }                                        //│
+	      if (triple.operand1 == (char*)"MOD")                                    //│
+	      {                                                                       //│
+	         if (chanel == 1){                                                    //│
+	        	sprintf(G->CH1.AM_mod,"%s.dat",triple.operand2.buf);              //│
+                G->Create_AM_Modulation1();                                       //│
+	         }                                                                    //│
+	         else                                                                 //│
+	         {                                                                    //│
+	        	sprintf(G->CH2.AM_mod,"%s.dat",triple.operand2.buf);              //│
+	        	G->Create_AM_Modulation2();                                       //│
+	         }                                                                    //│
+	        render = 1;                                                           //│
+	      }                                                                       //│
+	      return;                                                                 //│
+	    }                                                                         //│
+	//╰─────────────────────────────────────────────────────────────────────────────╯
+	//╭─ FM1 FM2 ───────────────────────────────────────────────────────────────────╮
+	    if ((triple.operand0 == (char*)"FM1")||(triple.operand0 == (char*)"FM2")) //│
+	    {                                                                         //│
+	      SEGGER_RTT_printf(0, "╭─ FM1 FM2 ─╮\n");                                //│
+	                                                                              //│
+	      //FM[1 2] BASE 1234.6                                                   //│
+	      if (triple.operand1 == (char*)"BASE")                                   //│
+	      {                                                                       //│
+	    	  float value = triple.operand2.toFloat();                            //│
+	    	  if (chanel == 1){                                                   //│
+	    	    G->CH1.FM_Base = (uint16_t)value;                                 //│
+	    	    G->Refresh_FM_Modulation1();                                      //│
+	    	  }                                                                   //│
+	    	  else{                                                               //│
+	    	    G->CH2.FM_Base = (uint16_t)value;                                 //│
+	    	    G->Refresh_FM_Modulation2();                                      //│
+	    	  }                                                                   //│
+	    	  render = 1;                                                         //│
+	      }                                                                       //│
+                                                                                  //│
+	      //FM[1 2] DEV  123.8                                                    //│
+	      if (triple.operand1 == (char*)"DEV")                                    //│
+	      {                                                                       //│
+	    	  float value = triple.operand2.toFloat();                            //│
+	    	  if (chanel == 1){                                                   //│
+	    	    G->CH1.FM_Dev = value;                                            //│
+	    	    G->Refresh_FM_Modulation1();                                      //│
+	    	  }                                                                   //│
+	    	  else{                                                               //│
+	    	    G->CH2.FM_Dev = value;                                            //│
+	    	    G->Refresh_FM_Modulation2();                                      //│
+	    	  }                                                                   //│
+	    	  render = 1;                                                         //│
+	      }                                                                       //│
+	                                                                              //│
+	      //FM[1 2] MOD 02_HWawe                                                  //│
+	      if (triple.operand1 == (char*)"MOD")                                    //│
+	      {                                                                       //│
+	    	  if (chanel == 1){                                                   //│
+	    	 	 sprintf(G->CH1.FM_mod,"%s.dat",triple.operand2.buf);             //│
+	    	     G->Create_FM_Modulation1();                                      //│
+	    	  }                                                                   //│
+	    	  else                                                                //│
+	    	  {                                                                   //│
+	    	 	 sprintf(G->CH2.FM_mod,"%s.dat",triple.operand2.buf);             //│
+	    	 	 G->Create_FM_Modulation2();                                      //│
+	    	  }                                                                   //│
+                                                                                  //│
+	    	  render = 1;                                                         //│
+	      }                                                                       //│
+                                                                                  //│
+	      //FM[1 2] FR   3.5                                                      //│
+	      if (triple.operand1 == (char*)"FR")                                     //│
+	      {                                                                       //│
+	    	  float value = triple.operand2.toFloat();                            //│
+	    	  if (chanel == 1)                                                    //│
+	    	    G->CH1.FM_mod_fr = value;                                         //│
+	    	  else                                                                //│
+	    	    G->CH2.FM_mod_fr = value;                                         //│
+	    	  render = 1;                                                         //│
+	      }                                                                       //│
+                                                                                  //│
+	      return;                                                                 //│
+	    }                                                                         //│
+	//╰─────────────────────────────────────────────────────────────────────────────╯
 	}
 
 
