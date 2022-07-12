@@ -24,6 +24,9 @@ extern uint8_t render;
 
 extern HiSpeedDWT TimerT5;
 
+
+#define PC_MAX 128
+
 //Команда максимум 20 байт [128]
 //Скрипты лежат в папке script
 
@@ -167,11 +170,11 @@ public:
 		char c = comand.buf[0];
 
 		switch (c) {
-		//╭─ ENDIF ELSE ───╮
-		case 'E':        //│
-		    pc++;        //│
-		    break;       //│
-		//╰────────────────╯
+		//╭─ ENDIF ELSE ───╮────────────────────────────────────────────────────────╮
+		case 'E':        //│ На крайний случай IF должен сам дать PC+1 к ENDIF ELSE │
+		    pc++;        //│                                                        │
+		    break;       //│                                                        │
+		//╰────────────────╯────────────────────────────────────────────────────────╯
 		//╭─ IF ───────────╮
 		case 'I':        //│
 		    ifComand();  //│
@@ -193,8 +196,6 @@ public:
 			pc++;               //│
 			break;              //│
 		//╰───────────────────────╯
-
-
 		//╭── MINUS ─────────────╮
 		case 'M':              //│
 			comandPlusMinus(); //│
@@ -398,7 +399,7 @@ public:
 	float   F[10]; //10 FLOAT регистров
 
 	char str[32];           //Временная строка
-	mString<20> list[128]; //Список команд
+	mString<20> list[PC_MAX]; //Список команд
 
 	uint8_t line = 0; //Текучая строка
 
@@ -588,39 +589,72 @@ public:
 
 
 
+	// IF R1 < 4500
 	void ifComand(void)
 	{
+	  mString<20> comand;
+	  comand = list[pc];
+	  comand.truncate(1);
+      if (comand.indexOf((char*) "IF", 0) != 0){pc++;return;}
+      comand.remove(0, 3); //Убрали IF
+      triple = excretionTripleOperand(comand);
+
+      float f1value = 0.0F;
+      float f2value = 0.0F;
+
+      f1value = F[triple.operand0.buf[1] - 0x30];
+
+      if ((triple.operand2.buf[0] == 'F'))
+      {
+          f2value = F[triple.operand2.buf[1] - 0x30];
+      }
+      else
+    	  f2value = triple.operand2.toFloat();
 
 
+      // имеем f1value и f2value
+      bool boolResult = false; //Результат сравнения true or false чтобы решить куда дальше
+
+      if ((triple.operand1 == "<" )&&(f1value <  f2value)) boolResult = true;
+      if ((triple.operand1 == ">" )&&(f1value >  f2value)) boolResult = true;
+      if ((triple.operand1 == "<=")&&(f1value <= f2value)) boolResult = true;
+      if ((triple.operand1 == ">=")&&(f1value >= f2value)) boolResult = true;
+      if ((triple.operand1 == "!=")&&(f1value != f2value)) boolResult = true;
+      if ((triple.operand1 == "=" )&&(f1value == f2value)) boolResult = true;
+
+      if (boolResult)
+      {
+    	  pc++; //Переход на следующую строку
+      }
+      else
+      {
+    	  //Ищем первое ELSE или ENDIF
+          uint16_t currentPC = pc;
+          while(true)
+          {
+        	  if ((list[currentPC].indexOf((char*)"ELSE", 0) == 0)||(list[currentPC].indexOf((char*)"ENDIF", 0) == 0))
+		         { pc = currentPC; break; }
+        	  else
+        		  currentPC++;
+
+        	  if (currentPC > (PC_MAX - 1))
+        		  break;
+          }
+      }
 	}
-
-
-
-
-
-
-
-
-
-
-
-
 
  void Unit5Load(void)
  {
 	list[0] = "Unit test";
 	list[1] = "T Юнит тест\r\n";
-	list[2] = "LOAD R1 2000\r\n";
-	list[3] = "IF R1 > 1000\r\n";
-	list[4] = "MINUS R1 100\r\n";
-	list[5] = "T XXX\r\n";
+	list[2] = "LOAD F1 2000\r\n";
+	list[3] = "IF F1 > 1000\r\n";
+	list[4] = "MINUS F1 100\r\n";
+	list[5] = "PRINTF\r\n";
     list[6] = "GOTO 3\r\n";
     list[7] = "ENDIF\r\n";
     list[8] = "T Выход\r\n";
     list[9] = "END\r\n";
-
-
-
  }
 
 };

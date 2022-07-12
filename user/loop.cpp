@@ -82,7 +82,8 @@ void setup(void) {
 	//Gen.pause();
 
 	script.G = &Gen; //Привязать генератор
-	script.load((char *)"test1");
+	//script.load((char *)"test1");
+	script.Unit5Load();
 	HAL_Delay(50);
 	script.start();
 
