@@ -226,6 +226,7 @@ void generator_pre_CH1_FM_BASE(uint32_t index) {
 				if (temp < 200)
 					temp = 200;
 				Gen.CH1.FM_Base = temp;
+				Gen.Refresh_FM_Modulation1();
 			}
 
 			if (Encoder.Right) {
@@ -235,9 +236,13 @@ void generator_pre_CH1_FM_BASE(uint32_t index) {
 				if (temp > 5000)
 					temp = 5000;
 				Gen.CH1.FM_Base = temp;
+				Gen.Refresh_FM_Modulation1();
 			}
 			sprintf(item_generator[INDEX_CH1_FM_BASE].text, " Base * %d *",
 					Gen.CH1.FM_Base);
+
+
+
 		}
 		menu_generator.field.needUpdate = 1;
 	} else {
@@ -261,6 +266,7 @@ void generator_pre_CH2_FM_BASE(uint32_t index) {
 				if (temp < 200)
 					temp = 200;
 				Gen.CH2.FM_Base = temp;
+				Gen.Refresh_FM_Modulation2();
 			}
 
 			if (Encoder.Right) {
@@ -270,9 +276,13 @@ void generator_pre_CH2_FM_BASE(uint32_t index) {
 				if (temp > 5000)
 					temp = 5000;
 				Gen.CH2.FM_Base = temp;
+				Gen.Refresh_FM_Modulation2();
 			}
 			sprintf(item_generator[INDEX_CH2_FM_BASE].text, " Base * %d *",
 					Gen.CH2.FM_Base);
+
+
+
 		}
 		menu_generator.field.needUpdate = 1;
 	} else {
@@ -294,6 +304,7 @@ void generator_pre_CH1_FM_DEV(uint32_t index) {
 				tempf = Gen.CH1.FM_Dev;
 				tempf = utils_fr_decrement_fr(tempf);
 				Gen.CH1.FM_Dev = tempf;
+				Gen.Refresh_FM_Modulation1();
 			}
 
 			if (Encoder.Right) {
@@ -301,12 +312,14 @@ void generator_pre_CH1_FM_DEV(uint32_t index) {
 				tempf = Gen.CH1.FM_Dev;
 				tempf = utils_fr_increment(tempf);
 				Gen.CH1.FM_Dev = tempf;
+				Gen.Refresh_FM_Modulation1();
 			}
 
             if (Gen.CH1.FM_Dev >= 10.0F)
 			  sprintf(item_generator[INDEX_CH1_FM_DEV].text, " Dev * %.0f *", Gen.CH1.FM_Dev);
             else
               sprintf(item_generator[INDEX_CH1_FM_DEV].text, " Dev * %.1f *", Gen.CH1.FM_Dev);
+
 		}
 		menu_generator.field.needUpdate = 1;
 
@@ -335,6 +348,7 @@ void generator_pre_CH2_FM_DEV(uint32_t index) {
 				tempf = Gen.CH2.FM_Dev;
 				tempf = utils_fr_decrement_fr(tempf);
 				Gen.CH2.FM_Dev = tempf;
+				Gen.Refresh_FM_Modulation2();
 			}
 
 			if (Encoder.Right) {
@@ -342,12 +356,14 @@ void generator_pre_CH2_FM_DEV(uint32_t index) {
 				tempf = Gen.CH2.FM_Dev;
 				tempf = utils_fr_increment(tempf);
 				Gen.CH2.FM_Dev = tempf;
+				Gen.Refresh_FM_Modulation2();
 			}
 
             if (Gen.CH2.FM_Dev >= 10.0F)
 			  sprintf(item_generator[INDEX_CH2_FM_DEV].text, " Dev * %.0f *", Gen.CH2.FM_Dev);
             else
               sprintf(item_generator[INDEX_CH2_FM_DEV].text, " Dev * %.1f *", Gen.CH2.FM_Dev);
+
 		}
 		menu_generator.field.needUpdate = 1;
 

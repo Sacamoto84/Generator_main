@@ -1115,6 +1115,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Middlewares/Third_Party/FatFs/src/option}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/IniFile}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/IniFile}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/TimerDWT}&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.input.467344060" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.input"/>
 							</tool>
@@ -1135,6 +1136,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Middlewares/Third_Party/FatFs/src/option}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/IniFile}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/IniFile}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/TimerDWT}&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c.1551657972" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c"/>
 							</tool>
@@ -1155,6 +1157,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Middlewares/Third_Party/FatFs/src/option}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/IniFile}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/IniFile}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/TimerDWT}&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.input.cpp.520462278" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.input.cpp"/>
 							</tool>
@@ -2287,6 +2290,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Middlewares/Third_Party/FatFs/src/option}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/IniFile}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/IniFile}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/TimerDWT}&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.input.1319544879" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.input"/>
 							</tool>
@@ -2307,6 +2311,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Middlewares/Third_Party/FatFs/src/option}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/IniFile}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/IniFile}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/TimerDWT}&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c.1771381551" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c"/>
 							</tool>
@@ -2327,6 +2332,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Middlewares/Third_Party/FatFs/src/option}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/IniFile}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/IniFile}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Generetor_V3/Lib/TimerDWT}&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.input.cpp.1192040556" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.input.cpp"/>
 							</tool>

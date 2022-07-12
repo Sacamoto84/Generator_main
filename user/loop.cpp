@@ -86,8 +86,8 @@ void setup(void) {
 
 	script.load((char *)"test1");
 	HAL_Delay(50);
-	script.start();
-	//script.run();
+	//script.start();
+
 
 
 

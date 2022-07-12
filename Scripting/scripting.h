@@ -22,6 +22,8 @@
 
 extern uint8_t render;
 
+extern HiSpeedDWT TimerT5;
+
 //Команда максимум 12 байт [128]
 //Скрипты лежат в папке script
 
@@ -272,8 +274,6 @@ public:
 
 	}
 
-
-
 	void comandPlusMinus()	{
 
 		mString<20> comand;
@@ -351,8 +351,6 @@ public:
 		}
 	}
 
-
-
 	void printR()
 	{
 		SEGGER_RTT_printf(0, "\x1B[0mR 0:%d 1:%d 2:%d 3:%d 4:%d 5:%d 6:%d 7:%d 8:%d 9:%d\r\n", R[0],R[1],R[2],R[3],R[4],R[5],R[6],R[7],R[8],R[9]);
@@ -364,7 +362,6 @@ public:
 		sprintf(s, "\x1B[0mF 0:%.1f 1:%.1f 2:%.1f 3:%.1f 4:%.1f 5:%.1f 6:%.1f 7:%.1f 8:%.1f 9:%.1f\r\n", F[0],F[1],F[2],F[3],F[4],F[5],F[6],F[7],F[8],F[9]);
 		SEGGER_RTT_printf(0, s );
 	}
-
 
     //Выделение пары операндов из строки
 	pair_operand excretionPairOperand(mString<20> str){
@@ -476,9 +473,6 @@ public:
 	//╰──────────────────────────────────────╯
 
 
-
-
-
 	//╭─ AM1 AM2 ────────────────────────────╮
 	    if ((triple.operand0 == (char*)"AM1")||(triple.operand0 == (char*)"AM2"))
 	    {
@@ -499,9 +493,10 @@ public:
 
 	      }
 
-	      //AM[1 2] MOD 02_HWawe
+	      //AM[1 2] MOD 02_HWawe { 1.9ms }
 	      if (triple.operand1 == (char*)"MOD")
 	      {
+	    	  TimerT5.Start();
 	         if (chanel == 1){
 	        	sprintf(G->CH1.AM_mod,"%s.dat",triple.operand2.buf);
                 G->Create_AM_Modulation1();
@@ -511,7 +506,10 @@ public:
 	        	sprintf(G->CH2.AM_mod,"%s.dat",triple.operand2.buf);
 	        	G->Create_AM_Modulation2();
 	         }
-	    	  render = 1;
+
+
+
+	        render = 1;
 	      }
 	      return;
 	    }
