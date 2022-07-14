@@ -38,10 +38,16 @@ void setup(void) {
 
 	tft.ST77XX_Update_MADCTL();
 
-	tft.video_play((char*)"intro.raw", 20);
-	tft.video_play((char*)"intro.raw", 20);
+	//tft.video_play((char*)"intro.raw", 20);
+	//tft.video_play((char*)"intro.raw", 20);
 
+	script.G = &Gen; //Привязать генератор
 #ifdef USE_GEN
+	//script.Unit5Load();
+	Gen.CH1.CH = 0;
+	Gen.CH2.CH = 1;
+	script.load((char *)"save");
+	script.start();
 	Gen.Init();//Инициализация генератора
 #endif
 
@@ -81,11 +87,11 @@ void setup(void) {
 
 	//Gen.pause();
 
-	script.G = &Gen; //Привязать генератор
+	//HAL_Delay(3000);
+
+
 	//script.load((char *)"test1");
-	script.Unit5Load();
-	HAL_Delay(50);
-	script.start();
+
 
 
 

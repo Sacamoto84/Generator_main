@@ -135,42 +135,19 @@ int main(void)
 	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
 
 	SEGGER_RTT_Init();
-	//SEGGER_SYSVIEW_Conf();
-	//SEGGER_SYSVIEW_Start();
-	//SEGGER_SYSVIEW_Print("Start");
 
 	res = f_mount(&SDFatFS, SDPath, 1);       //Mount MicroSd
 
-	SEGGER_RTT_WriteString(0, "\r\n\033[01;03;38;05;226;48;05;24m");
-	SEGGER_RTT_WriteString(0, "Start\x1B[0m\r\n");
+	SEGGER_RTT_WriteString(0, "\033[01;03;38;05;226;48;05;24m");
+	SEGGER_RTT_WriteString(0, " Генератор V83 \x1B[0m\r\n");
 
-	SEGGER_RTT_WriteString(0, "\r\n\033[01;38;05;226;48;05;24m");
-	SEGGER_RTT_WriteString(0, "Start\x1B[0m\r\n");
-
-	SEGGER_RTT_WriteString(0, "\r\n\033[03;38;05;226;48;05;24m");
-	SEGGER_RTT_WriteString(0, "Start\x1B[0m\r\n");
-
-	SEGGER_RTT_WriteString(0, "\r\n\033[04;38;05;226;48;05;24m");
-	SEGGER_RTT_WriteString(0, "Start\x1B[0m\r\n");
-
-	SEGGER_RTT_WriteString(0, "\r\n\033[03;38;05;226;48;05;24m");
-	SEGGER_RTT_WriteString(0, "Start\x1B[0m\r\n");
-
-	SEGGER_RTT_WriteString(0, "\r\n\033[03;07;38;05;226;48;05;24m");
-	SEGGER_RTT_WriteString(0, "Start\x1B[0m\r\n");
-
-	SEGGER_RTT_WriteString(0, "\r\n\033[03;07;08;38;05;226;48;05;24m");
-	SEGGER_RTT_WriteString(0, "Start\x1B[0m\r\n");
-
-
-	if (f_open(&SDFile, "b1.bmp", FA_OPEN_EXISTING | FA_READ)
-			== FR_OK) {
-		SEGGER_RTT_WriteString(0, "Тест f_open == OK\r\n");
-		f_close(&SDFile);
-
-	} else {
-		SEGGER_RTT_WriteString(0, "Тест f_open == ERROR\r\n");
-	}
+	//if (f_open(&SDFile, "b1.bmp", FA_OPEN_EXISTING | FA_READ)
+	//		== FR_OK) {
+	//	SEGGER_RTT_WriteString(0, "Тест f_open == OK\r\n");
+	//	f_close(&SDFile);
+	//} else {
+	//	SEGGER_RTT_WriteString(0, "Тест f_open == ERROR\r\n");
+	//}
 
 	//ESP_ON;
 	main_cpp();

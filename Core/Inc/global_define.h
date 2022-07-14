@@ -99,8 +99,8 @@
 //┌─────────┬──────────────────────┐
 //│ extern  │                      │
 //└─────────┴──────────────────────┤
-	extern TFT       tft CCMRAM; //│
-	extern GENERATOR Gen CCMRAM; //│
+	extern TFT       tft CCMRAM;  //│
+	extern GENERATOR Gen CCMRAM;//│
 //─────────────────────────────────┘
 
 
