@@ -139,7 +139,7 @@ int main(void)
 	res = f_mount(&SDFatFS, SDPath, 1);       //Mount MicroSd
 
 	SEGGER_RTT_WriteString(0, "\033[01;03;38;05;226;48;05;24m");
-	SEGGER_RTT_WriteString(0, " Генератор V83 \x1B[0m\r\n");
+	SEGGER_RTT_WriteString(0, " Генератор V84 \x1B[0m\r\n");
 
 	//if (f_open(&SDFile, "b1.bmp", FA_OPEN_EXISTING | FA_READ)
 	//		== FR_OK) {

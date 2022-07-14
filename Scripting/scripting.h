@@ -1,10 +1,3 @@
-/*
- * scripting.h
- *
- *  Created on: Jul 5, 2022
- *      Author: Ivan
- */
-
 #ifndef SCRIPTING_H_
 #define SCRIPTING_H_
 
@@ -15,15 +8,12 @@
 #include "SEGGER_RTT.h"
 
 #include "tim.h"
-
 #include "HiSpeedDWT.h"
-
 #include "generator.h"
 
 extern uint8_t render;
 
 extern HiSpeedDWT TimerT5;
-
 
 #define PC_MAX 128
 #define CMD_LEN 24
@@ -101,7 +91,7 @@ typedef struct {
 	mString<CMD_LEN> operand2;
 }triple_operand;
 
-class Scripting {
+class Scripting{
 public:
 
 //╭─ Генератор ─────────────────╮
@@ -122,13 +112,21 @@ public:
 	mString<CMD_LEN> list[PC_MAX];    //Список команд
 	uint8_t line = 0;            //Текучая строка
 	GENERATOR * G;
+
+	bool returnToMenu2 = false;
+
 //╰─────────────────────────────╯
 
 
-	void start(void) { pc = 1; end = false;	}
+	void start(void)  { pc = 1; end = false; }
+	void stop(void)   { pc = 1; end = true;	 SEGGER_RTT_WriteString(0, "Script Stop\n");}
+	void pause(void)  { end = true;  }
+	void resume(void) { end = false; }
 
 	void printF(void);
+
 	void run(void);
+
 	triple_operand excretionTripleOperand(mString<CMD_LEN> str);
 
 	void  comandPlusMinus(void);
@@ -139,6 +137,7 @@ public:
 
 	void ifComand(void);
 
+	void command(char * str);
 
  void Unit5Load(void)
  {

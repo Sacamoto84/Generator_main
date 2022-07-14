@@ -221,8 +221,6 @@ void PAGE_generator_select_modulation(void)
 }
 
 
-
-
 //Пред функция для картинки генератор, обрабатывем крутилки
 void prePageGenerator(void)
 {

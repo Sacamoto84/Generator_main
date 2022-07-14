@@ -37,6 +37,8 @@ void PAGE_Generator();
 
 void PAGE_Setting();
 
+void PAGE_Script();
+
 
 //Wifi
 void PAGE_wifi(void);
@@ -80,5 +82,6 @@ void generator_pre_CH1_FM_EN(uint32_t index);
 void generator_pre_CH2_FM_EN(uint32_t index);
 
 void setting_save_click(void);
+void setting_script_stop(void);
 
 #endif

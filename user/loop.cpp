@@ -8,7 +8,6 @@
 #include "global_define.h"
 
 #include "TimesNRCyr16.h"
-#include "IniFile.h"
 
 
 void illegal_instruction_execution(void) {
@@ -46,7 +45,7 @@ void setup(void) {
 	//script.Unit5Load();
 	Gen.CH1.CH = 0;
 	Gen.CH2.CH = 1;
-	script.load((char *)"save");
+	script.load((char *)"load_def");
 	script.start();
 	Gen.Init();//Инициализация генератора
 #endif

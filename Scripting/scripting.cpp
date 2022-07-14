@@ -346,10 +346,6 @@ void Scripting::CMD_EXE(void){
 	SEGGER_RTT_WriteString(0, "\x1B[01;38;05;208;48;05;234mScript \x1B[01;38;05;7;48;05;234m:");
 	SEGGER_RTT_printf(0, "%d \x1B[01;38;05;10;48;05;234m%s \x1B[0m \n", pc, com.buf);
 
-	//SEGGER_RTT_WriteString(0, "\x1B[0m");
-
-
-
 	char c = comand.buf[0];
 
 	switch (c) {
@@ -474,7 +470,6 @@ void Scripting::CMD_EXE(void){
 		if (pc >= PC_MAX)
 		  end = true;
 		break;
-
 	};
 
 }
@@ -538,6 +533,48 @@ void Scripting::ifComand(void){
           }
       }
 	}
+
+
+
+//Выполнить команду
+void Scripting::command(char * str){
+
+	mString<CMD_LEN> comand;
+	comand = str;
+
+	SEGGER_RTT_WriteString(0, "\x1B[01;38;05;208;48;05;234mComand \x1B[01;38;05;7;48;05;234m:");
+	SEGGER_RTT_printf(0, " \x1B[01;38;05;10;48;05;234m%s \x1B[0m \n", comand.buf);
+
+	char c = comand.buf[0];
+
+	switch (c) {
+	//╭── Генератор ──────────╮
+	case 'C':               //│
+		generatorComand();  //│
+		break;              //│
+	                        //│
+	case 'A':               //│
+		generatorComand();  //│
+		break;              //│
+	                        //│
+	case 'F':               //│
+		generatorComand();  //│
+		break;              //│
+	//╰───────────────────────╯
+	//╭── PLUS ─ PRINTR ─ PRINTF ───────────────────────╮
+	case 'P':                                         //│                                                   //│
+		if (comand.indexOf((char*) "PRINTF", 0) == 0) //│
+		  printF();                                   //│
+		break;                                        //│
+	//╰─────────────────────────────────────────────────╯
+	default:
+		SEGGER_RTT_printf(0, "EXE:? %s\r\n", pc, comand.buf);
+		break;
+	};
+
+}
+
+
 
 
 

@@ -4,7 +4,7 @@
 
 //┌─────────────────────────────────────────┐
 	//Для картинки генератора индексы строк │
-	#define INDEX_SETTING_SAVE      1     //│
+	#define INDEX_SETTING_SAVE      3     //│
 
 									      //│
 	#define NUM_ITEM_SETTING  8           //│

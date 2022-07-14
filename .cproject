@@ -1248,7 +1248,7 @@
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="FATFS"/>
 						<entry excluding="mysignal.c|mysignal.h|Generator_buffer.c|signal.c|Generator_Render.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Generator"/>
 						<entry excluding="blueBackground_240x240.cpp|save1_32x32.cpp|program32A_32x32.cpp|on.cpp|bmp889727.cpp|off.cpp|glass240x240.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Icons"/>
-						<entry excluding="BLE|CLI|BLE_CPP|Utils/SWO.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Lib"/>
+						<entry excluding="IniFile|BLE|CLI|BLE_CPP|Utils/SWO.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Lib"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Middlewares"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="SW"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Scripting"/>

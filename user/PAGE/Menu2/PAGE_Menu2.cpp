@@ -44,6 +44,8 @@ void PAGE_Menu2(menu_typedef *menu, item_typedef *item, int NUM) {
 
 	while (1) {
 
+		script.returnToMenu2 = false;
+
 		script.run();
 
 		KEY.tick();

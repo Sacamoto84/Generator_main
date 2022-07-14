@@ -237,6 +237,10 @@ void PAGE_Menu(menu_typedef *menu, item_typedef *item, int NUM) {
 
 	while (1) {
 
+		if (script.returnToMenu2) return;
+
+		script.run();
+
 		KEY.tick();
 
 		//tft.needUpdate = 0;
@@ -296,8 +300,8 @@ void PAGE_Menu(menu_typedef *menu, item_typedef *item, int NUM) {
     		if (item[i].gif) {
     				item[i].gif->setY(StartY + H * (menu->ii % menu->item_count));
     				item[i].gif->run(); //32x32x32 4800us(914285 Байт/Сек) -Of Gen Off    5000us Gen On 4096байт
-    				sprintf(str, "item[%d].gif->run();", i);
-    				LOG((char*)"MENU",'I',str);
+    				//sprintf(str, "item[%d].gif->run();", i);
+    				//LOG((char*)"MENU",'I',str);
     			}
 
     		if (item[i].gif) {tft.ST7789_Update(item[i].gif->info());}
