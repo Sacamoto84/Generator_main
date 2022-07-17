@@ -9,7 +9,7 @@ typedef struct {
 	char text[20];
 } item_files;
 
-void PAGE_Script(void) {
+void PAGE_Player(void) {
 	char str[32];
 	static FRESULT res;
 	DIR dir;
@@ -131,3 +131,7 @@ void PAGE_Script(void) {
 	}
 
 }
+
+
+
+

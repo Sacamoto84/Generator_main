@@ -16,11 +16,15 @@ void PAGE_init_struct_setting(void) {
 	sprintf(item_setting[0].text, "Назад");
 	item_setting[0].field.exit = 1;
 
+
 	sprintf(item_setting[1].text, "Скрипт");
 	item_setting[1].callBackFunc_isClick = &PAGE_Script;
 
 	sprintf(item_setting[2].text, "Скрипт Stop");
 	item_setting[2].callBackFunc_isClick = &setting_script_stop;
+
+
+
 
     //
 	sprintf(item_setting[INDEX_SETTING_SAVE].text, "Сохранить");
@@ -32,11 +36,6 @@ void PAGE_init_struct_setting(void) {
     //
 
 	//page_item_setting[2].bmp = &bmpProgram3232;
-
-    //
-
-
-
 
 	//
 	sprintf(item_setting[4].text, "USB MSD");
@@ -51,8 +50,8 @@ void PAGE_init_struct_setting(void) {
 	item_setting[6].callBackFunc_isClick = &PAGE_BT_Audio;
 
 
-	sprintf(item_setting[7].text, "Wiget");
-	item_setting[7].callBackFunc_isClick = &PAGE_Volume;
+	sprintf(item_setting[7].text, "Плеер");
+	item_setting[7].callBackFunc_isClick = &PAGE_Player;
 
 
 	for(int i = 0; i < 8 ; i++)

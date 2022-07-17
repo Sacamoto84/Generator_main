@@ -2,6 +2,9 @@
 #include "global_define.h"
 #include "stdio.h"
 
+#include "ff.h"
+#include "fatfs.h"
+
 #define APPLICATION_ADDRESS    0x08004000
 
 void Go_To_User_App(void)

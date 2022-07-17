@@ -39,6 +39,7 @@ void PAGE_Setting();
 
 void PAGE_Script();
 
+void PAGE_Player();
 
 //Wifi
 void PAGE_wifi(void);

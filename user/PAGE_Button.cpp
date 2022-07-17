@@ -156,14 +156,6 @@ void PAGE_Background_Board(void) {
 	tft.LineV(234, 5, 234, palitra[9]); //uTFT_VLine(234 , 5, 234, RGB565(186,207,178));
 }
 
-
-
-
-
-
-
-
-
 void PAGE_Menu(menu_typedef *menu, item_typedef *item, int NUM) {
 
 	tft.Font_Smooth_Load(menu->font);
